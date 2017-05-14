@@ -1,0 +1,211 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import javax.swing.JTextField;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+import javax.swing.JScrollBar;
+import javax.swing.JCheckBox;
+import javax.swing.ButtonGroup;
+
+public class VentanaPadre extends JDialog {
+//	public VentanaPadre() {
+//		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//		setAlwaysOnTop(true);
+//		setModal(true);
+//		setResizable(false);
+//		setTitle("Catálogo");
+//		setBounds(100,100,581,545);
+//		getContentPane().setLayout(null);
+//		
+//		JLabel lblNombre = new JLabel("Nombre");
+//		lblNombre.setBounds(12, 28, 152, 27);
+//		getContentPane().add(lblNombre);
+//		
+//		textNombre = new JTextField();
+//		textNombre.setEditable(false);
+//		textNombre.setBounds(92, 32, 200, 23);
+//		getContentPane().add(textNombre);
+//		textNombre.setColumns(10);
+//		
+//		JLabel lblPrecio = new JLabel("Precio");
+//		lblPrecio.setBounds(12, 67, 80, 27);
+//		getContentPane().add(lblPrecio);
+//		
+//		textPrecio = new JTextField();
+//		textPrecio.setEditable(false);
+//		textPrecio.setBounds(92, 71, 193, 23);
+//		getContentPane().add(textPrecio);
+//		textPrecio.setColumns(10);
+//		
+//		JLabel lblDescripcion = new JLabel("Detalles");
+//		lblDescripcion.setBounds(12, 121, 105, 27);
+//		getContentPane().add(lblDescripcion);
+//		
+//		textDetalles = new JTextField();
+//		textDetalles.setEditable(false);
+//		textDetalles.setBounds(92, 106, 200, 84);
+//		getContentPane().add(textDetalles);
+//		textDetalles.setColumns(10);
+//		
+//		JLabel lblEstado = new JLabel("Estado");
+//		lblEstado.setBounds(12, 205, 116, 27);
+//		getContentPane().add(lblEstado);
+//		
+//		textEstado = new JTextField();
+//		textEstado.setEditable(false);
+//		textEstado.setBounds(92, 213, 200, 23);
+//		getContentPane().add(textEstado);
+//		textEstado.setColumns(10);
+//		
+//		JLabel lblCantidadStock = new JLabel("Stock");
+//		lblCantidadStock.setBounds(12, 251, 128, 27);
+//		getContentPane().add(lblCantidadStock);
+//		
+//		textStock = new JTextField();
+//		textStock.setEditable(false);
+//		textStock.setBounds(92, 255, 200, 23);
+//		getContentPane().add(textStock);
+//		textStock.setColumns(10);
+//		
+//		JLabel lblFechaEntrada = new JLabel("Entrada");
+//		lblFechaEntrada.setBounds(12, 286, 116, 34);
+//		getContentPane().add(lblFechaEntrada);
+//		
+//		textFechaEntrada = new JTextField();
+//		textFechaEntrada.setEditable(false);
+//		textFechaEntrada.setBounds(92, 291, 200, 23);
+//		getContentPane().add(textFechaEntrada);
+//		textFechaEntrada.setColumns(10);
+//		
+//		JLabel lblNProducto = new JLabel("Nº Prod.");
+//		lblNProducto.setBounds(12, 321, 104, 27);
+//		getContentPane().add(lblNProducto);
+//		
+//		textId = new JTextField();
+//		textId.setEditable(false);
+//		textId.setBounds(92, 322, 200, 23);
+//		getContentPane().add(textId);
+//		textId.setColumns(10);
+//		
+//		JButton btnAnterior = new JButton("Anterior");
+//		buttonGroup.add(btnAnterior);
+//		btnAnterior.setBounds(12, 471, 117, 25);
+//		getContentPane().add(btnAnterior);
+//		
+//		JButton btnALaCesta = new JButton("A la cesta");
+//		buttonGroup.add(btnALaCesta);
+//		btnALaCesta.setBounds(166, 471, 117, 25);
+//		getContentPane().add(btnALaCesta);
+//		
+//		JButton btnSacar = new JButton("Sacar");
+//		buttonGroup.add(btnSacar);
+//		btnSacar.setBounds(308, 471, 117, 25);
+//		getContentPane().add(btnSacar);
+//		
+//		JButton btnSiguiente = new JButton("Siguiente");
+//		buttonGroup.add(btnSiguiente);
+//		btnSiguiente.setBounds(452, 471, 117, 25);
+//		getContentPane().add(btnSiguiente);
+//		
+//		JCheckBox chckbxEnLaCesta = new JCheckBox("En la cesta");
+//		chckbxEnLaCesta.setBounds(233, 440, 129, 23);
+//		getContentPane().add(chckbxEnLaCesta);
+//		
+//		JLabel lblPaginas = new JLabel("Paginas");
+//		lblPaginas.setBounds(316, 34, 70, 15);
+//		getContentPane().add(lblPaginas);
+//		
+//		textPaginas = new JTextField();
+//		textPaginas.setEditable(false);
+//		textPaginas.setBounds(404, 34, 114, 19);
+//		getContentPane().add(textPaginas);
+//		textPaginas.setColumns(10);
+//		
+//		JLabel lblPublicacion = new JLabel("Publicacion");
+//		lblPublicacion.setBounds(308, 77, 88, 15);
+//		getContentPane().add(lblPublicacion);
+//		
+//		textPublicacion = new JTextField();
+//		textPublicacion.setEditable(false);
+//		textPublicacion.setBounds(404, 75, 114, 19);
+//		getContentPane().add(textPublicacion);
+//		textPublicacion.setColumns(10);
+//		
+//		JLabel lblAutor = new JLabel("Autor");
+//		lblAutor.setBounds(310, 115, 70, 15);
+//		getContentPane().add(lblAutor);
+//		
+//		textAutor = new JTextField();
+//		textAutor.setEditable(false);
+//		textAutor.setBounds(404, 113, 114, 19);
+//		getContentPane().add(textAutor);
+//		textAutor.setColumns(10);
+//		
+//		JLabel lblGenero = new JLabel("Genero");
+//		lblGenero.setBounds(310, 155, 70, 15);
+//		getContentPane().add(lblGenero);
+//		
+//		textGenero = new JTextField();
+//		textGenero.setEditable(false);
+//		textGenero.setBounds(404, 153, 114, 19);
+//		getContentPane().add(textGenero);
+//		textGenero.setColumns(10);
+//		
+//		JLabel lblColeccion = new JLabel("Coleccion");
+//		lblColeccion.setBounds(308, 198, 70, 15);
+//		getContentPane().add(lblColeccion);
+//		
+//		textColeccion = new JTextField();
+//		textColeccion.setEditable(false);
+//		textColeccion.setBounds(404, 196, 114, 19);
+//		getContentPane().add(textColeccion);
+//		textColeccion.setColumns(10);
+//		
+//		JLabel lblIdioma = new JLabel("Idioma");
+//		lblIdioma.setBounds(310, 245, 70, 15);
+//		getContentPane().add(lblIdioma);
+//		
+//		textIdioma = new JTextField();
+//		textIdioma.setEditable(false);
+//		textIdioma.setBounds(404, 243, 114, 19);
+//		getContentPane().add(textIdioma);
+//		textIdioma.setColumns(10);
+//		
+//		JLabel lblTipo = new JLabel("Tipo");
+//		lblTipo.setBounds(310, 284, 70, 15);
+//		getContentPane().add(lblTipo);
+//		
+//		textTipo = new JTextField();
+//		textTipo.setEditable(false);
+//		textTipo.setBounds(404, 286, 114, 19);
+//		getContentPane().add(textTipo);
+//		textTipo.setColumns(10);
+//		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNombre, textNombre, lblPrecio, textPrecio, lblDescripcion, textDetalles, lblEstado, textEstado, lblCantidadStock, textStock, lblFechaEntrada, textFechaEntrada, lblNProducto, textId}));
+//	}
+//
+//	private final JPanel contentPanel = new JPanel();
+//	private JTextField textNombre;
+//	private JTextField textPrecio;
+//	private JTextField textDetalles;
+//	private JTextField textEstado;
+//	private JTextField textStock;
+//	private JTextField textFechaEntrada;
+//	protected JTextField textId;
+//	private JTextField textPaginas;
+//	private JTextField textPublicacion;
+//	private JTextField textAutor;
+//	private JTextField textGenero;
+//	private JTextField textColeccion;
+//	private JTextField textIdioma;
+//	private JTextField textTipo;
+//	private final ButtonGroup buttonGroup = new ButtonGroup();
+}

@@ -1,0 +1,27 @@
+package gui;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import jerarquia.Articulo;
+/**
+ * Cargar arraylist (static desde la principal o pasado como argumento?)
+ * @author d16lealp
+ *
+ */
+public class PanelMostrar extends PanelPadre {
+
+	public PanelMostrar() {
+		btnALaCesta_anadir.setVisible(false);
+		btnSacar_borrar.setVisible(false);
+		
+
+	}
+	private void mostrarArticulo(Articulo articulo) {
+		comboBoxEstado.setSelectedItem(articulo.getEstado());
+		textStock.setText(Integer.toString(articulo.getCantidad()));
+		textDetalles.setText(articulo.getDescripcion());
+		textNombre.setText(articulo.getNombre());
+		textPrecio.setText(Double.toString(articulo.getPrecio()));
+		textId.setText(Integer.toString(articulo.getId()));
+	}
+	}

@@ -1,0 +1,40 @@
+1494525620530	Delete element
+1494526075636	Convert local variable 'model2' to field
+1494526279018	Rename local variable 'spinner_1'
+1494526295450	Convert local variable 'spinnerPublicacion' to field
+1494526309880	Rename field 'spinner'
+1494533860444	Rename local variable 'btnUri'
+1494537125516	Delete element
+1494575711865	Rename local variable 'chckbxNewCheckBox'
+1494575723688	Convert local variable 'chkbxColeccion' to field
+1494575746826	Convert local variable 'spinnerPeso' to field
+1494575755900	Convert local variable 'chckbxYesno' to field
+1494575791835	Convert local variable 'numElementos' to field
+1494702574943	Convert local variable 'rdbtnCartas' to field
+1494702581819	Convert local variable 'rdbtnTablero' to field
+1494702590928	Convert local variable 'rdbtnRol' to field
+1494702922783	Rename field 'buttonGroup_1'
+1494703061047	Rename local variable 'panel'
+1494703109121	Convert local variable 'panelButtons' to field
+1494747578251	Rename type 'OrdenarNombre'
+1494747597071	Rename type 'OrdenarPrecio'
+1494747699201	Rename method 'ordenarNombre'
+1494748175360	Rename method 'incluirEnCesta'
+1494748257112	Rename method 'addToChest'
+1494748299299	Rename method 'eliminarDeCesta'
+1494748430161	Rename method 'removeFromBasket'
+1494748458480	Rename method 'ordenarPrecio'
+1494748530162	Rename method 'vaciarCesta'
+1494748550911	Rename method 'incluirEnStock'
+1494748561741	Rename method 'eliminarDelStock'
+1494748711070	Rename method 'mostrarDestacados'
+1494748735625	Rename method 'isCestaVacia'
+1494748909722	Rename method 'mostrarGenerico'
+1494748979844	Rename method 'checkArticle'
+1494754350136	Rename field 'model2'
+1494754367425	Rename field 'chckbxYesno'
+1494754414823	Encapsulate field 'contentPanel'
+1494755521829	Extract method 'selectPanels'
+1494761208918	Extract method 'mostrarPanelFiguras'
+1494761257467	Extract method 'mostrarPanelJuego'
+1494761312587	Extract method 'mostrarPanelLibro'
