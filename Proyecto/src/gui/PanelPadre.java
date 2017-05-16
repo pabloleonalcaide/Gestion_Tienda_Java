@@ -54,67 +54,53 @@ public class PanelPadre extends JFrame {
 			panelPrincipal.setLayout(new GridLayout(0, 2, 0, 0));
 
 			lblNombre = new JLabel("Nombre");
-			lblNombre.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblNombre);
 
 			textNombre = new JTextField();
-			textNombre.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(textNombre);
 			textNombre.setColumns(10);
 
 			lblPrecio = new JLabel("Precio");
-			lblPrecio.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblPrecio);
 
 			textPrecio = new JTextField();
-			textPrecio.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(textPrecio);
 			textPrecio.setColumns(10);
 
 			lblDescripcion = new JLabel("Detalles");
-			lblDescripcion.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblDescripcion);
 
 			textDetalles = new JTextField();
-			textDetalles.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(textDetalles);
 			textDetalles.setColumns(10);
 
 			lblEstado = new JLabel("Estado");
-			lblEstado.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblEstado);
 
 			comboBoxEstado = new JComboBox();
 			comboBoxEstado.setEnabled(false);
-			comboBoxEstado.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			comboBoxEstado.setModel(new DefaultComboBoxModel(EstadoArticulo.values()));
 			panelPrincipal.add(comboBoxEstado);
 
 			lblCantidadStock = new JLabel("Stock");
-			lblCantidadStock.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblCantidadStock);
 
 			textStock = new JTextField();
-			textStock.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(textStock);
 			textStock.setColumns(10);
 
 			lblFechaEntrada = new JLabel("Entrada");
-			lblFechaEntrada.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblFechaEntrada);
 
 			SpinnerModel model1 = new SpinnerDateModel();
 			spinnerEntrada = new JSpinner(model1);
 			spinnerEntrada.setEnabled(false);
-			spinnerEntrada.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(spinnerEntrada);
 
 			lblNProducto = new JLabel("num Prod.");
-			lblNProducto.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			panelPrincipal.add(lblNProducto);
 
 			textId = new JTextField();
-			textId.setAlignmentX(Component.RIGHT_ALIGNMENT);
 			textId.setEditable(false);
 			panelPrincipal.add(textId);
 			textId.setColumns(10);
@@ -359,16 +345,31 @@ public class PanelPadre extends JFrame {
 		panelButtons.setLayout(null);
 
 		rdbtnCartas = new JRadioButton("Cartas");
+		rdbtnCartas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				enableCartas();
+			}
+		});
 		bgJuegos.add(rdbtnCartas);
 		rdbtnCartas.setBounds(0, 13, 84, 23);
 		panelButtons.add(rdbtnCartas);
 
 		rdbtnTablero = new JRadioButton("Tablero");
+		rdbtnTablero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			enableTablero();
+			}
+		});
 		bgJuegos.add(rdbtnTablero);
 		rdbtnTablero.setBounds(88, 13, 113, 23);
 		panelButtons.add(rdbtnTablero);
 
 		rdbtnRol = new JRadioButton("Rol");
+		rdbtnRol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			enableRol();
+			}
+		});
 		bgJuegos.add(rdbtnRol);
 		rdbtnRol.setBounds(205, 13, 83, 23);
 		panelButtons.add(rdbtnRol);
@@ -431,8 +432,10 @@ public class PanelPadre extends JFrame {
 		selectPanels(articulo);
 
 	}
+
 	/**
 	 * Muestra el panel secundario oportuno y rellena el contenido
+	 * 
 	 * @param articulo
 	 */
 	private void selectPanels(Articulo articulo) {
@@ -440,9 +443,11 @@ public class PanelPadre extends JFrame {
 			panelButtons.setVisible(false);
 			mostrarPanelLibro();
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
-			//Buscar la manera de volcar la fecha en el spinner
-			//spinnerPublicacion.setValue((LocalDate)((Libro) (articulo)).getFechaPublicacion());
-			spinnerPublicacion = devolverSpinner(((Libro)(articulo)).getFecha());
+
+			// Buscar la manera de volcar la fecha en el spinner
+			// spinnerPublicacion.setValue((LocalDate)((Libro)
+			// (articulo)).getFechaPublicacion());
+			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFecha());
 			textAutor.setText(((Libro) (articulo)).getAutor());
 			chkbxColeccion.setSelected(((Libro) (articulo)).isColeccion());
 			comboBox_Idioma.setSelectedItem((((Libro) (articulo)).getIdioma()));
@@ -515,31 +520,68 @@ public class PanelPadre extends JFrame {
 			panelJuego.setVisible(true);
 		}
 	}
-
+		public JPanel getContentPanel() {
+		return contentPanel;
+	}
 	/**
 	 * Recoge la fecha en formato LocalDate del spinner
 	 * 
 	 * @param sp
 	 * @return
 	 */
-	public LocalDate leerFecha(JSpinner sp) {
+	public LocalDate readDateSpinner(JSpinner sp) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime((Date) sp.getModel().getValue());
 		LocalDate fecha = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
 				calendar.get(Calendar.DAY_OF_MONTH));
 		return fecha;
 	}
-	public JSpinner devolverSpinner(LocalDate ld){
-		 SpinnerDateModel model = new SpinnerDateModel();
-	        JSpinner spinner = new JSpinner(model);
-	        Calendar calendar = new GregorianCalendar(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
-	        spinner.setValue(calendar.getTime());
-	        return spinner;
+	/**
+	 * Dada una fecha devuelve un spinner apuntando a ese dia
+	 * @param ld
+	 * @return
+	 */
+	public JSpinner getDateSpinner(LocalDate ld) {
+		SpinnerDateModel model = new SpinnerDateModel();
+		JSpinner spinner = new JSpinner(model);
+		Calendar calendar = new GregorianCalendar(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
+		spinner.setValue(calendar.getTime());
+		return spinner;
+	}
+	/**
+	 * habilita la entrada de datos a un articulo Tablero
+	 */
+	void enableTablero() {
+		textCartas.setEditable(false);	
+		comboBoxDificultad.setEditable(false);
+		chkbxColeccion.setEnabled(false);
+		comboBox_Genero.setEditable(false);
+		comboBoxMaterialRol.setEditable(false);
+		textEdicion.setEditable(false);		
+	}
+	/**
+	 * habilita la entrada de datos a un articulo Rol
+	 */
+	 void enableRol() {
+		textCartas.setEditable(false);	
+		comboBoxDificultad.setEditable(false);
+		chkbxColeccion.setVisible(false);
+		comboBox_Genero.setEditable(true);
+		comboBoxMaterialRol.setEditable(true);
+		textEdicion.setEditable(true);
+	}
+	/**
+	* habilita la entrada de datos a un articulo Cartas
+	*/
+	 void enableCartas() {
+		textCartas.setEditable(true);	
+		comboBoxDificultad.setEditable(true);
+		chkbxColeccion.setEnabled(true);
+		comboBox_Genero.setEditable(false);
+		comboBoxMaterialRol.setEditable(false);
+		textEdicion.setEditable(false);
 	}
 
-	public JPanel getContentPanel() {
-		return contentPanel;
-	}
 
 	private final JPanel contentPanel = new JPanel();
 	protected JTextField textNombre;
@@ -573,29 +615,29 @@ public class PanelPadre extends JFrame {
 	protected JLabel lblIdioma;
 	protected JLabel lblTipo;
 	protected JLabel lblDuracionJuego;
-	protected JPanel panelPrincipal;
-	protected JPanel panelLibro;
-	protected JComboBox comboBoxEstado;
-	protected JComboBox comboBox_Genero;
-	protected JComboBox comboBox_Idioma;
-	protected int posicion;
-	protected JPanel panelJuego;
-	protected JPanel panelFigura;
-	protected JLabel lblPiezas;
-	protected JTextField textPiezas;
-	protected JLabel lblDimensiones;
-	protected JTextField textDimensiones;
-	protected JTextField textJugadores;
-	protected JTextField textColeccionJuego;
-	protected JTextField textCartas;
+	JPanel panelPrincipal;
+	JPanel panelLibro;
+	JComboBox comboBoxEstado;
+	JComboBox comboBox_Genero;
+	JComboBox comboBox_Idioma;
+	JPanel panelJuego;
+	JPanel panelFigura;
+	JLabel lblPiezas;
+	JTextField textPiezas;
+	JLabel lblDimensiones;
+	JTextField textDimensiones;
+	JTextField textJugadores;
+	JTextField textColeccionJuego;
+	JTextField textCartas;
 	JComboBox comboBoxDificultad;
-	protected JTextField textGenero;
+	JTextField textGenero;
 	JLabel lblEdicion;
 	JTextField textEdicion;
 	JSpinner spinnerEntrada;
 	JComboBox comboBoxTipoArticulo = new JComboBox();
 	JCheckBox chckbxEnLaCesta;
 
+	
 	JComboBox comboBoxMaterialRol;
 	JLabel lblMaterial;
 	JLabel lblGeneroRol;

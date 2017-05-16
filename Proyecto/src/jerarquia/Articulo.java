@@ -13,7 +13,7 @@ import java.util.function.ToLongFunction;
 import enumeraciones.EstadoArticulo;
 import excepciones.PrecioNoValidoException;
 
-public abstract class Articulo implements Rebajable, Serializable{
+public abstract class Articulo implements Serializable{
 	private String nombre;
 	private String descripcion;
 	private double precio;
@@ -181,15 +181,13 @@ public abstract class Articulo implements Rebajable, Serializable{
 		this.cantidad = cantidad;
 	}
 	/**
-	 * Metodo abstracto del interface Rebajable
+	 * Metodo abstracto que calcula el descuento del articulo
 	 */
-	@Override
 	public abstract void calcularDescuento();
 
 	/**
-	 * Metodo abstracto del interface Rebajable
+	 * Metodo abstracto que devuelve el descuento especifico del articulo
 	 */
-	@Override
 	public abstract double obtenerDescuento();
 	
 

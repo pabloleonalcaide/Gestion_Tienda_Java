@@ -34,6 +34,8 @@ public class Principal {
 	Filtro filtro = new Filtro(".obj", "obj");
 	static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
+	JButton btnWeb;
+	JFileChooser fileChooser= new JFileChooser();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -230,6 +232,7 @@ public class Principal {
 		framePrincipal.getContentPane().add(menuEmpleado);
 
 		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
+		mnGestinArticulos.setMnemonic('G');
 		menuEmpleado.add(mnGestinArticulos);
 
 		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
@@ -271,12 +274,14 @@ public class Principal {
 		mnGestinArticulos.add(mntmActualizarExistencias);
 
 		JMenu mnPedidos = new JMenu("Pedidos");
+		mnPedidos.setMnemonic('P');
 		menuEmpleado.add(mnPedidos);
 
 		JMenuItem mntmMostrar = new JMenuItem("Mostrar");
 		mnPedidos.add(mntmMostrar);
 
 		JMenu mnCambiarDestacados = new JMenu("Cambiar Destacados");
+		mnCambiarDestacados.setMnemonic('C');
 		mnCambiarDestacados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -285,9 +290,11 @@ public class Principal {
 		menuEmpleado.add(mnCambiarDestacados);
 
 		JMenu mnBbdd = new JMenu("Archivo");
+		mnBbdd.setMnemonic('A');
 		menuEmpleado.add(mnBbdd);
 
 		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
+		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
 		mntmGuardarcambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				guardarCopiaComo();
@@ -296,6 +303,7 @@ public class Principal {
 		mnBbdd.add(mntmGuardarcambios);
 
 		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
+		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 		mntmAbrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				recuperarCopia();
@@ -303,20 +311,21 @@ public class Principal {
 		});
 		mnBbdd.add(mntmAbrir);
 
-		JButton btnWeb = new JButton("Vista web");
+		btnWeb = new JButton("Vista web");
 		btnWeb.setBounds(166, 219, 120, 19);
 		framePrincipal.getContentPane().add(btnWeb);
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				menuUsuario.setVisible(true);
 				menuEmpleado.setVisible(false);
+				btnWeb.setVisible(false);
 			}
 		});
 
 	}
-
+	// guarda el stock en un txt, pero solo los datos para clientes.
 	protected void descargaCatalogo() {
-		// guarda el stock en un txt, pero solo los datos para clientes.
+		
 
 	}
 
@@ -324,13 +333,12 @@ public class Principal {
 	 * Guarda una copia del stock actual
 	 */
 	protected void guardarCopiaComo() {
-		JFileChooser saveAs = new JFileChooser();
-		saveAs.setAcceptAllFileFilterUsed(false);
-		saveAs.addChoosableFileFilter(filtro);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(filtro);
 
-		if (JFileChooser.APPROVE_OPTION == saveAs.showDialog(saveAs, "Guardar Archivo")) {
-			saveAs.setAcceptAllFileFilterUsed(false);
-			Fichero.checkFile(saveAs.getSelectedFile());
+		if (JFileChooser.APPROVE_OPTION == fileChooser.showDialog(fileChooser, "Guardar Archivo")) {
+			fileChooser.setAcceptAllFileFilterUsed(false);
+			Fichero.checkFile(fileChooser.getSelectedFile());
 			if (Fichero.getFichero().exists()) {
 				Object[] options = { "Si", "No" };
 				int option = JOptionPane.showOptionDialog(null,
@@ -354,7 +362,7 @@ public class Principal {
 		}
 
 	}
-
+	
 	protected void save() {
 		if (Fichero.fichero.getName().equalsIgnoreCase("")) {
 			guardarCopiaComo();
@@ -381,18 +389,24 @@ public class Principal {
 		}
 
 	}
-
+	/**
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	private void openFileChooser() throws FileNotFoundException, ClassNotFoundException, IOException {
-		JFileChooser open = new JFileChooser();
-		open.setAcceptAllFileFilterUsed(false);
-		open.addChoosableFileFilter(filtro);
-		if (open.showDialog(open, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
-			Fichero.fichero = open.getSelectedFile();
-			stock = (Stock) Fichero.open(open.getSelectedFile());
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(filtro);
+		if (fileChooser.showDialog(fileChooser, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
+			Fichero.fichero = fileChooser.getSelectedFile();
+			stock = (Stock) Fichero.open(fileChooser.getSelectedFile());
 			JOptionPane.showMessageDialog(null, "Cargado con exito");
 		}
 	}
-
+	/**
+	 * Panel de stock vacio --> ¿metodo o desde el evento?
+	 */
 	private void msjStockVacio() {
 		JOptionPane.showMessageDialog(null, "No hay articulos,\n espera a renovar el stock");
 	}

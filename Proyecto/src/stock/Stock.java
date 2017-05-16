@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.ListIterator;
 
 import enumeraciones.*;
+import excepciones.ArticuloNoExisteException;
 import excepciones.ImposibleEliminarException;
 import jerarquia.Articulo;
 import jerarquia.Libro;
@@ -23,14 +24,12 @@ public class Stock implements Serializable{
 	 */
 	void sortByName(){
 		Collections.sort(stock, new CompareName());
-		System.out.println(stock);
 	}
 	/**
 	 * Ordena los articulos por precio
 	 */
 	void sortByPrice(){
 		Collections.sort(stock, new ComparePrice());
-		System.out.println(stock);
 		
 	}
 	
@@ -38,12 +37,13 @@ public class Stock implements Serializable{
 	 * Si encuentra el articulo en el stock, lo selecciona
 	 * de lo contrario, lanza un mensaje advirtiendo
 	 * @param articulo
+	 * @throws ArticuloNoExisteException 
 	 */
-	void addToBasket(Articulo articulo){
+	void addToBasket(Articulo articulo) throws ArticuloNoExisteException{
 		if (stock.contains(articulo))
 			articulo.setSeleccionado(true);
 		else 
-			System.out.println("no se ha encontrado el articulo");
+			throw new ArticuloNoExisteException("el articulo no existe");
 	}
 	/**
 	 * si encuentra el articulo y está seleccionado, lo vuelve de nuevo a false
@@ -76,7 +76,6 @@ public class Stock implements Serializable{
 
 			int indice =stock.indexOf(articulo);
 			stock.get(indice).setCantidad(stock.get(indice).getCantidad()+cantidad);
-			System.out.println("añadido con exito");
 		}
 	/**
 	 * Remueve definitivamente el articulo del stock
