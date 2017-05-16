@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-public class Fichero implements Serializable {
+public class Fichero {
 
 	private static final long serialVersionUID = 1L;
 	private static final Pattern patron = Pattern.compile("^((\\w)+(\\.obj))$");
