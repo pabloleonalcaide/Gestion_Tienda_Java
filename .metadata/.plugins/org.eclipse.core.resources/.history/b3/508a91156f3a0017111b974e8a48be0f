@@ -390,9 +390,7 @@ public class Principal {
 		}
 
 	}
-	/**
-	 * Guarda el stock en un fichero
-	 */
+
 	protected void save() {
 		if (Fichero.fichero.getName().equalsIgnoreCase("")) {
 			guardarCopiaComo();
@@ -447,8 +445,8 @@ public class Principal {
 				"No hay articulos,\n espera a renovar el stock");
 	}
 
-	// CARGA UN ARRAYLIST INICIAL DE ARTICULOS
-	protected static void cargarCatalogo() {
-
-	}
+//	// CARGA UN ARRAYLIST INICIAL DE ARTICULOS
+//	protected static void cargarCatalogo() {
+//
+//	}
 }

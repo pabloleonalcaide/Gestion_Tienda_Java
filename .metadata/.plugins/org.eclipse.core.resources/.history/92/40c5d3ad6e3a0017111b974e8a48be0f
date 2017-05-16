@@ -36,7 +36,7 @@ public class Principal {
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
-	protected JFileChooser fileChooser = new JFileChooser();
+	JFileChooser fileChooser = new JFileChooser();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -88,7 +88,7 @@ public class Principal {
 		mntmTodasOfertas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isEmpty()) {
-					msjEmptyStock();
+					msjStockVacio();
 				} else {
 					// DialogOferta ofertas = new DialogOferta();
 					// ofertas.setVisible(true);
@@ -106,7 +106,7 @@ public class Principal {
 		mntmCategoriasOfertas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isEmpty()) {
-					msjEmptyStock();
+					msjStockVacio();
 				} else {
 					// DialogOpcionesMostrar mostrarOfertas =new
 					// DialogOpcionesMostrar();
@@ -140,7 +140,7 @@ public class Principal {
 		mntmMostrarNombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (stock.isEmpty())
-					msjEmptyStock();
+					msjStockVacio();
 				else {
 					PanelMostrar ordenaNombre = new PanelMostrar();
 					ordenaNombre.setVisible(true);
@@ -390,9 +390,7 @@ public class Principal {
 		}
 
 	}
-	/**
-	 * Guarda el stock en un fichero
-	 */
+
 	protected void save() {
 		if (Fichero.fichero.getName().equalsIgnoreCase("")) {
 			guardarCopiaComo();
@@ -442,7 +440,7 @@ public class Principal {
 	/**
 	 * Panel de stock vacio --> ¿metodo o desde el evento?
 	 */
-	private void msjEmptyStock() {
+	private void msjStockVacio() {
 		JOptionPane.showMessageDialog(null,
 				"No hay articulos,\n espera a renovar el stock");
 	}

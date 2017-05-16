@@ -1,5 +1,16 @@
 package gui;
 
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+
+import enumeraciones.CategoriaLibro;
+import enumeraciones.EstadoArticulo;
+import enumeraciones.IdiomaLibro;
+
+import java.awt.event.ActionEvent;
+
+import jerarquia.Articulo;
+
 /**
  * @author pablo
  *
