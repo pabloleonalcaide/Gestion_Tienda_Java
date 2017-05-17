@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.event.ActionListener;
+import java.util.ListIterator;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
@@ -13,7 +14,8 @@ import javax.swing.JRadioButton;
 
 //RECUERDA, MUESTRA Y PIDE CONFIRMACION ANTES DE ELIMINAR
 public class PanelEliminar extends PanelPadre {
-	public PanelEliminar() {
+	public PanelEliminar(ListIterator it) {
+		super(it);
 		textNombre.setEditable(false);
 		textPrecio.setEditable(false);
 		textDetalles.setEditable(false);

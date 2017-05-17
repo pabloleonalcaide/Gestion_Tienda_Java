@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="23" version="2.0">
 <workbenchAdvisor/>
-<window height="771" maximized="true" width="1018" x="55" y="24">
+<window height="770" maximized="true" width="799" x="55" y="24">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -39,6 +39,7 @@
 <part id="5"/>
 <part id="6"/>
 <part id="7"/>
+<part id="8"/>
 </presentation>
 </folder>
 </info>
@@ -49,31 +50,35 @@
 </editor>
 <editor id="org.eclipse.wb.core.guiEditor" name="Principal.java" partName="Principal.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/Principal.java" title="Principal.java" tooltip="Proyecto/src/gui/Principal.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/Principal.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="12797" selectionTopPixel="5219"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="12950" selectionTopPixel="5219"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.wb.core.guiEditor" name="PanelAnadir.java" partName="PanelAnadir.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/PanelAnadir.java" title="PanelAnadir.java" tooltip="Proyecto/src/gui/PanelAnadir.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.wb.core.guiEditor" name="PanelAnadir.java" partName="PanelAnadir.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/PanelAnadir.java" title="PanelAnadir.java" tooltip="Proyecto/src/gui/PanelAnadir.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/PanelAnadir.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4221" selectionTopPixel="990"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6473" selectionTopPixel="2154"/>
 </editor>
 <editor id="org.eclipse.wb.core.guiEditor" name="PanelPadre.java" partName="PanelPadre.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/PanelPadre.java" title="PanelPadre.java" tooltip="Proyecto/src/gui/PanelPadre.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/PanelPadre.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="6" selectionOffset="18879" selectionTopPixel="9210"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="17314" selectionTopPixel="8229"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PanelMostrar.java" partName="PanelMostrar.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/PanelMostrar.java" title="PanelMostrar.java" tooltip="Proyecto/src/gui/PanelMostrar.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/PanelMostrar.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1389" selectionTopPixel="118"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuscarEliminar.java" partName="BuscarEliminar.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/BuscarEliminar.java" title="BuscarEliminar.java" tooltip="Proyecto/src/gui/BuscarEliminar.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/BuscarEliminar.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="129" selectionTopPixel="0"/>
-</editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PanelEliminar.java" partName="PanelEliminar.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/PanelEliminar.java" title="PanelEliminar.java" tooltip="Proyecto/src/gui/PanelEliminar.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/PanelEliminar.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1602" selectionTopPixel="88"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1610" selectionTopPixel="133"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tablero.java" partName="Tablero.java" path="/home/pablo/workspace_proyecto/Proyecto/src/jerarquia/Tablero.java" title="Tablero.java" tooltip="Proyecto/src/jerarquia/Tablero.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/jerarquia/Tablero.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="92" selectionOffset="398" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Stock.java" partName="Stock.java" path="/home/pablo/workspace_proyecto/Proyecto/src/stock/Stock.java" title="Stock.java" tooltip="Proyecto/src/stock/Stock.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/stock/Stock.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4777" selectionTopPixel="2563"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Articulo.java" partName="Articulo.java" path="/home/pablo/workspace_proyecto/Proyecto/src/jerarquia/Articulo.java" title="Articulo.java" tooltip="Proyecto/src/jerarquia/Articulo.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/jerarquia/Articulo.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.wb.core.guiEditor" name="BuscarEliminar.java" partName="BuscarEliminar.java" path="/home/pablo/workspace_proyecto/Proyecto/src/gui/BuscarEliminar.java" title="BuscarEliminar.java" tooltip="Proyecto/src/gui/BuscarEliminar.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Proyecto/src/gui/BuscarEliminar.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -164,161 +169,166 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/gui/PanelEliminar.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" path="/Proyecto/src/gui/PanelAnadir.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" path="/Proyecto/src/gui/PanelPadre.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/jerarquia/Rol.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" path="/Proyecto/src/gui/Principal.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/jerarquia/Tablero.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" path="/Proyecto/src/gui/PanelPadre.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/jerarquia/Cartas.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/stock/Stock.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/jerarquia/Articulo.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" path="/Proyecto/src/gui/PanelAnadir.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/gui/PanelMostrar.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Proyecto/src/gui/PanelEliminar.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" path="/Proyecto/src/gui/BuscarEliminar.java"/>
 </editors>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3197" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3197" y="0"/>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="7520" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="6317" y="6"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3197" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3197" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3197" y="0"/>
+<position info="not_deleted" x="7356" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="7944" y="7"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position/>
+<position info="not_deleted" x="7520" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="7944" y="7"/>
+<position info="not_deleted" x="7356" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="5405" y="0"/>
+<position info="not_deleted" x="7520" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="5201" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3219" y="0"/>
-</item>
-<item historyLabel="Rol.java" index="3">
-<position info="not_deleted" x="465" y="85"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3795" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3553" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3789" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3590" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3789" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3628" y="0"/>
+<position info="not_deleted" x="7586" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="6947" y="5"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3628" y="0"/>
+<position info="not_deleted" x="7757" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="6947" y="5"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3628" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3789" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3696" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3746" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3789" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3785" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="3795" y="0"/>
+<position info="not_deleted" x="7832" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="17140" y="6"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4485" y="0"/>
-</item>
-<item historyLabel="Tablero.java" index="4">
-<position info="not_deleted" x="398" y="92"/>
-</item>
-<item historyLabel="PanelEliminar.java" index="0">
-<position info="not_deleted" x="1602" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4485" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4132" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4386" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4170" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4386" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4264" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4386" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4306" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4307" y="0"/>
-</item>
-<item historyLabel="PanelAnadir.java" index="1">
-<position info="not_deleted" x="4386" y="0"/>
+<position info="not_deleted" x="7934" y="0"/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="18132" y="8"/>
+<position info="not_deleted" x="7997" y="0"/>
 </item>
-<item historyLabel="PanelAnadir.java" index="1">
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="7934" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="7832" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="7934" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="7997" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="8162" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="8248" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="8340" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="8248" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="8340" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
 <position/>
 </item>
 <item historyLabel="PanelPadre.java" index="2">
-<position info="not_deleted" x="18879" y="6"/>
+<position info="not_deleted" x="16830" y="0"/>
 </item>
-<item active="true" historyLabel="PanelAnadir.java" index="1">
+<item historyLabel="Principal.java" index="0">
+<position info="not_deleted" x="12797" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16964" y="0"/>
+</item>
+<item historyLabel="Principal.java" index="0">
+<position info="not_deleted" x="12797" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16964" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
 <position/>
+</item>
+<item historyLabel="Cartas.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position/>
+</item>
+<item historyLabel="Tablero.java" index="1">
+<position/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16814" y="0"/>
+</item>
+<item historyLabel="Tablero.java" index="1">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16836" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16834" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16870" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="16904" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="17614" y="0"/>
+</item>
+<item historyLabel="Principal.java" index="0">
+<position info="not_deleted" x="13418" y="0"/>
+</item>
+<item historyLabel="Stock.java" index="4">
+<position info="not_deleted" x="483" y="0"/>
+</item>
+<item historyLabel="Articulo.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Stock.java" index="4">
+<position info="not_deleted" x="668" y="0"/>
+</item>
+<item historyLabel="Principal.java" index="0">
+<position info="not_deleted" x="12950" y="0"/>
+</item>
+<item historyLabel="Tablero.java" index="1">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="17314" y="0"/>
+</item>
+<item historyLabel="Stock.java" index="4">
+<position info="not_deleted" x="4777" y="0"/>
+</item>
+<item historyLabel="Principal.java" index="0">
+<position info="not_deleted" x="12950" y="0"/>
+</item>
+<item historyLabel="PanelAnadir.java" index="6">
+<position info="not_deleted" x="6473" y="0"/>
+</item>
+<item historyLabel="PanelPadre.java" index="2">
+<position info="not_deleted" x="17314" y="0"/>
+</item>
+<item historyLabel="PanelMostrar.java" index="7">
+<position info="not_deleted" x="1389" y="0"/>
+</item>
+<item historyLabel="PanelEliminar.java" index="8">
+<position info="not_deleted" x="1610" y="0"/>
+</item>
+<item active="true" historyLabel="BuscarEliminar.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -337,26 +347,29 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" name="BuscarEliminar.java" tooltip="Proyecto/src/gui/BuscarEliminar.java">
+<persistable path="/Proyecto/src/gui/BuscarEliminar.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Articulo.java" tooltip="Proyecto/src/jerarquia/Articulo.java">
+<persistable path="/Proyecto/src/jerarquia/Articulo.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Stock.java" tooltip="Proyecto/src/stock/Stock.java">
+<persistable path="/Proyecto/src/stock/Stock.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tablero.java" tooltip="Proyecto/src/jerarquia/Tablero.java">
 <persistable path="/Proyecto/src/jerarquia/Tablero.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Rol.java" tooltip="Proyecto/src/jerarquia/Rol.java">
-<persistable path="/Proyecto/src/jerarquia/Rol.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Cartas.java" tooltip="Proyecto/src/jerarquia/Cartas.java">
 <persistable path="/Proyecto/src/jerarquia/Cartas.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Articulo.java" tooltip="Proyecto/src/jerarquia/Articulo.java">
-<persistable path="/Proyecto/src/jerarquia/Articulo.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Rol.java" tooltip="Proyecto/src/jerarquia/Rol.java">
+<persistable path="/Proyecto/src/jerarquia/Rol.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PanelEliminar.java" tooltip="Proyecto/src/gui/PanelEliminar.java">
 <persistable path="/Proyecto/src/gui/PanelEliminar.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wb.core.guiEditor" name="AcercaDe.java" tooltip="Proyecto/src/gui/AcercaDe.java">
 <persistable path="/Proyecto/src/gui/AcercaDe.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuscarEliminar.java" tooltip="Proyecto/src/gui/BuscarEliminar.java">
-<persistable path="/Proyecto/src/gui/BuscarEliminar.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PanelMostrar.java" tooltip="Proyecto/src/gui/PanelMostrar.java">
 <persistable path="/Proyecto/src/gui/PanelMostrar.java"/>
@@ -372,9 +385,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Fichero.java" tooltip="Proyecto/src/ficheros/Fichero.java">
 <persistable path="/Proyecto/src/ficheros/Fichero.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Stock.java" tooltip="Proyecto/src/stock/Stock.java">
-<persistable path="/Proyecto/src/stock/Stock.java"/>
 </file>
 </mruList>
 </workbench>

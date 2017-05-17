@@ -24,6 +24,8 @@ import stock.Stock;
 import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ListIterator;
+
 import javax.swing.JButton;
 //REFACTORIZAR --> COMPORTAMIENTO, ESTADO
 //CORREGIR LOS ESPACIOS EN LA BARRA DE MENU
@@ -42,7 +44,7 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Bienvenida bienvenida = new Bienvenida();
+					DialogBienvenida bienvenida = new DialogBienvenida();
 					Principal window = new Principal();
 					window.framePrincipal.setVisible(false);
 					cargarCatalogo();
@@ -59,8 +61,7 @@ public class Principal {
 
 	private void initialize() {
 		framePrincipal = new JFrame();
-		framePrincipal
-				.setTitle("Developer's Dungeon - May the force be with Unix");
+		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		framePrincipal.getContentPane().setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBounds(100, 100, 473, 300);
@@ -70,8 +71,7 @@ public class Principal {
 		menuUsuario = new JMenuBar();
 		menuUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		menuUsuario.setBackground(Color.LIGHT_GRAY);
-		menuUsuario
-				.setToolTipText("Bienvenido a la Mazmorra del Desarrollador");
+		menuUsuario.setToolTipText("Bienvenido a la Mazmorra del Desarrollador");
 		menuUsuario.setBounds(0, 0, 461, 21);
 		framePrincipal.getContentPane().add(menuUsuario);
 
@@ -83,8 +83,7 @@ public class Principal {
 
 		JMenuItem mntmTodasOfertas = new JMenuItem("Todas las ofertas");
 		mntmTodasOfertas.setToolTipText("Nuevo");
-		mntmTodasOfertas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
-				InputEvent.CTRL_MASK));
+		mntmTodasOfertas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
 		mntmTodasOfertas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isEmpty()) {
@@ -99,10 +98,8 @@ public class Principal {
 		mnOfertas.add(mntmTodasOfertas);
 
 		JMenuItem mntmCategoriasOfertas = new JMenuItem("Ofertas por Categoria");
-		mntmCategoriasOfertas
-				.setToolTipText("Comprueba las ofertas por categoria");
-		mntmCategoriasOfertas.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_O, InputEvent.CTRL_MASK));
+		mntmCategoriasOfertas.setToolTipText("Comprueba las ofertas por categoria");
+		mntmCategoriasOfertas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		mntmCategoriasOfertas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isEmpty()) {
@@ -126,13 +123,12 @@ public class Principal {
 		mntmMostrarPrecio.setToolTipText("Ordenar por precio");
 		mntmMostrarPrecio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PanelMostrar ordenaPrecio = new PanelMostrar();
+				PanelMostrar ordenaPrecio = new PanelMostrar(stock.iteratorPrice());
 				ordenaPrecio.setVisible(true);
 
 			}
 		});
-		mntmMostrarPrecio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
-				InputEvent.CTRL_MASK));
+		mntmMostrarPrecio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 		mnArticulos.add(mntmMostrarPrecio);
 
 		JMenuItem mntmMostrarNombre = new JMenuItem("Ordenar por Nombre");
@@ -142,18 +138,16 @@ public class Principal {
 				if (stock.isEmpty())
 					msjEmptyStock();
 				else {
-					PanelMostrar ordenaNombre = new PanelMostrar();
+					PanelMostrar ordenaNombre = new PanelMostrar(stock.iteratorName());
 					ordenaNombre.setVisible(true);
 				}
 			}
 		});
-		mntmMostrarNombre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				InputEvent.CTRL_MASK));
+		mntmMostrarNombre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mnArticulos.add(mntmMostrarNombre);
 
 		JMenuItem mntmMostrarCategoria = new JMenuItem("Mostrar por Categoria");
-		mntmMostrarCategoria.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_C, InputEvent.CTRL_MASK));
+		mntmMostrarCategoria.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
 		mntmMostrarCategoria.setToolTipText("muestra por categoria");
 		mntmMostrarCategoria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -168,32 +162,26 @@ public class Principal {
 		menuUsuario.add(mnCesta);
 
 		JMenuItem mntmVaciarCesta = new JMenuItem("Vaciar");
-		mntmVaciarCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
-				InputEvent.CTRL_MASK));
+		mntmVaciarCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
 		mntmVaciarCesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isBasketEmpty()) {
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido",
-									"Esta Vacia", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
 		mnCesta.add(mntmVaciarCesta);
 
 		JMenuItem mntmPorColor = new JMenuItem("Mostrar");
-		mntmPorColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
-				InputEvent.CTRL_MASK));
+		mntmPorColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
 		mntmPorColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isBasketEmpty()) {
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido",
-									"Esta Vacia", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
@@ -208,7 +196,7 @@ public class Principal {
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de...");
 		mntmAcercaDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AcercaDe about = new AcercaDe();
+				DialogAbout about = new DialogAbout();
 				about.setVisible(true);
 			}
 		});
@@ -216,7 +204,7 @@ public class Principal {
 		JMenuItem mntmAyuda = new JMenuItem("Ayuda");
 		mntmAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Ayuda ayuda = new Ayuda();
+				DialogHelp ayuda = new DialogHelp();
 				ayuda.setVisible(true);
 			}
 		});
@@ -226,12 +214,11 @@ public class Principal {
 		JMenuItem menuFormulario = new JMenuItem("Formulario de Contacto");
 		menuFormulario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Formulario formulario = new Formulario();
+				DialogFormulario formulario = new DialogFormulario();
 				formulario.setVisible(true);
 			}
 		});
-		menuFormulario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,
-				InputEvent.CTRL_MASK));
+		menuFormulario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
 		mnAyuda_1.add(menuFormulario);
 
 		JMenu mnCatalogo = new JMenu("Catalogo");
@@ -254,7 +241,7 @@ public class Principal {
 		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
 		mntmAadirNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				anadir = new PanelAnadir();
+				anadir = new PanelAnadir(stock.listIterator());
 				anadir.setVisible(true);
 			}
 		});
@@ -263,7 +250,7 @@ public class Principal {
 		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
 		mntmEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PanelEliminar delete = new PanelEliminar();
+				PanelEliminar delete = new PanelEliminar(stock.listIterator());
 				delete.setVisible(true);
 			}
 		});
@@ -272,20 +259,18 @@ public class Principal {
 		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
 		mntmBuscarYEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BuscarEliminar be = new BuscarEliminar();
+				BuscarEliminar be = new BuscarEliminar(stock.listIterator());
 				be.setVisible(true);
 
 			}
 		});
 		mnGestinArticulos.add(mntmBuscarYEliminar);
 
-		JMenuItem mntmActualizarExistencias = new JMenuItem(
-				"Actualizar existencias");
+		JMenuItem mntmActualizarExistencias = new JMenuItem("Actualizar existencias");
 		mntmActualizarExistencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showConfirmDialog(null,
-						"Aumentaremos todas las existencias\nEstas seguro?",
-						"Reponer", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if (JOptionPane.showConfirmDialog(null, "Aumentaremos todas las existencias\nEstas seguro?", "Reponer",
+						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					stock.replenishAll();
 				}
 			}
@@ -313,8 +298,7 @@ public class Principal {
 		menuEmpleado.add(mnBbdd);
 
 		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
-		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,
-				InputEvent.CTRL_MASK));
+		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
 		mntmGuardarcambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				guardarCopiaComo();
@@ -323,29 +307,29 @@ public class Principal {
 		mnBbdd.add(mntmGuardarcambios);
 
 		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
-		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
-				InputEvent.CTRL_MASK));
+		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 		mntmAbrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				recuperarCopia();
 			}
 		});
 		mnBbdd.add(mntmAbrir);
-		
+
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(stock.isModificado()){
+				if (stock.isModificado()) {
 					Object[] options = { "SI", "NO", "CANCELAR" };
-					int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?", "NO HAS GUARDADO",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-					if(respuesta == 0){
+					int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?",
+							"NO HAS GUARDADO", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+							options[0]);
+					if (respuesta == 0) {
 						guardarCopiaComo();
 						System.exit(0);
-					}else if(respuesta == 1){
+					} else if (respuesta == 1) {
 						System.exit(0);
 					}
-				}else{
+				} else {
 					System.exit(0);
 				}
 			}
@@ -367,7 +351,7 @@ public class Principal {
 
 	// guarda el stock en un txt, pero solo los datos para clientes.
 	protected void descargaCatalogo() {
-		stock.getCatalogo(); //pasarlo a un fichero
+		stock.getCatalogo(); // pasarlo a un fichero
 	}
 
 	/**
@@ -377,31 +361,23 @@ public class Principal {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(filtro);
 
-		if (JFileChooser.APPROVE_OPTION == fileChooser.showDialog(fileChooser,
-				"Guardar Archivo")) {
+		if (JFileChooser.APPROVE_OPTION == fileChooser.showDialog(fileChooser, "Guardar Archivo")) {
 			fileChooser.setAcceptAllFileFilterUsed(false);
 			Fichero.checkFile(fileChooser.getSelectedFile());
 			if (Fichero.getFichero().exists()) {
 				Object[] options = { "Si", "No" };
-				int option = JOptionPane
-						.showOptionDialog(
-								null,
-								"El archivo indicado ya existe, ¿Desea Sobreescribirlo?",
-								"Guardando", JOptionPane.DEFAULT_OPTION,
-								JOptionPane.WARNING_MESSAGE, null, options,
-								options[0]);
+				int option = JOptionPane.showOptionDialog(null,
+						"El archivo indicado ya existe, ¿Desea Sobreescribirlo?", "Guardando",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 				if (option == JOptionPane.YES_OPTION) {
 					try {
 						Fichero.saveAs(stock, Fichero.getFichero());
 					} catch (IOException ex) {
-						JOptionPane.showMessageDialog(null,
-								"Error al guardar el archivo", "ERROR",
+						JOptionPane.showMessageDialog(null, "Error al guardar el archivo", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null,
-							"No se ha podido guardar", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No se ha podido guardar", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 
 			} else {
@@ -411,6 +387,7 @@ public class Principal {
 		}
 
 	}
+
 	/**
 	 * Guarda el stock en un fichero
 	 */
@@ -422,8 +399,7 @@ public class Principal {
 				Fichero.save(stock);
 				stock.setModificado(true);
 			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(null,
-						"Hay problemas para guardar el fichero", "ERROR",
+				JOptionPane.showMessageDialog(null, "Hay problemas para guardar el fichero", "ERROR",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -436,8 +412,7 @@ public class Principal {
 		try {
 			openFileChooser();
 		} catch (IOException | ClassNotFoundException e1) {
-			JOptionPane.showMessageDialog(null,
-					"Hay problemas para abrir el fichero", "ERROR",
+			JOptionPane.showMessageDialog(null, "Hay problemas para abrir el fichero", "ERROR",
 					JOptionPane.ERROR_MESSAGE);
 			Fichero.newFile();
 		}
@@ -450,8 +425,7 @@ public class Principal {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	private void openFileChooser() throws FileNotFoundException,
-			ClassNotFoundException, IOException {
+	private void openFileChooser() throws FileNotFoundException, ClassNotFoundException, IOException {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(filtro);
 		if (fileChooser.showDialog(fileChooser, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
@@ -465,8 +439,7 @@ public class Principal {
 	 * Panel de stock vacio --> ¿metodo o desde el evento?
 	 */
 	private void msjEmptyStock() {
-		JOptionPane.showMessageDialog(null,
-				"No hay articulos,\n espera a renovar el stock");
+		JOptionPane.showMessageDialog(null, "No hay articulos,\n espera a renovar el stock");
 	}
 
 	// CARGA UN ARRAYLIST INICIAL DE ARTICULOS

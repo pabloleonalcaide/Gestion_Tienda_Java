@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ListIterator;
 
 import javax.swing.JOptionPane;
 
@@ -24,14 +25,15 @@ import javax.swing.JPanel;
 
 /**
  * 
- * acciones para a�adir Figuras y Juegos (con su respectiva herencia)
+ * acciones para incluir Libro, Figuras y Juegos (con su respectiva herencia)
  * 
  * @author d16lealp
  * 
  */
 public class PanelAnadir extends PanelPadre {
 
-	public PanelAnadir() {
+	public PanelAnadir(ListIterator it) {
+		super(it);
 		setTitle("Stock: Introducir articulo");
 		textNombre.setEnabled(true);
 		textDetalles.setEnabled(true);
@@ -47,32 +49,27 @@ public class PanelAnadir extends PanelPadre {
 
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelLibro.isVisible()) {
+				if (panelLibro.isVisible()) {	//Si se ha marcado Libro
 					try {
 						addBook();
 						Principal.stock.setModificado(true);
-					} catch (NumberFormatException | NombreNoValidoException
-							| PrecioNoValidoException | FechaNoValidaException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(),
-								"Error", JOptionPane.ERROR_MESSAGE);
+					} catch (NumberFormatException | NombreNoValidoException | PrecioNoValidoException
+							| FechaNoValidaException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
-				} else if (panelJuego.isVisible()) {
+				} else if (panelJuego.isVisible()) {	//Si se ha marcado Juego
 					try {
 						addGame();
-					} catch (NumberFormatException | PrecioNoValidoException
-							| EdadNoValidaException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(),
-								"Error", JOptionPane.ERROR_MESSAGE);
+					} catch (NumberFormatException | PrecioNoValidoException | EdadNoValidaException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 					Principal.stock.setModificado(true);
-				} else if (panelFigura.isVisible()) {
+				} else if (panelFigura.isVisible()) {	//Si se ha marcado figura
 					try {
 						addToy();
 						Principal.stock.setModificado(true);
-					} catch (NumberFormatException | PesoNoValidoException
-							| PrecioNoValidoException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(),
-								"Error", JOptionPane.ERROR_MESSAGE);
+					} catch (NumberFormatException | PesoNoValidoException | PrecioNoValidoException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
 					}
 				}
@@ -86,65 +83,35 @@ public class PanelAnadir extends PanelPadre {
 			 * @throws PrecioNoValidoException
 			 * @throws NumberFormatException
 			 */
-			protected void addGame() throws NumberFormatException,
-					PrecioNoValidoException, EdadNoValidaException {
+			protected void addGame() throws NumberFormatException, PrecioNoValidoException, EdadNoValidaException {
 
-				if (rdbtnCartas.isSelected()) {
+				if (rdbtnCartas.isSelected()) {	//Si se ha marcado el boton de Cartas
 					enableCartas();
-					Principal.stock.addToStock(
-							new Cartas(textNombre.getText(), textDetalles
-									.getText(), Double.parseDouble(textPrecio
-									.getText()),
-									(EstadoArticulo) comboBoxEstado
-											.getSelectedItem(),
-									LocalDate.now(), Double
-											.parseDouble(textFieldDuracion
-													.getText()), Integer
-											.parseInt(textEdad.getText()),
-									Integer.parseInt(textCartas.getText()),
-									(DificultadCartas) comboBoxDificultad
-											.getSelectedItem(), chkbxColeccion
-											.isSelected()), Integer
-									.parseInt(textStock.getText()));
-
-				} else if (rdbtnRol.isSelected()) {
-					enableRol();
-					enableCartas();
-					Principal.stock.addToStock(
-							new Rol(textNombre.getText(), textDetalles
-									.getText(), Double.parseDouble(textPrecio
-									.getText()),
-									(EstadoArticulo) comboBoxEstado
-											.getSelectedItem(),
-									LocalDate.now(), Double
-											.parseDouble(textFieldDuracion
-													.getText()), Integer
-											.parseInt(textEdad.getText()),
-									(GeneroRol) comboBox_Genero
-											.getSelectedItem(),
-									(MaterialRol) comboBoxMaterialRol
-											.getSelectedItem(), Double
-											.parseDouble(textEdicion.getText())),
+					Principal.stock.addToStock(new Cartas(textNombre.getText(), textDetalles.getText(),
+							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
+							Integer.parseInt(textEdad.getText()), Integer.parseInt(textCartas.getText()),
+							(DificultadCartas) comboBoxDificultad.getSelectedItem(), chkbxColeccion.isSelected()),
 							Integer.parseInt(textStock.getText()));
 
-				} else if (rdbtnTablero.isSelected()) {
+				} else if (rdbtnRol.isSelected()) { //Si se ha marcado el boton de Rol
+					enableRol();
+					enableCartas();
+					Principal.stock.addToStock(new Rol(textNombre.getText(), textDetalles.getText(),
+							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
+							Integer.parseInt(textEdad.getText()), (GeneroRol) comboBox_Genero.getSelectedItem(),
+							(MaterialRol) comboBoxMaterialRol.getSelectedItem(),
+							Double.parseDouble(textEdicion.getText())), Integer.parseInt(textStock.getText()));
+
+				} else if (rdbtnTablero.isSelected()) { //Si se ha marcado el boton de Tablero
 					enableTablero();
-					Principal.stock.addToStock(
-							new Tablero(textNombre.getText(), textDetalles
-									.getText(), Double.parseDouble(textPrecio
-									.getText()),
-									(EstadoArticulo) comboBoxEstado
-											.getSelectedItem(),
-									LocalDate.now(), Double
-											.parseDouble(textFieldDuracion
-													.getText()), Integer
-											.parseInt(textEdad.getText()),
-									Integer.parseInt(textPiezas.getText()),
-									Double.parseDouble(textDimensiones
-											.getText()), Integer
-											.parseInt(textJugadores.getText()),
-									chkbxColeccion.isSelected()), Integer
-									.parseInt(textStock.getText()));
+					Principal.stock.addToStock(new Tablero(textNombre.getText(), textDetalles.getText(),
+							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
+							Integer.parseInt(textEdad.getText()), Integer.parseInt(textPiezas.getText()),
+							Double.parseDouble(textDimensiones.getText()), Integer.parseInt(textJugadores.getText()),
+							chkbxColeccion.isSelected()), Integer.parseInt(textStock.getText()));
 				}
 			}
 
@@ -154,20 +121,12 @@ public class PanelAnadir extends PanelPadre {
 			 * @throws PesoNoValidoException
 			 * @tInthrows PrecioNoValidoException
 			 */
-			protected void addToy() throws PesoNoValidoException,
-					PrecioNoValidoException {
-				Principal.stock.addToStock(
-						new Figura(textNombre.getText(),
-								textDetalles.getText(), Double
-										.parseDouble(textPrecio.getText()),
-								(EstadoArticulo) comboBoxEstado
-										.getSelectedItem(), LocalDate.now(),
-								(double) (spinnerPeso.getValue()), textTematica
-										.getText(),
-								chkbxColeccion.isSelected(), chckbxDesmontable
-										.isSelected(), (int) (numElementos
-										.getValue())), Integer
-								.parseInt(textStock.getText()));
+			protected void addToy() throws PesoNoValidoException, PrecioNoValidoException {
+				Principal.stock.addToStock(new Figura(textNombre.getText(), textDetalles.getText(),
+						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+						LocalDate.now(), (double) (spinnerPeso.getValue()), textTematica.getText(),
+						chkbxColeccion.isSelected(), chckbxDesmontable.isSelected(), (int) (numElementos.getValue())),
+						Integer.parseInt(textStock.getText()));
 			}
 
 			/**
@@ -177,24 +136,12 @@ public class PanelAnadir extends PanelPadre {
 			 * @throws PrecioNoValidoException
 			 * @throws FechaNoValidaException
 			 */
-			protected void addBook() throws NombreNoValidoException,
-					PrecioNoValidoException, FechaNoValidaException {
-				Principal.stock.addToStock(
-						new Libro(
-								textNombre.getText(),
-								textDetalles.getText(),
-								Double.parseDouble(textPrecio.getText()),
-								(EstadoArticulo) comboBoxEstado
-										.getSelectedItem(),
-								LocalDate.now(),
-								Integer.parseInt(textPaginas.getText()),
-								readDateSpinner(spinnerPublicacion),
-								textAutor.getText(),
-								true,
-								(IdiomaLibro) comboBox_Idioma.getSelectedItem(),
-								(CategoriaLibro) comboBox_Genero
-										.getSelectedItem()), Integer
-								.parseInt(textStock.getText()));
+			protected void addBook() throws NombreNoValidoException, PrecioNoValidoException, FechaNoValidaException {
+				Principal.stock.addToStock(new Libro(textNombre.getText(), textDetalles.getText(),
+						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+						LocalDate.now(), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
+						textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
+						(CategoriaLibro) comboBox_Genero.getSelectedItem()), Integer.parseInt(textStock.getText()));
 			}
 		});
 

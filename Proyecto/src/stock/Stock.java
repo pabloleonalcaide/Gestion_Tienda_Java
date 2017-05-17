@@ -92,8 +92,7 @@ public class Stock implements Serializable {
 			stock.add(articulo);
 		}
 		int indice = stock.indexOf(articulo);
-		stock.get(indice).setCantidad(
-				stock.get(indice).getCantidad() + cantidad);
+		stock.get(indice).setCantidad(stock.get(indice).getCantidad() + cantidad);
 	}
 
 	/**
@@ -102,8 +101,7 @@ public class Stock implements Serializable {
 	 * @param articulo
 	 * @throws ImposibleEliminarException
 	 */
-	public void removeFromStock(Articulo articulo)
-			throws ImposibleEliminarException {
+	public void removeFromStock(Articulo articulo) throws ImposibleEliminarException {
 		if (!stock.remove(articulo))
 			throw new ImposibleEliminarException("no se ha podido eliminar");
 	}
@@ -158,7 +156,6 @@ public class Stock implements Serializable {
 	 * @return
 	 */
 	public boolean isBasketEmpty() {
-		int aux = 0;
 		for (Articulo art : stock) {
 			if (art.isSeleccionado())
 				return false;
@@ -196,7 +193,57 @@ public class Stock implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ListIterator<Articulo> iterator() {
+	public ListIterator<Articulo> listIterator() {
+		return stock.listIterator();
+	}
+
+	/**
+	 * Devuelve un iterador ordenando los articulos por nombre
+	 * 
+	 * @return
+	 */
+	public ListIterator iteratorName() {
+		sortByName();
+		return stock.listIterator();
+	}
+
+	/**
+	 * Devuelve un iterador ordenando los articulos por precio
+	 * 
+	 * @return
+	 */
+	public ListIterator iteratorPrice() {
+		sortByPrice();
+		return stock.listIterator();
+	}
+
+	/**
+	 * Devuleve un iterador de Articulos del tipo Libro
+	 * 
+	 * @return
+	 */
+	public ListIterator iteratorLibro() {
+
+		return stock.listIterator();
+	}
+
+	/**
+	 * Devuleve un iterador de Articulos del tipo Figura
+	 * 
+	 * @return
+	 */
+	public ListIterator iteratorFigura() {
+
+		return stock.listIterator();
+	}
+
+	/**
+	 * Devuleve un iterador de Articulos del tipo Juego
+	 * 
+	 * @return
+	 */
+	public ListIterator iteratorJuego() {
+
 		return stock.listIterator();
 	}
 
@@ -208,8 +255,7 @@ public class Stock implements Serializable {
 	public String getCatalogo() {
 		StringBuilder catalogo = new StringBuilder();
 		for (Articulo art : stock) {
-			catalogo.append("\nArticulo: " + art.getNombre() + ", Categoria: "
-					+ art.getClass().getName());
+			catalogo.append("\nArticulo: " + art.getNombre() + ", Categoria: " + art.getClass().getName());
 		}
 		return catalogo.toString();
 	}

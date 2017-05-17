@@ -12,11 +12,16 @@ import jerarquia.Articulo;
 import stock.Stock;
 
 import javax.swing.JTextPane;
-
+/**
+ * Panel que muestra las ofertas actuales
+ * @author pablo
+ *
+ */
 public class DialogOferta extends JDialog {
 	JTextPane textOfertas;
 	private final JPanel contentPanel = new JPanel();
 	private Stock stockOfertas = new Stock();
+
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +46,7 @@ public class DialogOferta extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		textOfertas = new JTextPane();
 		textOfertas.setEnabled(false);
 		textOfertas.setEditable(false);
@@ -49,20 +54,25 @@ public class DialogOferta extends JDialog {
 		contentPanel.add(textOfertas);
 	}
 
+	/**
+	 * Recorre el stock buscando aquellos articulos con mejores descuentos
+	 */
 	private void buscarOfertas() {
 		StringBuilder contenido = new StringBuilder();
-		for(Articulo art:Principal.stock.getStock()){
-			if(art.getDescuento()>0.5){
-				stockOfertas.addToStock(art, 1);
-				contenido.append(art.getNombre()+", precio: "+art.getPrecio()+"\n");
+		int contador=0;
+		for (Articulo art : Principal.stock.getStock()) {
+			if (art.getDescuento() > 0.5) {
+				contenido.append(art.getNombre() + ", precio: " + art.getPrecio() + "\n");
+				contador++;
+				if (contador>4)break;
 			}
-		
+
 		}
-		if(contenido.length()==0)
+		if (contenido.length() == 0)
 			textOfertas.setText("no tenemos ofertas");
 		else
 			textOfertas.setText(contenido.toString());
-		
+
 	}
 
 }

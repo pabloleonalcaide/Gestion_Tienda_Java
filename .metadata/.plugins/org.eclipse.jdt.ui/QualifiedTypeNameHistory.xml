@@ -10,10 +10,11 @@
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
-<fullyQualifiedTypeName name="java.util.ListIterator"/>
 <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="jerarquia.Cartas"/>
 <fullyQualifiedTypeName name="jerarquia.Rol"/>
 <fullyQualifiedTypeName name="jerarquia.Tablero"/>
+<fullyQualifiedTypeName name="java.util.ListIterator"/>
+<fullyQualifiedTypeName name="jerarquia.Articulo"/>
 </qualifiedTypeNameHistroy>

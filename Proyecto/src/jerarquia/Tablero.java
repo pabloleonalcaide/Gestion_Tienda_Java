@@ -7,27 +7,19 @@ import excepciones.EdadNoValidaException;
 import excepciones.PrecioNoValidoException;
 
 public class Tablero extends Juego {
-	
+
 	int num_piezas;
 	double dimensiones;
 	int num_jugadores;
 	boolean coleccion;
-	public Tablero(String nombre, String descripcion, double precio,
-			EstadoArticulo estado, LocalDate fecha, double duracion, int edad,
-			int piezas,double dimension,int jugadores, boolean coleccion)
+
+	public Tablero(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha,
+			double duracion, int edad, int piezas, double dimension, int jugadores, boolean coleccion)
 			throws PrecioNoValidoException, EdadNoValidaException {
 		super(nombre, descripcion, precio, estado, fecha, duracion, edad);
 	}
-/**
- * El descuento se aplica en base a si es un juego coleccionable o no
- */
-	@Override
-	public void calcularDescuento() {
-		if(isColeccion())
-			setDescuento(getPrecio()*0.013);
-		else 
-			setDescuento(0);
-	}
+
+	
 
 	int getNum_piezas() {
 		return num_piezas;
@@ -66,5 +58,14 @@ public class Tablero extends Juego {
 		calcularDescuento();
 		return getDescuento();
 	}
-
+	/**
+	 * El descuento se aplica en base a si es un juego coleccionable o no
+	 */
+	@Override
+	public void calcularDescuento() {
+		if (isColeccion())
+			setDescuento(getPrecio() * 0.013);
+		else
+			setDescuento(0);
+	}
 }

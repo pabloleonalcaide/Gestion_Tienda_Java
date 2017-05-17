@@ -1,12 +1,15 @@
 package gui;
 
+import java.util.ListIterator;
+
 /**
  * @author pablo
  *
  */
 public class PanelMostrar extends PanelPadre {
 
-	public PanelMostrar() {
+	public PanelMostrar(ListIterator it) {
+		super(it);
 		btnALaCesta_anadir.setVisible(false);
 		btnSacar_borrar.setVisible(false);
 		spinnerEntrada.setEnabled(false);

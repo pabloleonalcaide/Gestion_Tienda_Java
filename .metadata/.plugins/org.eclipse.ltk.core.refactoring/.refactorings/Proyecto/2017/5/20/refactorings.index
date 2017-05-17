@@ -8,3 +8,16 @@
 1495006058617	Extract method 'addBook'
 1495006100234	Extract method 'addToy'
 1495006152615	Extract method 'addGame'
+1495047214463	Convert local variable 'chckbxColeccion' to field
+1495049875168	Rename method 'iterator'
+1495049887468	Rename method 'iteradorNombre'
+1495049897086	Rename method 'iteradorPrecio'
+1495051288708	Infer generic type arguments
+1495052461620	Rename type 'AcercaDe'
+1495052470449	Rename type 'Ayuda'
+1495052486675	Rename type 'Bienvenida'
+1495052501062	Rename type 'Formulario'
+1495052527029	Rename type 'PanelFormulario'
+1495052543277	Rename type 'PanelBienvenida'
+1495052553057	Rename type 'PanelAbout'
+1495052564411	Rename type 'PanelHelp'
