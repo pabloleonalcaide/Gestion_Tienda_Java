@@ -274,6 +274,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent arg0) {
 				BuscarEliminar be = new BuscarEliminar();
 				be.setVisible(true);
+
 			}
 		});
 		mnGestinArticulos.add(mntmBuscarYEliminar);
@@ -330,6 +331,26 @@ public class Principal {
 			}
 		});
 		mnBbdd.add(mntmAbrir);
+		
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(stock.isModificado()){
+					Object[] options = { "SI", "NO", "CANCELAR" };
+					int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?", "NO HAS GUARDADO",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+					if(respuesta == 0){
+						guardarCopiaComo();
+						System.exit(0);
+					}else if(respuesta == 1){
+						System.exit(0);
+					}
+				}else{
+					System.exit(0);
+				}
+			}
+		});
+		mnBbdd.add(mntmSalir);
 
 		btnWeb = new JButton("Vista web");
 		btnWeb.setBounds(166, 219, 120, 19);
@@ -346,7 +367,7 @@ public class Principal {
 
 	// guarda el stock en un txt, pero solo los datos para clientes.
 	protected void descargaCatalogo() {
-
+		stock.getCatalogo(); //pasarlo a un fichero
 	}
 
 	/**
@@ -386,7 +407,7 @@ public class Principal {
 			} else {
 				save();
 			}
-
+			stock.setModificado(false);
 		}
 
 	}
@@ -399,6 +420,7 @@ public class Principal {
 		} else {
 			try {
 				Fichero.save(stock);
+				stock.setModificado(true);
 			} catch (IOException ex) {
 				JOptionPane.showMessageDialog(null,
 						"Hay problemas para guardar el fichero", "ERROR",

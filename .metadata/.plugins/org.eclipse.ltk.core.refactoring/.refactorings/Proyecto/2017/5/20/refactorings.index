@@ -5,3 +5,6 @@
 1494917347017	Rename method 'leerFecha'
 1494921079356	Convert local variable 'saveAs' to field
 1494963363433	Rename method 'msjStockVacio'
+1495006058617	Extract method 'addBook'
+1495006100234	Extract method 'addToy'
+1495006152615	Extract method 'addGame'

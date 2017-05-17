@@ -13,4 +13,7 @@
 <fullyQualifiedTypeName name="java.util.ListIterator"/>
 <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="jerarquia.Cartas"/>
+<fullyQualifiedTypeName name="jerarquia.Rol"/>
+<fullyQualifiedTypeName name="jerarquia.Tablero"/>
 </qualifiedTypeNameHistroy>

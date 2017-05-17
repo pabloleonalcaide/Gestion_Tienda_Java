@@ -42,7 +42,8 @@ public class PanelMostrar extends PanelPadre {
 		textAutor.setEnabled(false);
 		comboBox_Idioma.setEnabled(false);
 		comboBox_Genero.setEnabled(false);
-		
+		btnAnterior.setEnabled(false);
+		avanzar();
 	}
 
 	

@@ -598,9 +598,9 @@ public class PanelPadre extends JFrame {
 	protected JButton btnSacar_borrar;
 	protected JButton btnALaCesta_anadir;
 	protected JButton btnAnterior;
-	protected JTextField textFieldDuracion;
+	JTextField textFieldDuracion;
 	protected JLabel lblEdad;
-	protected JTextField textEdad;
+	JTextField textEdad;
 	protected JLabel lblNombre;
 	protected JLabel lblPrecio;
 	protected JLabel lblDescripcion;

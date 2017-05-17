@@ -30,7 +30,7 @@ public class AcercaDe extends JDialog {
 	 URI uri;
 	public AcercaDe() {
 	    try {
-			uri = new URI("https://github.com/pabloleonalcaide/Proyecto_Frikytienda");
+			uri = new URI("https://github.com/pabloleonalcaide/Tienda_Geek");
 		} catch (URISyntaxException e) {
 			System.out.println("url invalida");
 		}
