@@ -573,10 +573,7 @@ public class PanelPadre extends JFrame {
 	 * habilita la entrada de datos a un articulo Tablero
 	 */
 	void enableTablero() {
-		textPiezas.setVisible(true);
-		textDimensiones.setVisible(true);
-		textJugadores.setVisible(true);
-		textColeccion.setVisible(true);
+
 		textCartas.setVisible(false);
 		comboBoxDificultad.setVisible(false);
 		chkbxColeccion.setVisible(false);
@@ -592,10 +589,6 @@ public class PanelPadre extends JFrame {
 	 * habilita la entrada de datos a un articulo Rol
 	 */
 	void enableRol() {
-		textPiezas.setVisible(false);
-		textDimensiones.setVisible(false);
-		textJugadores.setVisible(false);
-		textColeccion.setVisible(false);
 		spinnerPeso.setVisible(false);
 		textTematica.setVisible(false);
 		numElementos.setVisible(false);
@@ -611,10 +604,6 @@ public class PanelPadre extends JFrame {
 	 * habilita la entrada de datos a un articulo Cartas
 	 */
 	void enableCartas() {
-		textPiezas.setVisible(false);
-		textDimensiones.setVisible(false);
-		textJugadores.setVisible(false);
-		textColeccion.setVisible(true);
 		textTematica.setVisible(false);
 		numElementos.setVisible(false);
 		spinnerPeso.setVisible(false);

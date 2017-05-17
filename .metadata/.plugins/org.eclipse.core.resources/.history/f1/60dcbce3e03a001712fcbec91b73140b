@@ -1,5 +1,4 @@
 package gui;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -10,7 +9,6 @@ import excepciones.ImposibleEliminarException;
 import jerarquia.Libro;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
 //RECUERDA, MUESTRA Y PIDE CONFIRMACION ANTES DE ELIMINAR
 public class PanelEliminar extends PanelPadre {
 	public PanelEliminar() {
@@ -24,10 +22,8 @@ public class PanelEliminar extends PanelPadre {
 		panelFigura.setVisible(false);
 		panelJuego.setVisible(false);
 		rdbtnCartas.setEnabled(false);
-		rdbtnTablero.setEnabled(false);
-		;
-		rdbtnRol.setEnabled(false);
-		;
+		rdbtnTablero.setEnabled(false);;
+		rdbtnRol.setEnabled(false);;
 		lblEstado.setBounds(12, 205, 80, 27);
 		lblFechaEntrada.setBounds(12, 286, 80, 34);
 		lblCantidadStock.setBounds(12, 251, 80, 27);
@@ -52,7 +48,7 @@ public class PanelEliminar extends PanelPadre {
 					Principal.stock.removeFromStock(new Libro(id));
 					Principal.stock.setModificado(true);
 				} catch (ImposibleEliminarException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
+					JOptionPane.showMessageDialog(null,e.getMessage());
 				}
 			}
 		});

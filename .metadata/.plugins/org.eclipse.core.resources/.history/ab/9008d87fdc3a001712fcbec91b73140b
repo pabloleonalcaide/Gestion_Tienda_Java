@@ -573,57 +573,45 @@ public class PanelPadre extends JFrame {
 	 * habilita la entrada de datos a un articulo Tablero
 	 */
 	void enableTablero() {
-		textPiezas.setVisible(true);
-		textDimensiones.setVisible(true);
-		textJugadores.setVisible(true);
-		textColeccion.setVisible(true);
-		textCartas.setVisible(false);
-		comboBoxDificultad.setVisible(false);
-		chkbxColeccion.setVisible(false);
-		comboBox_Genero.setVisible(false);
-		comboBoxMaterialRol.setVisible(false);
-		textEdicion.setVisible(false);
-		spinnerPeso.setVisible(true);
-		textTematica.setVisible(true);
-		numElementos.setVisible(true);
+		spinnerPeso.setEnabled(true);
+		textTematica.setEditable(true);
+		numElementos.setEnabled(true);
+		textCartas.setEditable(false);
+		comboBoxDificultad.setEditable(false);
+		chkbxColeccion.setEnabled(false);
+		comboBox_Genero.setEditable(false);
+		comboBoxMaterialRol.setEditable(false);
+		textEdicion.setEditable(false);
 	}
 
 	/**
 	 * habilita la entrada de datos a un articulo Rol
 	 */
 	void enableRol() {
-		textPiezas.setVisible(false);
-		textDimensiones.setVisible(false);
-		textJugadores.setVisible(false);
-		textColeccion.setVisible(false);
-		spinnerPeso.setVisible(false);
-		textTematica.setVisible(false);
-		numElementos.setVisible(false);
-		textCartas.setVisible(false);
-		comboBoxDificultad.setVisible(false);
+		spinnerPeso.setEnabled(false);
+		textTematica.setEditable(false);
+		numElementos.setEnabled(false);
+		textCartas.setEditable(false);
+		comboBoxDificultad.setEditable(false);
 		chkbxColeccion.setVisible(false);
-		comboBox_Genero.setVisible(true);
-		comboBoxMaterialRol.setVisible(true);
-		textEdicion.setVisible(true);
+		comboBox_Genero.setEditable(true);
+		comboBoxMaterialRol.setEditable(true);
+		textEdicion.setEditable(true);
 	}
 
 	/**
 	 * habilita la entrada de datos a un articulo Cartas
 	 */
 	void enableCartas() {
-		textPiezas.setVisible(false);
-		textDimensiones.setVisible(false);
-		textJugadores.setVisible(false);
-		textColeccion.setVisible(true);
-		textTematica.setVisible(false);
-		numElementos.setVisible(false);
-		spinnerPeso.setVisible(false);
-		comboBox_Genero.setVisible(false);
-		comboBoxMaterialRol.setVisible(false);
-		textEdicion.setVisible(false);
-		textCartas.setVisible(true);
-		comboBoxDificultad.setVisible(true);
-		chkbxColeccion.setVisible(true);
+		textTematica.setEditable(false);
+		numElementos.setEnabled(false);
+		spinnerPeso.setEnabled(false);
+		textCartas.setEditable(true);
+		comboBoxDificultad.setEditable(true);
+		chkbxColeccion.setEnabled(true);
+		comboBox_Genero.setEditable(false);
+		comboBoxMaterialRol.setEditable(false);
+		textEdicion.setEditable(false);
 	}
 
 	private final JPanel contentPanel = new JPanel();
