@@ -22,14 +22,10 @@ public class PanelEliminar extends PanelPadre {
 		textStock.setEditable(false);
 		textStock.setEnabled(false);
 		comboBoxEstado.setEnabled(false);
-		panelLibro.setVisible(false);
-		panelFigura.setVisible(false);
-		panelJuego.setVisible(false);
+		cleanRightPanel();
 		rdbtnCartas.setEnabled(false);
 		rdbtnTablero.setEnabled(false);
-		;
 		rdbtnRol.setEnabled(false);
-		;
 		lblEstado.setBounds(12, 205, 80, 27);
 		lblFechaEntrada.setBounds(12, 286, 80, 34);
 		lblCantidadStock.setBounds(12, 251, 80, 27);

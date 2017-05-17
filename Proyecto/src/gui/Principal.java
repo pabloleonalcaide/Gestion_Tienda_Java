@@ -27,17 +27,17 @@ import java.io.IOException;
 import java.util.ListIterator;
 
 import javax.swing.JButton;
+
 //REFACTORIZAR --> COMPORTAMIENTO, ESTADO
 //CORREGIR LOS ESPACIOS EN LA BARRA DE MENU
-
+//CORREGIR OPCIONES FILECHOOSER
 public class Principal {
-	public static JFrame framePrincipal;
-	public static Stock stock = new Stock();
-	public static PanelAnadir anadir;
+	static JFrame framePrincipal;
+	static Stock stock = new Stock();
 	Filtro filtro = new Filtro(".obj", "obj");
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
-	protected JButton btnWeb;
+	protected JButton btnWeb;	
 	protected JFileChooser fileChooser = new JFileChooser();
 
 	public static void main(String[] args) {
@@ -68,12 +68,7 @@ public class Principal {
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
 
-		menuUsuario = new JMenuBar();
-		menuUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
-		menuUsuario.setBackground(Color.LIGHT_GRAY);
-		menuUsuario.setToolTipText("Bienvenido a la Mazmorra del Desarrollador");
-		menuUsuario.setBounds(0, 0, 461, 21);
-		framePrincipal.getContentPane().add(menuUsuario);
+		cargarMenuUsuario();
 
 		JMenu mnOfertas = new JMenu("Ofertas");
 		mnOfertas.setToolTipText("Revisa las ofertas");
@@ -89,14 +84,15 @@ public class Principal {
 				if (stock.isEmpty()) {
 					msjEmptyStock();
 				} else {
-					// DialogOferta ofertas = new DialogOferta();
-					// ofertas.setVisible(true);
+					DialogOferta ofertas = new DialogOferta();
+					ofertas.setVisible(true);
 				}
 			}
 
 		});
 		mnOfertas.add(mntmTodasOfertas);
 
+		/// ME INTERESA ESTA OPCION O ES REDUNDANTE??
 		JMenuItem mntmCategoriasOfertas = new JMenuItem("Ofertas por Categoria");
 		mntmCategoriasOfertas.setToolTipText("Comprueba las ofertas por categoria");
 		mntmCategoriasOfertas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
@@ -174,52 +170,23 @@ public class Principal {
 		});
 		mnCesta.add(mntmVaciarCesta);
 
-		JMenuItem mntmPorColor = new JMenuItem("Mostrar");
-		mntmPorColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
-		mntmPorColor.addActionListener(new ActionListener() {
+		JMenuItem mntmVerCesta = new JMenuItem("Mostrar");
+		mntmVerCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
+		mntmVerCesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (stock.isBasketEmpty()) {
 					JOptionPane.showMessageDialog(null,
 							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
 							JOptionPane.WARNING_MESSAGE);
+				} else {
+					// Muestra todos los articulos seleccionados en una lista y
+					// despliega opcion de pagar
 				}
 			}
 		});
-		mnCesta.add(mntmPorColor);
+		mnCesta.add(mntmVerCesta);
 
-		JMenu mnAyuda_1 = new JMenu("Ayuda");
-		mnAyuda_1.setToolTipText("necesitas ayuda?");
-		mnAyuda_1.setMnemonic('Y');
-		mnAyuda_1.setBackground(Color.LIGHT_GRAY);
-		menuUsuario.add(mnAyuda_1);
-
-		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de...");
-		mntmAcercaDe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DialogAbout about = new DialogAbout();
-				about.setVisible(true);
-			}
-		});
-		mnAyuda_1.add(mntmAcercaDe);
-		JMenuItem mntmAyuda = new JMenuItem("Ayuda");
-		mntmAyuda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				DialogHelp ayuda = new DialogHelp();
-				ayuda.setVisible(true);
-			}
-		});
-		mntmAyuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
-		mnAyuda_1.add(mntmAyuda);
-
-		JMenuItem menuFormulario = new JMenuItem("Formulario de Contacto");
-		menuFormulario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				DialogFormulario formulario = new DialogFormulario();
-				formulario.setVisible(true);
-			}
-		});
-		menuFormulario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-		mnAyuda_1.add(menuFormulario);
+		menuContact();
 
 		JMenu mnCatalogo = new JMenu("Catalogo");
 		mnCatalogo.addActionListener(new ActionListener() {
@@ -230,9 +197,7 @@ public class Principal {
 		});
 		menuUsuario.add(mnCatalogo);
 
-		menuEmpleado = new JMenuBar();
-		menuEmpleado.setBounds(10, 0, 461, 21);
-		framePrincipal.getContentPane().add(menuEmpleado);
+		generarMenuEmpleado();
 
 		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
 		mnGestinArticulos.setMnemonic('G');
@@ -241,7 +206,7 @@ public class Principal {
 		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
 		mntmAadirNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				anadir = new PanelAnadir(stock.listIterator());
+				PanelAnadir anadir = new PanelAnadir(stock.listIterator());
 				anadir.setVisible(true);
 			}
 		});
@@ -318,20 +283,7 @@ public class Principal {
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (stock.isModificado()) {
-					Object[] options = { "SI", "NO", "CANCELAR" };
-					int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?",
-							"NO HAS GUARDADO", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
-							options[0]);
-					if (respuesta == 0) {
-						guardarCopiaComo();
-						System.exit(0);
-					} else if (respuesta == 1) {
-						System.exit(0);
-					}
-				} else {
-					System.exit(0);
-				}
+				salir();
 			}
 		});
 		mnBbdd.add(mntmSalir);
@@ -347,6 +299,59 @@ public class Principal {
 			}
 		});
 
+	}
+
+	protected void generarMenuEmpleado() {
+		menuEmpleado = new JMenuBar();
+		menuEmpleado.setBounds(10, 0, 461, 21);
+		framePrincipal.getContentPane().add(menuEmpleado);
+	}
+
+	protected void menuContact() {
+		JMenu mnAyuda_1 = new JMenu("Ayuda");
+		mnAyuda_1.setToolTipText("necesitas ayuda?");
+		mnAyuda_1.setMnemonic('Y');
+		mnAyuda_1.setBackground(Color.LIGHT_GRAY);
+		menuUsuario.add(mnAyuda_1);
+
+		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de...");
+		mntmAcercaDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DialogAbout about = new DialogAbout();
+				about.setVisible(true);
+			}
+		});
+		mnAyuda_1.add(mntmAcercaDe);
+		JMenuItem mntmAyuda = new JMenuItem("Ayuda");
+		mntmAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DialogHelp ayuda = new DialogHelp();
+				ayuda.setVisible(true);
+			}
+		});
+		mntmAyuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+		mnAyuda_1.add(mntmAyuda);
+
+		JMenuItem menuFormulario = new JMenuItem("Formulario de Contacto");
+		menuFormulario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DialogFormulario formulario = new DialogFormulario();
+				formulario.setVisible(true);
+			}
+		});
+		menuFormulario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
+		mnAyuda_1.add(menuFormulario);
+	}
+	/**
+	 * Carga las barra de navegacion del usuario
+	 */
+	protected void cargarMenuUsuario() {
+		menuUsuario = new JMenuBar();
+		menuUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		menuUsuario.setBackground(Color.LIGHT_GRAY);
+		menuUsuario.setToolTipText("Bienvenido a la Mazmorra del Desarrollador");
+		menuUsuario.setBounds(0, 0, 461, 21);
+		framePrincipal.getContentPane().add(menuUsuario);
 	}
 
 	// guarda el stock en un txt, pero solo los datos para clientes.
@@ -440,6 +445,25 @@ public class Principal {
 	 */
 	private void msjEmptyStock() {
 		JOptionPane.showMessageDialog(null, "No hay articulos,\n espera a renovar el stock");
+	}
+	/**
+	 * Comprueba si hubo cambios y sale del programa
+	 */
+	protected void salir() {
+		if (stock.isModificado()) {
+			Object[] options = { "SI", "NO", "CANCELAR" };
+			int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?",
+					"NO HAS GUARDADO", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+					options[0]);
+			if (respuesta == 0) {
+				guardarCopiaComo();
+				System.exit(0);
+			} else if (respuesta == 1) {
+				System.exit(0);
+			}
+		} else {
+			System.exit(0);
+		}
 	}
 
 	// CARGA UN ARRAYLIST INICIAL DE ARTICULOS

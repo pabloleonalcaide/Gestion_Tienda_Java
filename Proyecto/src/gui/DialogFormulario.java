@@ -26,6 +26,12 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
+/**
+ * Dialogo de Formulario --> Recoger el formulario en un fichero
+ * 
+ * @author pablo
+ *
+ */
 public class DialogFormulario extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -35,10 +41,10 @@ public class DialogFormulario extends JDialog {
 	private JComboBox comboBoxFormulario;
 	private JTextArea textArea;
 	private JLabel lblFichero;
-	private Filtro filtroInput = new Filtro("pdf","pdf");
-	private Filtro filtroOutput = new Filtro ("txt","txt");
-	// ------------->> INTRODUCIR CAMBIO DE COLOR CUANDO EL CAMPO ES INCORRECTO 
-	
+	private Filtro filtroInput = new Filtro("pdf", "pdf");
+	private Filtro filtroOutput = new Filtro("txt", "txt");
+	// ------------->> INTRODUCIR CAMBIO DE COLOR CUANDO EL CAMPO ES INCORRECTO
+
 	/**
 	 * Launch the application.
 	 */
@@ -78,14 +84,20 @@ public class DialogFormulario extends JDialog {
 				@Override
 				public void focusLost(FocusEvent arg0) {
 					if (!nombreValido()) {
-						formNombre.setForeground(java.awt.Color.red);//si no es valida, se lo indicamos en rojo
+						formNombre.setForeground(java.awt.Color.red);// si no es
+																		// valida,
+																		// se lo
+																		// indicamos
+																		// en
+																		// rojo
 						formNombre.setText(formNombre.getText());
 					}
 				}
+
 				@Override
 				public void focusGained(FocusEvent arg0) {
 					formNombre.setForeground(java.awt.Color.black);
-					formNombre.setText("");//una vez regresa, vuelve a ponerse negro
+					// una vez regresa, vuelve a ponerse negro
 				}
 			});
 		}
@@ -114,14 +126,19 @@ public class DialogFormulario extends JDialog {
 				@Override
 				public void focusLost(FocusEvent arg0) {
 					if (!emailValido()) {
-						formEmail.setForeground(java.awt.Color.red);//si no es valida, se lo indicamos en rojo
+						formEmail.setForeground(java.awt.Color.red);// si no es
+																	// valida,
+																	// se lo
+																	// indicamos
+																	// en rojo
 						formEmail.setText(formEmail.getText());
 					}
 				}
+
 				@Override
 				public void focusGained(FocusEvent arg0) {
 					formEmail.setForeground(java.awt.Color.black);
-					formEmail.setText("");//una vez regresa, vuelve a ponerse negro
+					// una vez regresa, vuelve a ponerse negro
 				}
 			});
 		}
@@ -133,7 +150,8 @@ public class DialogFormulario extends JDialog {
 		{
 			comboBoxFormulario = new JComboBox();
 			comboBoxFormulario.setBounds(217, 101, 197, 31);
-			comboBoxFormulario.setModel(new DefaultComboBoxModel(new String[] {"Sugerencia", "Reclamacion", "Dejar un C.V"}));
+			comboBoxFormulario
+					.setModel(new DefaultComboBoxModel(new String[] { "Sugerencia", "Reclamacion", "Dejar un C.V" }));
 			comboBoxFormulario.setSelectedItem(null);
 			contentPanel.add(comboBoxFormulario);
 		}
@@ -143,7 +161,7 @@ public class DialogFormulario extends JDialog {
 			textArea.setRows(2);
 			textArea.setColumns(3);
 			contentPanel.add(textArea);
-		    
+
 		}
 		{
 			JLabel lblComentarios = new JLabel("Comentarios*");
@@ -165,27 +183,26 @@ public class DialogFormulario extends JDialog {
 						try {
 							openFileChooser();
 						} catch (IOException | ClassNotFoundException e) {
-							JOptionPane.showMessageDialog(null, "Hay problemas para abrir el fichero", "ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Hay problemas para abrir el fichero", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
 							Fichero.newFile();
 						}
-						
+
 					}
 
-					
-						private void openFileChooser() throws FileNotFoundException, ClassNotFoundException, IOException {
-							JFileChooser open = new JFileChooser();
-							open.setAcceptAllFileFilterUsed(false);
-							open.addChoosableFileFilter(filtroInput);
-							if (open.showDialog(open, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
-								Fichero.fichero = open.getSelectedFile();
-								lblFichero.setText(open.getSelectedFile().getName());				
-							}
+					private void openFileChooser() throws FileNotFoundException, ClassNotFoundException, IOException {
+						JFileChooser open = new JFileChooser();
+						open.setAcceptAllFileFilterUsed(false);
+						open.addChoosableFileFilter(filtroInput);
+						if (open.showDialog(open, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
+							Fichero.fichero = open.getSelectedFile();
+							lblFichero.setText(open.getSelectedFile().getName());
 						}
-						
 					}
-				);
+
+				});
 				{
-					 lblFichero = new JLabel("ninguno seleccionado");
+					lblFichero = new JLabel("ninguno seleccionado");
 					lblFichero.setEnabled(false);
 					buttonPane.add(lblFichero);
 				}
@@ -195,28 +212,33 @@ public class DialogFormulario extends JDialog {
 				JButton okButton = new JButton("Enviar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if(nombreValido() && emailValido()){//Comprobamos si el nombre y el email son validos
-							if(textArea.getText().length()>500||textArea.getText().length()<10  ){
+						if (nombreValido() && emailValido()) {
+							// Comprobamos si el nombre y el email son validos
+							if (textArea.getText().length() > 500 || textArea.getText().length() < 10) {
 								try {
-									throw new NombreNoValidoException("Por favor, el comentario debe tener entre 10 y 500 caracteres");
+									throw new NombreNoValidoException(
+											"Por favor, el comentario debe tener entre 10 y 500 caracteres");
 								} catch (NombreNoValidoException e) {
-									JOptionPane.showMessageDialog(rootPane, e.getMessage(),"Fallo al enviar",JOptionPane.WARNING_MESSAGE);
+									JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Fallo al enviar",
+											JOptionPane.WARNING_MESSAGE);
 								}
-							}else{
-								//Guarda la informacion en un fichero txt
-								JOptionPane.showMessageDialog(rootPane,"Enviado con Exito \n Muy pronto atenderemos su mensaje");
+							} else {
+								// Guarda la informacion en un fichero txt
+								JOptionPane.showMessageDialog(rootPane,
+										"Enviado con Exito \n Muy pronto atenderemos su mensaje");
 								setVisible(false);
 							}
-						}else{
+						} else {
 							try {
-								throw new NombreNoValidoException("El nombre o email no es valido, por favor corrigelo");
+								throw new NombreNoValidoException(
+										"El nombre o email no es valido, por favor corrigelo");
 							} catch (NombreNoValidoException e) {
-								JOptionPane.showMessageDialog(rootPane, e.getMessage(),"Fallo al enviar",JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Fallo al enviar",
+										JOptionPane.WARNING_MESSAGE);
 							}
 						}
-						//Guarda la información del formulario en un fichero .txt
+						// Guarda la información del formulario en un fichero.txt
 					}
-
 
 				});
 				buttonPane.add(okButton);
@@ -226,30 +248,36 @@ public class DialogFormulario extends JDialog {
 				JButton cancelButton = new JButton("Limpiar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-					formNombre.setText("");
-					formApellidos.setText("");
-					formEmail.setText("");
-					comboBoxFormulario.setSelectedItem(null);
-					textArea.setText("");
-					lblFichero.setText("ninguno seleccionado");
-					Fichero.fichero =null;
+						formNombre.setText("");
+						formApellidos.setText("");
+						formEmail.setText("");
+						comboBoxFormulario.setSelectedItem(null);
+						textArea.setText("");
+						lblFichero.setText("ninguno seleccionado");
+						Fichero.fichero = null;
 					}
 				});
-				
+
 				buttonPane.add(cancelButton);
 			}
 		}
-	}					private boolean emailValido() {
-		final Pattern controlEmail = Pattern
-				.compile("^(\\w\\.)*[a-z0-9._%+-]+@[a-z0-9]+\\.[a-z]{2,3}(.[a-z]{2,3})*$");
-		java.util.regex.Matcher mEmail =controlEmail.matcher(formEmail.getText());
-		return mEmail.matches();
-		
 	}
+	/**
+	 * Comprueba que el email se escriba en un formato valido
+	 * @return
+	 */
+	private boolean emailValido() {
+		final Pattern controlEmail = Pattern.compile("^(\\w\\.)*[a-z0-9._%+-]+@[a-z0-9]+\\.[a-z]{2,3}(.[a-z]{2,3})*$");
+		java.util.regex.Matcher mEmail = controlEmail.matcher(formEmail.getText());
+		return mEmail.matches();
 
+	}
+	/**
+	 * Comprueba que el nombre se escriba en un formato valido
+	 * @return
+	 */
 	private boolean nombreValido() {
-		final Pattern controlNombre = Pattern
-				.compile("^\\w{5,20}");
+		final Pattern controlNombre = Pattern.compile("^\\w{5,20}");
 		java.util.regex.Matcher mNombre = controlNombre.matcher(formNombre.getText());
 		return mNombre.matches();
 	}
