@@ -37,7 +37,7 @@ public class Principal {
 	Filtro filtro = new Filtro(".obj", "obj");
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
-	protected JButton btnWeb;	
+	protected JButton btnWeb;
 	protected JFileChooser fileChooser = new JFileChooser();
 
 	public static void main(String[] args) {
@@ -47,7 +47,7 @@ public class Principal {
 					DialogBienvenida bienvenida = new DialogBienvenida();
 					Principal window = new Principal();
 					window.framePrincipal.setVisible(false);
-					cargarCatalogo();
+					// cargarCatalogo();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,6 +70,206 @@ public class Principal {
 
 		cargarMenuUsuario();
 
+		cargarMenuOfertas();
+
+		cargarMenuArticulo();
+
+		cargarMenuCesta();
+
+		crearMenuContacto();
+
+		cargarMenuCatalogo();
+
+		generarMenuEmpleado();
+
+		crearMenuGestion();
+
+		crearMenuPedidos();
+
+		cargarMenuDestacados();
+
+		cargarMenuArchivo();
+
+		cargarBotonWeb();
+
+	}
+
+	/**
+	 * Carga el menu de usuario Articulos (mostrar por precio, mostrar por
+	 * nombre, mostrar por categoria)
+	 */
+	protected void cargarMenuArticulo() {
+		JMenu mnArticulos = new JMenu("Articulos");
+		mnArticulos.setMnemonic('C');
+		mnArticulos.setBackground(Color.LIGHT_GRAY);
+		mnArticulos.setToolTipText("Go Shopping");
+		menuUsuario.add(mnArticulos);
+
+		JMenuItem mntmMostrarPrecio = new JMenuItem("Ordenar por Precio");
+		mntmMostrarPrecio.setToolTipText("Ordenar por precio");
+		mntmMostrarPrecio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PanelMostrar ordenaPrecio = new PanelMostrar(stock.iteratorPrice());
+				ordenaPrecio.setVisible(true);
+
+			}
+		});
+		mntmMostrarPrecio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
+		mnArticulos.add(mntmMostrarPrecio);
+
+		JMenuItem mntmMostrarNombre = new JMenuItem("Ordenar por Nombre");
+		mntmMostrarNombre.setToolTipText("Ordenar por Nombre");
+		mntmMostrarNombre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (stock.isEmpty())
+					msjEmptyStock();
+				else {
+					PanelMostrar ordenaNombre = new PanelMostrar(stock.iteratorName());
+					ordenaNombre.setVisible(true);
+				}
+			}
+		});
+		mntmMostrarNombre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+		mnArticulos.add(mntmMostrarNombre);
+
+		crearMostrarCategorias(mnArticulos);
+	}
+
+	/**
+	 * Carga el menu de usuario Cesta (mostrar cesta, vaciar cesta)
+	 */
+	protected void cargarMenuCesta() {
+		JMenu mnCesta = new JMenu("Cesta");
+		mnCesta.setMnemonic('T');
+		mnCesta.setBackground(Color.LIGHT_GRAY);
+		mnCesta.setToolTipText("Revisa tu cesta");
+		menuUsuario.add(mnCesta);
+
+		JMenuItem mntmVaciarCesta = new JMenuItem("Vaciar");
+		mntmVaciarCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
+		mntmVaciarCesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (stock.isBasketEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+		mnCesta.add(mntmVaciarCesta);
+
+		JMenuItem mntmVerCesta = new JMenuItem("Mostrar");
+		mntmVerCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
+		mntmVerCesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (stock.isBasketEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
+							JOptionPane.WARNING_MESSAGE);
+				} else {
+					// Muestra todos los articulos seleccionados en una lista y
+					// despliega opcion de pagar
+				}
+			}
+		});
+		mnCesta.add(mntmVerCesta);
+	}
+
+	/**
+	 * Carga el menu de usuario Catalogo (descargar catalogo)
+	 */
+	protected void cargarMenuCatalogo() {
+		JMenu mnCatalogo = new JMenu("Catalogo");
+		mnCatalogo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Descarga el catalogo (ArrayList) en un documento txt
+				descargaCatalogo();
+			}
+		});
+		menuUsuario.add(mnCatalogo);
+	}
+
+	/**
+	 * Carga el boton de acceso a la vista de usuario
+	 */
+	protected void cargarBotonWeb() {
+		btnWeb = new JButton("Vista web");
+		btnWeb.setBounds(166, 219, 120, 19);
+		framePrincipal.getContentPane().add(btnWeb);
+		btnWeb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				menuUsuario.setVisible(true);
+				menuEmpleado.setVisible(false);
+				btnWeb.setVisible(false);
+			}
+		});
+	}
+
+	/**
+	 * Crea el menu de empleado Pedidos (mostrar pedidos)
+	 */
+	protected void crearMenuPedidos() {
+		JMenu mnPedidos = new JMenu("Pedidos");
+		mnPedidos.setMnemonic('P');
+		menuEmpleado.add(mnPedidos);
+
+		JMenuItem mntmMostrar = new JMenuItem("Mostrar");
+		mnPedidos.add(mntmMostrar);
+	}
+
+	/**
+	 * Crea el menu de empleado Destacados (cambiar destacados)
+	 */
+	protected void cargarMenuDestacados() {
+		JMenu mnCambiarDestacados = new JMenu("Cambiar Destacados");
+		mnCambiarDestacados.setMnemonic('C');
+		mnCambiarDestacados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
+		menuEmpleado.add(mnCambiarDestacados);
+	}
+
+	/**
+	 * Crea el menu de archivo (abrir copia, guardar copia, salir)
+	 */
+	protected void cargarMenuArchivo() {
+		JMenu mnBbdd = new JMenu("Archivo");
+		mnBbdd.setMnemonic('A');
+		menuEmpleado.add(mnBbdd);
+
+		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
+		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
+		mntmGuardarcambios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				saveAs();
+			}
+		});
+		mnBbdd.add(mntmGuardarcambios);
+
+		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
+		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+		mntmAbrir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				recuperarCopia();
+			}
+		});
+		mnBbdd.add(mntmAbrir);
+
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				salir();
+			}
+		});
+		mnBbdd.add(mntmSalir);
+	}
+
+	/**
+	 * Carga el menu de usuario de ofertas
+	 */
+	protected void cargarMenuOfertas() {
 		JMenu mnOfertas = new JMenu("Ofertas");
 		mnOfertas.setToolTipText("Revisa las ofertas");
 		mnOfertas.setBackground(Color.LIGHT_GRAY);
@@ -108,153 +308,11 @@ public class Principal {
 			}
 		});
 		mnOfertas.add(mntmCategoriasOfertas);
-
-		JMenu mnArticulos = new JMenu("Articulos");
-		mnArticulos.setMnemonic('C');
-		mnArticulos.setBackground(Color.LIGHT_GRAY);
-		mnArticulos.setToolTipText("Go Shopping");
-		menuUsuario.add(mnArticulos);
-
-		JMenuItem mntmMostrarPrecio = new JMenuItem("Ordenar por Precio");
-		mntmMostrarPrecio.setToolTipText("Ordenar por precio");
-		mntmMostrarPrecio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				PanelMostrar ordenaPrecio = new PanelMostrar(stock.iteratorPrice());
-				ordenaPrecio.setVisible(true);
-
-			}
-		});
-		mntmMostrarPrecio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
-		mnArticulos.add(mntmMostrarPrecio);
-
-		JMenuItem mntmMostrarNombre = new JMenuItem("Ordenar por Nombre");
-		mntmMostrarNombre.setToolTipText("Ordenar por Nombre");
-		mntmMostrarNombre.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (stock.isEmpty())
-					msjEmptyStock();
-				else {
-					PanelMostrar ordenaNombre = new PanelMostrar(stock.iteratorName());
-					ordenaNombre.setVisible(true);
-				}
-			}
-		});
-		mntmMostrarNombre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-		mnArticulos.add(mntmMostrarNombre);
-		
-		crearMostrarCategorias(mnArticulos);
-
-		JMenu mnCesta = new JMenu("Cesta");
-		mnCesta.setMnemonic('T');
-		mnCesta.setBackground(Color.LIGHT_GRAY);
-		mnCesta.setToolTipText("Revisa tu cesta");
-		menuUsuario.add(mnCesta);
-
-		JMenuItem mntmVaciarCesta = new JMenuItem("Vaciar");
-		mntmVaciarCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
-		mntmVaciarCesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (stock.isBasketEmpty()) {
-					JOptionPane.showMessageDialog(null,
-							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
-							JOptionPane.WARNING_MESSAGE);
-				}
-			}
-		});
-		mnCesta.add(mntmVaciarCesta);
-
-		JMenuItem mntmVerCesta = new JMenuItem("Mostrar");
-		mntmVerCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
-		mntmVerCesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (stock.isBasketEmpty()) {
-					JOptionPane.showMessageDialog(null,
-							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
-							JOptionPane.WARNING_MESSAGE);
-				} else {
-					// Muestra todos los articulos seleccionados en una lista y
-					// despliega opcion de pagar
-				}
-			}
-		});
-		mnCesta.add(mntmVerCesta);
-
-		crearMenuContacto();
-
-		JMenu mnCatalogo = new JMenu("Catalogo");
-		mnCatalogo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Descarga el catalogo (ArrayList) en un documento txt
-				descargaCatalogo();
-			}
-		});
-		menuUsuario.add(mnCatalogo);
-
-		generarMenuEmpleado();
-
-		crearMenuGestion();
-
-		JMenu mnPedidos = new JMenu("Pedidos");
-		mnPedidos.setMnemonic('P');
-		menuEmpleado.add(mnPedidos);
-
-		JMenuItem mntmMostrar = new JMenuItem("Mostrar");
-		mnPedidos.add(mntmMostrar);
-
-		JMenu mnCambiarDestacados = new JMenu("Cambiar Destacados");
-		mnCambiarDestacados.setMnemonic('C');
-		mnCambiarDestacados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
-		menuEmpleado.add(mnCambiarDestacados);
-
-		JMenu mnBbdd = new JMenu("Archivo");
-		mnBbdd.setMnemonic('A');
-		menuEmpleado.add(mnBbdd);
-
-		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
-		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
-		mntmGuardarcambios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				guardarCopiaComo();
-			}
-		});
-		mnBbdd.add(mntmGuardarcambios);
-
-		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
-		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
-		mntmAbrir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				recuperarCopia();
-			}
-		});
-		mnBbdd.add(mntmAbrir);
-
-		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mntmSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				salir();
-			}
-		});
-		mnBbdd.add(mntmSalir);
-
-		btnWeb = new JButton("Vista web");
-		btnWeb.setBounds(166, 219, 120, 19);
-		framePrincipal.getContentPane().add(btnWeb);
-		btnWeb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				menuUsuario.setVisible(true);
-				menuEmpleado.setVisible(false);
-				btnWeb.setVisible(false);
-			}
-		});
-
 	}
-/**
- * Creacion del menu Gestion
- */
+
+	/**
+	 * Creacion del menu Gestion
+	 */
 	protected void crearMenuGestion() {
 		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
 		mnGestinArticulos.setMnemonic('G');
@@ -299,36 +357,39 @@ public class Principal {
 		});
 		mnGestinArticulos.add(mntmActualizarExistencias);
 	}
-/**
- * Creacion del menu Mostrar por Categoria
- * @param mnArticulos
- */
+
+	/**
+	 * Creacion del menu Mostrar por Categoria
+	 * 
+	 * @param mnArticulos
+	 */
 	protected void crearMostrarCategorias(JMenu mnArticulos) {
 		JMenu mnMostrarPorCategoria = new JMenu("Mostrar por Categoria");
 		mnArticulos.add(mnMostrarPorCategoria);
-		
+
 		JMenuItem mntmJuegos = new JMenuItem("Juegos");
 		mntmJuegos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorJuego());
+				mostrarJuegos.setVisible(true);
 			}
 		});
 		mnMostrarPorCategoria.add(mntmJuegos);
-		
+
 		JMenuItem mntmFiguras = new JMenuItem("Figuras");
 		mntmFiguras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorFigura());
-
+				PanelMostrar mostrarFiguras = new PanelMostrar(stock.iteratorFigura());
+				mostrarFiguras.setVisible(true);
 			}
 		});
 		mnMostrarPorCategoria.add(mntmFiguras);
-		
+
 		JMenuItem mntmLibros = new JMenuItem("Libros");
 		mntmLibros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorLibro());
-
+				PanelMostrar mostrarLibros = new PanelMostrar(stock.iteratorLibro());
+				mostrarLibros.setVisible(true);
 			}
 		});
 		mnMostrarPorCategoria.add(mntmLibros);
@@ -342,6 +403,7 @@ public class Principal {
 		menuEmpleado.setBounds(10, 0, 461, 21);
 		framePrincipal.getContentPane().add(menuEmpleado);
 	}
+
 	/**
 	 * Creacion del menu de contacto
 	 */
@@ -380,6 +442,7 @@ public class Principal {
 		menuFormulario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
 		mnContacto.add(menuFormulario);
 	}
+
 	/**
 	 * Carga las barra de navegacion del usuario
 	 */
@@ -400,7 +463,7 @@ public class Principal {
 	/**
 	 * Guarda una copia del stock actual
 	 */
-	protected void guardarCopiaComo() {
+	protected void saveAs() {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(filtro);
 
@@ -436,7 +499,7 @@ public class Principal {
 	 */
 	protected void save() {
 		if (Fichero.fichero.getName().equalsIgnoreCase("")) {
-			guardarCopiaComo();
+			saveAs();
 		} else {
 			try {
 				Fichero.save(stock);
@@ -484,17 +547,17 @@ public class Principal {
 	private void msjEmptyStock() {
 		JOptionPane.showMessageDialog(null, "No hay articulos,\n espera a renovar el stock");
 	}
+
 	/**
 	 * Comprueba si hubo cambios y sale del programa
 	 */
 	protected void salir() {
 		if (stock.isModificado()) {
 			Object[] options = { "SI", "NO", "CANCELAR" };
-			int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?",
-					"NO HAS GUARDADO", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
-					options[0]);
+			int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?", "NO HAS GUARDADO",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 			if (respuesta == 0) {
-				guardarCopiaComo();
+				saveAs();
 				System.exit(0);
 			} else if (respuesta == 1) {
 				System.exit(0);
