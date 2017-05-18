@@ -141,15 +141,8 @@ public class Principal {
 		});
 		mntmMostrarNombre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mnArticulos.add(mntmMostrarNombre);
-
-		JMenuItem mntmMostrarCategoria = new JMenuItem("Mostrar por Categoria");
-		mntmMostrarCategoria.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
-		mntmMostrarCategoria.setToolTipText("muestra por categoria");
-		mntmMostrarCategoria.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		mnArticulos.add(mntmMostrarCategoria);
+		
+		crearMostrarCategorias(mnArticulos);
 
 		JMenu mnCesta = new JMenu("Cesta");
 		mnCesta.setMnemonic('T');
@@ -186,7 +179,7 @@ public class Principal {
 		});
 		mnCesta.add(mntmVerCesta);
 
-		menuContact();
+		crearMenuContacto();
 
 		JMenu mnCatalogo = new JMenu("Catalogo");
 		mnCatalogo.addActionListener(new ActionListener() {
@@ -199,48 +192,7 @@ public class Principal {
 
 		generarMenuEmpleado();
 
-		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
-		mnGestinArticulos.setMnemonic('G');
-		menuEmpleado.add(mnGestinArticulos);
-
-		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
-		mntmAadirNuevo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PanelAnadir anadir = new PanelAnadir(stock.listIterator());
-				anadir.setVisible(true);
-			}
-		});
-		mnGestinArticulos.add(mntmAadirNuevo);
-
-		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
-		mntmEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				PanelEliminar delete = new PanelEliminar(stock.listIterator());
-				delete.setVisible(true);
-			}
-		});
-		mnGestinArticulos.add(mntmEliminar);
-
-		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
-		mntmBuscarYEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				BuscarEliminar be = new BuscarEliminar(stock.listIterator());
-				be.setVisible(true);
-
-			}
-		});
-		mnGestinArticulos.add(mntmBuscarYEliminar);
-
-		JMenuItem mntmActualizarExistencias = new JMenuItem("Actualizar existencias");
-		mntmActualizarExistencias.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showConfirmDialog(null, "Aumentaremos todas las existencias\nEstas seguro?", "Reponer",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					stock.replenishAll();
-				}
-			}
-		});
-		mnGestinArticulos.add(mntmActualizarExistencias);
+		crearMenuGestion();
 
 		JMenu mnPedidos = new JMenu("Pedidos");
 		mnPedidos.setMnemonic('P');
@@ -300,19 +252,105 @@ public class Principal {
 		});
 
 	}
+/**
+ * Creacion del menu Gestion
+ */
+	protected void crearMenuGestion() {
+		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
+		mnGestinArticulos.setMnemonic('G');
+		menuEmpleado.add(mnGestinArticulos);
 
+		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
+		mntmAadirNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PanelAnadir anadir = new PanelAnadir(stock.listIterator());
+				anadir.setVisible(true);
+			}
+		});
+		mnGestinArticulos.add(mntmAadirNuevo);
+
+		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mntmEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PanelEliminar delete = new PanelEliminar(stock.listIterator());
+				delete.setVisible(true);
+			}
+		});
+		mnGestinArticulos.add(mntmEliminar);
+
+		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
+		mntmBuscarYEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BuscarEliminar be = new BuscarEliminar(stock.listIterator());
+				be.setVisible(true);
+
+			}
+		});
+		mnGestinArticulos.add(mntmBuscarYEliminar);
+
+		JMenuItem mntmActualizarExistencias = new JMenuItem("Actualizar existencias");
+		mntmActualizarExistencias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (JOptionPane.showConfirmDialog(null, "Aumentaremos todas las existencias\nEstas seguro?", "Reponer",
+						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					stock.replenishAll();
+				}
+			}
+		});
+		mnGestinArticulos.add(mntmActualizarExistencias);
+	}
+/**
+ * Creacion del menu Mostrar por Categoria
+ * @param mnArticulos
+ */
+	protected void crearMostrarCategorias(JMenu mnArticulos) {
+		JMenu mnMostrarPorCategoria = new JMenu("Mostrar por Categoria");
+		mnArticulos.add(mnMostrarPorCategoria);
+		
+		JMenuItem mntmJuegos = new JMenuItem("Juegos");
+		mntmJuegos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorJuego());
+			}
+		});
+		mnMostrarPorCategoria.add(mntmJuegos);
+		
+		JMenuItem mntmFiguras = new JMenuItem("Figuras");
+		mntmFiguras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorFigura());
+
+			}
+		});
+		mnMostrarPorCategoria.add(mntmFiguras);
+		
+		JMenuItem mntmLibros = new JMenuItem("Libros");
+		mntmLibros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorLibro());
+
+			}
+		});
+		mnMostrarPorCategoria.add(mntmLibros);
+	}
+
+	/**
+	 * CReacion de la barra de menu de Empleado
+	 */
 	protected void generarMenuEmpleado() {
 		menuEmpleado = new JMenuBar();
 		menuEmpleado.setBounds(10, 0, 461, 21);
 		framePrincipal.getContentPane().add(menuEmpleado);
 	}
-
-	protected void menuContact() {
-		JMenu mnAyuda_1 = new JMenu("Ayuda");
-		mnAyuda_1.setToolTipText("necesitas ayuda?");
-		mnAyuda_1.setMnemonic('Y');
-		mnAyuda_1.setBackground(Color.LIGHT_GRAY);
-		menuUsuario.add(mnAyuda_1);
+	/**
+	 * Creacion del menu de contacto
+	 */
+	protected void crearMenuContacto() {
+		JMenu mnContacto = new JMenu("Contacto");
+		mnContacto.setToolTipText("necesitas ayuda?");
+		mnContacto.setMnemonic('O');
+		mnContacto.setBackground(Color.LIGHT_GRAY);
+		menuUsuario.add(mnContacto);
 
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de...");
 		mntmAcercaDe.addActionListener(new ActionListener() {
@@ -321,7 +359,7 @@ public class Principal {
 				about.setVisible(true);
 			}
 		});
-		mnAyuda_1.add(mntmAcercaDe);
+		mnContacto.add(mntmAcercaDe);
 		JMenuItem mntmAyuda = new JMenuItem("Ayuda");
 		mntmAyuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -330,7 +368,7 @@ public class Principal {
 			}
 		});
 		mntmAyuda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
-		mnAyuda_1.add(mntmAyuda);
+		mnContacto.add(mntmAyuda);
 
 		JMenuItem menuFormulario = new JMenuItem("Formulario de Contacto");
 		menuFormulario.addActionListener(new ActionListener() {
@@ -340,7 +378,7 @@ public class Principal {
 			}
 		});
 		menuFormulario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-		mnAyuda_1.add(menuFormulario);
+		mnContacto.add(menuFormulario);
 	}
 	/**
 	 * Carga las barra de navegacion del usuario

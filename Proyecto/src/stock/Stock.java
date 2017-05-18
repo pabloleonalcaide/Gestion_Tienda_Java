@@ -9,6 +9,7 @@ import enumeraciones.*;
 import excepciones.ArticuloNoExisteException;
 import excepciones.ImposibleEliminarException;
 import jerarquia.Articulo;
+import jerarquia.Figura;
 import jerarquia.Libro;
 
 /**
@@ -223,8 +224,13 @@ public class Stock implements Serializable {
 	 * @return
 	 */
 	public ListIterator iteratorLibro() {
-
-		return stock.listIterator();
+		ArrayList<Articulo> listaLibros = new ArrayList<Articulo>();
+		for(Articulo art: stock){
+			if(art instanceof Libro){
+				listaLibros.add(art);
+			}
+		}
+		return listaLibros.listIterator();
 	}
 
 	/**
@@ -233,9 +239,14 @@ public class Stock implements Serializable {
 	 * @return
 	 */
 	public ListIterator iteratorFigura() {
-
-		return stock.listIterator();
-	}
+		ArrayList<Articulo> listaFiguras = new ArrayList<Articulo>();
+		for(Articulo art: stock){
+			if(art instanceof Figura){
+				listaFiguras.add(art);
+			}
+		}
+		return listaFiguras.listIterator();
+		}
 
 	/**
 	 * Devuleve un iterador de Articulos del tipo Juego
@@ -243,9 +254,15 @@ public class Stock implements Serializable {
 	 * @return
 	 */
 	public ListIterator iteratorJuego() {
-
-		return stock.listIterator();
+		ArrayList<Articulo> listaJuego = new ArrayList<Articulo>();
+		for(Articulo art: stock){
+			if(art instanceof Libro){
+				listaJuego.add(art);
+			}
+		}
+		return listaJuego.listIterator();
 	}
+	
 
 	/**
 	 * Devuelve el catálogo de artículos (nombre, tipo de articulo y precio)

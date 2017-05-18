@@ -22,7 +22,11 @@ import java.awt.Desktop;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.SystemColor;
-
+/**
+ * Muestra la informacion acerca del autor y el proyecto
+ * @author pablo
+ *
+ */
 public class DialogAbout extends JDialog {
 
 	
@@ -68,11 +72,18 @@ public class DialogAbout extends JDialog {
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 	}
+	/**
+	 * 
+	 * @param uri
+	 */
 	private static void open(URI uri) {
 	    if (Desktop.isDesktopSupported()) {
 	      try {
 	        Desktop.getDesktop().browse(uri);
-	      } catch (IOException e) { /* TODO: error handling */ }
-	    } else { /* TODO: error handling */ }
+	      } catch (IOException e) { 
+	      }
+	    } else {
+	    	
+	    }
 }
 	}

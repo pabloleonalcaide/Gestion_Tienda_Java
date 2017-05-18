@@ -35,3 +35,6 @@
 1495059972411	Extract method 'crearPanelFigura'
 1495060005838	Extract method 'crearBotones'
 1495060104384	Extract method 'crearBotonesJuego'
+1495098731149	Extract method 'crearMostrarCategorias'
+1495098781454	Extract method 'crearMenuGestion'
+1495098880127	Rename method 'menuContact'
