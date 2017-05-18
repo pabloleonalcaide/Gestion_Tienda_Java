@@ -396,7 +396,7 @@ public class Principal {
 	}
 
 	/**
-	 * Creacion de la barra de menu de Empleado
+	 * CReacion de la barra de menu de Empleado
 	 */
 	protected void generarMenuEmpleado() {
 		menuEmpleado = new JMenuBar();

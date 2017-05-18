@@ -49,7 +49,7 @@ public class DialogAbout extends JDialog {
 		txtrAutorPabloLeon.setToolTipText("");
 		txtrAutorPabloLeon.setBackground(SystemColor.window);
 		txtrAutorPabloLeon.setEditable(false);
-		txtrAutorPabloLeon.setText("Autor: Pablo Leon Alcaide \r\n\nAsignatura: Programacion\r\n\nFecha de entrega: Ayer\r\n");
+		txtrAutorPabloLeon.setText("<html>\n<body>\n<p><b>Autor</b>: Pablo Leon Alcaide </p>\r\n<p><b>Asignatura</b>: Programacion</p>\r\n<p><b>Fecha de entrega</b>: Ayer</p>\r\n</body> \n</html>");
 		txtrAutorPabloLeon.setBounds(50, 27, 196, 90);
 		
 		getContentPane().setLayout(null);

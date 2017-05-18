@@ -47,7 +47,7 @@ public class PanelEliminar extends PanelPadre {
 			public void actionPerformed(ActionEvent arg0) {
 				int id = Integer.parseInt(textId.getText());
 				try {
-					showMainPanel(new Libro(id));
+					showArticle(new Libro(id));
 					switch(JOptionPane.showConfirmDialog(getContentPane(), "desea eliminar?",null,JOptionPane.YES_NO_CANCEL_OPTION)){
 					case JOptionPane.YES_OPTION: 
 						Principal.stock.removeFromStock(new Libro(id));

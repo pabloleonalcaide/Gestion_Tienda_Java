@@ -396,7 +396,7 @@ public class Principal {
 	}
 
 	/**
-	 * Creacion de la barra de menu de Empleado
+	 * CReacion de la barra de menu de Empleado
 	 */
 	protected void generarMenuEmpleado() {
 		menuEmpleado = new JMenuBar();
@@ -542,7 +542,7 @@ public class Principal {
 	}
 
 	/**
-	 * Mensaje de stock vacio --> ¿metodo o desde el evento?
+	 * Panel de stock vacio --> ¿metodo o desde el evento?
 	 */
 	private void msjEmptyStock() {
 		JOptionPane.showMessageDialog(null, "No hay articulos,\n espera a renovar el stock");
@@ -557,10 +557,10 @@ public class Principal {
 			Object[] options = { "SI", "NO", "CANCELAR" };
 			int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?", "NO HAS GUARDADO",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-			if (respuesta == JOptionPane.YES_OPTION) {
+			if (respuesta == 0) {
 				saveAs();
 				System.exit(0);
-			} else if (respuesta == JOptionPane.NO_OPTION) {
+			} else if (respuesta == 1) {
 				System.exit(0);
 			}
 		} else {

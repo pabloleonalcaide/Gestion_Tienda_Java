@@ -466,11 +466,6 @@ public class PanelPadre extends JFrame {
 	 * @param articulo
 	 */
 	void showArticle(Articulo articulo) {
-		showMainPanel(articulo);
-		selectPanels(articulo);
-
-	}
-	void showMainPanel(Articulo articulo){
 		comboBoxEstado.setSelectedItem(articulo.getEstado());
 		textStock.setText(Integer.toString(articulo.getCantidad()));
 		spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
@@ -478,7 +473,9 @@ public class PanelPadre extends JFrame {
 		textNombre.setText(articulo.getNombre());
 		textPrecio.setText(Double.toString(articulo.getPrecio()));
 		textId.setText(Integer.toString(articulo.getId()));
+
 	}
+	
 	/**
 	 * Muestra el panel secundario oportuno y rellena el contenido
 	 * 

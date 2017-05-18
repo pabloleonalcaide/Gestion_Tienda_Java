@@ -465,20 +465,17 @@ public class PanelPadre extends JFrame {
 	 * 
 	 * @param articulo
 	 */
-	void showArticle(Articulo articulo) {
-		showMainPanel(articulo);
-		selectPanels(articulo);
-
-	}
-	void showMainPanel(Articulo articulo){
+	private void showArticle(Articulo articulo) {
 		comboBoxEstado.setSelectedItem(articulo.getEstado());
 		textStock.setText(Integer.toString(articulo.getCantidad()));
-		spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
 		textDetalles.setText(articulo.getDescripcion());
 		textNombre.setText(articulo.getNombre());
 		textPrecio.setText(Double.toString(articulo.getPrecio()));
 		textId.setText(Integer.toString(articulo.getId()));
+		selectPanels(articulo);
+
 	}
+
 	/**
 	 * Muestra el panel secundario oportuno y rellena el contenido
 	 * 
@@ -489,7 +486,7 @@ public class PanelPadre extends JFrame {
 			panelButtons.setVisible(false);
 			mostrarPanelLibro();
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
-			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFechaPublicacion());
+			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFecha());
 			textAutor.setText(((Libro) (articulo)).getAutor());
 			chkbxColeccion.setSelected(((Libro) (articulo)).isColeccion());
 			comboBox_Idioma.setSelectedItem((((Libro) (articulo)).getIdioma()));
@@ -582,7 +579,6 @@ public class PanelPadre extends JFrame {
 	 * @param sp
 	 * @return LocalDate fecha
 	 */
-	
 	public LocalDate readDateSpinner(JSpinner sp) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime((Date) sp.getModel().getValue());
