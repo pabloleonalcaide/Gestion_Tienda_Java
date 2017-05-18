@@ -2,7 +2,7 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	**Comprobacion de botones al mostrar
 	
 	**Me Falla al Eliminar --> NullPointerException	
-						(Introducir comprobacion de botones)
+				(Introducir comprobacion de botones)
 
 	**ficheros --> Cada vez que hago modificaciones, no me reconoce los ficheros
 				(Sino, no me va a cargar un stock al abrirse)
@@ -11,7 +11,8 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	**Revisar contenido paneles secundarios mostrados 
 
 Cosas que me están haciendo la puñeta: 
-	usar JOPtionPane yes_no_option al guardar
+	salir con alt+F4 ?? 
+	usar JOPtionPane yes_no_option al salir
 	revisar el mostrar, que inhabilite los paneles secundarios
 	corregir filechooser
 	implementar método showBestFive() ((clase stock))
@@ -19,5 +20,5 @@ Cosas que me están haciendo la puñeta:
 	opcion menu "mostrar ofertas por categoria"  --> ¿Me Interesa?
 	Pattern de autor de libro (permitir espacios)
 	Trabajar idea de Jaime --> Boton cobrar que calcule el total y genere algun
-								tipo de factura.
+				tipo de factura.
 

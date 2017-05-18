@@ -551,7 +551,6 @@ public class Principal {
 	/**
 	 * Comprueba si hubo cambios y sale del programa
 	 */
-	//CORREGIR --> USAR YES_NO_CANCEL 
 	protected void salir() {
 		if (stock.isModificado()) {
 			Object[] options = { "SI", "NO", "CANCELAR" };
