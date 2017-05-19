@@ -45,15 +45,15 @@ public class DialogAbout extends JDialog {
 		setModal(true);
 		setBounds(100, 100, 289, 228);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setToolTipText("");
-		textArea.setBackground(SystemColor.window);
-		textArea.setEditable(false);
-		textArea.setText("Autor: Pablo Leon Alcaide \r\n\nAsignatura: Programacion\r\n\nFecha de entrega: Ayer\r\n");
-		textArea.setBounds(50, 27, 196, 90);
+		JTextArea txtrAutorPabloLeon = new JTextArea();
+		txtrAutorPabloLeon.setToolTipText("");
+		txtrAutorPabloLeon.setBackground(SystemColor.window);
+		txtrAutorPabloLeon.setEditable(false);
+		txtrAutorPabloLeon.setText("Autor: Pablo Leon Alcaide \r\n\nAsignatura: Programacion\r\n\nFecha de entrega: Ayer\r\n");
+		txtrAutorPabloLeon.setBounds(50, 27, 196, 90);
 		
 		getContentPane().setLayout(null);
-		getContentPane().add(textArea);
+		getContentPane().add(txtrAutorPabloLeon);
 		
 		JButton btnirAllink = new JButton("repositorio");
 		btnirAllink.addActionListener(new ActionListener() {

@@ -47,3 +47,4 @@
 1495103223916	Extract method 'cargarMenuCesta'
 1495103308957	Extract method 'cargarMenuArticulo'
 1495105286679	Rename method 'guardarCopiaComo'
+1495117025920	Rename local variable 'txtrAutorPabloLeon'

@@ -13,7 +13,7 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 		      	¿Hay que añadir opción Nuevo al menu Archivo?
 
 	**Revisar contenido paneles secundarios mostrados 
-	
+	**Corregir el spinner de Fecha de Entrada al mostrar --> ahora muestra now()
 Cosas que me están haciendo la puñeta: 
 	salir con alt+F4 ?? 
 	usar JOPtionPane yes_no_option al salir
