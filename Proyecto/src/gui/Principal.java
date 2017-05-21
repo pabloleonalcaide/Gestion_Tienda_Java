@@ -76,11 +76,11 @@ public class Principal {
 
 		cargarMenuCesta();
 
-		crearMenuContacto();
+		cargarMenuContacto();
 
 		cargarMenuCatalogo();
 
-		generarMenuEmpleado();
+		cargarMenuEmpleado();
 
 		crearMenuGestion();
 
@@ -339,8 +339,12 @@ public class Principal {
 		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
 		mntmBuscarYEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BuscarEliminar be = new BuscarEliminar(stock.listIterator());
-				be.setVisible(true);
+				try {
+					BuscarEliminar be = new BuscarEliminar(stock.listIterator());
+					be.setVisible(true);
+				} catch (Exception e) {
+					msjEmptyStock();
+				}
 
 			}
 		});
@@ -370,8 +374,12 @@ public class Principal {
 		JMenuItem mntmJuegos = new JMenuItem("Juegos");
 		mntmJuegos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorJuego());
-				mostrarJuegos.setVisible(true);
+				try {
+					PanelMostrar mostrarJuegos = new PanelMostrar(stock.iteratorJuego());
+					mostrarJuegos.setVisible(true);
+				} catch (Exception e) {
+					msjEmptyStock();
+				}
 			}
 		});
 		mnMostrarPorCategoria.add(mntmJuegos);
@@ -379,8 +387,12 @@ public class Principal {
 		JMenuItem mntmFiguras = new JMenuItem("Figuras");
 		mntmFiguras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelMostrar mostrarFiguras = new PanelMostrar(stock.iteratorFigura());
-				mostrarFiguras.setVisible(true);
+				try {
+					PanelMostrar mostrarFiguras = new PanelMostrar(stock.iteratorFigura());
+					mostrarFiguras.setVisible(true);
+				} catch (Exception e1) {
+					msjEmptyStock();
+				}
 			}
 		});
 		mnMostrarPorCategoria.add(mntmFiguras);
@@ -388,8 +400,12 @@ public class Principal {
 		JMenuItem mntmLibros = new JMenuItem("Libros");
 		mntmLibros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PanelMostrar mostrarLibros = new PanelMostrar(stock.iteratorLibro());
-				mostrarLibros.setVisible(true);
+				try {
+					PanelMostrar mostrarLibros = new PanelMostrar(stock.iteratorLibro());
+					mostrarLibros.setVisible(true);
+				} catch (Exception e1) {
+					msjEmptyStock();
+				}
 			}
 		});
 		mnMostrarPorCategoria.add(mntmLibros);
@@ -398,7 +414,7 @@ public class Principal {
 	/**
 	 * Creacion de la barra de menu de Empleado
 	 */
-	protected void generarMenuEmpleado() {
+	protected void cargarMenuEmpleado() {
 		menuEmpleado = new JMenuBar();
 		menuEmpleado.setBounds(10, 0, 461, 21);
 		framePrincipal.getContentPane().add(menuEmpleado);
@@ -407,7 +423,7 @@ public class Principal {
 	/**
 	 * Creacion del menu de contacto
 	 */
-	protected void crearMenuContacto() {
+	protected void cargarMenuContacto() {
 		JMenu mnContacto = new JMenu("Contacto");
 		mnContacto.setToolTipText("necesitas ayuda?");
 		mnContacto.setMnemonic('O');
@@ -545,7 +561,7 @@ public class Principal {
 	 * Mensaje de stock vacio --> ¿metodo o desde el evento?
 	 */
 	private void msjEmptyStock() {
-		JOptionPane.showMessageDialog(null, "No hay articulos,\n espera a renovar el stock");
+		JOptionPane.showMessageDialog(null, "No hay articulos",null,JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**

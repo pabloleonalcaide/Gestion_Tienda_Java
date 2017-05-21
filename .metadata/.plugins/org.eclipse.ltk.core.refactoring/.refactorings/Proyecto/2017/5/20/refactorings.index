@@ -48,3 +48,6 @@
 1495103308957	Extract method 'cargarMenuArticulo'
 1495105286679	Rename method 'guardarCopiaComo'
 1495117025920	Rename local variable 'txtrAutorPabloLeon'
+1495374128352	Rename local variable 'model1'
+1495376035674	Rename method 'generarMenuEmpleado'
+1495376046350	Rename method 'crearMenuContacto'

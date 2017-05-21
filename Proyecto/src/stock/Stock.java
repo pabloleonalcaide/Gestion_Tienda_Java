@@ -10,6 +10,7 @@ import excepciones.ArticuloNoExisteException;
 import excepciones.ImposibleEliminarException;
 import jerarquia.Articulo;
 import jerarquia.Figura;
+import jerarquia.Juego;
 import jerarquia.Libro;
 
 /**
@@ -256,7 +257,7 @@ public class Stock implements Serializable {
 	public ListIterator iteratorJuego() {
 		ArrayList<Articulo> listaJuego = new ArrayList<Articulo>();
 		for(Articulo art: stock){
-			if(art instanceof Libro){
+			if(art instanceof Juego){
 				listaJuego.add(art);
 			}
 		}

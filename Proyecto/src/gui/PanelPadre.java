@@ -35,17 +35,19 @@ import javax.swing.JRadioButton;
 import jerarquia.*;
 
 public class PanelPadre extends JFrame {
-	ListIterator<Articulo> it;
+	 ListIterator<Articulo> it;
 
 	// REFACTORIZAR --> SEPARAR POR COMPORTAMIENTO
 	public PanelPadre(ListIterator<Articulo> iterador) {
+		it = iterador;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("");
-		it = iterador;
+		
 		setBounds(100, 100, 732, 541);
 		getContentPane().setLayout(null);
+
 		// Panel General
 		crearPanelPrincipal();
 
@@ -402,8 +404,8 @@ public class PanelPadre extends JFrame {
 			lblFechaEntrada = new JLabel("Entrada");
 			panelPrincipal.add(lblFechaEntrada);
 
-			SpinnerModel model1 = new SpinnerDateModel();
-			spinnerEntrada = new JSpinner(model1);
+			SpinnerModel spinnerModel = new SpinnerDateModel();
+			spinnerEntrada = new JSpinner(spinnerModel);
 			spinnerEntrada.setEnabled(false);
 			panelPrincipal.add(spinnerEntrada);
 
@@ -447,15 +449,15 @@ public class PanelPadre extends JFrame {
 		if (it.hasNext())
 			showArticle(it.next());
 		if (it.hasNext()) {
-			btnSiguiente.setEnabled(true);
+			btnSiguiente.setVisible(true);
 		} else {
-			btnSiguiente.setEnabled(false);
+			btnSiguiente.setVisible(false);
 			it.previous();
 		}
 		if (it.hasPrevious()) {
-			btnAnterior.setEnabled(true);
+			btnAnterior.setVisible(true);
 		} else {
-			btnAnterior.setEnabled(false);
+			btnAnterior.setVisible(false);
 		}
 
 	}
@@ -473,7 +475,7 @@ public class PanelPadre extends JFrame {
 	void showMainPanel(Articulo articulo){
 		comboBoxEstado.setSelectedItem(articulo.getEstado());
 		textStock.setText(Integer.toString(articulo.getCantidad()));
-		spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
+		//spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
 		textDetalles.setText(articulo.getDescripcion());
 		textNombre.setText(articulo.getNombre());
 		textPrecio.setText(Double.toString(articulo.getPrecio()));
@@ -569,6 +571,7 @@ public class PanelPadre extends JFrame {
 			panelLibro.setVisible(false);
 			panelFigura.setVisible(false);
 			panelJuego.setVisible(true);
+			enableCartas();
 		}
 	}
 
@@ -618,10 +621,12 @@ public class PanelPadre extends JFrame {
 		chkbxColeccion.setVisible(false);
 		comboBox_Genero.setVisible(false);
 		comboBoxMaterialRol.setVisible(false);
+		textColeccionJuego.setVisible(false);
 		textEdicion.setVisible(false);
 		spinnerPeso.setVisible(true);
 		textTematica.setVisible(true);
 		numElementos.setVisible(true);
+
 	}
 
 	/**
@@ -637,10 +642,12 @@ public class PanelPadre extends JFrame {
 		numElementos.setVisible(false);
 		textCartas.setVisible(false);
 		comboBoxDificultad.setVisible(false);
+		textColeccionJuego.setVisible(false);
 		chkbxColeccion.setVisible(false);
 		comboBox_Genero.setVisible(true);
 		comboBoxMaterialRol.setVisible(true);
 		textEdicion.setVisible(true);
+
 	}
 
 	/**
@@ -654,6 +661,7 @@ public class PanelPadre extends JFrame {
 		textTematica.setVisible(false);
 		numElementos.setVisible(false);
 		spinnerPeso.setVisible(false);
+		textGenero.setVisible(false);
 		comboBox_Genero.setVisible(false);
 		comboBoxMaterialRol.setVisible(false);
 		textEdicion.setVisible(false);

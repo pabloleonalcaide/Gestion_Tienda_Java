@@ -2,50 +2,58 @@ package gui;
 
 import java.util.ListIterator;
 
+import jerarquia.Articulo;
+
 /**
  * @author pablo
  *
  */
 public class PanelMostrar extends PanelPadre {
 
-	public PanelMostrar(ListIterator it) {
-		super(it);
-		btnALaCesta_anadir.setVisible(false);
-		btnSacar_borrar.setVisible(false);
-		spinnerEntrada.setEnabled(false);
-		textNombre.setEditable(false);
-		textPrecio.setEditable(false);
-		textDetalles.setEditable(false);
-		textStock.setEditable(false);
-		btnALaCesta_anadir.setVisible(false);
-		btnSacar_borrar.setText("Eliminar");
-		chckbxEnLaCesta.setVisible(false);
-		comboBoxEstado.setEditable(false);
-		comboBoxTipoArticulo.setVisible(false);
-		textStock.setEnabled(false);
-		textId.setEnabled(false);
-		textPrecio.setEnabled(false);
-		textDetalles.setEnabled(false);
-		textCartas.setEnabled(false);	
-		comboBoxDificultad.setEnabled(false);
-		chkbxColeccion.setEnabled(false);
-		comboBox_Genero.setEnabled(true);
-		comboBoxMaterialRol.setEnabled(false);
-		textEdicion.setEnabled(false);
-		spinnerPeso.setEnabled(false);
-		textTematica.setEnabled(false);
-		numElementos.setEnabled(false);
-		chkbxColeccion.setEnabled(false);
-		chckbxDesmontable.setEnabled(false);
-		textNombre.setEnabled(false);
-		textDetalles.setEnabled(false);
-		comboBoxEstado.setEnabled(false);
-		spinnerPublicacion.setEnabled(false);
+	public PanelMostrar(ListIterator<Articulo> iterator) {
+		super(iterator);
+		this.it = iterator;
+
 		textPaginas.setEnabled(false); 
 		textAutor.setEnabled(false);
+		textNombre.setEnabled(false);
+		textDetalles.setEnabled(false);
+		textTematica.setEnabled(false);
+		textPrecio.setEditable(false);
+		textEdicion.setEnabled(false);
+		textStock.setEnabled(false);
+		textId.setEnabled(false);
+		textCartas.setEnabled(false);
+		textColeccionJuego.setEnabled(false);
+		textDimensiones.setEnabled(false);
+		textEdad.setEnabled(false);
+		textFieldDuracion.setEnabled(false);
+		textGenero.setEnabled(false);
+		textTipo.setEnabled(false);
+		textPiezas.setEnabled(false);
+		textJugadores.setEnabled(false);
+		numElementos.setEnabled(false);
+
+		
+		btnALaCesta_anadir.setVisible(false);
+		btnSacar_borrar.setText("Eliminar");
+		btnAnterior.setEnabled(false);
+		
+		spinnerEntrada.setEnabled(false);
+		spinnerPeso.setEnabled(false);
+		spinnerPublicacion.setEnabled(false);
+		
+		comboBoxEstado.setEnabled(false);
 		comboBox_Idioma.setEnabled(false);
 		comboBox_Genero.setEnabled(false);
-		btnAnterior.setEnabled(false);
+		comboBoxTipoArticulo.setVisible(false);
+		comboBoxDificultad.setEnabled(false);
+		comboBoxMaterialRol.setEnabled(false);
+		
+		chckbxEnLaCesta.setVisible(false);
+		chkbxColeccion.setEnabled(false);
+		chckbxDesmontable.setEnabled(false);
+		
 		avanzar();
 	}
 

@@ -31,7 +31,7 @@ import javax.swing.JPanel;
  * 
  */
 public class PanelAnadir extends PanelPadre {
-
+	
 	public PanelAnadir(ListIterator it) {
 		super(it);
 		setTitle("Stock: Introducir articulo");

@@ -16,5 +16,8 @@
 <fullyQualifiedTypeName name="jerarquia.Tablero"/>
 <fullyQualifiedTypeName name="java.util.ListIterator"/>
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
 <fullyQualifiedTypeName name="jerarquia.Articulo"/>
+<fullyQualifiedTypeName name="jerarquia.Juego"/>
 </qualifiedTypeNameHistroy>
