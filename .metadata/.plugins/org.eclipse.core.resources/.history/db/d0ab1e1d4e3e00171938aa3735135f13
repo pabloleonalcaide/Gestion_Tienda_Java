@@ -64,7 +64,7 @@ public class Principal {
 		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		framePrincipal.getContentPane().setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBackground(Color.LIGHT_GRAY);
-		framePrincipal.setBounds(400, 400, 500, 500);
+		framePrincipal.setBounds(400, 400, 600, 600);
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
 
@@ -416,7 +416,7 @@ public class Principal {
 	 */
 	protected void cargarMenuEmpleado() {
 		menuEmpleado = new JMenuBar();
-		menuEmpleado.setBounds(0, 0, 500, 21);
+		menuEmpleado.setBounds(10, 0, 400, 21);
 		framePrincipal.getContentPane().add(menuEmpleado);
 	}
 

@@ -416,7 +416,7 @@ public class Principal {
 	 */
 	protected void cargarMenuEmpleado() {
 		menuEmpleado = new JMenuBar();
-		menuEmpleado.setBounds(0, 0, 500, 21);
+		menuEmpleado.setBounds(0, 0, 400, 21);
 		framePrincipal.getContentPane().add(menuEmpleado);
 	}
 

@@ -6008,3 +6008,13 @@ java.io.IOException: Unable to resolve plug-in "platform:/plugin/org.eclipse.wb.
 
 !ENTRY org.eclipse.e4.ui.workbench 2 0 2017-05-18 11:00:31.892
 !MESSAGE Removing part descriptor with the 'org.eclipse.wb.core.PaletteView' id and the 'Palette' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+!SESSION 2017-05-21 22:33:06.218 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-05-21 22:33:15.536
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

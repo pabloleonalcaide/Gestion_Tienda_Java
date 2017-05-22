@@ -17,6 +17,9 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	**Revisar contenido paneles secundarios mostrados 
 	**Corregir el spinner de Fecha de Entrada al mostrar --> ahora muestra now()
 Cosas que me están haciendo la puñeta: 
+	archivo a la izquierda
+	listar articulos tb desde parte empleado
+	archivo --> nuevo
 	salir con alt+F4 ?? 
 	usar JOPtionPane yes_no_option al salir
 	revisar el mostrar, que inhabilite los paneles secundarios

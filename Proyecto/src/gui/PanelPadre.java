@@ -208,7 +208,9 @@ public class PanelPadre extends JFrame {
 			panelFigura.add(numElementos);
 		}
 	}
-
+	void cerrarPanel(){
+		this.remove(panelPrincipal);
+	}
 	/**
 	 * crea el panel secundario de juego
 	 */
@@ -426,7 +428,9 @@ public class PanelPadre extends JFrame {
 	 * Retrocede en el stock
 	 */
 	protected void retroceder() {
+		cerrarPanel();
 		if (it.hasPrevious())
+			
 			showArticle(it.previous());
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
