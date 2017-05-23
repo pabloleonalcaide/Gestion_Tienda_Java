@@ -67,6 +67,7 @@ public class PanelAnadir extends PanelPadre {
 				} else if (panelFigura.isVisible()) {	//Si se ha marcado figura
 					try {
 						addToy();
+						
 						Principal.stock.setModificado(true);
 					} catch (NumberFormatException | PesoNoValidoException | PrecioNoValidoException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

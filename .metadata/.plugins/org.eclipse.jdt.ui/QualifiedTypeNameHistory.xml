@@ -20,4 +20,5 @@
 <fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
 <fullyQualifiedTypeName name="jerarquia.Articulo"/>
 <fullyQualifiedTypeName name="jerarquia.Juego"/>
+<fullyQualifiedTypeName name="java.io.File"/>
 </qualifiedTypeNameHistroy>

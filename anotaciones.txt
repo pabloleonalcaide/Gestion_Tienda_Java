@@ -1,25 +1,30 @@
 PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA  
 	**Comprobacion de botones al mostrar
 	
-	**Me Falla al Eliminar (Buscar y eliminar) --> 
-				Inhabilitar textField
-				No me actualiza la lista hasta que salgo y entro de nuevo
-				(Introducir comprobacion de botones)
-
-	** Me falla al Eliminar por identificador 
-
 	**Problemas con los Spinner --> 
 				No me vuelve a volcar la fecha en un spinner
 
-	**ficheros --> 
-		      	¿Hay que añadir opción Nuevo al menu Archivo?
 
-	**Revisar contenido paneles secundarios mostrados 
-	**Corregir el spinner de Fecha de Entrada al mostrar --> ahora muestra now()
+	**Revisar contenido paneles secundarios mostrados -->
+				No me carga el de Juegos
+
+	**Corregir el spinner de FechaEntrada -->
+				al mostrar ahora muestra now()
+
+	**Vaciar contenido de los textField al añadir nuevo articulo
+
+	**Buscar y Eliminar -->
+				me peta cuando elimino el ultimo y trato de moverme, y no me actualiza los botones al eliminar
+
+	**Ids duplicados (cada vez que entro de nuevo, parte de 1)
+
+	** añadir modificar
+
+	** al eliminar --> filtrar con instanceof para ver el tipo de articulo y pasarle el new ***(id) del objeto correspondiente
+
 Cosas que me están haciendo la puñeta: 
 	archivo a la izquierda
 	listar articulos tb desde parte empleado
-	archivo --> nuevo
 	salir con alt+F4 ?? 
 	usar JOPtionPane yes_no_option al salir
 	revisar el mostrar, que inhabilite los paneles secundarios

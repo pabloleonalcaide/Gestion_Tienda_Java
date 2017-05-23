@@ -201,7 +201,7 @@ public abstract class Articulo implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 	@Override
@@ -213,13 +213,10 @@ public abstract class Articulo implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Articulo other = (Articulo) obj;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
+		if (id != other.id)
 			return false;
 		return true;
 	}
-	
+
 
 }

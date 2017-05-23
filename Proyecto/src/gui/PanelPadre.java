@@ -428,9 +428,7 @@ public class PanelPadre extends JFrame {
 	 * Retrocede en el stock
 	 */
 	protected void retroceder() {
-		cerrarPanel();
 		if (it.hasPrevious())
-			
 			showArticle(it.previous());
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
@@ -453,15 +451,15 @@ public class PanelPadre extends JFrame {
 		if (it.hasNext())
 			showArticle(it.next());
 		if (it.hasNext()) {
-			btnSiguiente.setVisible(true);
+			btnSiguiente.setEnabled(true);
 		} else {
-			btnSiguiente.setVisible(false);
+			btnSiguiente.setEnabled(false);
 			it.previous();
 		}
 		if (it.hasPrevious()) {
-			btnAnterior.setVisible(true);
+			btnAnterior.setEnabled(true);
 		} else {
-			btnAnterior.setVisible(false);
+			btnAnterior.setEnabled(false);
 		}
 
 	}
@@ -482,7 +480,7 @@ public class PanelPadre extends JFrame {
 		//spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
 		textDetalles.setText(articulo.getDescripcion());
 		textNombre.setText(articulo.getNombre());
-		textPrecio.setText(Double.toString(articulo.getPrecio()));
+		textPrecio.setText(Double.toString(articulo.calcularTotal()));
 		textId.setText(Integer.toString(articulo.getId()));
 	}
 	/**

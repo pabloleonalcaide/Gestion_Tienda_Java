@@ -22,11 +22,14 @@ import java.awt.Color;
 import stock.Stock;
 
 import java.awt.Font;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ListIterator;
 
 import javax.swing.JButton;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 //REFACTORIZAR --> COMPORTAMIENTO, ESTADO
 //CORREGIR LOS ESPACIOS EN LA BARRA DE MENU
@@ -39,18 +42,21 @@ public class Principal {
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
 	protected JFileChooser fileChooser = new JFileChooser();
-
+	static{
+		Fichero.fichero = new File("stockUltimo.obj");
+		try {
+			stock = (Stock) Fichero.open(Fichero.fichero);
+		} catch (ClassNotFoundException | IOException e) {
+			System.out.println("eoo no ha colado cargar el stock!");
+		}
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
 					DialogBienvenida bienvenida = new DialogBienvenida();
 					Principal window = new Principal();
 					window.framePrincipal.setVisible(false);
-					// cargarCatalogo();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
@@ -61,6 +67,15 @@ public class Principal {
 
 	private void initialize() {
 		framePrincipal = new JFrame();
+		framePrincipal.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				if (stock.isModificado()) {
+					if (JOptionPane.showConfirmDialog(null, "Has hecho cambios... ¿quieres guardar antes de salir?",
+							"Festival modificado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+							saveAs();}
+					}
+		}});
 		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		framePrincipal.getContentPane().setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBackground(Color.LIGHT_GRAY);
@@ -94,6 +109,7 @@ public class Principal {
 
 	}
 
+	
 	/**
 	 * Carga el menu de usuario Articulos (mostrar por precio, mostrar por
 	 * nombre, mostrar por categoria)
@@ -235,35 +251,6 @@ public class Principal {
 	 * Crea el menu de archivo (abrir copia, guardar copia, salir)
 	 */
 	protected void cargarMenuArchivo() {
-		JMenu mnBbdd = new JMenu("Archivo");
-		mnBbdd.setMnemonic('A');
-		menuEmpleado.add(mnBbdd);
-
-		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
-		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
-		mntmGuardarcambios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				saveAs();
-			}
-		});
-		mnBbdd.add(mntmGuardarcambios);
-
-		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
-		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
-		mntmAbrir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				recuperarCopia();
-			}
-		});
-		mnBbdd.add(mntmAbrir);
-
-		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mntmSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				salir();
-			}
-		});
-		mnBbdd.add(mntmSalir);
 	}
 
 	/**
@@ -314,6 +301,43 @@ public class Principal {
 	 * Creacion del menu Gestion
 	 */
 	protected void crearMenuGestion() {
+		JMenu mnBbdd = new JMenu("Archivo");
+		mnBbdd.setMnemonic('A');
+		menuEmpleado.add(mnBbdd);
+		
+				JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
+				mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
+				mntmGuardarcambios.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						saveAs();
+					}
+				});
+				
+				JMenuItem mntmNuevoStock = new JMenuItem("Nuevo Stock");
+				mntmNuevoStock.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						openNew();
+					}
+				});
+				mnBbdd.add(mntmNuevoStock);
+				mnBbdd.add(mntmGuardarcambios);
+				
+						JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
+						mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+						mntmAbrir.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								recuperarCopia();
+							}
+						});
+						mnBbdd.add(mntmAbrir);
+						
+								JMenuItem mntmSalir = new JMenuItem("Salir");
+								mntmSalir.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+										salir();
+									}
+								});
+								mnBbdd.add(mntmSalir);
 		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
 		mnGestinArticulos.setMnemonic('G');
 		menuEmpleado.add(mnGestinArticulos);
@@ -334,6 +358,14 @@ public class Principal {
 				delete.setVisible(true);
 			}
 		});
+		
+		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mntmModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			//Extender modificar de extender?? consultar a nieves
+			}
+		});
+		mnGestinArticulos.add(mntmModificar);
 		mnGestinArticulos.add(mntmEliminar);
 
 		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
@@ -342,6 +374,7 @@ public class Principal {
 				try {
 					BuscarEliminar be = new BuscarEliminar(stock.listIterator());
 					be.setVisible(true);
+					be.btnAnterior.setEnabled(false);
 				} catch (Exception e) {
 					msjEmptyStock();
 				}
@@ -360,6 +393,33 @@ public class Principal {
 			}
 		});
 		mnGestinArticulos.add(mntmActualizarExistencias);
+	}
+    /**
+    * Abre un nuevo stock
+    */
+	protected void openNew() {
+		if (stock.isModificado()) {
+			Object[] options = { "SI", "NO", "CANCELAR" };
+			int respuesta = JOptionPane.showOptionDialog(null, "Desea guardar los cambios?", "Hay Cambios sin Guardar",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if (respuesta==JOptionPane.YES_OPTION) {
+				saveAs();
+				Fichero.setFichero("Stock: Nuevo");
+				stock = new Stock();
+				framePrincipal.setTitle(Fichero.fichero.getName());
+				stock.setModificado(false);
+			} else if (respuesta == 1) {
+				Fichero.setFichero("Stock: Nuevo");
+				stock = new Stock();
+				framePrincipal.setTitle(Fichero.fichero.getName());
+				stock.setModificado(false);
+			}
+		} else {
+			Fichero.setFichero("Stock: Nuevo");
+			stock = new Stock();
+			framePrincipal.setTitle(Fichero.fichero.getName());
+			stock.setModificado(false);
+}		
 	}
 
 	/**

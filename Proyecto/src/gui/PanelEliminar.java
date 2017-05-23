@@ -12,9 +12,8 @@ import jerarquia.Libro;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-//RECUERDA, MUESTRA Y PIDE CONFIRMACION ANTES DE ELIMINAR
 public class PanelEliminar extends PanelPadre {
-	public PanelEliminar(ListIterator it) {
+	public PanelEliminar(ListIterator<Articulo> it) {
 		super(it);
 		textNombre.setEditable(false);
 		textPrecio.setEditable(false);
@@ -46,17 +45,26 @@ public class PanelEliminar extends PanelPadre {
 		btnSacar_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id = Integer.parseInt(textId.getText());
+				showMainPanel(new Libro(id));
+				switch (JOptionPane.showConfirmDialog(getContentPane(), "desea eliminar?", null,
+						JOptionPane.YES_NO_CANCEL_OPTION)) {
+				case JOptionPane.YES_OPTION:
+					removeArticle(id);
+					Principal.stock.setModificado(true);
+					break;
+				case JOptionPane.NO_OPTION:
+				case JOptionPane.CANCEL_OPTION:
+					break;
+				}
+			}
+			//Constructor con id de cada clase hija e insertar el instanceof para filtrar el eliminado
+			protected void removeArticle(int id) {
 				try {
-					showMainPanel(new Libro(id));
-					switch(JOptionPane.showConfirmDialog(getContentPane(), "desea eliminar?",null,JOptionPane.YES_NO_CANCEL_OPTION)){
-					case JOptionPane.YES_OPTION: 
-						Principal.stock.removeFromStock(new Libro(id));
-						Principal.stock.setModificado(true);break;
-					case JOptionPane.NO_OPTION:
-					case JOptionPane.CANCEL_OPTION:break;
-					}
+					Principal.stock.removeFromStock((Articulo) Principal.stock.getArticulo(id));
 				} catch (ImposibleEliminarException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
+					JOptionPane.showMessageDialog(getContentPane(), e.getMessage());
+				} catch (ArrayIndexOutOfBoundsException e1) {
+					JOptionPane.showMessageDialog(getContentPane(), "algo falla");
 				}
 			}
 		});
