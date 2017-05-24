@@ -112,10 +112,15 @@ Varias de las clases en la jerarquía contienen el campo boolean “coleccion”
     El Interface Rebajable fue eliminado en el desarrollo del proyecto, viendose más adecuado hacer Abstract
     las clases Artículo y Juego
 ## Expresiones regulares y Excepciones:
-String autor (Libros) → La cadena no puede empezar por números o símbolos, y debe tener al menos 3 caracteres. → Lanzaría NombreNoValidoException
-double precio (Articulos) → El precio no puede ser menor o igual de cero. Además, si el estado del artículo es Descatalogado, no puede ser superior a 1000, y si el estado es Edicion_Limitada, el precio no puede ser menor de 10 → Lanzaría
-PrecioNoValidoException
-int edad (Juegos) → la edad de juego oscila entre los 3 y los 65 años. → Lanzaría EdadNoValidaException
-double peso (Figuras) → el peso de las figuras ha de ser positivo y menor de 5000 (el coleccionismo de la tienda no incluye amantes de las esculturas pesadas) → Lanzaría PesoInvalidoException
-Date fecha Entrada / Date fechaPublicacion → la fecha debe estar dentro de un rango válido (no hay publicaciones posteriores al mes actual) → lanza FechaInvalidaException
-Campos no nulos → no se permite que al introducir elementos en el stock contenga campos nulos. → Lanzaría → FichaIncompletaException
+    String autor (Libros) → La cadena no puede empezar por números o símbolos, y debe tener al menos 3 caracteres.
+    → Lanzaría NombreNoValidoException
+    double precio (Articulos) → El precio no puede ser menor o igual de cero. Además, si el estado del artículo 
+    es Descatalogado, no puede ser superior a 1000, y si el estado es Edicion_Limitada, el precio no puede ser 
+    menor de 10 → Lanzaría PrecioNoValidoException
+    int edad (Juegos) → la edad de juego oscila entre los 3 y los 65 años. → Lanzaría EdadNoValidaException
+    double peso (Figuras) → el peso de las figuras ha de ser positivo y menor de 5000 (el coleccionismo de la tienda 
+    no incluye amantes de las esculturas pesadas) → Lanzaría PesoInvalidoException
+    Date fecha Entrada / Date fechaPublicacion → la fecha debe estar dentro de un rango válido (no hay publicaciones 
+    posteriores al mes actual) → lanza FechaInvalidaException
+    Campos no nulos → no se permite que al introducir elementos en el stock contenga campos nulos. → 
+    Lanzaría →FichaIncompletaException
