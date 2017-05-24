@@ -30,12 +30,13 @@ La interfaz del programa permitirá que el propietario acceda para realizar modi
             En la clase Libro → al descuento base se le añade una cantidad proporcional a partir de las 100 
             páginas ( n.o páginas/10000)En la clase Juego → si se trata de un juego infantil (edad <18) se le 
             aplica el doble de descuento Descuento base * 2)
-            En la clase Tablero → se aplica un descuento superior en juegos coleccionables ( Descuento base * 1’3) 
-            Debido a que es más habitual que los clientes vuelvan a por expansiones de un juego que a por uno nuevo.
-            En la clase Cartas → sucede igual que en la clase Tablero, sólo que el descuento es menor (Descuento 
-            base * 1’15). El gasto de papél es mayor que en los juegos de tablero.
-            En la clase Rol → se aplica un descuento del 50% a aquellas ediciones por encima de la 2.0 (se premia a 
-            aquellos que se actualizan)
+            En la clase Tablero → se aplica un descuento superior en juegos coleccionables 
+            ( Descuento base *1’3) Debido a que es más habitual que los clientes vuelvan a por expansiones de 
+            un juego que a por uno nuevo.
+            En la clase Cartas → sucede igual que en la clase Tablero, sólo que el descuento es menor 
+            (Descuento base * 1’15). El gasto de papél es mayor que en los juegos de tablero.
+            En la clase Rol → se aplica un descuento del 50% a aquellas ediciones por encima de la 2.0 (se 
+            premia a aquellos que se actualizan)
 
     public class Figura extends Articulo tamaño
         peso (double)
