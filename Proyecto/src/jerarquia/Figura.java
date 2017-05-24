@@ -32,6 +32,9 @@ public class Figura extends Articulo {
 	public Figura(String nombre){
 		super(nombre);
 	}
+	public Figura (int id){
+		super(id);
+	}
 	
 	double getPeso() {
 		return peso;

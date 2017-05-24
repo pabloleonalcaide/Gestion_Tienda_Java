@@ -11,8 +11,6 @@ import jerarquia.Articulo;
  *
  */
 public class BuscarEliminar extends PanelMostrar {
-
-	//IMPLEMENTAR EN CONDICIONES
 	
 	public BuscarEliminar( ListIterator<Articulo> iterador) {
 		super(iterador);
@@ -28,13 +26,15 @@ public class BuscarEliminar extends PanelMostrar {
 
 		});
 	}
-//	@Override
-//	public void avanzar(){
-//		cleanRightPanel();
-//	}
-//	@Override
-//	public void retroceder(){
-//		cleanRightPanel();
-//	}
+	@Override
+	public void avanzar(){
+		super.avanzar();
+		cleanRightPanel();
+	}
+	@Override
+	public void retroceder(){
+		super.avanzar();
+		cleanRightPanel();
+	}
 
 }

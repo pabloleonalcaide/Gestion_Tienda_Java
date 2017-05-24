@@ -10,6 +10,7 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 
 	**Corregir el spinner de FechaEntrada -->
 				al mostrar ahora muestra now()
+	**Quitar el jtext de Coleccion (añadir Cartas)
 
 	**Vaciar contenido de los textField al añadir nuevo articulo
 

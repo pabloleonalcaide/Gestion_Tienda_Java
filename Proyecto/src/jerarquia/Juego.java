@@ -25,6 +25,9 @@ public abstract class Juego extends Articulo {
 		setEdad_minima(edad);
 	}
 
+	public Juego(int id){
+		super(id);
+	}
 	double getDuracion_horas() {
 		return duracion_horas;
 	}

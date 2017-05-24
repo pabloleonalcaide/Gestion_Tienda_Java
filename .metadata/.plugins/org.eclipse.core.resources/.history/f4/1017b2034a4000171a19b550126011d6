@@ -1,0 +1,115 @@
+package jerarquia;
+
+import java.time.LocalDate;
+
+import enumeraciones.EstadoArticulo;
+import excepciones.PesoNoValidoException;
+import excepciones.PrecioNoValidoException;
+/**
+ * figura es un articulo, puede ser desmontable o no, y pertenecer o no a una coleccion 
+ * @author pablo
+ *
+ */
+public class Figura extends Articulo {
+	private static final double DESCUENTO_B = 0.03;
+	private static final double DESCUENTO_A = 0.05;
+	private double peso;
+	private String tematica;
+	private boolean desmontable;
+	private boolean coleccion;
+	private int num_elementos; //cantidad de figuras de que se compone el articulo
+	
+	public Figura(String nombre, String descripcion, double precio,
+			EstadoArticulo estado, LocalDate fecha, double peso, String tematica, boolean desmontable,
+			boolean coleccion, int num_elementos) throws PesoNoValidoException, PrecioNoValidoException {
+		super(nombre, descripcion, precio, estado, fecha);
+		setPeso(peso);
+		setTematica(tematica);
+		setDesmontable(desmontable);
+		setColeccion(coleccion);
+		setNum_elementos(num_elementos);
+	}
+	public Figura(String nombre){
+		super(nombre);
+	}
+	
+	double getPeso() {
+		return peso;
+	}
+	//Controlamos que el peso no sea negativo ni excesivo
+	void setPeso(double peso) throws PesoNoValidoException {
+		if (peso>5000 || peso<0)
+			throw new PesoNoValidoException("ese peso no esta permitido");
+		else this.peso = peso;
+	}
+
+	public String getTematica() {
+		return tematica;
+	}
+
+	void setTematica(String tematica) {
+		this.tematica = tematica;
+	}
+
+	public boolean isDesmontable() {
+		return desmontable;
+	}
+	/**
+	 * Si la pieza es demasiado grande, siempre es desmontable
+	 * @param desmontable
+	 */
+	void setDesmontable(boolean desmontable) {
+		if(isPesoReducido())
+		this.desmontable = desmontable;
+		else this.desmontable=true;
+	}
+
+
+	private boolean isPesoReducido() {
+		return getPeso()<500;
+	}
+
+	public boolean isColeccion() {
+		return coleccion;
+	}
+
+	void setColeccion(boolean coleccion) {
+		this.coleccion = coleccion;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNum_elementos() {
+		return num_elementos;
+	}
+	/**
+	 * 
+	 * @param num_elementos
+	 */
+	void setNum_elementos(int num_elementos) {
+		this.num_elementos = num_elementos;
+	}
+	/**
+	 * Calcula el descuento en función del tipo de figura
+	 */
+	@Override
+	public void calcularDescuento() {
+		if(isDesmontable())
+			setDescuento(getPrecio()*DESCUENTO_A);
+		else setDescuento(getPrecio()*DESCUENTO_B);
+	}
+	/**
+	 * si se trata de una figura única, calcula el descuento y lo devuelve, si es un pack de figuras
+	 * no tiene descuento (descuento=0) 
+	 */
+	@Override
+	public double obtenerDescuento() {
+		if (getNum_elementos()!=1) return 0;
+		else {
+			calcularDescuento();
+			return getDescuento();
+		}
+	}
+
+}

@@ -12,6 +12,7 @@ import jerarquia.Articulo;
 import jerarquia.Figura;
 import jerarquia.Juego;
 import jerarquia.Libro;
+import jerarquia.Tablero;
 
 /**
  * Stock de articulos, envoltorio de arraylist
@@ -145,11 +146,72 @@ public class Stock implements Serializable {
 	}
 
 	/**
-	 * Extrae un articulo a traves de su id
+	 * Extrae un Libro a traves de su id
 	 */
-	public Articulo getArticulo(int id) {
+	public Articulo getLibro(int id) {
 		int indice = stock.indexOf((Articulo) new Libro(id));
 		return stock.get(indice);
+	}
+
+	/**
+	 * Extrae un Juego de Tablero a traves de su id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Articulo getTablero(int id) {
+		int indice = stock.indexOf((Articulo) new Tablero(id));
+		return stock.get(indice);
+	}
+
+	/**
+	 * Extrae un Juego de Cartas a traves de su id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Articulo getCartas(int id) {
+		int indice = stock.indexOf((Articulo) new Libro(id));
+		return stock.get(indice);
+	}
+
+	/**
+	 * Extrae un Juego de Rol a través de su id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Articulo getRol(int id) {
+		int indice = stock.indexOf((Articulo) new Libro(id));
+		return stock.get(indice);
+	}
+
+	/**
+	 * Extrae una Figura a través de su id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Articulo getFigura(int id) {
+		int indice = stock.indexOf((Articulo) new Figura(id));
+		return stock.get(indice);
+	}
+
+	/**
+	 * Devuelve un articulo a traves de su id
+	 * 
+	 * @param cod
+	 * @return
+	 */
+	public Articulo devuelvePorCódigo(int id) {
+		Articulo articulo;
+		for (Articulo art : stock) {
+			articulo = art;
+			if (articulo.getId() == id) {
+				return articulo;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -226,8 +288,8 @@ public class Stock implements Serializable {
 	 */
 	public ListIterator iteratorLibro() {
 		ArrayList<Articulo> listaLibros = new ArrayList<Articulo>();
-		for(Articulo art: stock){
-			if(art instanceof Libro){
+		for (Articulo art : stock) {
+			if (art instanceof Libro) {
 				listaLibros.add(art);
 			}
 		}
@@ -241,13 +303,13 @@ public class Stock implements Serializable {
 	 */
 	public ListIterator iteratorFigura() {
 		ArrayList<Articulo> listaFiguras = new ArrayList<Articulo>();
-		for(Articulo art: stock){
-			if(art instanceof Figura){
+		for (Articulo art : stock) {
+			if (art instanceof Figura) {
 				listaFiguras.add(art);
 			}
 		}
 		return listaFiguras.listIterator();
-		}
+	}
 
 	/**
 	 * Devuleve un iterador de Articulos del tipo Juego
@@ -256,14 +318,13 @@ public class Stock implements Serializable {
 	 */
 	public ListIterator iteratorJuego() {
 		ArrayList<Articulo> listaJuego = new ArrayList<Articulo>();
-		for(Articulo art: stock){
-			if(art instanceof Juego){
+		for (Articulo art : stock) {
+			if (art instanceof Juego) {
 				listaJuego.add(art);
 			}
 		}
 		return listaJuego.listIterator();
 	}
-	
 
 	/**
 	 * Devuelve el catálogo de artículos (nombre, tipo de articulo y precio)

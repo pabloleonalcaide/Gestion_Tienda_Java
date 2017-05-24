@@ -7,8 +7,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 import excepciones.ImposibleEliminarException;
-import jerarquia.Articulo;
-import jerarquia.Libro;
+import jerarquia.*;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -46,6 +45,7 @@ public class PanelEliminar extends PanelPadre {
 			public void actionPerformed(ActionEvent arg0) {
 				int id = Integer.parseInt(textId.getText());
 				showMainPanel(new Libro(id));
+				
 				switch (JOptionPane.showConfirmDialog(getContentPane(), "desea eliminar?", null,
 						JOptionPane.YES_NO_CANCEL_OPTION)) {
 				case JOptionPane.YES_OPTION:
@@ -57,14 +57,26 @@ public class PanelEliminar extends PanelPadre {
 					break;
 				}
 			}
-			//Constructor con id de cada clase hija e insertar el instanceof para filtrar el eliminado
+
+			/**
+			 * Filtra el tipo de articulo y elimina
+			 * @param id
+			 */
 			protected void removeArticle(int id) {
 				try {
-					Principal.stock.removeFromStock((Articulo) Principal.stock.getArticulo(id));
+					Articulo articulo = Principal.stock.devuelvePorCódigo(id);
+					if (articulo instanceof Libro)
+						Principal.stock.removeFromStock((Articulo) Principal.stock.getLibro(id));
+					else if (articulo instanceof Figura)
+						Principal.stock.removeFromStock((Articulo) Principal.stock.getFigura(id));
+					else if (articulo instanceof Rol)
+						Principal.stock.removeFromStock((Articulo) Principal.stock.getRol(id));
+					else if (articulo instanceof Tablero)
+						Principal.stock.removeFromStock((Articulo) Principal.stock.getTablero(id));
+					else if (articulo instanceof Cartas)
+						Principal.stock.removeFromStock((Articulo) Principal.stock.getCartas(id));
 				} catch (ImposibleEliminarException e) {
 					JOptionPane.showMessageDialog(getContentPane(), e.getMessage());
-				} catch (ArrayIndexOutOfBoundsException e1) {
-					JOptionPane.showMessageDialog(getContentPane(), "algo falla");
 				}
 			}
 		});

@@ -47,7 +47,7 @@ public class Principal {
 		try {
 			stock = (Stock) Fichero.open(Fichero.fichero);
 		} catch (ClassNotFoundException | IOException e) {
-			System.out.println("eoo no ha colado cargar el stock!");
+			JOptionPane.showMessageDialog(framePrincipal,"no se ha cargado ningun stock","Aviso", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
@@ -524,6 +524,7 @@ public class Principal {
 	 */
 	protected void cargarMenuUsuario() {
 		menuUsuario = new JMenuBar();
+		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		menuUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		menuUsuario.setBackground(Color.LIGHT_GRAY);
 		menuUsuario.setToolTipText("Bienvenido a la Mazmorra del Desarrollador");

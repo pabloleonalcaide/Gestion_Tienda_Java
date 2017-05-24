@@ -21,6 +21,12 @@ public class Tablero extends Juego {
 
 	
 
+	public Tablero(int id) {
+		super(id);
+	}
+
+
+
 	int getNum_piezas() {
 		return num_piezas;
 	}
