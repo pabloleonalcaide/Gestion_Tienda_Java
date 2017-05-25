@@ -13,12 +13,12 @@
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="jerarquia.Cartas"/>
 <fullyQualifiedTypeName name="jerarquia.Rol"/>
-<fullyQualifiedTypeName name="jerarquia.Tablero"/>
 <fullyQualifiedTypeName name="java.util.ListIterator"/>
-<fullyQualifiedTypeName name="jerarquia.Figura"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
 <fullyQualifiedTypeName name="jerarquia.Articulo"/>
 <fullyQualifiedTypeName name="jerarquia.Juego"/>
 <fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="jerarquia.Tablero"/>
+<fullyQualifiedTypeName name="jerarquia.Figura"/>
 </qualifiedTypeNameHistroy>
