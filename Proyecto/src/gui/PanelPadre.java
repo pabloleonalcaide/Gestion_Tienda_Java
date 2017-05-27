@@ -79,6 +79,9 @@ public class PanelPadre extends JFrame {
 		comboBoxTipoArticulo.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				identifyArticle();
+				if (panelJuego.isVisible())
+					panelButtons.setVisible(true);
+				
 			}
 		});
 		comboBoxTipoArticulo.setBounds(279, 471, 139, 25);
@@ -94,13 +97,9 @@ public class PanelPadre extends JFrame {
 		});
 		btnSalir.setBounds(289, 504, 117, 25);
 		getContentPane().add(btnSalir);
-
-		panelButtons = new JPanel();
-		panelButtons.setBounds(398, 415, 296, 44);
-		getContentPane().add(panelButtons);
-		panelButtons.setLayout(null);
-
+		
 		crearBotonesJuego();
+		
 		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(
 				new Component[] { lblNombre, textNombre, lblPrecio, textPrecio, lblDescripcion, textDetalles, lblEstado,
 						lblCantidadStock, textStock, lblFechaEntrada, lblNProducto }));
@@ -110,6 +109,10 @@ public class PanelPadre extends JFrame {
 	 * Crea los botones de seleccion de tipo de juego
 	 */
 	protected void crearBotonesJuego() {
+		panelButtons = new JPanel();
+		panelButtons.setBounds(398, 415, 296, 44);
+		getContentPane().add(panelButtons);
+		panelButtons.setLayout(null);
 		rdbtnCartas = new JRadioButton("Cartas");
 		rdbtnCartas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,9 +211,7 @@ public class PanelPadre extends JFrame {
 			panelFigura.add(numElementos);
 		}
 	}
-	void cerrarPanel(){
-		this.remove(panelPrincipal);
-	}
+
 	/**
 	 * crea el panel secundario de juego
 	 */
@@ -261,10 +262,9 @@ public class PanelPadre extends JFrame {
 
 			lblColeccionJuego = new JLabel("Coleccion");
 			panelJuego.add(lblColeccionJuego);
-
-			textColeccionJuego = new JTextField();
-			panelJuego.add(textColeccionJuego);
-			textColeccionJuego.setColumns(10);
+			
+			chbxColeccionJuego = new JCheckBox("Coleccion");
+			panelJuego.add(chbxColeccionJuego);
 
 			lblCartas = new JLabel("Cartas");
 			panelJuego.add(lblCartas);
@@ -474,6 +474,10 @@ public class PanelPadre extends JFrame {
 		selectPanels(articulo);
 
 	}
+	/**
+	 * Muestra el contenido comun del articulo
+	 * @param articulo
+	 */
 	void showMainPanel(Articulo articulo){
 		comboBoxEstado.setSelectedItem(articulo.getEstado());
 		textStock.setText(Integer.toString(articulo.getCantidad()));
@@ -568,15 +572,28 @@ public class PanelPadre extends JFrame {
 			panelFigura.setVisible(true);
 			panelJuego.setVisible(false);
 		} else {
-			panelButtons.setVisible(true);
 			rdbtnCartas.setSelected(true);
 			panelLibro.setVisible(false);
 			panelFigura.setVisible(false);
 			panelJuego.setVisible(true);
 			enableCartas();
 		}
+	
 	}
-
+	
+	/**
+	 * Vacia el contenido de los textfields en los paneles
+	 */
+	public void emptyPanels(){
+		textNombre.setText("");
+		textDetalles.setText("");
+		textPrecio.setText("");
+		textPaginas.setText("");
+		panelButtons.setVisible(false);
+		comboBoxTipoArticulo.setSelectedItem(null);
+		cleanRightPanel();
+		
+	}
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
@@ -623,7 +640,7 @@ public class PanelPadre extends JFrame {
 		chkbxColeccion.setVisible(false);
 		comboBox_Genero.setVisible(false);
 		comboBoxMaterialRol.setVisible(false);
-		textColeccionJuego.setVisible(false);
+		chbxColeccionJuego.setVisible(false);
 		textEdicion.setVisible(false);
 		spinnerPeso.setVisible(true);
 		textTematica.setVisible(true);
@@ -644,7 +661,7 @@ public class PanelPadre extends JFrame {
 		numElementos.setVisible(false);
 		textCartas.setVisible(false);
 		comboBoxDificultad.setVisible(false);
-		textColeccionJuego.setVisible(false);
+		chbxColeccionJuego.setVisible(false);
 		chkbxColeccion.setVisible(false);
 		comboBox_Genero.setVisible(true);
 		comboBoxMaterialRol.setVisible(true);
@@ -714,6 +731,7 @@ public class PanelPadre extends JFrame {
 	JPanel panelLibro;
 	JPanel panelJuego;
 	JPanel panelFigura;
+	JPanel panelButtons;
 
 	JComboBox comboBoxEstado;
 	JComboBox comboBox_Genero;
@@ -723,7 +741,6 @@ public class PanelPadre extends JFrame {
 	JLabel lblDimensiones;
 	JTextField textDimensiones;
 	JTextField textJugadores;
-	JTextField textColeccionJuego;
 	JTextField textCartas;
 	JComboBox comboBoxDificultad;
 	JTextField textGenero;
@@ -752,8 +769,8 @@ public class PanelPadre extends JFrame {
 	JRadioButton rdbtnCartas;
 	JRadioButton rdbtnTablero;
 	JRadioButton rdbtnRol;
-	JPanel panelButtons;
 
 	JSpinner numElementos;
 	JCheckBox chckbxColeccion;
+	JCheckBox chbxColeccionJuego;
 }

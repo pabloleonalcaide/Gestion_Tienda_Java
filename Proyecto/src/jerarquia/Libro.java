@@ -8,7 +8,6 @@ import enumeraciones.*;
 import excepciones.*;
 
 public class Libro extends Articulo {
-	
 
 	private static final int PAGINAS_MINIMAS = 20;
 	private int paginas;
@@ -18,15 +17,12 @@ public class Libro extends Articulo {
 	private IdiomaLibro idioma;
 	private CategoriaLibro categoria;
 	private double variableDescuento;
-	//Patron para el nombre del autor
+	// Patron para el nombre del autor
 	private Pattern patronAutor = Pattern.compile("^[A-Z][A-Za-z]+");
-	
-	public Libro(String nombre, String descripcion, double precio,
-			EstadoArticulo estado, LocalDate fecha, int paginas, LocalDate fechaPublicacion, 
- String autor, boolean coleccion,
-			IdiomaLibro idioma, CategoriaLibro genero)
-			throws NombreNoValidoException, PrecioNoValidoException,
-			FechaNoValidaException {
+
+	public Libro(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha, int paginas,
+			LocalDate fechaPublicacion, String autor, boolean coleccion, IdiomaLibro idioma, CategoriaLibro genero)
+			throws NombreNoValidoException, PrecioNoValidoException, FechaNoValidaException {
 		super(nombre, descripcion, precio, estado, fecha);
 		setPaginas(paginas);
 		setFechaPublicacion(fechaPublicacion);
@@ -34,40 +30,48 @@ public class Libro extends Articulo {
 		setColeccion(coleccion);
 		setIdioma(idioma);
 		setCategoria(genero);
-		
-		}
-	public Libro (int id){
+
+	}
+
+	public Libro(int id) {
 		super(id);
-		}
-	public Libro (String nombre){
+	}
+
+	public Libro(String nombre) {
 		super(nombre);
-		}
+	}
+
 	/**
 	 * El descuento se calcula en base al numero de paginas del libro
 	 */
 	@Override
 	public void calcularDescuento() {
-		if (getPaginas()>=100)
-			setDescuento((getPaginas()*getVariableDescuento()));
-		else 
-			{setDescuento(0);}
-	
+		if (getPaginas() >= 100)
+			setDescuento((getPaginas() * getVariableDescuento()));
+		else {
+			setDescuento(0);
+		}
+
 	}
+
 	private double getVariableDescuento() {
-		return getPaginas()*0.00001;
+		return getPaginas() * 0.00001;
 	}
 
 	public int getPaginas() {
 		return paginas;
 	}
-	 /**
-	  * establecemos un minimo de paginas para considerarlo libro
-	  * @param paginas
-	  */
+
+	/**
+	 * establecemos un minimo de paginas para considerarlo libro
+	 * 
+	 * @param paginas
+	 */
 	public void setPaginas(int paginas) {
-		if (paginas >PAGINAS_MINIMAS)
+		if (paginas > PAGINAS_MINIMAS)
 			this.paginas = paginas;
-		else this.paginas=PAGINAS_MINIMAS;
+		else
+			this.paginas = PAGINAS_MINIMAS;
 	}
 
 	public LocalDate getFechaPublicacion() {
@@ -76,15 +80,17 @@ public class Libro extends Articulo {
 
 	public void setFechaPublicacion(LocalDate fechaPublicacion) throws FechaNoValidaException {
 		if (fechaValida(fechaPublicacion))
-		 this.fechaPublicacion = fechaPublicacion;
-		else 
+			this.fechaPublicacion = fechaPublicacion;
+		else
 			throw new FechaNoValidaException("la fecha no puede ser posterior a hoy, lo siento");
 	}
-	 /**
-	  * Comprueba que la fecha de publicacion no es una fecha futura
-	  * @param fechaPublicacion
-	  * @return
-	  */
+
+	/**
+	 * Comprueba que la fecha de publicacion no es una fecha futura
+	 * 
+	 * @param fechaPublicacion
+	 * @return
+	 */
 	private boolean fechaValida(LocalDate fechaPublicacion) {
 		return LocalDate.now().isAfter(fechaPublicacion);
 	}
@@ -92,15 +98,18 @@ public class Libro extends Articulo {
 	public String getAutor() {
 		return autor;
 	}
-	 /**
-	  * El nombre del autor comienza con Mayúscula y no contiene simbolos ni caracteres numéricos
-	  * @param autor
-	  * @throws NombreNoValidoException
-	  */
-	 void setAutor(String autor) throws NombreNoValidoException {
+
+	/**
+	 * El nombre del autor comienza con Mayúscula y no contiene simbolos ni
+	 * caracteres numéricos
+	 * 
+	 * @param autor
+	 * @throws NombreNoValidoException
+	 */
+	public void setAutor(String autor) throws NombreNoValidoException {
 		Matcher m = patronAutor.matcher(autor);
-		if(m.matches())
-		 this.autor = autor;
+		if (m.matches())
+			this.autor = autor;
 		else
 			throw new NombreNoValidoException("nombre invalido");
 	}
@@ -109,15 +118,15 @@ public class Libro extends Articulo {
 		return coleccion;
 	}
 
-	 void setColeccion(boolean coleccion) {
+	public void setColeccion(boolean coleccion) {
 		this.coleccion = coleccion;
 	}
 
-	 public IdiomaLibro getIdioma() {
+	public IdiomaLibro getIdioma() {
 		return idioma;
 	}
 
-	 void setIdioma(IdiomaLibro idioma) {
+	public void setIdioma(IdiomaLibro idioma) {
 		this.idioma = idioma;
 	}
 
@@ -125,7 +134,7 @@ public class Libro extends Articulo {
 		return categoria;
 	}
 
-	 void setCategoria(CategoriaLibro categoria) {
+	public void setCategoria(CategoriaLibro categoria) {
 		this.categoria = categoria;
 	}
 
@@ -134,11 +143,10 @@ public class Libro extends Articulo {
 		calcularDescuento();
 		return this.descuento;
 	}
+
 	@Override
 	public String toString() {
-		return super.toString()+"Libro [paginas=" + paginas + ", fechaPublicacion="
-				+ fechaPublicacion + ", autor=" + autor + ", coleccion="
-				+ coleccion + ", idioma=" + idioma + ", categoria=" + categoria
-				+ "]";
+		return super.toString() + "Libro [paginas=" + paginas + ", fechaPublicacion=" + fechaPublicacion + ", autor="
+				+ autor + ", coleccion=" + coleccion + ", idioma=" + idioma + ", categoria=" + categoria + "]";
 	}
 }

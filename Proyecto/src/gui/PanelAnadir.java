@@ -31,8 +31,8 @@ import javax.swing.JPanel;
  * 
  */
 public class PanelAnadir extends PanelPadre {
-	
-	public PanelAnadir(ListIterator it) {
+
+	public PanelAnadir(ListIterator<Articulo> it) {
 		super(it);
 		setTitle("Stock: Introducir articulo");
 		textNombre.setEnabled(true);
@@ -46,35 +46,34 @@ public class PanelAnadir extends PanelPadre {
 		panelButtons.setVisible(false);
 		comboBoxEstado.setEnabled(true);
 		btnALaCesta_anadir.setText("A\u00f1adir");
-
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (panelLibro.isVisible()) {	//Si se ha marcado Libro
+				if (panelLibro.isVisible()) { // Si se ha marcado Libro
+
 					try {
 						addBook();
 						Principal.stock.setModificado(true);
+
 					} catch (NumberFormatException | NombreNoValidoException | PrecioNoValidoException
 							| FechaNoValidaException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
-				} else if (panelJuego.isVisible()) {	//Si se ha marcado Juego
+				} else if (panelJuego.isVisible()) { // Si se ha marcado Juego
 					try {
 						addGame();
 					} catch (NumberFormatException | PrecioNoValidoException | EdadNoValidaException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 					Principal.stock.setModificado(true);
-				} else if (panelFigura.isVisible()) {	//Si se ha marcado figura
+				} else if (panelFigura.isVisible()) { // Si se ha marcado figura
 					try {
 						addToy();
-						
 						Principal.stock.setModificado(true);
 					} catch (NumberFormatException | PesoNoValidoException | PrecioNoValidoException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-
 					}
 				}
-
+				emptyPanels();
 			}
 
 			/**
@@ -86,7 +85,8 @@ public class PanelAnadir extends PanelPadre {
 			 */
 			protected void addGame() throws NumberFormatException, PrecioNoValidoException, EdadNoValidaException {
 
-				if (rdbtnCartas.isSelected()) {	//Si se ha marcado el boton de Cartas
+				if (rdbtnCartas.isSelected()) { // Si se ha marcado el boton de
+												// Cartas
 					enableCartas();
 					Principal.stock.addToStock(new Cartas(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
@@ -95,9 +95,9 @@ public class PanelAnadir extends PanelPadre {
 							(DificultadCartas) comboBoxDificultad.getSelectedItem(), chkbxColeccion.isSelected()),
 							Integer.parseInt(textStock.getText()));
 
-				} else if (rdbtnRol.isSelected()) { //Si se ha marcado el boton de Rol
-					enableRol();
-					enableCartas();
+				} else if (rdbtnRol.isSelected()) { // Si se ha marcado el boton
+													// de Rol
+					enableRol();				
 					Principal.stock.addToStock(new Rol(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
 							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
@@ -105,7 +105,8 @@ public class PanelAnadir extends PanelPadre {
 							(MaterialRol) comboBoxMaterialRol.getSelectedItem(),
 							Double.parseDouble(textEdicion.getText())), Integer.parseInt(textStock.getText()));
 
-				} else if (rdbtnTablero.isSelected()) { //Si se ha marcado el boton de Tablero
+				} else if (rdbtnTablero.isSelected()) { // Si se ha marcado el
+														// boton de Tablero
 					enableTablero();
 					Principal.stock.addToStock(new Tablero(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),

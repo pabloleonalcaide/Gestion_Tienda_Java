@@ -28,15 +28,15 @@ public abstract class Juego extends Articulo {
 	public Juego(int id){
 		super(id);
 	}
-	double getDuracion_horas() {
+	public double getDuracion_horas() {
 		return duracion_horas;
 	}
 
-	void setDuracion_horas(double duracion_horas) {
+	public void setDuracion_horas(double duracion_horas) {
 		this.duracion_horas = duracion_horas;
 	}
 
-	int getEdad_minima() {
+	public int getEdad_minima() {
 		return edad_minima;
 	}
 
@@ -47,7 +47,7 @@ public abstract class Juego extends Articulo {
 	 * @param edad_minima
 	 * @throws EdadNoValidaException
 	 */
-	void setEdad_minima(int edad_minima) throws EdadNoValidaException {
+	public void setEdad_minima(int edad_minima) throws EdadNoValidaException {
 		if (isEdadValida(edad_minima))
 			throw new EdadNoValidaException("edad fuera de los limites");
 		this.edad_minima = edad_minima;

@@ -27,7 +27,7 @@ public class Cartas extends Juego {
 		return num_cartas;
 	}
 
-	void setNum_cartas(int num_cartas) {
+	public void setNum_cartas(int num_cartas) {
 		this.num_cartas = num_cartas;
 	}
 
@@ -35,7 +35,7 @@ public class Cartas extends Juego {
 		return dificultad;
 	}
 
-	void setDificultad(DificultadCartas dificultad) {
+	public void setDificultad(DificultadCartas dificultad) {
 		this.dificultad = dificultad;
 	}
 
@@ -43,7 +43,7 @@ public class Cartas extends Juego {
 		return coleccion;
 	}
 
-	void setColeccion(boolean coleccion) {
+	public void setColeccion(boolean coleccion) {
 		this.coleccion = coleccion;
 	}
 	/**

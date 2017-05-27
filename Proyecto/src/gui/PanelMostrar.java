@@ -24,7 +24,7 @@ public class PanelMostrar extends PanelPadre {
 		textStock.setEnabled(false);
 		textId.setEnabled(false);
 		textCartas.setEnabled(false);
-		textColeccionJuego.setEnabled(false);
+		chbxColeccionJuego.setEnabled(false);
 		textDimensiones.setEnabled(false);
 		textEdad.setEnabled(false);
 		textFieldDuracion.setEnabled(false);

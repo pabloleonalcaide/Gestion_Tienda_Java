@@ -40,7 +40,7 @@ public class Figura extends Articulo {
 		return peso;
 	}
 	//Controlamos que el peso no sea negativo ni excesivo
-	void setPeso(double peso) throws PesoNoValidoException {
+	public void setPeso(double peso) throws PesoNoValidoException {
 		if (peso>5000 || peso<0)
 			throw new PesoNoValidoException("ese peso no esta permitido");
 		else this.peso = peso;
@@ -50,7 +50,7 @@ public class Figura extends Articulo {
 		return tematica;
 	}
 
-	void setTematica(String tematica) {
+	public void setTematica(String tematica) {
 		this.tematica = tematica;
 	}
 
@@ -61,7 +61,7 @@ public class Figura extends Articulo {
 	 * Si la pieza es demasiado grande, siempre es desmontable
 	 * @param desmontable
 	 */
-	void setDesmontable(boolean desmontable) {
+	public void setDesmontable(boolean desmontable) {
 		if(isPesoReducido())
 		this.desmontable = desmontable;
 		else this.desmontable=true;
@@ -76,7 +76,7 @@ public class Figura extends Articulo {
 		return coleccion;
 	}
 
-	void setColeccion(boolean coleccion) {
+	public void setColeccion(boolean coleccion) {
 		this.coleccion = coleccion;
 	}
 	/**
@@ -90,7 +90,7 @@ public class Figura extends Articulo {
 	 * 
 	 * @param num_elementos
 	 */
-	void setNum_elementos(int num_elementos) {
+	public void setNum_elementos(int num_elementos) {
 		this.num_elementos = num_elementos;
 	}
 	/**

@@ -31,7 +31,7 @@ public class Tablero extends Juego {
 		return num_piezas;
 	}
 
-	void setNum_piezas(int num_piezas) {
+	public void setNum_piezas(int num_piezas) {
 		this.num_piezas = num_piezas;
 	}
 
@@ -39,7 +39,7 @@ public class Tablero extends Juego {
 		return dimensiones;
 	}
 
-	void setDimensiones(double dimensiones) {
+	public void setDimensiones(double dimensiones) {
 		this.dimensiones = dimensiones;
 	}
 
@@ -47,7 +47,7 @@ public class Tablero extends Juego {
 		return num_jugadores;
 	}
 
-	void setNum_jugadores(int num_jugadores) {
+	public void setNum_jugadores(int num_jugadores) {
 		this.num_jugadores = num_jugadores;
 	}
 
@@ -55,7 +55,7 @@ public class Tablero extends Juego {
 		return coleccion;
 	}
 
-	void setColeccion(boolean coleccion) {
+	public void setColeccion(boolean coleccion) {
 		this.coleccion = coleccion;
 	}
 

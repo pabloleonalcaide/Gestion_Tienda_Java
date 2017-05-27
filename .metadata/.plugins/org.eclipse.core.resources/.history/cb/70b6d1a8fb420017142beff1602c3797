@@ -1,0 +1,152 @@
+package jerarquia;
+
+import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import enumeraciones.*;
+import excepciones.*;
+
+public class Libro extends Articulo {
+
+	private static final int PAGINAS_MINIMAS = 20;
+	private int paginas;
+	private LocalDate fechaPublicacion;
+	private String autor;
+	private boolean coleccion;
+	private IdiomaLibro idioma;
+	private CategoriaLibro categoria;
+	private double variableDescuento;
+	// Patron para el nombre del autor
+	private Pattern patronAutor = Pattern.compile("^[A-Z][A-Za-z]+");
+
+	public Libro(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha, int paginas,
+			LocalDate fechaPublicacion, String autor, boolean coleccion, IdiomaLibro idioma, CategoriaLibro genero)
+			throws NombreNoValidoException, PrecioNoValidoException, FechaNoValidaException {
+		super(nombre, descripcion, precio, estado, fecha);
+		setPaginas(paginas);
+		setFechaPublicacion(fechaPublicacion);
+		setAutor(autor);
+		setColeccion(coleccion);
+		setIdioma(idioma);
+		setCategoria(genero);
+
+	}
+
+	public Libro(int id) {
+		super(id);
+	}
+
+	public Libro(String nombre) {
+		super(nombre);
+	}
+
+	/**
+	 * El descuento se calcula en base al numero de paginas del libro
+	 */
+	@Override
+	public void calcularDescuento() {
+		if (getPaginas() >= 100)
+			setDescuento((getPaginas() * getVariableDescuento()));
+		else {
+			setDescuento(0);
+		}
+
+	}
+
+	private double getVariableDescuento() {
+		return getPaginas() * 0.00001;
+	}
+
+	public int getPaginas() {
+		return paginas;
+	}
+
+	/**
+	 * establecemos un minimo de paginas para considerarlo libro
+	 * 
+	 * @param paginas
+	 */
+	public void setPaginas(int paginas) {
+		if (paginas > PAGINAS_MINIMAS)
+			this.paginas = paginas;
+		else
+			this.paginas = PAGINAS_MINIMAS;
+	}
+
+	public LocalDate getFechaPublicacion() {
+		return fechaPublicacion;
+	}
+
+	public void setFechaPublicacion(LocalDate fechaPublicacion) throws FechaNoValidaException {
+		if (fechaValida(fechaPublicacion))
+			this.fechaPublicacion = fechaPublicacion;
+		else
+			throw new FechaNoValidaException("la fecha no puede ser posterior a hoy, lo siento");
+	}
+
+	/**
+	 * Comprueba que la fecha de publicacion no es una fecha futura
+	 * 
+	 * @param fechaPublicacion
+	 * @return
+	 */
+	private boolean fechaValida(LocalDate fechaPublicacion) {
+		return LocalDate.now().isAfter(fechaPublicacion);
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	/**
+	 * El nombre del autor comienza con Mayúscula y no contiene simbolos ni
+	 * caracteres numéricos
+	 * 
+	 * @param autor
+	 * @throws NombreNoValidoException
+	 */
+	public void setAutor(String autor) throws NombreNoValidoException {
+		Matcher m = patronAutor.matcher(autor);
+		if (m.matches())
+			this.autor = autor;
+		else
+			throw new NombreNoValidoException("nombre invalido");
+	}
+
+	public boolean isColeccion() {
+		return coleccion;
+	}
+
+	public void setColeccion(boolean coleccion) {
+		this.coleccion = coleccion;
+	}
+
+	public IdiomaLibro getIdioma() {
+		return idioma;
+	}
+
+	void setIdioma(IdiomaLibro idioma) {
+		this.idioma = idioma;
+	}
+
+	public CategoriaLibro getCategoria() {
+		return categoria;
+	}
+
+	void setCategoria(CategoriaLibro categoria) {
+		this.categoria = categoria;
+	}
+
+	@Override
+	public double obtenerDescuento() {
+		calcularDescuento();
+		return this.descuento;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Libro [paginas=" + paginas + ", fechaPublicacion=" + fechaPublicacion + ", autor="
+				+ autor + ", coleccion=" + coleccion + ", idioma=" + idioma + ", categoria=" + categoria + "]";
+	}
+}

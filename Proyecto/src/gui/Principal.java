@@ -31,8 +31,6 @@ import javax.swing.JButton;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-//REFACTORIZAR --> COMPORTAMIENTO, ESTADO
-//CORREGIR LOS ESPACIOS EN LA BARRA DE MENU
 //CORREGIR OPCIONES FILECHOOSER
 public class Principal {
 	static JFrame framePrincipal;
@@ -42,21 +40,22 @@ public class Principal {
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
 	protected JFileChooser fileChooser = new JFileChooser();
-	static{
+	static {
 		Fichero.fichero = new File("stockUltimo.obj");
 		try {
 			stock = (Stock) Fichero.open(Fichero.fichero);
 		} catch (ClassNotFoundException | IOException e) {
-			JOptionPane.showMessageDialog(framePrincipal,"no se ha cargado ningun stock","Aviso", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(framePrincipal, "no se ha cargado ningun stock", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-					DialogBienvenida bienvenida = new DialogBienvenida();
-					Principal window = new Principal();
-					window.framePrincipal.setVisible(false);
+				DialogBienvenida bienvenida = new DialogBienvenida();
+				Principal window = new Principal();
+				window.framePrincipal.setVisible(false);
 			}
 		});
 	}
@@ -73,9 +72,11 @@ public class Principal {
 				if (stock.isModificado()) {
 					if (JOptionPane.showConfirmDialog(null, "Has hecho cambios... ¿quieres guardar antes de salir?",
 							"Festival modificado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-							saveAs();}
+						saveAs();
 					}
-		}});
+				}
+			}
+		});
 		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		framePrincipal.getContentPane().setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBackground(Color.LIGHT_GRAY);
@@ -109,7 +110,6 @@ public class Principal {
 
 	}
 
-	
 	/**
 	 * Carga el menu de usuario Articulos (mostrar por precio, mostrar por
 	 * nombre, mostrar por categoria)
@@ -304,40 +304,40 @@ public class Principal {
 		JMenu mnBbdd = new JMenu("Archivo");
 		mnBbdd.setMnemonic('A');
 		menuEmpleado.add(mnBbdd);
-		
-				JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
-				mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
-				mntmGuardarcambios.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						saveAs();
-					}
-				});
-				
-				JMenuItem mntmNuevoStock = new JMenuItem("Nuevo Stock");
-				mntmNuevoStock.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						openNew();
-					}
-				});
-				mnBbdd.add(mntmNuevoStock);
-				mnBbdd.add(mntmGuardarcambios);
-				
-						JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
-						mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
-						mntmAbrir.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								recuperarCopia();
-							}
-						});
-						mnBbdd.add(mntmAbrir);
-						
-								JMenuItem mntmSalir = new JMenuItem("Salir");
-								mntmSalir.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent arg0) {
-										salir();
-									}
-								});
-								mnBbdd.add(mntmSalir);
+
+		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
+		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
+		mntmGuardarcambios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				saveAs();
+			}
+		});
+
+		JMenuItem mntmNuevoStock = new JMenuItem("Nuevo Stock");
+		mntmNuevoStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				openNew();
+			}
+		});
+		mnBbdd.add(mntmNuevoStock);
+		mnBbdd.add(mntmGuardarcambios);
+
+		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
+		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+		mntmAbrir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				recuperarCopia();
+			}
+		});
+		mnBbdd.add(mntmAbrir);
+
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				salir();
+			}
+		});
+		mnBbdd.add(mntmSalir);
 		JMenu mnGestinArticulos = new JMenu("Gestion Articulos");
 		mnGestinArticulos.setMnemonic('G');
 		menuEmpleado.add(mnGestinArticulos);
@@ -358,11 +358,12 @@ public class Principal {
 				delete.setVisible(true);
 			}
 		});
-		
+
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			//Extender modificar de extender?? consultar a nieves
+				PanelModificar modificar = new PanelModificar(stock.listIterator());
+				modificar.setVisible(true);
 			}
 		});
 		mnGestinArticulos.add(mntmModificar);
@@ -393,33 +394,6 @@ public class Principal {
 			}
 		});
 		mnGestinArticulos.add(mntmActualizarExistencias);
-	}
-    /**
-    * Abre un nuevo stock
-    */
-	protected void openNew() {
-		if (stock.isModificado()) {
-			Object[] options = { "SI", "NO", "CANCELAR" };
-			int respuesta = JOptionPane.showOptionDialog(null, "Desea guardar los cambios?", "Hay Cambios sin Guardar",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-			if (respuesta==JOptionPane.YES_OPTION) {
-				saveAs();
-				Fichero.setFichero("Stock: Nuevo");
-				stock = new Stock();
-				framePrincipal.setTitle(Fichero.fichero.getName());
-				stock.setModificado(false);
-			} else if (respuesta == 1) {
-				Fichero.setFichero("Stock: Nuevo");
-				stock = new Stock();
-				framePrincipal.setTitle(Fichero.fichero.getName());
-				stock.setModificado(false);
-			}
-		} else {
-			Fichero.setFichero("Stock: Nuevo");
-			stock = new Stock();
-			framePrincipal.setTitle(Fichero.fichero.getName());
-			stock.setModificado(false);
-}		
 	}
 
 	/**
@@ -538,6 +512,34 @@ public class Principal {
 	}
 
 	/**
+	 * Abre un nuevo stock
+	 */
+	protected void openNew() {
+		if (stock.isModificado()) {
+			Object[] options = { "SI", "NO", "CANCELAR" };
+			int respuesta = JOptionPane.showOptionDialog(null, "Desea guardar los cambios?", "Hay Cambios sin Guardar",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+			if (respuesta == JOptionPane.YES_OPTION) {
+				saveAs();
+				Fichero.setFichero("Stock: Nuevo");
+				stock = new Stock();
+				framePrincipal.setTitle(Fichero.fichero.getName());
+				stock.setModificado(false);
+			} else if (respuesta == 1) {
+				Fichero.setFichero("Stock: Nuevo");
+				stock = new Stock();
+				framePrincipal.setTitle(Fichero.fichero.getName());
+				stock.setModificado(false);
+			}
+		} else {
+			Fichero.setFichero("Stock: Nuevo");
+			stock = new Stock();
+			framePrincipal.setTitle(Fichero.fichero.getName());
+			stock.setModificado(false);
+		}
+	}
+
+	/**
 	 * Guarda una copia del stock actual
 	 */
 	protected void saveAs() {
@@ -594,6 +596,7 @@ public class Principal {
 	protected void recuperarCopia() {
 		try {
 			openFileChooser();
+			stock.setModificado(false);
 		} catch (IOException | ClassNotFoundException e1) {
 			JOptionPane.showMessageDialog(null, "Hay problemas para abrir el fichero", "ERROR",
 					JOptionPane.ERROR_MESSAGE);
@@ -622,13 +625,13 @@ public class Principal {
 	 * Mensaje de stock vacio --> ¿metodo o desde el evento?
 	 */
 	private void msjEmptyStock() {
-		JOptionPane.showMessageDialog(null, "No hay articulos",null,JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "No hay articulos", null, JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
 	 * Comprueba si hubo cambios y sale del programa
 	 */
-	//CORREGIR --> USAR YES_NO_CANCEL 
+	// CORREGIR --> USAR YES_NO_CANCEL
 	protected void salir() {
 		if (stock.isModificado()) {
 			Object[] options = { "SI", "NO", "CANCELAR" };

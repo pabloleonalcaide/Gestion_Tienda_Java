@@ -30,7 +30,7 @@ public class Rol extends Juego {
 		return genero;
 	}
 
-	void setGenero(GeneroRol genero) {
+	public void setGenero(GeneroRol genero) {
 		this.genero = genero;
 	}
 
@@ -38,7 +38,7 @@ public class Rol extends Juego {
 		return material;
 	}
 
-	void setMaterial(MaterialRol material) {
+	public void setMaterial(MaterialRol material) {
 		this.material = material;
 	}
 
@@ -46,7 +46,7 @@ public class Rol extends Juego {
 		return edicion;
 	}
 
-	void setEdicion(double edicion) {
+	public void setEdicion(double edicion) {
 		this.edicion = edicion;
 	}
 	/**
