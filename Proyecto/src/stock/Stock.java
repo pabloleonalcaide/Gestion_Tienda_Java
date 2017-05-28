@@ -1,13 +1,18 @@
 package stock;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 
 import enumeraciones.*;
 import excepciones.ArticuloNoExisteException;
+import excepciones.FechaNoValidaException;
 import excepciones.ImposibleEliminarException;
+import excepciones.NombreNoValidoException;
+import excepciones.PesoNoValidoException;
+import excepciones.PrecioNoValidoException;
 import jerarquia.Articulo;
 import jerarquia.Figura;
 import jerarquia.Juego;
@@ -214,6 +219,10 @@ public class Stock implements Serializable {
 		return null;
 	}
 
+	public int indexOf(Articulo articulo) {
+		return indexOf(articulo);
+	}
+
 	/**
 	 * Comprueba si hay articulos en la cesta del usuario
 	 * 
@@ -266,7 +275,7 @@ public class Stock implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ListIterator iteratorName() {
+	public ListIterator<Articulo> iteratorName() {
 		sortByName();
 		return stock.listIterator();
 	}
@@ -276,7 +285,7 @@ public class Stock implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ListIterator iteratorPrice() {
+	public ListIterator<Articulo> iteratorPrice() {
 		sortByPrice();
 		return stock.listIterator();
 	}
@@ -286,7 +295,7 @@ public class Stock implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ListIterator iteratorLibro() {
+	public ListIterator<Articulo> iteratorLibro() {
 		ArrayList<Articulo> listaLibros = new ArrayList<Articulo>();
 		for (Articulo art : stock) {
 			if (art instanceof Libro) {
@@ -301,7 +310,7 @@ public class Stock implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ListIterator iteratorFigura() {
+	public ListIterator<Articulo> iteratorFigura() {
 		ArrayList<Articulo> listaFiguras = new ArrayList<Articulo>();
 		for (Articulo art : stock) {
 			if (art instanceof Figura) {
@@ -316,7 +325,7 @@ public class Stock implements Serializable {
 	 * 
 	 * @return
 	 */
-	public ListIterator iteratorJuego() {
+	public ListIterator<Articulo> iteratorJuego() {
 		ArrayList<Articulo> listaJuego = new ArrayList<Articulo>();
 		for (Articulo art : stock) {
 			if (art instanceof Juego) {
@@ -337,6 +346,118 @@ public class Stock implements Serializable {
 			catalogo.append("\nArticulo: " + art.getNombre() + ", Categoria: " + art.getClass().getName());
 		}
 		return catalogo.toString();
+	}
+
+	/**
+	 * Modifica los datos del Articulo Libro
+	 * 
+	 * @param nombre
+	 * @param precio
+	 * @param cantidad
+	 * @param estado
+	 * @param descripcion
+	 * @param fecha
+	 * @param paginas
+	 * @param publicacion 
+	 * @param autor 
+	 * @param coleccion 
+	 * @param idioma 
+	 * @param categoria 
+	 * @throws PrecioNoValidoException 
+	 * @throws NombreNoValidoException 
+	 * @throws FechaNoValidaException 
+	 */
+	public void ModificarLibro(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
+			String descripcion, LocalDate fecha, int paginas, LocalDate publicacion, String autor, boolean coleccion, IdiomaLibro idioma, CategoriaLibro categoria) throws PrecioNoValidoException, NombreNoValidoException, FechaNoValidaException {
+		stock.get(index).setNombre(nombre);
+		stock.get(index).setPrecio(precio);
+		stock.get(index).setCantidad(cantidad);
+		stock.get(index).setEstado(estado);
+		stock.get(index).setDescripcion(descripcion);
+		stock.get(index).setFecha(fecha);
+		((Libro) stock.get(index)).setPaginas(paginas);
+		((Libro) stock.get(index)).setFechaPublicacion(publicacion);
+		((Libro) stock.get(index)).setAutor(autor);
+		((Libro) stock.get(index)).setColeccion(coleccion);
+		((Libro) stock.get(index)).setIdioma(idioma);
+		((Libro) stock.get(index)).setCategoria(categoria);
+	}
+
+	/**
+	 * Modifica los datos del Articulo Figura
+	 * 
+	 * @param index
+	 * @param peso 
+	 * @param tematica 
+	 * @param coleccion 
+	 * @param desmontable 
+	 * @param numElementos 
+	 * @throws PrecioNoValidoException 
+	 * @throws PesoNoValidoException 
+	 */
+	public void ModificarFigura(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
+			String descripcion,LocalDate fecha, Double peso, String tematica, boolean coleccion, boolean desmontable, int numElementos) throws PrecioNoValidoException, PesoNoValidoException {
+		stock.get(index).setNombre(nombre);
+		stock.get(index).setPrecio(precio);
+		stock.get(index).setCantidad(cantidad);
+		stock.get(index).setEstado(estado);
+		stock.get(index).setDescripcion(descripcion);
+		stock.get(index).setFecha(fecha);
+		((Figura) stock.get(index)).setPeso(peso);
+		((Figura) stock.get(index)).setTematica(tematica);
+		((Figura) stock.get(index)).setColeccion(coleccion);
+		((Figura) stock.get(index)).setDesmontable(desmontable);
+		((Figura) stock.get(index)).setNum_elementos(numElementos);
+
+	}
+
+	/**
+	 * Modifica los datos del Articulo Juego-Rol
+	 * 
+	 * @param index
+	 * @throws PrecioNoValidoException 
+	 */
+	public void ModificarRol(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
+			String descripcion,LocalDate fecha) throws PrecioNoValidoException {
+		stock.get(index).setNombre(nombre);
+		stock.get(index).setPrecio(precio);
+		stock.get(index).setCantidad(cantidad);
+		stock.get(index).setEstado(estado);
+		stock.get(index).setDescripcion(descripcion);
+		stock.get(index).setFecha(fecha);
+
+	}
+
+	/**
+	 * Modifica los datos del Articulo Juego-Cartas
+	 * 
+	 * @param index
+	 * @throws PrecioNoValidoException 
+	 */
+	public void ModificarCartas(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
+			String descripcion,LocalDate fecha) throws PrecioNoValidoException {
+		stock.get(index).setNombre(nombre);
+		stock.get(index).setPrecio(precio);
+		stock.get(index).setCantidad(cantidad);
+		stock.get(index).setEstado(estado);
+		stock.get(index).setDescripcion(descripcion);
+		stock.get(index).setFecha(fecha);
+	}
+
+	/**
+	 * Modifica los datos del Articulo Juego-Tablero
+	 * 
+	 * @param index
+	 * @throws PrecioNoValidoException 
+	 */
+	public void ModificarTablero(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
+			String descripcion,LocalDate fecha) throws PrecioNoValidoException {
+		stock.get(index).setNombre(nombre);
+		stock.get(index).setPrecio(precio);
+		stock.get(index).setCantidad(cantidad);
+		stock.get(index).setEstado(estado);
+		stock.get(index).setDescripcion(descripcion);
+		stock.get(index).setFecha(fecha);
 	}
 
 	@Override

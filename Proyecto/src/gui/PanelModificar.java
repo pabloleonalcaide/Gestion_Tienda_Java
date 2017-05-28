@@ -15,6 +15,7 @@ import enumeraciones.MaterialRol;
 import excepciones.EdadNoValidaException;
 import excepciones.FechaNoValidaException;
 import excepciones.NombreNoValidoException;
+import excepciones.PesoNoValidoException;
 import excepciones.PrecioNoValidoException;
 import jerarquia.Articulo;
 import jerarquia.Cartas;
@@ -71,9 +72,10 @@ public class PanelModificar extends PanelMostrar {
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-				//	modificarArticulo(null);
+					modificarArticulo(articuloMostrado);
 					JOptionPane.showMessageDialog(getContentPane(), "Modificado con exito");
-				} catch (NumberFormatException | PrecioNoValidoException | FechaNoValidaException | NombreNoValidoException e1) {
+				} catch (EdadNoValidaException | FechaNoValidaException | PesoNoValidoException | NumberFormatException
+						| PrecioNoValidoException | NombreNoValidoException e1) {
 					JOptionPane.showMessageDialog(getContentPane(), "No se ha podido modificar");
 				}
 			}
@@ -82,7 +84,8 @@ public class PanelModificar extends PanelMostrar {
 
 	}
 
-	protected void modificarArticulo(Articulo articulo) throws NumberFormatException, PrecioNoValidoException, FechaNoValidaException, NombreNoValidoException, EdadNoValidaException {
+	protected void modificarArticulo(Articulo articulo) throws NumberFormatException, PrecioNoValidoException,
+			FechaNoValidaException, NombreNoValidoException, EdadNoValidaException, PesoNoValidoException {
 		articulo.setEstado((EstadoArticulo) comboBoxEstado.getSelectedItem());
 		articulo.setCantidad(Integer.parseInt(textStock.getText()));
 		articulo.setFecha(readDateSpinner(spinnerEntrada));
@@ -90,8 +93,6 @@ public class PanelModificar extends PanelMostrar {
 		articulo.setNombre(textNombre.getText());
 		articulo.setPrecio(Double.parseDouble(textPrecio.getText()));
 
-
-		
 		if (articulo instanceof Libro) {
 			((Libro) articulo).setPaginas(Integer.valueOf(textPaginas.getText()));
 			((Libro) articulo).setFechaPublicacion(readDateSpinner(spinnerPublicacion));
@@ -103,7 +104,7 @@ public class PanelModificar extends PanelMostrar {
 		} else if (articulo instanceof Juego) {
 			((Juego) articulo).setDuracion_horas(Double.parseDouble(textFieldDuracion.getText()));
 			((Juego) articulo).setEdad_minima(Integer.parseInt(textEdad.getText()));
-			
+
 			if (articulo instanceof Rol) {
 				((Rol) articulo).setGenero((GeneroRol) comboBox_Genero.getSelectedItem());
 				((Rol) articulo).setMaterial((MaterialRol) comboBoxMaterialRol.getSelectedItem());
@@ -119,8 +120,12 @@ public class PanelModificar extends PanelMostrar {
 				((Tablero) articulo).setColeccion(chkbxColeccion.isSelected());
 			}
 		} else if (articulo instanceof Figura) {
-			
+			((Figura) articulo).setPeso((double) spinnerPeso.getValue());
+			((Figura) articulo).setTematica(textTematica.getText());
+			((Figura) articulo).setColeccion(chkbxColeccion.isSelected());
+			((Figura) articulo).setDesmontable(chckbxDesmontable.isSelected());
+			((Figura) articulo).setNum_elementos((int) numElementos.getValue());
 		}
-		
+
 	}
 }

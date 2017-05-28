@@ -21,4 +21,6 @@
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="jerarquia.Tablero"/>
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="excepciones.PesoNoValidoException"/>
 </qualifiedTypeNameHistroy>

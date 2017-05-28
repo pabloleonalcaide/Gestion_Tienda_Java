@@ -144,7 +144,7 @@ public class PanelAnadir extends PanelPadre {
 						LocalDate.now(), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
 						textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
 						(CategoriaLibro) comboBox_Genero.getSelectedItem()), Integer.parseInt(textStock.getText()));
-				JOptionPane.showMessageDialog(null, readDateSpinner(spinnerPublicacion).toString());
+				
 			}
 		});
 

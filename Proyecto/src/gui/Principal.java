@@ -362,8 +362,12 @@ public class Principal {
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PanelModificar modificar = new PanelModificar(stock.listIterator());
-				modificar.setVisible(true);
+				try {
+					PanelModificar modificar = new PanelModificar(stock.listIterator());
+					modificar.setVisible(true);
+				} catch (Exception e) {
+					msjEmptyStock();
+				}
 			}
 		});
 		mnGestinArticulos.add(mntmModificar);

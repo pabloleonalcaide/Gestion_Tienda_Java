@@ -36,10 +36,12 @@ import jerarquia.*;
 
 public class PanelPadre extends JFrame {
 	 ListIterator<Articulo> it;
+	 Articulo articuloMostrado;
 
 	// REFACTORIZAR --> SEPARAR POR COMPORTAMIENTO
 	public PanelPadre(ListIterator<Articulo> iterador) {
 		it = iterador;
+		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setResizable(false);
@@ -57,8 +59,9 @@ public class PanelPadre extends JFrame {
 		crearPanelJuego();
 		// PANEL FIGURA
 		crearPanelFigura();
-
+		// BOTONES
 		crearBotones();
+		crearBotonesJuego();
 
 		// boton siguiente
 		btnSiguiente.addActionListener(new ActionListener() {
@@ -98,7 +101,6 @@ public class PanelPadre extends JFrame {
 		btnSalir.setBounds(289, 504, 117, 25);
 		getContentPane().add(btnSalir);
 		
-		crearBotonesJuego();
 		
 		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(
 				new Component[] { lblNombre, textNombre, lblPrecio, textPrecio, lblDescripcion, textDetalles, lblEstado,
@@ -347,7 +349,7 @@ public class PanelPadre extends JFrame {
 			comboBox_Idioma = new JComboBox();
 			comboBox_Idioma.setModel(new DefaultComboBoxModel(IdiomaLibro.values()));
 			panelLibro.add(comboBox_Idioma);
-			lblTipo = new JLabel("Tipo");
+			lblTipo = new JLabel("Categoria");
 			panelLibro.add(lblTipo);
 			textTipo = new JTextField();
 			panelLibro.add(textTipo);
@@ -423,13 +425,27 @@ public class PanelPadre extends JFrame {
 			panelPrincipal.add(label);
 		}
 	}
-
+	/**
+	 * Cambia el articulo que se esta mostrando
+	 * @param articulo
+	 */
+	void setArticuloMostrado(Articulo articulo){
+		this.articuloMostrado = articulo;
+	}
+	/**
+	 * Devuelve el articulo que se esta mostrando
+	 * @return
+	 */
+	Articulo getArticuloMostrado(){
+		return articuloMostrado;
+	}
 	/**
 	 * Retrocede en el stock
 	 */
 	protected void retroceder() {
 		if (it.hasPrevious())
 			showArticle(it.previous());
+			articuloMostrado = it.previous();
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
 		} else {
@@ -450,6 +466,7 @@ public class PanelPadre extends JFrame {
 	protected void avanzar() {
 		if (it.hasNext())
 			showArticle(it.next());
+			articuloMostrado = it.next();
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
 		} else {
@@ -519,6 +536,7 @@ public class PanelPadre extends JFrame {
 			chkbxColeccion.setSelected(((Figura) (articulo)).isColeccion());
 			numElementos.setValue((((Figura) (articulo)).getNum_elementos()));
 		}
+		setArticuloMostrado(articulo);
 	}
 
 	/**
