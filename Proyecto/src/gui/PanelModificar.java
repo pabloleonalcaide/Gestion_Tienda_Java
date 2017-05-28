@@ -86,45 +86,91 @@ public class PanelModificar extends PanelMostrar {
 
 	protected void modificarArticulo(Articulo articulo) throws NumberFormatException, PrecioNoValidoException,
 			FechaNoValidaException, NombreNoValidoException, EdadNoValidaException, PesoNoValidoException {
-		articulo.setEstado((EstadoArticulo) comboBoxEstado.getSelectedItem());
-		articulo.setCantidad(Integer.parseInt(textStock.getText()));
-		articulo.setFecha(readDateSpinner(spinnerEntrada));
-		articulo.setDescripcion(textDetalles.getText());
-		articulo.setNombre(textNombre.getText());
-		articulo.setPrecio(Double.parseDouble(textPrecio.getText()));
 
 		if (articulo instanceof Libro) {
-			((Libro) articulo).setPaginas(Integer.valueOf(textPaginas.getText()));
-			((Libro) articulo).setFechaPublicacion(readDateSpinner(spinnerPublicacion));
-			((Libro) articulo).setAutor(textAutor.getText());
-			((Libro) articulo).setColeccion(chkbxColeccion.isSelected());
-			((Libro) articulo).setIdioma((IdiomaLibro) comboBox_Idioma.getSelectedItem());
-			((Libro) articulo).setCategoria((CategoriaLibro) comboBox_Genero.getSelectedItem());
+			modificarLibro(articulo);
 
 		} else if (articulo instanceof Juego) {
-			((Juego) articulo).setDuracion_horas(Double.parseDouble(textFieldDuracion.getText()));
-			((Juego) articulo).setEdad_minima(Integer.parseInt(textEdad.getText()));
-
 			if (articulo instanceof Rol) {
-				((Rol) articulo).setGenero((GeneroRol) comboBox_Genero.getSelectedItem());
-				((Rol) articulo).setMaterial((MaterialRol) comboBoxMaterialRol.getSelectedItem());
-				((Rol) articulo).setEdicion(Double.parseDouble(textEdicion.getText()));
+				modificarJuegoRol(articulo);
 			} else if (articulo instanceof Cartas) {
-				((Cartas) articulo).setNum_cartas(Integer.parseInt(textCartas.getText()));
-				((Cartas) articulo).setDificultad((DificultadCartas) comboBoxDificultad.getSelectedItem());
-				((Cartas) articulo).setColeccion(chckbxColeccion.isSelected());
+				modificarJuegoCartas(articulo);
 			} else if (articulo instanceof Tablero) {
-				((Tablero) articulo).setNum_piezas(Integer.parseInt(textPiezas.getText()));
-				((Tablero) articulo).setDimensiones(Double.parseDouble(textDimensiones.getText()));
-				((Tablero) articulo).setNum_jugadores(Integer.parseInt(textJugadores.getText()));
-				((Tablero) articulo).setColeccion(chkbxColeccion.isSelected());
+				modificarJuegoTablero(articulo);
 			}
 		} else if (articulo instanceof Figura) {
-			((Figura) articulo).setPeso((double) spinnerPeso.getValue());
-			((Figura) articulo).setTematica(textTematica.getText());
-			((Figura) articulo).setColeccion(chkbxColeccion.isSelected());
-			((Figura) articulo).setDesmontable(chckbxDesmontable.isSelected());
-			((Figura) articulo).setNum_elementos((int) numElementos.getValue());
+			modificarFigura(articulo);
+		}
+
+		
+	}
+
+	protected void modificarJuegoTablero(Articulo articulo) throws EdadNoValidaException {
+		try {
+			Principal.stock.ModificarTablero(Principal.stock.indexOf(articulo), textNombre.getText(),
+						Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
+						(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+						readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()), 
+						Integer.parseInt(textEdad.getText()), Integer.parseInt(textPiezas.getText()), 
+						chkbxColeccion.isSelected(), Integer.parseInt(textJugadores.getText()),
+						Double.parseDouble(textDimensiones.getText()));
+		} catch (NumberFormatException | PrecioNoValidoException e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
+	}
+
+	protected void modificarJuegoCartas(Articulo articulo) throws EdadNoValidaException {
+		try {
+			Principal.stock.ModificarCartas(Principal.stock.indexOf(articulo), textNombre.getText(),
+							Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
+							(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+							readDateSpinner(spinnerEntrada), Integer.parseInt(textEdad.getText()),
+							Double.parseDouble(textFieldDuracion.getText()), Integer.parseInt(textCartas.getText()),
+							(DificultadCartas) comboBoxDificultad.getSelectedItem(), chckbxColeccion.isSelected());
+		} catch (NumberFormatException | PrecioNoValidoException e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
+		
+	}
+
+	protected void modificarJuegoRol(Articulo articulo) throws EdadNoValidaException {
+		try {
+			Principal.stock.ModificarRol(Principal.stock.indexOf(articulo), textNombre.getText(),
+								Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
+								(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+								readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),Integer.parseInt(textEdad.getText()),
+								 (GeneroRol) comboBox_Genero.getSelectedItem(), 
+								(MaterialRol) comboBoxMaterialRol.getSelectedItem(), Double.parseDouble(textEdicion.getText()));
+		} catch (NumberFormatException | PrecioNoValidoException e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
+		
+	}
+
+	protected void modificarFigura(Articulo articulo) throws PesoNoValidoException {
+		try {
+			Principal.stock.ModificarFigura(Principal.stock.indexOf(articulo), textNombre.getText(),
+					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+					readDateSpinner(spinnerEntrada), (double) spinnerPeso.getValue(), textTematica.getText(),
+					chkbxColeccion.isSelected(), chckbxDesmontable.isSelected(), (int) numElementos.getValue());
+		} catch (NumberFormatException | PrecioNoValidoException e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}
+
+	}
+
+	protected void modificarLibro(Articulo articulo) throws FechaNoValidaException, NombreNoValidoException {
+		try {
+			Principal.stock.ModificarLibro(Principal.stock.indexOf(articulo), textNombre.getText(),
+					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+					readDateSpinner(spinnerEntrada), Integer.valueOf(textPaginas.getText()),
+					readDateSpinner(spinnerPublicacion), textAutor.getText(), chkbxColeccion.isSelected(),
+					(IdiomaLibro) comboBox_Idioma.getSelectedItem(),
+					(CategoriaLibro) comboBox_Genero.getSelectedItem());
+		} catch (NumberFormatException | PrecioNoValidoException e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
 		}
 
 	}

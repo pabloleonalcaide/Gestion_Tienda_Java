@@ -12,6 +12,10 @@ import excepciones.PrecioNoValidoException;
  *
  */
 public class Rol extends Juego {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	GeneroRol genero;
 	MaterialRol material;
 	double edicion;
@@ -26,7 +30,7 @@ public class Rol extends Juego {
 		setEdicion(edicion);
 	}
 
-	GeneroRol getGenero() {
+	public GeneroRol getGenero() {
 		return genero;
 	}
 
@@ -34,7 +38,7 @@ public class Rol extends Juego {
 		this.genero = genero;
 	}
 
-	MaterialRol getMaterial() {
+	public MaterialRol getMaterial() {
 		return material;
 	}
 
@@ -42,7 +46,7 @@ public class Rol extends Juego {
 		this.material = material;
 	}
 
-	double getEdicion() {
+	public double getEdicion() {
 		return edicion;
 	}
 
