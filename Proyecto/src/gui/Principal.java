@@ -278,23 +278,6 @@ public class Principal {
 
 		});
 		mnOfertas.add(mntmTodasOfertas);
-
-		/// ME INTERESA ESTA OPCION O ES REDUNDANTE??
-		JMenuItem mntmCategoriasOfertas = new JMenuItem("Ofertas por Categoria");
-		mntmCategoriasOfertas.setToolTipText("Comprueba las ofertas por categoria");
-		mntmCategoriasOfertas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-		mntmCategoriasOfertas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (stock.isEmpty()) {
-					msjEmptyStock();
-				} else {
-					// DialogOpcionesMostrar mostrarOfertas =new
-					// DialogOpcionesMostrar();
-					// mostrarOfertas.setVisible(true);
-				}
-			}
-		});
-		mnOfertas.add(mntmCategoriasOfertas);
 	}
 
 	/**
@@ -347,6 +330,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				PanelAnadir anadir = new PanelAnadir(stock.listIterator());
 				anadir.setVisible(true);
+				anadir.cleanRightPanel();
 			}
 		});
 		mnGestinArticulos.add(mntmAadirNuevo);
@@ -370,6 +354,15 @@ public class Principal {
 				}
 			}
 		});
+		
+		JMenuItem mntmMostrar_1 = new JMenuItem("Mostrar");
+		mntmMostrar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PanelMostrar mostrar = new PanelMostrar(stock.listIterator());
+				mostrar.setVisible(true);
+			}
+		});
+		mnGestinArticulos.add(mntmMostrar_1);
 		mnGestinArticulos.add(mntmModificar);
 		mnGestinArticulos.add(mntmEliminar);
 

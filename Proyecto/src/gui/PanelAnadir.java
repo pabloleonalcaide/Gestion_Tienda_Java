@@ -45,6 +45,30 @@ public class PanelAnadir extends PanelPadre {
 		rdbtnCartas.setSelected(true);
 		panelButtons.setVisible(false);
 		comboBoxEstado.setEnabled(true);
+		textAutor.setEnabled(true);
+		textCartas.setEnabled(true);
+		textDimensiones.setEnabled(true);
+		textEdad.setEnabled(true);
+		textEdicion.setEnabled(true);
+		textFieldDuracion.setEnabled(true);
+		textJugadores.setEnabled(true);
+		textNumElementos.setEnabled(true);
+		textPaginas.setEnabled(true);
+		textPiezas.setEnabled(true);
+		textTematica.setEnabled(true);
+		comboBox_Genero.setEnabled(true);
+		comboBox_Idioma.setEnabled(true);
+		comboBoxCategoriaLibro.setEnabled(true);
+		comboBoxDificultad.setEnabled(true);
+		comboBoxMaterialRol.setEnabled(true);
+		spinnerPeso.setEnabled(true);
+		spinnerEntrada.setEnabled(true);
+		spinnerPublicacion.setEnabled(true);
+		chckbxColeccion.setEnabled(true);
+		checkColeccion.setEnabled(true);
+		chbxColeccionJuego.setEnabled(true);
+		checkDesmontable.setEnabled(true);
+		
 		btnALaCesta_anadir.setText("A\u00f1adir");
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,7 +116,7 @@ public class PanelAnadir extends PanelPadre {
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
 							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
 							Integer.parseInt(textEdad.getText()), Integer.parseInt(textCartas.getText()),
-							(DificultadCartas) comboBoxDificultad.getSelectedItem(), chkbxColeccion.isSelected()),
+							(DificultadCartas) comboBoxDificultad.getSelectedItem(), checkColeccion.isSelected()),
 							Integer.parseInt(textStock.getText()));
 
 				} else if (rdbtnRol.isSelected()) { // Si se ha marcado el boton
@@ -113,7 +137,7 @@ public class PanelAnadir extends PanelPadre {
 							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
 							Integer.parseInt(textEdad.getText()), Integer.parseInt(textPiezas.getText()),
 							Double.parseDouble(textDimensiones.getText()), Integer.parseInt(textJugadores.getText()),
-							chkbxColeccion.isSelected()), Integer.parseInt(textStock.getText()));
+							checkColeccion.isSelected()), Integer.parseInt(textStock.getText()));
 				}
 			}
 
@@ -127,7 +151,7 @@ public class PanelAnadir extends PanelPadre {
 				Principal.stock.addToStock(new Figura(textNombre.getText(), textDetalles.getText(),
 						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
 						LocalDate.now(), (double) (spinnerPeso.getValue()), textTematica.getText(),
-						chkbxColeccion.isSelected(), chckbxDesmontable.isSelected(), (int) (numElementos.getValue())),
+						checkColeccion.isSelected(), checkDesmontable.isSelected(), (int) (textNumElementos.getValue())),
 						Integer.parseInt(textStock.getText()));
 			}
 
@@ -143,7 +167,7 @@ public class PanelAnadir extends PanelPadre {
 						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
 						LocalDate.now(), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
 						textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
-						(CategoriaLibro) comboBox_Genero.getSelectedItem()), Integer.parseInt(textStock.getText()));
+						(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()), Integer.parseInt(textStock.getText()));
 				
 			}
 		});

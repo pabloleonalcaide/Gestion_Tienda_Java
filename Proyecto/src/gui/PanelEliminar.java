@@ -44,7 +44,7 @@ public class PanelEliminar extends PanelPadre {
 		btnSacar_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id = Integer.parseInt(textId.getText());
-				showMainPanel(new Libro(id));
+				show(id);
 				
 				switch (JOptionPane.showConfirmDialog(getContentPane(), "desea eliminar?", null,
 						JOptionPane.YES_NO_CANCEL_OPTION)) {
@@ -80,5 +80,20 @@ public class PanelEliminar extends PanelPadre {
 				}
 			}
 		});
+	}
+
+	protected void show(int id) {
+		
+		if (Principal.stock.getStock().get(id) instanceof Libro)
+			showArticle(Principal.stock.getStock().get(id));
+		else if (Principal.stock.getStock().get(id) instanceof Figura)
+			showArticle(Principal.stock.getStock().get(id));
+		else if (Principal.stock.getStock().get(id) instanceof Rol)
+			showArticle(Principal.stock.getStock().get(id));
+		else if (Principal.stock.getStock().get(id) instanceof Tablero)
+			showArticle(Principal.stock.getStock().get(id));
+		else if (Principal.stock.getStock().get(id) instanceof Cartas)
+			showArticle(Principal.stock.getStock().get(id));
+		
 	}
 }

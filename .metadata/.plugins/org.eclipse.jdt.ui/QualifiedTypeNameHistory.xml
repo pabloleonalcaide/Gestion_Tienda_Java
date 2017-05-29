@@ -11,8 +11,6 @@
 <fullyQualifiedTypeName name="javax.swing.SwingConstants"/>
 <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
-<fullyQualifiedTypeName name="jerarquia.Cartas"/>
-<fullyQualifiedTypeName name="jerarquia.Rol"/>
 <fullyQualifiedTypeName name="java.util.ListIterator"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
@@ -23,4 +21,6 @@
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="excepciones.PesoNoValidoException"/>
+<fullyQualifiedTypeName name="jerarquia.Rol"/>
+<fullyQualifiedTypeName name="jerarquia.Cartas"/>
 </qualifiedTypeNameHistroy>

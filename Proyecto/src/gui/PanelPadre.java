@@ -77,6 +77,8 @@ public class PanelPadre extends JFrame {
 			}
 
 		});
+		comboBoxTipoArticulo.setModel(new DefaultComboBoxModel(new String[] {"Libro", "Figura", "Juego"}));
+		comboBoxTipoArticulo.setSelectedIndex(0);
 
 		// combobox tipo de articulo
 		comboBoxTipoArticulo.addItemListener(new ItemListener() {
@@ -89,8 +91,6 @@ public class PanelPadre extends JFrame {
 		});
 		comboBoxTipoArticulo.setBounds(279, 471, 139, 25);
 		getContentPane().add(comboBoxTipoArticulo);
-		comboBoxTipoArticulo.setModel(new DefaultComboBoxModel(new String[] { "Libro", "Figura", "Juego" }));
-		comboBoxTipoArticulo.setSelectedIndex(1);
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -170,10 +170,10 @@ public class PanelPadre extends JFrame {
 		buttonGroup.add(btnSiguiente);
 		btnSiguiente.setBounds(566, 471, 117, 25);
 		getContentPane().add(btnSiguiente);
-		chckbxEnLaCesta = new JCheckBox("En la cesta");
-		chckbxEnLaCesta.setEnabled(false);
-		chckbxEnLaCesta.setBounds(166, 440, 124, 23);
-		getContentPane().add(chckbxEnLaCesta);
+		checkEnLaCesta = new JCheckBox("En la cesta");
+		checkEnLaCesta.setEnabled(false);
+		checkEnLaCesta.setBounds(166, 440, 124, 23);
+		getContentPane().add(checkEnLaCesta);
 	}
 
 	/**
@@ -193,24 +193,27 @@ public class PanelPadre extends JFrame {
 			JLabel lblTematica = new JLabel("Tematica");
 			panelFigura.add(lblTematica);
 			textTematica = new JTextField();
+			textTematica.setEnabled(false);
 			panelFigura.add(textTematica);
 			textTematica.setColumns(10);
 			JLabel label = new JLabel("");
 			panelFigura.add(label);
-			chkbxColeccion = new JCheckBox("Coleccion");
-			chkbxColeccion.setEnabled(true);
-			chkbxColeccion.setSelected(false);
-			panelFigura.add(chkbxColeccion);
+			checkColeccion = new JCheckBox("Coleccion");
+			checkColeccion.setEnabled(false);
+			checkColeccion.setSelected(false);
+			panelFigura.add(checkColeccion);
 			JLabel lblDesmontable = new JLabel("Desmontable");
 			panelFigura.add(lblDesmontable);
-			chckbxDesmontable = new JCheckBox("yes/no");
-			panelFigura.add(chckbxDesmontable);
+			checkDesmontable = new JCheckBox("yes/no");
+			checkDesmontable.setEnabled(false);
+			panelFigura.add(checkDesmontable);
 			JLabel lblNumElementos = new JLabel("Num Elementos");
 			panelFigura.add(lblNumElementos);
 
-			numElementos = new JSpinner();
-			numElementos.setModel(new SpinnerNumberModel(new Integer(113), null, null, new Integer(1)));
-			panelFigura.add(numElementos);
+			textNumElementos = new JSpinner();
+			textNumElementos.setEnabled(false);
+			textNumElementos.setModel(new SpinnerNumberModel(new Integer(113), null, null, new Integer(1)));
+			panelFigura.add(textNumElementos);
 		}
 	}
 
@@ -228,6 +231,7 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblDuracionJuego);
 
 			textFieldDuracion = new JTextField();
+			textFieldDuracion.setEnabled(false);
 			panelJuego.add(textFieldDuracion);
 			textFieldDuracion.setText("");
 			textFieldDuracion.setColumns(10);
@@ -236,6 +240,7 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblEdad);
 
 			textEdad = new JTextField();
+			textEdad.setEnabled(false);
 			panelJuego.add(textEdad);
 			textEdad.setColumns(10);
 
@@ -243,6 +248,7 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblPiezas);
 
 			textPiezas = new JTextField();
+			textPiezas.setEnabled(false);
 			panelJuego.add(textPiezas);
 			textPiezas.setColumns(10);
 
@@ -250,6 +256,7 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblDimensiones);
 
 			textDimensiones = new JTextField();
+			textDimensiones.setEnabled(false);
 			textDimensiones.setText("");
 			panelJuego.add(textDimensiones);
 			textDimensiones.setColumns(10);
@@ -258,6 +265,7 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblJugadores);
 
 			textJugadores = new JTextField();
+			textJugadores.setEnabled(false);
 			textJugadores.setText("");
 			panelJuego.add(textJugadores);
 			textJugadores.setColumns(10);
@@ -266,12 +274,20 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblColeccionJuego);
 			
 			chbxColeccionJuego = new JCheckBox("Coleccion");
+			chbxColeccionJuego.setEnabled(false);
 			panelJuego.add(chbxColeccionJuego);
+			lblGenero = new JLabel("Genero");
+			panelJuego.add(lblGenero);
+			comboBox_Genero = new JComboBox();
+			comboBox_Genero.setEnabled(false);
+			panelJuego.add(comboBox_Genero);
+			comboBox_Genero.setModel(new DefaultComboBoxModel(GeneroRol.values()));
 
 			lblCartas = new JLabel("Cartas");
 			panelJuego.add(lblCartas);
 
 			textCartas = new JTextField();
+			textCartas.setEnabled(false);
 			panelJuego.add(textCartas);
 			textCartas.setColumns(10);
 
@@ -279,20 +295,15 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblDificultad);
 
 			comboBoxDificultad = new JComboBox();
+			comboBoxDificultad.setEnabled(false);
 			comboBoxDificultad.setModel(new DefaultComboBoxModel(DificultadCartas.values()));
 			panelJuego.add(comboBoxDificultad);
-
-			lblGeneroRol = new JLabel("Genero");
-			panelJuego.add(lblGeneroRol);
-
-			textGenero = new JTextField();
-			panelJuego.add(textGenero);
-			textGenero.setColumns(10);
 
 			lblMaterial = new JLabel("Material");
 			panelJuego.add(lblMaterial);
 
 			comboBoxMaterialRol = new JComboBox();
+			comboBoxMaterialRol.setEnabled(false);
 			comboBoxMaterialRol.setModel(new DefaultComboBoxModel(MaterialRol.values()));
 			panelJuego.add(comboBoxMaterialRol);
 
@@ -300,6 +311,7 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(lblEdicion);
 
 			textEdicion = new JTextField();
+			textEdicion.setEnabled(false);
 			panelJuego.add(textEdicion);
 			textEdicion.setColumns(10);
 		}
@@ -317,25 +329,23 @@ public class PanelPadre extends JFrame {
 			lblPaginas = new JLabel("Paginas");
 			panelLibro.add(lblPaginas);
 			textPaginas = new JTextField();
+			textPaginas.setEnabled(false);
 			panelLibro.add(textPaginas);
 			textPaginas.setColumns(10);
 			lblPublicacion = new JLabel("Publicacion");
 			panelLibro.add(lblPublicacion);
 			spmodel = new SpinnerDateModel();
 			spinnerPublicacion = new JSpinner(spmodel);
+			spinnerPublicacion.setEnabled(false);
 			JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinnerPublicacion, "dd-MM-yyyy");
 			spinnerPublicacion.setEditor(dateEditor);
 			panelLibro.add(spinnerPublicacion);
 			lblAutor = new JLabel("Autor");
 			panelLibro.add(lblAutor);
 			textAutor = new JTextField();
+			textAutor.setEnabled(false);
 			panelLibro.add(textAutor);
 			textAutor.setColumns(10);
-			lblGenero = new JLabel("Genero");
-			panelLibro.add(lblGenero);
-			comboBox_Genero = new JComboBox();
-			comboBox_Genero.setModel(new DefaultComboBoxModel(CategoriaLibro.values()));
-			panelLibro.add(comboBox_Genero);
 			textColeccion = new JTextField();
 			textColeccion.setVisible(false);
 			textColeccion.setEnabled(false);
@@ -343,17 +353,21 @@ public class PanelPadre extends JFrame {
 			textColeccion.setEditable(false);
 			textColeccion.setColumns(10);
 			chckbxColeccion = new JCheckBox("Coleccion");
+			chckbxColeccion.setEnabled(false);
 			panelLibro.add(chckbxColeccion);
 			lblIdioma = new JLabel("Idioma");
 			panelLibro.add(lblIdioma);
 			comboBox_Idioma = new JComboBox();
+			comboBox_Idioma.setEnabled(false);
 			comboBox_Idioma.setModel(new DefaultComboBoxModel(IdiomaLibro.values()));
 			panelLibro.add(comboBox_Idioma);
 			lblTipo = new JLabel("Categoria");
 			panelLibro.add(lblTipo);
-			textTipo = new JTextField();
-			panelLibro.add(textTipo);
-			textTipo.setColumns(10);
+			
+			comboBoxCategoriaLibro = new JComboBox();
+			comboBoxCategoriaLibro.setEnabled(false);
+			comboBoxCategoriaLibro.setModel(new DefaultComboBoxModel(CategoriaLibro.values()));
+			panelLibro.add(comboBoxCategoriaLibro);
 			labelEspaciador = new JLabel("");
 			panelLibro.add(labelEspaciador);
 		}
@@ -445,7 +459,7 @@ public class PanelPadre extends JFrame {
 	protected void retroceder() {
 		if (it.hasPrevious())
 			showArticle(it.previous());
-			articuloMostrado = it.previous();
+			
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
 		} else {
@@ -466,7 +480,6 @@ public class PanelPadre extends JFrame {
 	protected void avanzar() {
 		if (it.hasNext())
 			showArticle(it.next());
-			articuloMostrado = it.next();
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
 		} else {
@@ -516,9 +529,9 @@ public class PanelPadre extends JFrame {
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
 			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFechaPublicacion());
 			textAutor.setText(((Libro) (articulo)).getAutor());
-			chkbxColeccion.setSelected(((Libro) (articulo)).isColeccion());
+			checkColeccion.setSelected(((Libro) (articulo)).isColeccion());
 			comboBox_Idioma.setSelectedItem((((Libro) (articulo)).getIdioma()));
-			comboBox_Genero.setSelectedItem((((Libro) (articulo)).getCategoria()));
+			comboBoxCategoriaLibro.setSelectedItem((((Libro) (articulo)).getCategoria()));
 		} else if (articulo instanceof Juego) {
 			mostrarPanelJuego();
 			if (articulo instanceof Rol) {
@@ -532,9 +545,9 @@ public class PanelPadre extends JFrame {
 			panelButtons.setVisible(false);
 			mostrarPanelFiguras();
 			textTematica.setText(((Figura) (articulo)).getTematica());
-			chckbxDesmontable.setSelected(((Figura) (articulo)).isDesmontable());
-			chkbxColeccion.setSelected(((Figura) (articulo)).isColeccion());
-			numElementos.setValue((((Figura) (articulo)).getNum_elementos()));
+			checkDesmontable.setSelected(((Figura) (articulo)).isDesmontable());
+			checkColeccion.setSelected(((Figura) (articulo)).isColeccion());
+			textNumElementos.setValue((((Figura) (articulo)).getNum_elementos()));
 		}
 		setArticuloMostrado(articulo);
 	}
@@ -560,8 +573,13 @@ public class PanelPadre extends JFrame {
 	/**
 	 * Muestra el panel de Figuras y oculta el resto
 	 */
-	protected void mostrarPanelFiguras() {
+	protected void mostrarPanelFiguras() {  // --> Mejorar Esto, por algun motivo me oculta sus textField al añadir
 		panelFigura.setVisible(true);
+		textDimensiones.setVisible(true);
+		spinnerPeso.setVisible(true);
+		checkColeccion.setVisible(true);
+		textTematica.setVisible(true);
+		textNumElementos.setVisible(true);
 		panelLibro.setVisible(false);
 		panelJuego.setVisible(false);
 	}
@@ -582,18 +600,12 @@ public class PanelPadre extends JFrame {
 	 */
 	public void identifyArticle() {
 		if (comboBoxTipoArticulo.getSelectedItem() == "Libro") {
-			panelLibro.setVisible(true);
-			panelFigura.setVisible(false);
-			panelJuego.setVisible(false);
+			mostrarPanelLibro();
 		} else if (comboBoxTipoArticulo.getSelectedItem() == "Figura") {
-			panelLibro.setVisible(false);
-			panelFigura.setVisible(true);
-			panelJuego.setVisible(false);
+			mostrarPanelFiguras();
 		} else {
 			rdbtnCartas.setSelected(true);
-			panelLibro.setVisible(false);
-			panelFigura.setVisible(false);
-			panelJuego.setVisible(true);
+			mostrarPanelJuego();
 			enableCartas();
 		}
 	
@@ -655,14 +667,14 @@ public class PanelPadre extends JFrame {
 		textColeccion.setVisible(true);
 		textCartas.setVisible(false);
 		comboBoxDificultad.setVisible(false);
-		chkbxColeccion.setVisible(false);
+		checkColeccion.setVisible(false);
 		comboBox_Genero.setVisible(false);
 		comboBoxMaterialRol.setVisible(false);
 		chbxColeccionJuego.setVisible(false);
 		textEdicion.setVisible(false);
 		spinnerPeso.setVisible(true);
 		textTematica.setVisible(true);
-		numElementos.setVisible(true);
+		textNumElementos.setVisible(true);
 
 	}
 
@@ -676,11 +688,11 @@ public class PanelPadre extends JFrame {
 		textColeccion.setVisible(false);
 		spinnerPeso.setVisible(false);
 		textTematica.setVisible(false);
-		numElementos.setVisible(false);
+		textNumElementos.setVisible(false);
 		textCartas.setVisible(false);
 		comboBoxDificultad.setVisible(false);
 		chbxColeccionJuego.setVisible(false);
-		chkbxColeccion.setVisible(false);
+		checkColeccion.setVisible(false);
 		comboBox_Genero.setVisible(true);
 		comboBoxMaterialRol.setVisible(true);
 		textEdicion.setVisible(true);
@@ -696,15 +708,14 @@ public class PanelPadre extends JFrame {
 		textJugadores.setVisible(false);
 		textColeccion.setVisible(true);
 		textTematica.setVisible(false);
-		numElementos.setVisible(false);
+		textNumElementos.setVisible(false);
 		spinnerPeso.setVisible(false);
-		textGenero.setVisible(false);
 		comboBox_Genero.setVisible(false);
 		comboBoxMaterialRol.setVisible(false);
 		textEdicion.setVisible(false);
 		textCartas.setVisible(true);
 		comboBoxDificultad.setVisible(true);
-		chkbxColeccion.setVisible(true);
+		checkColeccion.setVisible(true);
 	}
 
 	// CAMPOS ---------------->
@@ -732,7 +743,6 @@ public class PanelPadre extends JFrame {
 	JTextField textPaginas;
 	JTextField textAutor;
 	JTextField textColeccion;
-	JTextField textTipo;
 	JLabel lblPaginas;
 	JLabel lblPublicacion;
 	JLabel lblAutor;
@@ -754,6 +764,8 @@ public class PanelPadre extends JFrame {
 	JComboBox comboBoxEstado;
 	JComboBox comboBox_Genero;
 	JComboBox comboBox_Idioma;
+	JComboBox comboBoxCategoriaLibro;
+
 	JLabel lblPiezas;
 	JTextField textPiezas;
 	JLabel lblDimensiones;
@@ -761,16 +773,14 @@ public class PanelPadre extends JFrame {
 	JTextField textJugadores;
 	JTextField textCartas;
 	JComboBox comboBoxDificultad;
-	JTextField textGenero;
 	JLabel lblEdicion;
 	JTextField textEdicion;
 	JSpinner spinnerEntrada;
 	JComboBox comboBoxTipoArticulo = new JComboBox();
-	JCheckBox chckbxEnLaCesta;
+	JCheckBox checkEnLaCesta;
 
 	JComboBox comboBoxMaterialRol;
 	JLabel lblMaterial;
-	JLabel lblGeneroRol;
 	JLabel lblDificultad;
 	JLabel lblCartas;
 	JLabel lblColeccionJuego;
@@ -780,15 +790,15 @@ public class PanelPadre extends JFrame {
 	JSpinner spinnerPublicacion;
 	JLabel lblPeso;
 	JTextField textTematica;
-	JCheckBox chkbxColeccion;
+	JCheckBox checkColeccion;
 	JSpinner spinnerPeso;
-	JCheckBox chckbxDesmontable;
+	JCheckBox checkDesmontable;
 	ButtonGroup bgJuegos = new ButtonGroup();
 	JRadioButton rdbtnCartas;
 	JRadioButton rdbtnTablero;
 	JRadioButton rdbtnRol;
 
-	JSpinner numElementos;
+	JSpinner textNumElementos;
 	JCheckBox chckbxColeccion;
 	JCheckBox chbxColeccionJuego;
 }

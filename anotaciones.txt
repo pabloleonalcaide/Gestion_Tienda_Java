@@ -3,21 +3,22 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	
 	**Problemas con los Spinner --> 
 				No me vuelve a volcar la fecha en un spinner
+				El spinner de FechaEntrada --> al mostrar ahora muestra now()
 
 
 	**Revisar contenido paneles secundarios mostrados -->
 				No me carga el de Juegos
 
-	**Corregir el spinner de FechaEntrada -->
-				al mostrar ahora muestra now()
-	**Quitar el jtext de Coleccion (añadir Cartas)
-
+	**Modificar -->
+			que me cargue el contenido del panel secundario
+			el panel libro no me coge categoria
+			el panel cartas no se muestra nada
+			el panel figura lo hace bien
+			el panel tablero no me coge nada
 	**Buscar y Eliminar -->
 				me peta cuando elimino el ultimo y trato de moverme, y no me actualiza los botones al eliminar
 
 	**Ids duplicados (cada vez que entro de nuevo, parte de 1)
-
-	** añadir modificar CONTINUAR CON EL MODIFICAR
 
 	** al eliminar --> filtrar con instanceof para ver el tipo de articulo y pasarle el new ***(id) del objeto correspondiente
 
@@ -25,16 +26,19 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 				peta cuando lo hago invisible, pero no al hacerlo visible  ¿what?
 
 Cosas que me están haciendo la puñeta: 
-	archivo a la izquierda
-	listar articulos tb desde parte empleado
-	salir con alt+F4 ?? 
+	
 	usar JOPtionPane yes_no_option al salir
+	
 	revisar el mostrar, que inhabilite los paneles secundarios
+	
 	corregir filechooser
+	
 	implementar método showBestFive() ((clase stock))
+	
 	cómo voy a guardar el catálogo en el txt icso facto?
-	opcion menu "mostrar ofertas por categoria"  --> ¿Me Interesa?
+		
 	Pattern de autor de libro (permitir espacios)
+	
 	Trabajar idea de Jaime --> Boton cobrar que calcule el total y genere algun
 				tipo de factura.
 

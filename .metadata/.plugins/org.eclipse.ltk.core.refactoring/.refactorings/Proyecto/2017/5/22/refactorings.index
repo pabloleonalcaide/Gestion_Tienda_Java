@@ -1,0 +1,6 @@
+1496054644630	Rename field 'numElementos'
+1496054670476	Rename field 'chckbxEnLaCesta'
+1496054683052	Rename field 'chkbxColeccion'
+1496054717080	Rename field 'chckbxDesmontable'
+1496054777347	Extract method 'habilitarCampos'
+1496055629364	Convert local variable 'comboBoxCategoriaLibro' to field

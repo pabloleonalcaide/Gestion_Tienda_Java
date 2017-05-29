@@ -225,7 +225,7 @@ public class Stock implements Serializable {
 	}
 	
 	public int indexOf(Articulo articulo) {
-		return indexOf(articulo);
+		return stock.indexOf(articulo);
 	}
 
 	/**

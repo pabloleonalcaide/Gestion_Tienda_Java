@@ -18,7 +18,7 @@ public class Libro extends Articulo {
 	private CategoriaLibro categoria;
 	private double variableDescuento;
 	// Patron para el nombre del autor
-	private Pattern patronAutor = Pattern.compile("^[A-Z][A-Za-z]+");
+	private Pattern patronAutor = Pattern.compile("^[A-Z][A-Za-z]+.[A-Za-z]+");
 
 	public Libro(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha, int paginas,
 			LocalDate fechaPublicacion, String autor, boolean coleccion, IdiomaLibro idioma, CategoriaLibro genero)

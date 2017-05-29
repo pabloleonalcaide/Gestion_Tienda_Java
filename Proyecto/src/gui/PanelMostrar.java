@@ -5,6 +5,7 @@ import java.util.ListIterator;
 import jerarquia.Articulo;
 
 /**
+ * Ventana que permite recorrer los articulos y mostrar sus caracteristicas
  * @author pablo
  *
  */
@@ -28,11 +29,10 @@ public class PanelMostrar extends PanelPadre {
 		textDimensiones.setEnabled(false);
 		textEdad.setEnabled(false);
 		textFieldDuracion.setEnabled(false);
-		textGenero.setEnabled(false);
-		textTipo.setEnabled(false);
+		
 		textPiezas.setEnabled(false);
 		textJugadores.setEnabled(false);
-		numElementos.setEnabled(false);
+		textNumElementos.setEnabled(false);
 
 		
 		btnALaCesta_anadir.setVisible(false);
@@ -43,6 +43,8 @@ public class PanelMostrar extends PanelPadre {
 		spinnerPeso.setEnabled(false);
 		spinnerPublicacion.setEnabled(false);
 		
+		comboBox_Genero.setEnabled(false);
+		comboBoxCategoriaLibro.setEnabled(false);
 		comboBoxEstado.setEnabled(false);
 		comboBox_Idioma.setEnabled(false);
 		comboBox_Genero.setEnabled(false);
@@ -50,9 +52,9 @@ public class PanelMostrar extends PanelPadre {
 		comboBoxDificultad.setEnabled(false);
 		comboBoxMaterialRol.setEnabled(false);
 		
-		chckbxEnLaCesta.setVisible(false);
-		chkbxColeccion.setEnabled(false);
-		chckbxDesmontable.setEnabled(false);
+		checkEnLaCesta.setVisible(false);
+		checkColeccion.setEnabled(false);
+		checkDesmontable.setEnabled(false);
 		
 		avanzar();
 	}
