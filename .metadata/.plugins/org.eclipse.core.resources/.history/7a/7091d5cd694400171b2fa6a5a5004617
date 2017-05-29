@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
  * @author pablo
  *
  */
-//DEBERIA CREAR OTRA CLASE FICHERO PARA GUARDAR FICHEROS TXT O EN ESTA MISMA?
 public class Fichero implements Serializable {
 
 	private static final long serialVersionUID = 1L;
