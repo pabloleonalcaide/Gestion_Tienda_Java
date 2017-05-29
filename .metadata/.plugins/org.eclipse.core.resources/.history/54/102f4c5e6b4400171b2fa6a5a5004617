@@ -68,7 +68,7 @@ public class PanelAnadir extends PanelPadre {
 		checkColeccion.setEnabled(true);
 		chbxColeccionJuego.setEnabled(true);
 		checkDesmontable.setEnabled(true);
-
+		
 		btnALaCesta_anadir.setText("A\u00f1adir");
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,7 +120,7 @@ public class PanelAnadir extends PanelPadre {
 
 				} else if (rdbtnRol.isSelected()) { // Si se ha marcado el boton
 													// de Rol
-					enableRol();
+					enableRol();				
 					Principal.stock.addToStock(new Rol(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
 							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
@@ -147,12 +147,10 @@ public class PanelAnadir extends PanelPadre {
 			 * @tInthrows PrecioNoValidoException
 			 */
 			protected void addToy() throws PesoNoValidoException, PrecioNoValidoException {
-				Principal.stock.addToStock(
-						new Figura(textNombre.getText(), textDetalles.getText(),
-								Double.parseDouble(textPrecio.getText()),
-								(EstadoArticulo) comboBoxEstado.getSelectedItem(), LocalDate.now(),
-								(double) (spinnerPeso.getValue()), textTematica.getText(), checkColeccion.isSelected(),
-								checkDesmontable.isSelected(), (int) (textNumElementos.getValue())),
+				Principal.stock.addToStock(new Figura(textNombre.getText(), textDetalles.getText(),
+						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+						LocalDate.now(), (double) (spinnerPeso.getValue()), textTematica.getText(),
+						checkColeccion.isSelected(), checkDesmontable.isSelected(), (int) (textNumElementos.getValue())),
 						Integer.parseInt(textStock.getText()));
 			}
 
@@ -168,9 +166,8 @@ public class PanelAnadir extends PanelPadre {
 						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
 						LocalDate.now(), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
 						textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
-						(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()),
-						Integer.parseInt(textStock.getText()));
-
+						(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()), Integer.parseInt(textStock.getText()));
+				
 			}
 		});
 

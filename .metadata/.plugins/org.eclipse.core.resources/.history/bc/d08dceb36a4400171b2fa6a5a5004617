@@ -28,6 +28,8 @@ public class Fichero implements Serializable {
 	}
 
 	/**
+	 * Metodo get
+	 * 
 	 * @return
 	 */
 	public static File getFichero() {

@@ -29,7 +29,6 @@ import jerarquia.Tablero;
  * 
  */
 public class Stock implements Serializable {
-	private static final long serialVersionUID = 1L;
 	private ArrayList<Articulo> stock = new ArrayList<Articulo>();
 	private boolean modificado = false;
 

@@ -37,7 +37,6 @@ public class PanelMostrar extends PanelPadre {
 		
 		btnALaCesta_anadir.setVisible(false);
 		btnSacar_borrar.setText("Eliminar");
-		btnSacar_borrar.setVisible(false);
 		btnAnterior.setEnabled(false);
 		
 		spinnerEntrada.setEnabled(false);

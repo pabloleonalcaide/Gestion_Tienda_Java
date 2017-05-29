@@ -21,6 +21,8 @@ public class Fichero implements Serializable {
 	public static File fichero = new File("SinTitulo");
 
 	/**
+	 * Metodo set
+	 * 
 	 * @param fichero
 	 */
 	public static void setFichero(String fichero) {
@@ -28,6 +30,8 @@ public class Fichero implements Serializable {
 	}
 
 	/**
+	 * Metodo get
+	 * 
 	 * @return
 	 */
 	public static File getFichero() {

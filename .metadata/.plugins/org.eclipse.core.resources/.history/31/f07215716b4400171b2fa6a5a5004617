@@ -761,7 +761,7 @@ public class PanelPadre extends JFrame {
 	JPanel panelFigura;
 	JPanel panelButtons;
 
-	JComboBox<EstadoArticulo> comboBoxEstado;
+	JComboBox comboBoxEstado;
 	JComboBox comboBox_Genero;
 	JComboBox comboBox_Idioma;
 	JComboBox comboBoxCategoriaLibro;
