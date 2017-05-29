@@ -25,9 +25,15 @@ import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JPanel;
+import java.awt.Cursor;
+import javax.swing.JLabel;
+import java.awt.Rectangle;
 
 //CORREGIR OPCIONES FILECHOOSER
 public class Principal {
@@ -38,6 +44,8 @@ public class Principal {
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
 	protected JFileChooser fileChooser = new JFileChooser();
+	private JLabel lblfondo;
+	private ImageIcon icono;
 	static {
 		Fichero.fichero = new File("stockUltimo.obj");
 		try {
@@ -64,6 +72,7 @@ public class Principal {
 
 	private void initialize() {
 		framePrincipal = new JFrame();
+		framePrincipal.setResizable(false);
 		framePrincipal.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -78,10 +87,11 @@ public class Principal {
 		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		framePrincipal.getContentPane().setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBackground(Color.LIGHT_GRAY);
-		framePrincipal.setBounds(400, 400, 500, 500);
+		framePrincipal.setBounds(400, 400, 500, 281);
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
-
+		icono = new ImageIcon("image1.jpg");
+		
 		cargarMenuUsuario();
 
 		cargarMenuOfertas();
@@ -210,6 +220,11 @@ public class Principal {
 		btnWeb = new JButton("Vista web");
 		btnWeb.setBounds(166, 219, 120, 19);
 		framePrincipal.getContentPane().add(btnWeb);
+		
+		lblfondo = new JLabel("");
+		lblfondo.setBounds(1, 1, 800, 250);
+		lblfondo.setIcon(icono);
+		framePrincipal.getContentPane().add(lblfondo);
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				menuUsuario.setVisible(true);

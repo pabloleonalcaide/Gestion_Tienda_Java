@@ -23,4 +23,5 @@
 <fullyQualifiedTypeName name="excepciones.PesoNoValidoException"/>
 <fullyQualifiedTypeName name="jerarquia.Rol"/>
 <fullyQualifiedTypeName name="jerarquia.Cartas"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 </qualifiedTypeNameHistroy>

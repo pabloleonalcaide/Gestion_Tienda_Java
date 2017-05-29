@@ -4,3 +4,5 @@
 1496054717080	Rename field 'chckbxDesmontable'
 1496054777347	Extract method 'habilitarCampos'
 1496055629364	Convert local variable 'comboBoxCategoriaLibro' to field
+1496083192019	Rename local variable 'lblNewLabel'
+1496083210765	Convert local variable 'lblfondo' to field
