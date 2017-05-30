@@ -3,12 +3,9 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	
 	**Problemas con los Spinner --> 
 				No me vuelve a volcar la fecha en un spinner
-
-	**Introducir Articulo -->
-				O cargar panel secundario o anular combobox tipo
-			
+		
 	**Buscar y Eliminar -->
-				botones
+				 habilitar / deshabilitar botones
 
 	**Ids duplicados (cada vez que entro de nuevo, parte de 1)
 
@@ -26,7 +23,6 @@ Cosas que me están haciendo la puñeta:
 	
 	implementar método showBestFive() ((clase stock))  --> ¿LO METO?
 		
-	Pattern de autor de libro (permitir espacios)
 	
 	Trabajar idea de Jaime --> Boton cobrar que calcule el total y genere algun
 				tipo de factura.

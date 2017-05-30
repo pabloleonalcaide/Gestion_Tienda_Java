@@ -32,7 +32,7 @@ public class Rol extends Juego {
 
 	public Rol(int id) {
 		super(id);
-		//setId(id);
+		setId(id);
 	}
 
 	public GeneroRol getGenero() {

@@ -25,7 +25,7 @@ public class Cartas extends Juego {
 	}
 	public Cartas(int id) {
 		super(id);
-//		setId(id);
+		setId(id);
 	}
 	public int getNum_cartas() {
 		return num_cartas;

@@ -27,7 +27,7 @@ public abstract class Articulo implements Serializable{
 	private int cantidad;
 	
 	public Articulo(String nombre,String descripcion, double precio,EstadoArticulo estado, LocalDate fecha) throws PrecioNoValidoException{
-		setId(id);
+		setId();
 		this.seleccionado=false; //no puede incluirse directamente seleccionado para la cesta de compra
 		this.precioTotal=calcularTotal();
 		setNombre(nombre);
@@ -38,16 +38,16 @@ public abstract class Articulo implements Serializable{
 		
 	}
 	public Articulo (int id){
-		this.id=id;
+		setId(id);
 	}
 	
 	public Articulo(String nombre) {
 		setNombre(nombre);
 	}
-//	protected void setId(int id) {
-//		this.id=id;
-//		
-//	}
+	protected void setId(int id) {
+		this.id=id;
+		
+	}
 	/**
 	 * Calcula el precio al que será vendido el producto.
 	 * @return precio total tras aplicar descuentos
@@ -58,7 +58,7 @@ public abstract class Articulo implements Serializable{
 	/**
 	 * Establece el id unico del articulo
 	 */
-	private void setId(int id) {
+	private void setId() {
 		this.id=codigo++;
 	}
 	/**
