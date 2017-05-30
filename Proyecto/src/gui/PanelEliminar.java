@@ -8,10 +8,15 @@ import javax.swing.JOptionPane;
 
 import excepciones.ImposibleEliminarException;
 import jerarquia.*;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-
+/**
+ * Elimina los articulos por su codigo identificativo
+ * @author pablo
+ *
+ */
 public class PanelEliminar extends PanelPadre {
+	
+	private static final long serialVersionUID = 1L;
+
 	public PanelEliminar(ListIterator<Articulo> it) {
 		super(it);
 		textNombre.setEditable(false);
@@ -44,18 +49,22 @@ public class PanelEliminar extends PanelPadre {
 		btnSacar_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id = Integer.parseInt(textId.getText());
+				
 				show(id);
 				
 				switch (JOptionPane.showConfirmDialog(getContentPane(), "desea eliminar?", null,
 						JOptionPane.YES_NO_CANCEL_OPTION)) {
 				case JOptionPane.YES_OPTION:
 					removeArticle(id);
+					emptyPanels();
 					Principal.stock.setModificado(true);
 					break;
 				case JOptionPane.NO_OPTION:
 				case JOptionPane.CANCEL_OPTION:
 					break;
 				}
+				if(Principal.stock.isEmpty())
+					setVisible(false);
 			}
 
 			/**
@@ -81,19 +90,22 @@ public class PanelEliminar extends PanelPadre {
 			}
 		});
 	}
-
+	/**
+	 * Muestra el articulo antes de eliminarlo
+	 * @param id
+	 */
 	protected void show(int id) {
 		
-		if (Principal.stock.getStock().get(id) instanceof Libro)
-			showArticle(Principal.stock.getStock().get(id));
-		else if (Principal.stock.getStock().get(id) instanceof Figura)
-			showArticle(Principal.stock.getStock().get(id));
-		else if (Principal.stock.getStock().get(id) instanceof Rol)
-			showArticle(Principal.stock.getStock().get(id));
-		else if (Principal.stock.getStock().get(id) instanceof Tablero)
-			showArticle(Principal.stock.getStock().get(id));
-		else if (Principal.stock.getStock().get(id) instanceof Cartas)
-			showArticle(Principal.stock.getStock().get(id));
+		if (Principal.stock.devuelvePorCódigo(id) instanceof Libro)
+			showArticle(Principal.stock.getLibro(id));
+		else if (Principal.stock.devuelvePorCódigo(id) instanceof Figura)
+			showArticle(Principal.stock.getFigura(id));
+		else if (Principal.stock.devuelvePorCódigo(id) instanceof Rol)
+			showArticle(Principal.stock.getRol(id));
+		else if (Principal.stock.devuelvePorCódigo(id) instanceof Tablero)
+			showArticle(Principal.stock.getTablero(id));
+		else if (Principal.stock.devuelvePorCódigo(id) instanceof Cartas)
+			showArticle(Principal.stock.getCartas(id));
 		
 	}
 }

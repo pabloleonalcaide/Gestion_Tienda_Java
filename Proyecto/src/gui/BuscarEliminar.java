@@ -19,22 +19,36 @@ public class BuscarEliminar extends PanelMostrar {
 		btnSacar_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				it.remove();
-				if(it.hasNext()) avanzar();
-				else if(it.hasPrevious()) retroceder();
-				else return;
+				if (!it.hasPrevious() && !it.hasNext())
+					setVisible(false);
+				
+				else if (!it.hasNext())
+					showPrevious();
+				
+				else
+					showNext();
+				
 			}
 
 		});
 	}
-	@Override
-	public void avanzar(){
-		super.avanzar();
-		cleanRightPanel();
-	}
-	@Override
-	public void retroceder(){
-		super.avanzar();
-		cleanRightPanel();
-	}
+//	/**
+//	 * Además de moverse en el stock, despeja el panel derecho
+//	 * @see PanelPadre.avanzar()
+//	 */
+//	@Override
+//	public void avanzar(){
+//		super.avanzar();
+//		cleanRightPanel();
+//	}
+//	/**
+//	 * Además de moverse en el stock, despeja el panel derecho
+//	 * @see PanelPadre.retroceder()
+//	 */
+//	@Override
+//	public void retroceder(){
+//		super.avanzar();
+//		cleanRightPanel();
+//	}
 
 }

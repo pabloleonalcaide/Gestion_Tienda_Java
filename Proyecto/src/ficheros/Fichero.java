@@ -24,6 +24,8 @@ public class Fichero implements Serializable {
 	 * @param fichero
 	 */
 	public static void setFichero(String fichero) {
+		if (fichero==null)
+			fichero="SinTitulo";
 		Fichero.fichero = new File(fichero);
 	}
 

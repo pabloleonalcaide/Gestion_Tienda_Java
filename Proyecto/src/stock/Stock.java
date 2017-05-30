@@ -1,10 +1,14 @@
 package stock;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
+
+import javax.swing.JOptionPane;
 
 import enumeraciones.*;
 import excepciones.ArticuloNoExisteException;
@@ -159,9 +163,9 @@ public class Stock implements Serializable {
 	/**
 	 * Extrae un Libro a traves de su id
 	 */
-	public Articulo getLibro(int id) {
+	public Libro getLibro(int id) {
 		int indice = stock.indexOf((Articulo) new Libro(id));
-		return stock.get(indice);
+		return (Libro) stock.get(indice);
 	}
 
 	/**
@@ -170,9 +174,9 @@ public class Stock implements Serializable {
 	 * @param id
 	 * @return
 	 */
-	public Articulo getTablero(int id) {
+	public Tablero getTablero(int id) {
 		int indice = stock.indexOf((Articulo) new Tablero(id));
-		return stock.get(indice);
+		return (Tablero) stock.get(indice);
 	}
 
 	/**
@@ -182,7 +186,7 @@ public class Stock implements Serializable {
 	 * @return
 	 */
 	public Articulo getCartas(int id) {
-		int indice = stock.indexOf((Articulo) new Libro(id));
+		int indice = stock.indexOf((Articulo) new Cartas(id));
 		return stock.get(indice);
 	}
 
@@ -192,9 +196,9 @@ public class Stock implements Serializable {
 	 * @param id
 	 * @return
 	 */
-	public Articulo getRol(int id) {
-		int indice = stock.indexOf((Articulo) new Libro(id));
-		return stock.get(indice);
+	public Rol getRol(int id) {
+		int indice = stock.indexOf((Articulo) new Rol(id));
+		return (Rol) stock.get(indice);
 	}
 
 	/**
@@ -203,9 +207,9 @@ public class Stock implements Serializable {
 	 * @param id
 	 * @return
 	 */
-	public Articulo getFigura(int id) {
+	public Figura getFigura(int id) {
 		int indice = stock.indexOf((Articulo) new Figura(id));
-		return stock.get(indice);
+		return (Figura) stock.get(indice);
 	}
 
 	/**
@@ -348,13 +352,18 @@ public class Stock implements Serializable {
 	 * Devuelve el catálogo de artículos (nombre, tipo de articulo y precio)
 	 * 
 	 * @return
+	 * @throws IOException 
 	 */
-	public String getCatalogo() {
+	public String getCatalogo(){
 		StringBuilder catalogo = new StringBuilder();
+		catalogo.append("----CATÁLOGO DE "+LocalDate.now()+"----\n");
 		for (Articulo art : stock) {
-			catalogo.append("\nArticulo: " + art.getNombre() + ", Categoria: " + art.getClass().getName());
+			catalogo.append("\nArticulo: " + art.getNombre() + ", Categoria: " + art.getClass()
+					+", Precio: "+art.calcularTotal());
+			
 		}
-		return catalogo.toString();
+		return catalogo.toString();		
+	
 	}
 
 	/**

@@ -23,6 +23,10 @@ public class Cartas extends Juego {
 		setDificultad(dif);
 		setColeccion(coleccion);
 	}
+	public Cartas(int id) {
+		super(id);
+		setId(id);
+	}
 	public int getNum_cartas() {
 		return num_cartas;
 	}

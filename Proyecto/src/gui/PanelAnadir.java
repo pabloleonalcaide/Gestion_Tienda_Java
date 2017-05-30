@@ -35,6 +35,7 @@ public class PanelAnadir extends PanelPadre {
 	public PanelAnadir(ListIterator<Articulo> it) {
 		super(it);
 		setTitle("Stock: Introducir articulo");
+		comboBoxTipoArticulo.setSelectedItem(null);
 		textNombre.setEnabled(true);
 		textDetalles.setEnabled(true);
 		textPrecio.setEnabled(true);
@@ -113,7 +114,7 @@ public class PanelAnadir extends PanelPadre {
 					enableCartas();
 					Principal.stock.addToStock(new Cartas(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
+							readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
 							Integer.parseInt(textEdad.getText()), Integer.parseInt(textCartas.getText()),
 							(DificultadCartas) comboBoxDificultad.getSelectedItem(), checkColeccion.isSelected()),
 							Integer.parseInt(textStock.getText()));
@@ -123,7 +124,7 @@ public class PanelAnadir extends PanelPadre {
 					enableRol();
 					Principal.stock.addToStock(new Rol(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
+							readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
 							Integer.parseInt(textEdad.getText()), (GeneroRol) comboBox_Genero.getSelectedItem(),
 							(MaterialRol) comboBoxMaterialRol.getSelectedItem(),
 							Double.parseDouble(textEdicion.getText())), Integer.parseInt(textStock.getText()));
@@ -133,7 +134,7 @@ public class PanelAnadir extends PanelPadre {
 					enableTablero();
 					Principal.stock.addToStock(new Tablero(textNombre.getText(), textDetalles.getText(),
 							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-							LocalDate.now(), Double.parseDouble(textFieldDuracion.getText()),
+							readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
 							Integer.parseInt(textEdad.getText()), Integer.parseInt(textPiezas.getText()),
 							Double.parseDouble(textDimensiones.getText()), Integer.parseInt(textJugadores.getText()),
 							checkColeccion.isSelected()), Integer.parseInt(textStock.getText()));
@@ -150,7 +151,7 @@ public class PanelAnadir extends PanelPadre {
 				Principal.stock.addToStock(
 						new Figura(textNombre.getText(), textDetalles.getText(),
 								Double.parseDouble(textPrecio.getText()),
-								(EstadoArticulo) comboBoxEstado.getSelectedItem(), LocalDate.now(),
+								(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
 								(double) (spinnerPeso.getValue()), textTematica.getText(), checkColeccion.isSelected(),
 								checkDesmontable.isSelected(), (int) (textNumElementos.getValue())),
 						Integer.parseInt(textStock.getText()));
@@ -166,7 +167,7 @@ public class PanelAnadir extends PanelPadre {
 			protected void addBook() throws NombreNoValidoException, PrecioNoValidoException, FechaNoValidaException {
 				Principal.stock.addToStock(new Libro(textNombre.getText(), textDetalles.getText(),
 						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-						LocalDate.now(), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
+						readDateSpinner(spinnerEntrada), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
 						textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
 						(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()),
 						Integer.parseInt(textStock.getText()));

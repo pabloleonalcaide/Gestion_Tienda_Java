@@ -24,7 +24,11 @@ import stock.Stock;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,8 +49,9 @@ public class Principal {
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
 	protected static JFileChooser fileChooser = new JFileChooser();
-	private JLabel lblfondo; //Para Fondo, prescindible
-	private ImageIcon icono;//Para Fondo, prescindible
+	private JLabel lblfondo; // Para Fondo, prescindible
+	private ImageIcon icono;// Para Fondo, prescindible
+	private JMenu mnArticulos_1;
 	static {
 		Fichero.fichero = new File("stockUltimo.obj");
 		try {
@@ -54,6 +59,7 @@ public class Principal {
 		} catch (ClassNotFoundException | IOException e) {
 			JOptionPane.showMessageDialog(framePrincipal, "no se ha cargado ningun stock", "Aviso",
 					JOptionPane.WARNING_MESSAGE);
+
 		}
 	}
 
@@ -91,8 +97,8 @@ public class Principal {
 		framePrincipal.setBounds(400, 400, 500, 281);
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
-		//icono = new ImageIcon("image1.jpg");
-		
+		// icono = new ImageIcon("image1.jpg");
+
 		cargarMenuUsuario();
 
 		cargarMenuOfertas();
@@ -122,11 +128,11 @@ public class Principal {
 	 * nombre, mostrar por categoria)
 	 */
 	protected void cargarMenuArticulo() {
-		JMenu mnArticulos = new JMenu("Articulos");
-		mnArticulos.setMnemonic('C');
-		mnArticulos.setBackground(Color.LIGHT_GRAY);
-		mnArticulos.setToolTipText("Go Shopping");
-		menuUsuario.add(mnArticulos);
+		mnArticulos_1 = new JMenu("Articulos");
+		mnArticulos_1.setMnemonic('C');
+		mnArticulos_1.setBackground(Color.LIGHT_GRAY);
+		mnArticulos_1.setToolTipText("Go Shopping");
+		menuUsuario.add(mnArticulos_1);
 
 		JMenuItem mntmMostrarPrecio = new JMenuItem("Ordenar por Precio");
 		mntmMostrarPrecio.setToolTipText("Ordenar por precio");
@@ -138,7 +144,7 @@ public class Principal {
 			}
 		});
 		mntmMostrarPrecio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
-		mnArticulos.add(mntmMostrarPrecio);
+		mnArticulos_1.add(mntmMostrarPrecio);
 
 		JMenuItem mntmMostrarNombre = new JMenuItem("Ordenar por Nombre");
 		mntmMostrarNombre.setToolTipText("Ordenar por Nombre");
@@ -153,9 +159,9 @@ public class Principal {
 			}
 		});
 		mntmMostrarNombre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-		mnArticulos.add(mntmMostrarNombre);
+		mnArticulos_1.add(mntmMostrarNombre);
 
-		crearMostrarCategorias(mnArticulos);
+		crearMostrarCategorias(mnArticulos_1);
 	}
 
 	/**
@@ -202,14 +208,6 @@ public class Principal {
 	 * Carga el menu de usuario Catalogo (descargar catalogo)
 	 */
 	protected void cargarMenuCatalogo() {
-		JMenu mnCatalogo = new JMenu("Catalogo");
-		mnCatalogo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Descarga el catalogo (ArrayList) en un documento txt
-				descargaCatalogo();
-			}
-		});
-		menuUsuario.add(mnCatalogo);
 	}
 
 	/**
@@ -219,7 +217,7 @@ public class Principal {
 		btnWeb = new JButton("Vista web");
 		btnWeb.setBounds(166, 219, 120, 19);
 		framePrincipal.getContentPane().add(btnWeb);
-		
+
 		lblfondo = new JLabel("");
 		lblfondo.setBounds(1, 1, 800, 250);
 		lblfondo.setIcon(icono);
@@ -365,7 +363,7 @@ public class Principal {
 				}
 			}
 		});
-		
+
 		JMenuItem mntmMostrar_1 = new JMenuItem("Mostrar");
 		mntmMostrar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
 		mntmMostrar_1.addActionListener(new ActionListener() {
@@ -386,13 +384,12 @@ public class Principal {
 		mntmBuscarYEliminar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK));
 		mntmBuscarYEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
+				if (!stock.isEmpty()) {
 					BuscarEliminar be = new BuscarEliminar(stock.listIterator());
 					be.setVisible(true);
 					be.btnAnterior.setEnabled(false);
-				} catch (Exception e) {
+				} else
 					msjEmptyStock();
-				}
 
 			}
 		});
@@ -402,9 +399,12 @@ public class Principal {
 		mntmActualizarExistencias.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		mntmActualizarExistencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showConfirmDialog(null, "Aumentaremos todas las existencias\nEstas seguro?", "Reponer",
-						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					stock.replenishAll();
+				if (!stock.isEmpty()) {
+					if (JOptionPane.showConfirmDialog(null, "Aumentaremos todas las existencias\nEstas seguro?",
+							"Reponer", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+						stock.replenishAll();
+					} else
+						msjEmptyStock();
 				}
 			}
 		});
@@ -417,6 +417,13 @@ public class Principal {
 	 * @param mnArticulos
 	 */
 	protected void crearMostrarCategorias(JMenu mnArticulos) {
+		JMenuItem mnCatalogo = new JMenuItem("Descargar Catalogo");
+		mnCatalogo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				descargaCatalogo();
+			}
+		});
+		mnArticulos_1.add(mnCatalogo);
 		JMenu mnMostrarPorCategoria = new JMenu("Mostrar por Categoria");
 		mnArticulos.add(mnMostrarPorCategoria);
 
@@ -521,29 +528,44 @@ public class Principal {
 		framePrincipal.getContentPane().add(menuUsuario);
 	}
 
-	// guarda el stock en un txt, pero solo los datos para clientes.
+	
+	/**
+	 * Guarda el catálogo en un documento
+	 */
 	protected void descargaCatalogo() {
-		stock.getCatalogo(); // pasarlo a un fichero
+		String sFichero = "catalogo.txt";
+		String mensaje = stock.getCatalogo();
+		try (FileWriter fichero = new FileWriter(sFichero)){
+			fichero.write(mensaje);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(framePrincipal, e.getMessage(), "Fallo al enviar",
+					JOptionPane.WARNING_MESSAGE);
+		}
+		
+		JOptionPane.showMessageDialog(framePrincipal,
+				"Descargado con Éxito");
 	}
 
 	/**
 	 * Abre un nuevo stock
 	 */
 	protected void openNew() {
+
 		if (stock.isModificado()) {
-			Object[] options = { "SI", "NO", "CANCELAR" };
+
 			int respuesta = JOptionPane.showOptionDialog(null, "Desea guardar los cambios?", "Hay Cambios sin Guardar",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+			String nombre = JOptionPane.showInputDialog("Introduce un nombre para este stock");
 			if (respuesta == JOptionPane.YES_OPTION) {
 				saveAs();
-				Fichero.setFichero("Stock: Nuevo");
+				Fichero.setFichero(nombre);
 				stock = new Stock();
-				framePrincipal.setTitle(Fichero.fichero.getName());
+				framePrincipal.setTitle(nombre);
 				stock.setModificado(false);
 			} else if (respuesta == 1) {
-				Fichero.setFichero("Stock: Nuevo");
+				Fichero.setFichero(nombre);
 				stock = new Stock();
-				framePrincipal.setTitle(Fichero.fichero.getName());
+				framePrincipal.setTitle(nombre);
 				stock.setModificado(false);
 			}
 		} else {
@@ -565,10 +587,9 @@ public class Principal {
 			fileChooser.setAcceptAllFileFilterUsed(false);
 			Fichero.checkFile(fileChooser.getSelectedFile());
 			if (Fichero.getFichero().exists()) {
-				Object[] options = { "Si", "No" };
 				int option = JOptionPane.showOptionDialog(null,
 						"El archivo indicado ya existe, ¿Desea Sobreescribirlo?", "Guardando",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 				if (option == JOptionPane.YES_OPTION) {
 					try {
 						Fichero.saveAs(stock, Fichero.getFichero());
@@ -646,17 +667,16 @@ public class Principal {
 	/**
 	 * Comprueba si hubo cambios y sale del programa
 	 */
-	// CORREGIR --> USAR YES_NO_CANCEL
 	protected void salir() {
 		if (stock.isModificado()) {
-			Object[] options = { "SI", "NO", "CANCELAR" };
 			int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, Desea Guardar?", "NO HAS GUARDADO",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 			if (respuesta == JOptionPane.YES_OPTION) {
 				saveAs();
 				System.exit(0);
 			} else if (respuesta == JOptionPane.NO_OPTION) {
 				System.exit(0);
+			} else {
 			}
 		} else {
 			System.exit(0);

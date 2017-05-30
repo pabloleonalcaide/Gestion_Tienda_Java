@@ -7,3 +7,6 @@
 1496083192019	Rename local variable 'lblNewLabel'
 1496083210765	Convert local variable 'lblfondo' to field
 1496127072688	Infer generic type arguments
+1496164041041	Rename method 'retroceder'
+1496164049838	Rename method 'avanzar'
+1496167214275	Rename local variable 'calendar'

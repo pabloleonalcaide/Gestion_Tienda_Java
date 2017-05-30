@@ -23,6 +23,8 @@ import javax.swing.JSpinner;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,18 +36,18 @@ import javax.swing.JRadioButton;
 import jerarquia.*;
 
 public class PanelPadre extends JFrame {
-	 ListIterator<Articulo> it;
-	 Articulo articuloMostrado;
+	ListIterator<Articulo> it;
+	Articulo articuloMostrado;
 
 	// REFACTORIZAR --> SEPARAR POR COMPORTAMIENTO
 	public PanelPadre(ListIterator<Articulo> iterador) {
 		it = iterador;
-		
+
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("");
-		
+
 		setBounds(100, 100, 732, 541);
 		getContentPane().setLayout(null);
 
@@ -65,18 +67,18 @@ public class PanelPadre extends JFrame {
 		// boton siguiente
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				avanzar();
+				showNext();
 			}
 
 		});
 		// boton anterior
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				retroceder();
+				showPrevious();
 			}
 
 		});
-		comboBoxTipoArticulo.setModel(new DefaultComboBoxModel(new String[] {"Libro", "Figura", "Juego"}));
+		comboBoxTipoArticulo.setModel(new DefaultComboBoxModel(new String[] { "Libro", "Figura", "Juego" }));
 		comboBoxTipoArticulo.setSelectedIndex(0);
 
 		// combobox tipo de articulo
@@ -85,7 +87,7 @@ public class PanelPadre extends JFrame {
 				identifyArticle();
 				if (panelJuego.isVisible())
 					panelButtons.setVisible(true);
-				
+
 			}
 		});
 		comboBoxTipoArticulo.setBounds(279, 471, 139, 25);
@@ -99,8 +101,7 @@ public class PanelPadre extends JFrame {
 		});
 		btnSalir.setBounds(289, 504, 117, 25);
 		getContentPane().add(btnSalir);
-		
-		
+
 		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(
 				new Component[] { lblNombre, textNombre, lblPrecio, textPrecio, lblDescripcion, textDetalles, lblEstado,
 						lblCantidadStock, textStock, lblFechaEntrada, lblNProducto }));
@@ -271,7 +272,7 @@ public class PanelPadre extends JFrame {
 
 			lblColeccionJuego = new JLabel("Coleccion");
 			panelJuego.add(lblColeccionJuego);
-			
+
 			chbxColeccionJuego = new JCheckBox("Coleccion");
 			chbxColeccionJuego.setEnabled(false);
 			panelJuego.add(chbxColeccionJuego);
@@ -333,11 +334,11 @@ public class PanelPadre extends JFrame {
 			textPaginas.setColumns(10);
 			lblPublicacion = new JLabel("Publicacion");
 			panelLibro.add(lblPublicacion);
-			spmodel = new SpinnerDateModel();
-			spinnerPublicacion = new JSpinner(spmodel);
+
+			spinnerPublicacion = new JSpinner();
+			spinnerPublicacion.setModel(new SpinnerDateModel());
+			spinnerPublicacion.setEditor(new JSpinner.DateEditor(spinnerPublicacion,"dd/MM/yyyy"));
 			spinnerPublicacion.setEnabled(false);
-			JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spinnerPublicacion, "dd-MM-yyyy");
-			spinnerPublicacion.setEditor(dateEditor);
 			panelLibro.add(spinnerPublicacion);
 			lblAutor = new JLabel("Autor");
 			panelLibro.add(lblAutor);
@@ -362,7 +363,7 @@ public class PanelPadre extends JFrame {
 			panelLibro.add(comboBox_Idioma);
 			lblTipo = new JLabel("Categoria");
 			panelLibro.add(lblTipo);
-			
+
 			comboBoxCategoriaLibro = new JComboBox();
 			comboBoxCategoriaLibro.setEnabled(false);
 			comboBoxCategoriaLibro.setModel(new DefaultComboBoxModel(CategoriaLibro.values()));
@@ -422,8 +423,9 @@ public class PanelPadre extends JFrame {
 			lblFechaEntrada = new JLabel("Entrada");
 			panelPrincipal.add(lblFechaEntrada);
 
-			SpinnerModel spinnerModel = new SpinnerDateModel();
-			spinnerEntrada = new JSpinner(spinnerModel);
+			spinnerEntrada = new JSpinner();
+			spinnerEntrada.setModel(new SpinnerDateModel());
+			spinnerEntrada.setEditor(new JSpinner.DateEditor(spinnerEntrada,"dd/MM/yyyy"));
 			spinnerEntrada.setEnabled(false);
 			panelPrincipal.add(spinnerEntrada);
 
@@ -439,27 +441,32 @@ public class PanelPadre extends JFrame {
 			panelPrincipal.add(label);
 		}
 	}
+
 	/**
 	 * Cambia el articulo que se esta mostrando
+	 * 
 	 * @param articulo
 	 */
-	void setArticuloMostrado(Articulo articulo){
+	void setArticuloMostrado(Articulo articulo) {
 		this.articuloMostrado = articulo;
 	}
+
 	/**
 	 * Devuelve el articulo que se esta mostrando
+	 * 
 	 * @return
 	 */
-	Articulo getArticuloMostrado(){
+	Articulo getArticuloMostrado() {
 		return articuloMostrado;
 	}
+
 	/**
 	 * Retrocede en el stock
 	 */
-	protected void retroceder() {
+	protected void showPrevious() {
 		if (it.hasPrevious())
 			showArticle(it.previous());
-			
+
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
 		} else {
@@ -477,7 +484,7 @@ public class PanelPadre extends JFrame {
 	/**
 	 * Avanza en el stock
 	 */
-	protected void avanzar() {
+	protected void showNext() {
 		if (it.hasNext())
 			showArticle(it.next());
 		if (it.hasNext()) {
@@ -504,19 +511,21 @@ public class PanelPadre extends JFrame {
 		selectPanels(articulo);
 
 	}
+
 	/**
 	 * Muestra el contenido comun del articulo
+	 * 
 	 * @param articulo
 	 */
-	void showMainPanel(Articulo articulo){
+	void showMainPanel(Articulo articulo) {
 		comboBoxEstado.setSelectedItem(articulo.getEstado());
 		textStock.setText(Integer.toString(articulo.getCantidad()));
-		//spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
 		textDetalles.setText(articulo.getDescripcion());
 		textNombre.setText(articulo.getNombre());
 		textPrecio.setText(Double.toString(articulo.calcularTotal()));
 		textId.setText(Integer.toString(articulo.getId()));
 	}
+
 	/**
 	 * Muestra el panel secundario oportuno y rellena el contenido
 	 * 
@@ -526,6 +535,7 @@ public class PanelPadre extends JFrame {
 		if (articulo instanceof Libro) {
 			panelButtons.setVisible(false);
 			mostrarPanelLibro();
+			spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
 			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFechaPublicacion());
 			textAutor.setText(((Libro) (articulo)).getAutor());
@@ -537,19 +547,21 @@ public class PanelPadre extends JFrame {
 			textFieldDuracion.setText(String.valueOf(((Juego) articulo).getDuracion()));
 			textEdad.setText(String.valueOf(((Juego) articulo).getEdad()));
 			if (articulo instanceof Rol) {
+				spinnerEntrada = getDateSpinner(((Rol) (articulo)).getFecha());
 				comboBoxMaterialRol.setSelectedItem(((Rol) articulo).getMaterial());
 				comboBox_Genero.setSelectedItem(((Rol) articulo).getGenero());
 				textEdicion.setText(String.valueOf(((Rol) articulo).getEdicion()));
 				rdbtnRol.setSelected(true);
 				enableRol();
 			} else if (articulo instanceof Cartas) {
+				spinnerEntrada = getDateSpinner(((Cartas) (articulo)).getFecha());
 				checkColeccion.setSelected(((Cartas) articulo).isColeccion());
 				textCartas.setText(String.valueOf(((Cartas) articulo).getNum_cartas()));
 				comboBoxDificultad.setSelectedItem(((Cartas) articulo).getDificultad());
 				rdbtnCartas.setSelected(true);
 				enableCartas();
 			} else if (articulo instanceof Tablero) {
-				//piezas dimensiones jugadores
+				spinnerEntrada = getDateSpinner(((Tablero) (articulo)).getFecha());
 				textPiezas.setText(String.valueOf(((Tablero) articulo).getNum_piezas()));
 				textDimensiones.setText(String.valueOf(((Tablero) articulo).getDimensiones()));
 				textJugadores.setText(String.valueOf(((Tablero) articulo).getNum_jugadores()));
@@ -559,6 +571,7 @@ public class PanelPadre extends JFrame {
 		} else if (articulo instanceof Figura) {
 			panelButtons.setVisible(false);
 			mostrarPanelFiguras();
+			spinnerEntrada = getDateSpinner(((Figura) (articulo)).getFecha());
 			textTematica.setText(((Figura) (articulo)).getTematica());
 			checkDesmontable.setSelected(((Figura) (articulo)).isDesmontable());
 			checkColeccion.setSelected(((Figura) (articulo)).isColeccion());
@@ -591,7 +604,8 @@ public class PanelPadre extends JFrame {
 	/**
 	 * Muestra el panel de Figuras y oculta el resto
 	 */
-	protected void mostrarPanelFiguras() {  // --> Mejorar Esto, por algun motivo me oculta sus textField al añadir
+	protected void mostrarPanelFiguras() { // --> Mejorar Esto, por algun motivo
+											// me oculta sus textField al añadir
 		panelFigura.setVisible(true);
 		textDimensiones.setVisible(true);
 		spinnerPeso.setVisible(true);
@@ -626,13 +640,13 @@ public class PanelPadre extends JFrame {
 			mostrarPanelJuego();
 			enableCartas();
 		}
-	
+
 	}
-	
+
 	/**
 	 * Vacia el contenido de los textfields en los paneles
 	 */
-	public void emptyPanels(){
+	public void emptyPanels() {
 		textNombre.setText("");
 		textDetalles.setText("");
 		textPrecio.setText("");
@@ -640,8 +654,9 @@ public class PanelPadre extends JFrame {
 		panelButtons.setVisible(false);
 		comboBoxTipoArticulo.setSelectedItem(null);
 		cleanRightPanel();
-		
+
 	}
+
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
@@ -652,13 +667,13 @@ public class PanelPadre extends JFrame {
 	 * @param sp
 	 * @return LocalDate fecha
 	 */
-	
+
 	public LocalDate readDateSpinner(JSpinner sp) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime((Date) sp.getModel().getValue());
-		LocalDate fecha = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH));
-		return fecha;
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime((Date) sp.getModel().getValue()); 
+		LocalDate fecha = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+				cal.get(Calendar.DAY_OF_MONTH));
+			return fecha;
 	}
 
 	/**
@@ -670,9 +685,13 @@ public class PanelPadre extends JFrame {
 	public JSpinner getDateSpinner(LocalDate ld) {
 		SpinnerDateModel model = new SpinnerDateModel();
 		JSpinner spinner = new JSpinner(model);
-		Calendar calendar = new GregorianCalendar(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
-		spinner.setValue(calendar.getTime());
-		return spinner;
+		String fecha = ld.toString();
+		try {
+			Date fechaDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+			spinner.setValue(fechaDate);
+		} catch (ParseException e) {
+		}
+				return spinner;
 	}
 
 	/**

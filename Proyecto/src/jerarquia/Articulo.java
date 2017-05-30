@@ -169,6 +169,11 @@ public abstract class Articulo implements Serializable{
 	public void setSeleccionado(boolean seleccionado) {
 		this.seleccionado = seleccionado;
 	}
+	/**
+	 * Devuelve la clase de Objeto
+	 * @param articulo
+	 * @return
+	 */
 	public Object getClass(Articulo articulo){
 		return getClass(articulo);
 	}
@@ -177,6 +182,10 @@ public abstract class Articulo implements Serializable{
 		return cantidad;
 	}
 	// idem del anterior
+	
+	public String getClassName(){
+		return this.getClass().getSimpleName();
+	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
@@ -190,7 +199,7 @@ public abstract class Articulo implements Serializable{
 	 */
 	public abstract double obtenerDescuento();
 	
-
+	
 	@Override
 	public String toString() {
 		return "\nArticulo [nombre=" + getNombre() + ", descripcion=" + getDescripcion()

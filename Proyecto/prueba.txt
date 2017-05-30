@@ -1,0 +1,3 @@
+----CATÁLOGO DE 2017-05-30----
+
+Articulo: Elemento, Categoria: class jerarquia.Libro, Precio: 198.4

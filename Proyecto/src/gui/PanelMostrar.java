@@ -61,7 +61,7 @@ public class PanelMostrar extends PanelPadre {
 		checkColeccion.setEnabled(false);
 		checkDesmontable.setEnabled(false);
 		
-		avanzar();
+		showNext();
 	}
 
 	

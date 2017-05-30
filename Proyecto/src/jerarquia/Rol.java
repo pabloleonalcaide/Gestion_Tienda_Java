@@ -30,6 +30,11 @@ public class Rol extends Juego {
 		setEdicion(edicion);
 	}
 
+	public Rol(int id) {
+		super(id);
+		setId(id);
+	}
+
 	public GeneroRol getGenero() {
 		return genero;
 	}

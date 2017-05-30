@@ -44,6 +44,10 @@ import java.awt.event.ActionEvent;
  */
 public class DialogFormulario extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField formNombre;
 	private JTextField formApellidos;
@@ -52,9 +56,7 @@ public class DialogFormulario extends JDialog {
 	private JTextArea textArea;
 	private JLabel lblFichero;
 	private Filtro filtroInput = new Filtro("pdf", "pdf");
-	private Filtro filtroOutput = new Filtro("txt", "txt");
 	StringBuilder mensaje = new StringBuilder();
-	// ------------->> INTRODUCIR CAMBIO DE COLOR CUANDO EL CAMPO ES INCORRECTO
 
 	/**
 	 * Launch the application.
