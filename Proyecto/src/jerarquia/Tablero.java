@@ -8,10 +8,10 @@ import excepciones.PrecioNoValidoException;
 
 public class Tablero extends Juego {
 
-	int num_piezas;
-	double dimensiones;
-	int num_jugadores;
-	boolean coleccion;
+	private int num_piezas;
+	private double dimensiones;
+	private int num_jugadores;
+	private boolean coleccion;
 
 	public Tablero(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha,
 			double duracion, int edad, int piezas, double dimension, int jugadores, boolean coleccion)
@@ -27,7 +27,7 @@ public class Tablero extends Juego {
 
 
 
-	int getNum_piezas() {
+	public int getNum_piezas() {
 		return num_piezas;
 	}
 
@@ -35,7 +35,7 @@ public class Tablero extends Juego {
 		this.num_piezas = num_piezas;
 	}
 
-	double getDimensiones() {
+	public double getDimensiones() {
 		return dimensiones;
 	}
 
@@ -43,7 +43,7 @@ public class Tablero extends Juego {
 		this.dimensiones = dimensiones;
 	}
 
-	int getNum_jugadores() {
+	public int getNum_jugadores() {
 		return num_jugadores;
 	}
 

@@ -23,7 +23,7 @@ public class Cartas extends Juego {
 		setDificultad(dif);
 		setColeccion(coleccion);
 	}
-	int getNum_cartas() {
+	public int getNum_cartas() {
 		return num_cartas;
 	}
 
@@ -31,7 +31,7 @@ public class Cartas extends Juego {
 		this.num_cartas = num_cartas;
 	}
 
-	DificultadCartas getDificultad() {
+	public DificultadCartas getDificultad() {
 		return dificultad;
 	}
 
@@ -39,7 +39,7 @@ public class Cartas extends Juego {
 		this.dificultad = dificultad;
 	}
 
-	boolean isColeccion() {
+	public boolean isColeccion() {
 		return coleccion;
 	}
 

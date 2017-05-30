@@ -37,6 +37,7 @@ public class PanelModificar extends PanelMostrar {
 		super(iterador);
 		habilitarCampos();
 		setTitle("Modificar articulo");
+		comboBoxTipoArticulo.setEnabled(false);
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {

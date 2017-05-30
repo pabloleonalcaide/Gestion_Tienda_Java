@@ -5,16 +5,9 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 				No me vuelve a volcar la fecha en un spinner
 				El spinner de FechaEntrada --> al mostrar ahora muestra now()
 
-
-	**Revisar contenido paneles secundarios mostrados -->
-				No me carga el de Juegos
-
-	**Modificar -->
-			que me cargue el contenido del panel secundario
-			el panel libro no me coge categoria
-			el panel cartas no se muestra nada
-			el panel figura lo hace bien
-			el panel tablero no me coge nada
+	**Introducir Articulo -->
+				O cargar panel secundario o anular combobox tipo
+			
 	**Buscar y Eliminar -->
 				me peta cuando elimino el ultimo y trato de moverme, y no me actualiza los botones al eliminar
 
@@ -25,6 +18,9 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	**panelButtons.setVisible(false) -->
 				peta cuando lo hago invisible, pero no al hacerlo visible  ¿what?
 
+	**imagen fondo -->
+			ajustar a los márgenes, pero tampoco perder tiempo en esto
+			
 Cosas que me están haciendo la puñeta: 
 	
 	usar JOPtionPane yes_no_option al salir

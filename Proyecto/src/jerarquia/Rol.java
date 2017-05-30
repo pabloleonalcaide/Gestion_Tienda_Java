@@ -16,9 +16,9 @@ public class Rol extends Juego {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	GeneroRol genero;
-	MaterialRol material;
-	double edicion;
+	private GeneroRol genero;
+	private MaterialRol material;
+	private double edicion;
 	
 	public Rol(String nombre, String descripcion, double precio,
 			EstadoArticulo estado, LocalDate fecha, double duracion,

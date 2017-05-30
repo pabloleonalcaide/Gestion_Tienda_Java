@@ -35,6 +35,7 @@ import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
 
+//Ruta icono: linea 93
 //CORREGIR OPCIONES FILECHOOSER
 public class Principal {
 	static JFrame framePrincipal;
@@ -43,9 +44,9 @@ public class Principal {
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
-	protected JFileChooser fileChooser = new JFileChooser();
-	private JLabel lblfondo;
-	private ImageIcon icono;
+	protected static JFileChooser fileChooser = new JFileChooser();
+	private JLabel lblfondo; //Para Fondo, prescindible
+	private ImageIcon icono;//Para Fondo, prescindible
 	static {
 		Fichero.fichero = new File("stockUltimo.obj");
 		try {
@@ -90,7 +91,7 @@ public class Principal {
 		framePrincipal.setBounds(400, 400, 500, 281);
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
-		icono = new ImageIcon("image1.jpg");
+		//icono = new ImageIcon("image1.jpg");
 		
 		cargarMenuUsuario();
 
@@ -111,8 +112,6 @@ public class Principal {
 		crearMenuPedidos();
 
 		cargarMenuDestacados();
-
-		cargarMenuArchivo();
 
 		cargarBotonWeb();
 
@@ -261,12 +260,6 @@ public class Principal {
 	}
 
 	/**
-	 * Crea el menu de archivo (abrir copia, guardar copia, salir)
-	 */
-	protected void cargarMenuArchivo() {
-	}
-
-	/**
 	 * Carga el menu de usuario de ofertas
 	 */
 	protected void cargarMenuOfertas() {
@@ -310,6 +303,7 @@ public class Principal {
 		});
 
 		JMenuItem mntmNuevoStock = new JMenuItem("Nuevo Stock");
+		mntmNuevoStock.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mntmNuevoStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				openNew();
@@ -328,6 +322,7 @@ public class Principal {
 		mnBbdd.add(mntmAbrir);
 
 		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK | InputEvent.ALT_MASK));
 		mntmSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				salir();
@@ -339,6 +334,7 @@ public class Principal {
 		menuEmpleado.add(mnGestinArticulos);
 
 		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
+		mntmAadirNuevo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
 		mntmAadirNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PanelAnadir anadir = new PanelAnadir(stock.listIterator());
@@ -349,6 +345,7 @@ public class Principal {
 		mnGestinArticulos.add(mntmAadirNuevo);
 
 		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mntmEliminar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
 		mntmEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PanelEliminar delete = new PanelEliminar(stock.listIterator());
@@ -357,6 +354,7 @@ public class Principal {
 		});
 
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mntmModificar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -369,10 +367,15 @@ public class Principal {
 		});
 		
 		JMenuItem mntmMostrar_1 = new JMenuItem("Mostrar");
+		mntmMostrar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
 		mntmMostrar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PanelMostrar mostrar = new PanelMostrar(stock.listIterator());
-				mostrar.setVisible(true);
+				try {
+					PanelMostrar mostrar = new PanelMostrar(stock.listIterator());
+					mostrar.setVisible(true);
+				} catch (Exception e) {
+					msjEmptyStock();
+				}
 			}
 		});
 		mnGestinArticulos.add(mntmMostrar_1);
@@ -380,6 +383,7 @@ public class Principal {
 		mnGestinArticulos.add(mntmEliminar);
 
 		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
+		mntmBuscarYEliminar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK));
 		mntmBuscarYEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -395,6 +399,7 @@ public class Principal {
 		mnGestinArticulos.add(mntmBuscarYEliminar);
 
 		JMenuItem mntmActualizarExistencias = new JMenuItem("Actualizar existencias");
+		mntmActualizarExistencias.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		mntmActualizarExistencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (JOptionPane.showConfirmDialog(null, "Aumentaremos todas las existencias\nEstas seguro?", "Reponer",
@@ -592,7 +597,7 @@ public class Principal {
 		} else {
 			try {
 				Fichero.save(stock);
-				stock.setModificado(true);
+				stock.setModificado(false);
 			} catch (IOException ex) {
 				JOptionPane.showMessageDialog(null, "Hay problemas para guardar el fichero", "ERROR",
 						JOptionPane.ERROR_MESSAGE);

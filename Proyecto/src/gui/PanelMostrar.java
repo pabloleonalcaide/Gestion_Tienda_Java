@@ -15,6 +15,10 @@ public class PanelMostrar extends PanelPadre {
 		super(iterator);
 		this.it = iterator;
 
+		rdbtnCartas.setEnabled(false);
+		rdbtnRol.setEnabled(false);
+		rdbtnTablero.setEnabled(false);
+
 		textPaginas.setEnabled(false); 
 		textAutor.setEnabled(false);
 		textNombre.setEnabled(false);
@@ -30,10 +34,10 @@ public class PanelMostrar extends PanelPadre {
 		textEdad.setEnabled(false);
 		textFieldDuracion.setEnabled(false);
 		
+		
 		textPiezas.setEnabled(false);
 		textJugadores.setEnabled(false);
 		textNumElementos.setEnabled(false);
-
 		
 		btnALaCesta_anadir.setVisible(false);
 		btnSacar_borrar.setText("Eliminar");

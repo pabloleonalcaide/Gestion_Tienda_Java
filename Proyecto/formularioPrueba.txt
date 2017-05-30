@@ -1,0 +1,6 @@
+---Formulario---Nombre: Pablo
+apellidos: alalalal
+email: pablo@lalala.es
+Tipo de mensaje: Sugerencia
+Contenido
+papañaklsjsjksjs dadad

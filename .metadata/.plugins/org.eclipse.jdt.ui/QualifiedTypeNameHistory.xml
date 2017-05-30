@@ -16,7 +16,6 @@
 <fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
 <fullyQualifiedTypeName name="jerarquia.Articulo"/>
 <fullyQualifiedTypeName name="jerarquia.Juego"/>
-<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="jerarquia.Tablero"/>
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
@@ -24,4 +23,11 @@
 <fullyQualifiedTypeName name="jerarquia.Rol"/>
 <fullyQualifiedTypeName name="jerarquia.Cartas"/>
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="java.nio.file.Files"/>
+<fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
 </qualifiedTypeNameHistroy>

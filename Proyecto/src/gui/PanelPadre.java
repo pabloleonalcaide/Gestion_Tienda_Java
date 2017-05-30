@@ -13,7 +13,6 @@ import javax.swing.SpinnerModel;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import enumeraciones.*;
-import jerarquia.Articulo;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
@@ -212,7 +211,7 @@ public class PanelPadre extends JFrame {
 
 			textNumElementos = new JSpinner();
 			textNumElementos.setEnabled(false);
-			textNumElementos.setModel(new SpinnerNumberModel(new Integer(113), null, null, new Integer(1)));
+			textNumElementos.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
 			panelFigura.add(textNumElementos);
 		}
 	}
@@ -367,6 +366,7 @@ public class PanelPadre extends JFrame {
 			comboBoxCategoriaLibro = new JComboBox();
 			comboBoxCategoriaLibro.setEnabled(false);
 			comboBoxCategoriaLibro.setModel(new DefaultComboBoxModel(CategoriaLibro.values()));
+			comboBoxCategoriaLibro.setVisible(true);
 			panelLibro.add(comboBoxCategoriaLibro);
 			labelEspaciador = new JLabel("");
 			panelLibro.add(labelEspaciador);
@@ -529,17 +529,32 @@ public class PanelPadre extends JFrame {
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
 			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFechaPublicacion());
 			textAutor.setText(((Libro) (articulo)).getAutor());
-			checkColeccion.setSelected(((Libro) (articulo)).isColeccion());
+			chckbxColeccion.setSelected(((Libro) (articulo)).isColeccion());
 			comboBox_Idioma.setSelectedItem((((Libro) (articulo)).getIdioma()));
 			comboBoxCategoriaLibro.setSelectedItem((((Libro) (articulo)).getCategoria()));
 		} else if (articulo instanceof Juego) {
 			mostrarPanelJuego();
+			textFieldDuracion.setText(String.valueOf(((Juego) articulo).getDuracion()));
+			textEdad.setText(String.valueOf(((Juego) articulo).getEdad()));
 			if (articulo instanceof Rol) {
+				comboBoxMaterialRol.setSelectedItem(((Rol) articulo).getMaterial());
+				comboBox_Genero.setSelectedItem(((Rol) articulo).getGenero());
+				textEdicion.setText(String.valueOf(((Rol) articulo).getEdicion()));
 				rdbtnRol.setSelected(true);
+				enableRol();
 			} else if (articulo instanceof Cartas) {
+				checkColeccion.setSelected(((Cartas) articulo).isColeccion());
+				textCartas.setText(String.valueOf(((Cartas) articulo).getNum_cartas()));
+				comboBoxDificultad.setSelectedItem(((Cartas) articulo).getDificultad());
 				rdbtnCartas.setSelected(true);
+				enableCartas();
 			} else if (articulo instanceof Tablero) {
+				//piezas dimensiones jugadores
+				textPiezas.setText(String.valueOf(((Tablero) articulo).getNum_piezas()));
+				textDimensiones.setText(String.valueOf(((Tablero) articulo).getDimensiones()));
+				textJugadores.setText(String.valueOf(((Tablero) articulo).getNum_jugadores()));
 				rdbtnTablero.setSelected(true);
+				enableTablero();
 			}
 		} else if (articulo instanceof Figura) {
 			panelButtons.setVisible(false);
@@ -559,6 +574,9 @@ public class PanelPadre extends JFrame {
 		panelLibro.setVisible(true);
 		panelJuego.setVisible(false);
 		panelFigura.setVisible(false);
+		textNumElementos.setVisible(false);
+		textTematica.setVisible(false);
+		comboBoxCategoriaLibro.setVisible(true);
 	}
 
 	/**

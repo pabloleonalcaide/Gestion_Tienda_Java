@@ -7,9 +7,9 @@
 		<item value="389" key="height"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.accelerator.KeyStrokePropertyEditor$KeyStrokeDialog">
-		<item value="512" key="x"/>
+		<item value="506" key="x"/>
 		<item value="396" key="width"/>
-		<item value="149" key="y"/>
+		<item value="171" key="y"/>
 		<item value="521" key="height"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.models.spinner.SpinnerModelDialog">
