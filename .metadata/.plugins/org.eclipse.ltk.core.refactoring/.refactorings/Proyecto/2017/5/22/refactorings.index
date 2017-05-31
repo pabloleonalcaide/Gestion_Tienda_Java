@@ -12,3 +12,5 @@
 1496167214275	Rename local variable 'calendar'
 1496214932305	Rename type 'BuscarEliminar'
 1496220920821	Rename method 'selectPanels'
+1496247510641	Extract method 'cargarImagenFondo'
+1496248774501	Delete element

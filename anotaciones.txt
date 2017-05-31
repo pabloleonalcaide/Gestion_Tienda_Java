@@ -20,7 +20,4 @@ MÁS COSAS QUE CONTROLAR:
 	**Trabajar idea de Jaime --> 
 			Boton cobrar que calcule el total y genere algun tipo de factura.
 
-	**imagen fondo -->
-			llamada a clase que se ocupa (revisar repo de dani)
-
 	** Github.io --> mirar lo que ha comentado Lourdes para la documentación

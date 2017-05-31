@@ -5,6 +5,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
@@ -16,13 +18,18 @@ import enumeraciones.*;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JSpinner;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,8 +43,14 @@ import java.awt.event.ItemEvent;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JRadioButton;
 import jerarquia.*;
+import stock.FondoImagen;
+import java.awt.Dimension;
 
 public class PanelPadre extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ListIterator<Articulo> it;
 	Articulo articuloMostrado;
 
@@ -65,7 +78,7 @@ public class PanelPadre extends JFrame {
 		// BOTONES
 		crearBotones();
 		crearBotonesJuego();
-
+		
 		// boton siguiente
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -329,6 +342,9 @@ public class PanelPadre extends JFrame {
 			getContentPane().add(panelLibro);
 			panelLibro.setLayout(new GridLayout(0, 2, 0, 0));
 			lblPaginas = new JLabel("Paginas");
+			lblPaginas.setMaximumSize(new Dimension(57, 10));
+			lblPaginas.setMinimumSize(new Dimension(57, 10));
+			lblPaginas.setPreferredSize(new Dimension(57, 10));
 			panelLibro.add(lblPaginas);
 			textPaginas = new JTextField();
 			textPaginas.setEnabled(false);
@@ -373,6 +389,7 @@ public class PanelPadre extends JFrame {
 			panelLibro.add(comboBoxCategoriaLibro);
 			labelEspaciador = new JLabel("");
 			panelLibro.add(labelEspaciador);
+			
 		}
 	}
 

@@ -61,7 +61,7 @@ public class Principal {
 	protected static JFileChooser fileChooser = new JFileChooser();
 	private JMenu mnArticulos_1;
 	static {
-		Fichero.fichero = new File("stockUltimo.obj");
+		//Fichero.fichero = new File("stockUltimo.obj");
 		// try {
 		// stock = (Stock) Fichero.open(Fichero.fichero);
 		// stock.setModificado(false); //Para que no piense que hemos modificado
@@ -107,19 +107,12 @@ public class Principal {
 				System.exit(0);
 			}
 		});
-		try {
-			BufferedImage image = null;
-			image = ImageIO.read(new File(getClass().getResource("/img/fondo.jpg").getFile()));
-			FondoImagen fondo = new FondoImagen(image);
-			((JComponent) framePrincipal.getContentPane()).setBorder(fondo);
-			framePrincipal.getContentPane().setLayout(null);
-		} catch (IOException e) {
-		}
+		cargarImagenFondo();
 		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
 		framePrincipal.getContentPane().setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBackground(Color.LIGHT_GRAY);
 		framePrincipal.setBounds(400, 400, 500, 281);
-		framePrincipal.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		framePrincipal.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
 
 		cargarMenuUsuario();
@@ -144,6 +137,20 @@ public class Principal {
 
 		cargarBotonWeb();
 
+	}
+	/**
+	 * Carga la imagen de fondo
+	 */
+	protected void cargarImagenFondo() {
+		try {
+			BufferedImage image = null;
+			image = ImageIO.read(new File(getClass().getResource("/img/fondo.jpg").getFile()));
+			FondoImagen fondo = new FondoImagen(image);
+			((JComponent) framePrincipal.getContentPane()).setBorder(fondo);
+			framePrincipal.getContentPane().setLayout(null);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(framePrincipal, "problemas al cargar el fondo");
+		}
 	}
 
 	/**
