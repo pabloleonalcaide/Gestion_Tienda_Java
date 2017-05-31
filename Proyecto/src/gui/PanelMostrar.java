@@ -43,9 +43,9 @@ public class PanelMostrar extends PanelPadre {
 		btnSacar_borrar.setText("");
 		btnSacar_borrar.setVisible(false);
 		
-		spinnerEntrada.setEnabled(true);
+		spinnerEntrada.setEnabled(false);
 		spinnerPeso.setEnabled(false);
-		spinnerPublicacion.setEnabled(true);
+		spinnerPublicacion.setEnabled(false);
 		
 		comboBox_Genero.setEnabled(false);
 		comboBoxCategoriaLibro.setEnabled(false);

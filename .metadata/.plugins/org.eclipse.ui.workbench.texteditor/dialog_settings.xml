@@ -9,13 +9,13 @@
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
 			<item value="getDate"/>
+			<item value="spinner"/>
+			<item value="spinnerF"/>
 			<item value="add"/>
 			<item value="an"/>
 			<item value="ann"/>
 			<item value="id"/>
 			<item value="prueba"/>
-			<item value="after"/>
-			<item value="spinnerPu"/>
 		</list>
 		<list key="replacehistory">
 		</list>

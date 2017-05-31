@@ -54,14 +54,14 @@ public class Principal {
 	private JMenu mnArticulos_1;
 	static {
 		Fichero.fichero = new File("stockUltimo.obj");
-		try {
-			stock = (Stock) Fichero.open(Fichero.fichero);
-			stock.setModificado(false); //Para que no piense que hemos modificado el stock cuando carga al inicio
-		} catch (ClassNotFoundException | IOException e) {
-			JOptionPane.showMessageDialog(framePrincipal, "no se ha cargado ningun stock", "Aviso",
-					JOptionPane.WARNING_MESSAGE);
-
-		}
+//		try {
+//			stock = (Stock) Fichero.open(Fichero.fichero);
+//			stock.setModificado(false); //Para que no piense que hemos modificado el stock cuando carga al inicio
+//		} catch (ClassNotFoundException | IOException e) {
+//			JOptionPane.showMessageDialog(framePrincipal, "no se ha cargado ningun stock", "Aviso",
+//					JOptionPane.WARNING_MESSAGE);
+//
+//		}
 	}
 
 	public static void main(String[] args) {

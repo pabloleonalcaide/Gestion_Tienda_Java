@@ -29,6 +29,8 @@
 <fullyQualifiedTypeName name="java.io.FileWriter"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.time.LocalDate"/>
-<fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
+<fullyQualifiedTypeName name="java.time.ZoneId"/>
+<fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
 </qualifiedTypeNameHistroy>

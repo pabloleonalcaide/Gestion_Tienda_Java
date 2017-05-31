@@ -1,15 +1,5 @@
 PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA  
-	
-	**Problemas con los Spinner --> 
-				No me vuelve a volcar la fecha en un spinner
-				Controla la fecha al introducir el dato 
-				(Cuadro de texto mejor?) --> Preguntar a Jaime o Lourdes
-
-				Pasar dato a dato al Date a ver si así lo coge el spinner
 						
-	**panelButtons.setVisible(false) -->
-				peta cuando lo hago invisible, pero no al hacerlo visible  ¿what?
-
 	**Añadir -->
 				comprobar que limpie bien todos los textfield
 				si hay arraylist cargado, no me añade los elementos nuevos
@@ -20,13 +10,15 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 				Mantener? --> Preguntar a Jaime o Lourdes
 	**Documentación -->
 				Mirar lo que ha puesto Lourdes sobre el repositorio y tal
-Cosas que me están haciendo la puñeta: 
+	**Botones Juego -->
+				Ocultar si no hay nada en el combobox
+
+MÁS COSAS QUE CONTROLAR: 
 	
-	**implementar método showBestFive() ((clase stock))  --> ¿LO METO?
-		
+	**implementar método showBestFive() ((clase stock))  --> ¿LO METO?		
 	
-	**Trabajar idea de Jaime --> Boton cobrar que calcule el total y genere algun
-				tipo de factura.
+	**Trabajar idea de Jaime --> 
+			Boton cobrar que calcule el total y genere algun tipo de factura.
 
 	**imagen fondo -->
 			llamada a clase que se ocupa (revisar repo de dani)

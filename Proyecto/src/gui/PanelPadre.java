@@ -23,9 +23,11 @@ import javax.swing.JSpinner;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -508,7 +510,7 @@ public class PanelPadre extends JFrame {
 	 */
 	void showArticle(Articulo articulo) {
 		showMainPanel(articulo);
-		selectPanels(articulo);
+		showSecundaryPanel(articulo);
 
 	}
 
@@ -531,14 +533,13 @@ public class PanelPadre extends JFrame {
 	 * 
 	 * @param articulo
 	 */
-	private void selectPanels(Articulo articulo) {
+	private void showSecundaryPanel(Articulo articulo) {
 		if (articulo instanceof Libro) {
 			panelButtons.setVisible(false);
 			mostrarPanelLibro();
-			spinnerEntrada.setEnabled(true);
-			spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
+			getDateSpinnerEntrada(((Libro) (articulo)).getFecha());
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
-			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFechaPublicacion());
+			getDateSpinnerPublicacion(((Libro) (articulo)).getFechaPublicacion());
 			textAutor.setText(((Libro) (articulo)).getAutor());
 			chckbxColeccion.setSelected(((Libro) (articulo)).isColeccion());
 			comboBox_Idioma.setSelectedItem((((Libro) (articulo)).getIdioma()));
@@ -548,21 +549,21 @@ public class PanelPadre extends JFrame {
 			textFieldDuracion.setText(String.valueOf(((Juego) articulo).getDuracion()));
 			textEdad.setText(String.valueOf(((Juego) articulo).getEdad()));
 			if (articulo instanceof Rol) {
-				spinnerEntrada = getDateSpinner(((Rol) (articulo)).getFecha());
+				getDateSpinnerEntrada(((Rol) (articulo)).getFecha());
 				comboBoxMaterialRol.setSelectedItem(((Rol) articulo).getMaterial());
 				comboBox_Genero.setSelectedItem(((Rol) articulo).getGenero());
 				textEdicion.setText(String.valueOf(((Rol) articulo).getEdicion()));
 				rdbtnRol.setSelected(true);
 				enableRol();
 			} else if (articulo instanceof Cartas) {
-				spinnerEntrada = getDateSpinner(((Cartas) (articulo)).getFecha());
+				getDateSpinnerEntrada(((Cartas) (articulo)).getFecha());
 				checkColeccion.setSelected(((Cartas) articulo).isColeccion());
 				textCartas.setText(String.valueOf(((Cartas) articulo).getNum_cartas()));
 				comboBoxDificultad.setSelectedItem(((Cartas) articulo).getDificultad());
 				rdbtnCartas.setSelected(true);
 				enableCartas();
 			} else if (articulo instanceof Tablero) {
-				spinnerEntrada = getDateSpinner(((Tablero) (articulo)).getFecha());
+				getDateSpinnerEntrada(((Tablero) (articulo)).getFecha());
 				textPiezas.setText(String.valueOf(((Tablero) articulo).getNum_piezas()));
 				textDimensiones.setText(String.valueOf(((Tablero) articulo).getDimensiones()));
 				textJugadores.setText(String.valueOf(((Tablero) articulo).getNum_jugadores()));
@@ -572,7 +573,7 @@ public class PanelPadre extends JFrame {
 		} else if (articulo instanceof Figura) {
 			panelButtons.setVisible(false);
 			mostrarPanelFiguras();
-			spinnerEntrada = getDateSpinner(((Figura) (articulo)).getFecha());
+			getDateSpinnerEntrada(((Figura) (articulo)).getFecha());
 			textTematica.setText(((Figura) (articulo)).getTematica());
 			checkDesmontable.setSelected(((Figura) (articulo)).isDesmontable());
 			checkColeccion.setSelected(((Figura) (articulo)).isColeccion());
@@ -586,6 +587,7 @@ public class PanelPadre extends JFrame {
 	 */
 	protected void mostrarPanelLibro() {
 		panelLibro.setVisible(true);
+		panelButtons.setVisible(false);
 		panelJuego.setVisible(false);
 		panelFigura.setVisible(false);
 		textNumElementos.setVisible(false);
@@ -600,6 +602,7 @@ public class PanelPadre extends JFrame {
 		panelJuego.setVisible(true);
 		panelLibro.setVisible(false);
 		panelFigura.setVisible(false);
+		panelButtons.setVisible(true);
 	}
 
 	/**
@@ -615,6 +618,7 @@ public class PanelPadre extends JFrame {
 		textNumElementos.setVisible(true);
 		panelLibro.setVisible(false);
 		panelJuego.setVisible(false);
+		panelButtons.setVisible(false);
 	}
 
 	/**
@@ -652,7 +656,14 @@ public class PanelPadre extends JFrame {
 		textDetalles.setText("");
 		textPrecio.setText("");
 		textPaginas.setText("");
-		panelButtons.setVisible(false);
+		textStock.setText("");
+		textCartas.setText("");
+		textDimensiones.setText("");
+		textEdad.setText("");
+		textFieldDuracion.setText("");
+		textJugadores.setText("");
+		textTematica.setText("");
+		textPiezas.setText("");
 		comboBoxTipoArticulo.setSelectedItem(null);
 		cleanRightPanel();
 
@@ -676,26 +687,32 @@ public class PanelPadre extends JFrame {
 				cal.get(Calendar.DAY_OF_MONTH));
 			return fecha;
 	}
-
 	/**
-	 * Dada una fecha devuelve un spinner apuntando a ese dia
-	 * 
-	 * @param ld
-	 * @return JSpinner spinner
+	 * Vuelca la fecha de publicacion de un articulo Libro en su correspondiente Spinner
+	 * @param localDate
 	 */
-	public JSpinner getDateSpinner(LocalDate ld) {
-		SpinnerDateModel model = new SpinnerDateModel();
-		JSpinner spinner = new JSpinner(model);
-		System.out.println(ld.toString()+"111");
-		String fecha = ld.toString();
-		Date fechaSpinner= new Date();
-		try {
-			fechaSpinner = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
-		} catch (ParseException e) {
-		}
-		System.out.println(fechaSpinner.toString());
-		spinner.setValue(fechaSpinner);
-				return spinner;
+	public void getDateSpinnerPublicacion(LocalDate localDate) {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, localDate.getYear());
+		cal.set(Calendar.MONTH,localDate.getMonthValue());
+		cal.set(Calendar.DAY_OF_MONTH,localDate.getDayOfMonth()-1);
+		Date date = cal.getTime();
+
+		spinnerPublicacion.setValue(date);}
+	
+	/**
+	 * Vuelva la fecha de Entrada en el stock de un Articulo en su correspondiente Spinner
+	 * @param localDate
+	 */
+	public void getDateSpinnerEntrada(LocalDate localDate) {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, localDate.getYear());
+		cal.set(Calendar.MONTH,localDate.getMonthValue());
+		cal.set(Calendar.DAY_OF_MONTH,localDate.getDayOfMonth()-1);
+		Date date = cal.getTime();
+		spinnerEntrada.setValue(date);
 	}
 
 	/**
