@@ -38,24 +38,25 @@ import javax.swing.JPanel;
 import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
-
-//Ruta icono: linea 93
-//CORREGIR OPCIONES FILECHOOSER
+/**
+ * Clase Principal que despliega el JFrame de base
+ * @author pablo
+ *
+ */
 public class Principal {
 	static JFrame framePrincipal;
 	static Stock stock = new Stock();
-	Filtro filtro = new Filtro(".obj", "obj");
+	private Filtro filtro = new Filtro(".obj", "obj");
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
 	protected JButton btnWeb;
 	protected static JFileChooser fileChooser = new JFileChooser();
-	private JLabel lblfondo; // Para Fondo, prescindible
-	private ImageIcon icono;// Para Fondo, prescindible
 	private JMenu mnArticulos_1;
 	static {
 		Fichero.fichero = new File("stockUltimo.obj");
 		try {
 			stock = (Stock) Fichero.open(Fichero.fichero);
+			stock.setModificado(false); //Para que no piense que hemos modificado el stock cuando carga al inicio
 		} catch (ClassNotFoundException | IOException e) {
 			JOptionPane.showMessageDialog(framePrincipal, "no se ha cargado ningun stock", "Aviso",
 					JOptionPane.WARNING_MESSAGE);
@@ -66,6 +67,10 @@ public class Principal {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				/*
+				 * DialogBienvenida lanza un JDialog para escoger si se accede
+				 * a la vista de Usuario o de Administrador
+				 */
 				DialogBienvenida bienvenida = new DialogBienvenida();
 				Principal window = new Principal();
 				window.framePrincipal.setVisible(false);
@@ -89,6 +94,7 @@ public class Principal {
 						saveAs();
 					}
 				}
+			System.exit(0);
 			}
 		});
 		framePrincipal.setTitle("Developer's Dungeon - May the force be with Unix");
@@ -97,7 +103,6 @@ public class Principal {
 		framePrincipal.setBounds(400, 400, 500, 281);
 		framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		framePrincipal.getContentPane().setLayout(null);
-		// icono = new ImageIcon("image1.jpg");
 
 		cargarMenuUsuario();
 
@@ -217,11 +222,7 @@ public class Principal {
 		btnWeb = new JButton("Vista web");
 		btnWeb.setBounds(166, 219, 120, 19);
 		framePrincipal.getContentPane().add(btnWeb);
-
-		lblfondo = new JLabel("");
-		lblfondo.setBounds(1, 1, 800, 250);
-		lblfondo.setIcon(icono);
-		framePrincipal.getContentPane().add(lblfondo);
+		framePrincipal.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				menuUsuario.setVisible(true);
@@ -255,6 +256,16 @@ public class Principal {
 			}
 		});
 		menuEmpleado.add(mnCambiarDestacados);
+		
+		JMenuItem mntmAyuda_1 = new JMenuItem("Ayuda");
+		mntmAyuda_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DialogHelp ayuda = new DialogHelp();
+				ayuda.setVisible(true);
+			}
+		});
+		mntmAyuda_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+		menuEmpleado.add(mntmAyuda_1);
 	}
 
 	/**
@@ -385,7 +396,7 @@ public class Principal {
 		mntmBuscarYEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!stock.isEmpty()) {
-					BuscarEliminar be = new BuscarEliminar(stock.listIterator());
+					PanelBuscarEliminar be = new PanelBuscarEliminar(stock.listIterator());
 					be.setVisible(true);
 					be.btnAnterior.setEnabled(false);
 				} else

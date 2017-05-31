@@ -1,29 +1,34 @@
 PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA  
-	**Comprobacion de botones al mostrar
 	
 	**Problemas con los Spinner --> 
 				No me vuelve a volcar la fecha en un spinner
-		
-	**Buscar y Eliminar -->
-				 habilitar / deshabilitar botones
+				Controla la fecha al introducir el dato 
+				(Cuadro de texto mejor?) --> Preguntar a Jaime o Lourdes
 
-	**Ids duplicados (cada vez que entro de nuevo, parte de 1)
-
-	** al eliminar --> filtrar con instanceof para ver el tipo de articulo y pasarle el new ***(id) del objeto correspondiente
-
+				Pasar dato a dato al Date a ver si así lo coge el spinner
+						
 	**panelButtons.setVisible(false) -->
 				peta cuando lo hago invisible, pero no al hacerlo visible  ¿what?
 
-	**imagen fondo -->
-			ajustar a los márgenes, pero tampoco perder tiempo en esto
-			
+	**Añadir -->
+				comprobar que limpie bien todos los textfield
+				si hay arraylist cargado, no me añade los elementos nuevos
+	
+	**Salir -->
+				no debería preguntarme si no he modificado nada.. ¿es xq carga el fichero en el static?
+	**NavBar Usuario --> 
+				Mantener? --> Preguntar a Jaime o Lourdes
+	**Documentación -->
+				Mirar lo que ha puesto Lourdes sobre el repositorio y tal
 Cosas que me están haciendo la puñeta: 
 	
-	revisar el mostrar, que inhabilite los paneles secundarios
-	
-	implementar método showBestFive() ((clase stock))  --> ¿LO METO?
+	**implementar método showBestFive() ((clase stock))  --> ¿LO METO?
 		
 	
-	Trabajar idea de Jaime --> Boton cobrar que calcule el total y genere algun
+	**Trabajar idea de Jaime --> Boton cobrar que calcule el total y genere algun
 				tipo de factura.
 
+	**imagen fondo -->
+			llamada a clase que se ocupa (revisar repo de dani)
+
+	** Github.io --> mirar lo que ha comentado Lourdes para la documentación

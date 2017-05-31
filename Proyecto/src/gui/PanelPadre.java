@@ -535,6 +535,7 @@ public class PanelPadre extends JFrame {
 		if (articulo instanceof Libro) {
 			panelButtons.setVisible(false);
 			mostrarPanelLibro();
+			spinnerEntrada.setEnabled(true);
 			spinnerEntrada = getDateSpinner(((Libro) (articulo)).getFecha());
 			textPaginas.setText((String.valueOf(((Libro) (articulo)).getPaginas())));
 			spinnerPublicacion = getDateSpinner(((Libro) (articulo)).getFechaPublicacion());
@@ -671,7 +672,7 @@ public class PanelPadre extends JFrame {
 	public LocalDate readDateSpinner(JSpinner sp) {
 		Calendar cal = Calendar.getInstance(); 
 		cal.setTime((Date) sp.getModel().getValue()); 
-		LocalDate fecha = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+		LocalDate fecha = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1,
 				cal.get(Calendar.DAY_OF_MONTH));
 			return fecha;
 	}
@@ -685,12 +686,15 @@ public class PanelPadre extends JFrame {
 	public JSpinner getDateSpinner(LocalDate ld) {
 		SpinnerDateModel model = new SpinnerDateModel();
 		JSpinner spinner = new JSpinner(model);
+		System.out.println(ld.toString()+"111");
 		String fecha = ld.toString();
+		Date fechaSpinner= new Date();
 		try {
-			Date fechaDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
-			spinner.setValue(fechaDate);
+			fechaSpinner = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
 		} catch (ParseException e) {
 		}
+		System.out.println(fechaSpinner.toString());
+		spinner.setValue(fechaSpinner);
 				return spinner;
 	}
 

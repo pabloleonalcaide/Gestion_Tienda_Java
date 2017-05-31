@@ -14,6 +14,8 @@ import enumeraciones.EstadoArticulo;
 import excepciones.PrecioNoValidoException;
 
 public abstract class Articulo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String descripcion;
 	private double precio;

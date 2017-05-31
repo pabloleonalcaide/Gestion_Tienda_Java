@@ -1,26 +1,17 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JSeparator;
-import java.awt.ScrollPane;
 import java.awt.TextArea;
 
 public class DialogHelp extends JDialog {
 
+
+	private static final long serialVersionUID = 1L;
 	private static DialogHelp ayuda;
 	private final JPanel contentPanel = new JPanel();
 
@@ -36,7 +27,7 @@ public class DialogHelp extends JDialog {
 		TextArea textArea = new TextArea();
 		textArea.setEditable(false);
 		textArea.setText(
-				"Ayuda para Compra Online...");
+				"Ayuda...\n Implementar Anotaciones, explicaciones, etc");
 		textArea.setBounds(0, 0, 294, 283);
 		getContentPane().add(textArea);
 		contentPanel.setLayout(new FlowLayout());

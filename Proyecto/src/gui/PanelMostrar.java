@@ -18,7 +18,7 @@ public class PanelMostrar extends PanelPadre {
 		rdbtnCartas.setEnabled(false);
 		rdbtnRol.setEnabled(false);
 		rdbtnTablero.setEnabled(false);
-
+		lblPrecio.setText("P.V.P");
 		textPaginas.setEnabled(false); 
 		textAutor.setEnabled(false);
 		textNombre.setEnabled(false);
@@ -40,13 +40,12 @@ public class PanelMostrar extends PanelPadre {
 		textNumElementos.setEnabled(false);
 		
 		btnALaCesta_anadir.setVisible(false);
-		btnSacar_borrar.setText("Eliminar");
+		btnSacar_borrar.setText("");
 		btnSacar_borrar.setVisible(false);
-		btnAnterior.setEnabled(false);
 		
-		spinnerEntrada.setEnabled(false);
+		spinnerEntrada.setEnabled(true);
 		spinnerPeso.setEnabled(false);
-		spinnerPublicacion.setEnabled(false);
+		spinnerPublicacion.setEnabled(true);
 		
 		comboBox_Genero.setEnabled(false);
 		comboBoxCategoriaLibro.setEnabled(false);
@@ -59,9 +58,10 @@ public class PanelMostrar extends PanelPadre {
 		
 		checkEnLaCesta.setVisible(false);
 		checkColeccion.setEnabled(false);
-		checkDesmontable.setEnabled(false);
-		
+		checkDesmontable.setEnabled(false);	
 		showNext();
+		btnAnterior.setEnabled(false);
+
 	}
 
 	

@@ -74,7 +74,7 @@ public class PanelAnadir extends PanelPadre {
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (panelLibro.isVisible()) { // Si se ha marcado Libro
-
+					panelButtons.setVisible(true);
 					try {
 						addBook();
 						Principal.stock.setModificado(true);
@@ -83,6 +83,7 @@ public class PanelAnadir extends PanelPadre {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (panelJuego.isVisible()) { // Si se ha marcado Juego
+					panelButtons.setVisible(false);
 					try {
 						addGame();
 						Principal.stock.setModificado(true);
@@ -90,6 +91,7 @@ public class PanelAnadir extends PanelPadre {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (panelFigura.isVisible()) { // Si se ha marcado figura
+					panelButtons.setVisible(false);
 					try {
 						addToy();
 						Principal.stock.setModificado(true);
