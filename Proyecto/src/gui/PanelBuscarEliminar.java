@@ -23,36 +23,18 @@ public class PanelBuscarEliminar extends PanelMostrar {
 			public void actionPerformed(ActionEvent arg0) {
 				it.remove();
 				if (!it.hasPrevious() && !it.hasNext())
-					setVisible(false);
-				
+					setVisible(false);				
+				else if (!it.hasPrevious()){
+					showNext();
+					btnAnterior.setEnabled(false);
+				}
 				else if (!it.hasNext()){
 					showPrevious();
 					btnSiguiente.setEnabled(false);
-				}
-				else
-					showNext();
-				
+				}				
 			}
 
 		});
 	}
-//	/**
-//	 * Además de moverse en el stock, despeja el panel derecho
-//	 * @see PanelPadre.avanzar()
-//	 */
-//	@Override
-//	public void avanzar(){
-//		super.avanzar();
-//		cleanRightPanel();
-//	}
-//	/**
-//	 * Además de moverse en el stock, despeja el panel derecho
-//	 * @see PanelPadre.retroceder()
-//	 */
-//	@Override
-//	public void retroceder(){
-//		super.avanzar();
-//		cleanRightPanel();
-//	}
 
 }

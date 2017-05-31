@@ -73,6 +73,7 @@ public class DialogBienvenida {
 			private void habilitarVentanasEmpleado() {
 				Principal.menuUsuario.setVisible(false);
 				
+				
 			}
 		});
 		btnAreaEmpleados.setBounds(212, 54, 150, 47);
