@@ -16,7 +16,22 @@ MÁS COSAS QUE CONTROLAR:
 	
 	**implementar método showBestFive() ((clase stock))  --> ¿LO METO?		
 	
-	**Trabajar idea de Jaime --> 
-			Boton cobrar que calcule el total y genere algun tipo de factura.
-
 	** Github.io --> mirar lo que ha comentado Lourdes para la documentación
+
+/////////////ANOTACIONES LOURDES ////////////////
+	-----------------------------------------------------------------------------Meter el tipo de objeto (Stock) en Fichero
+	-------------------------------------------------------------Controlar tipo de dato de entrada al añadir --> excepciones
+	El contador de Artículo tienes que actualizarlo al leer de fichero (comienza desde uno) 
+	Fichero.open devuelve Object en vez de Stock 
+	Tildes 
+	mnemonics --> se debe subrayar la letra tb en los subitems
+	Revisa los títulos de JOptionPane, dialog.... 
+	Has quitado el iterador del padre... 
+	Sólo en Mostrar Siguiente/Anterior: repites Borras con iterador, pero revisa if/else de hasNext hasPrevious 
+	Modificado set en vez de modificar desde el arraylist 
+	Te falta la parte Web 
+	Te falta cambiar destacados 
+	Te falta Pedidos 
+	Error for input string:1 Falla añadir y no indicas por qué. Revisa excepciones 
+	Si hay error al añadir, no borres todo. Sólo al añadir con éxito 
+	En la entrada de enteros revisa la excepción del parse

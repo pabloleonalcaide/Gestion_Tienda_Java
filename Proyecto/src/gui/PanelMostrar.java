@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ListIterator;
 
 import jerarquia.Articulo;
@@ -10,11 +12,13 @@ import jerarquia.Articulo;
  *
  */
 public class PanelMostrar extends PanelPadre {
+	 ListIterator<Articulo> it;
+	
 
 	public PanelMostrar(ListIterator<Articulo> iterator) {
-		super(iterator);
+		super();
 		this.it = iterator;
-
+		setTitle("Mostrar");
 		rdbtnCartas.setEnabled(false);
 		rdbtnRol.setEnabled(false);
 		rdbtnTablero.setEnabled(false);
@@ -22,7 +26,7 @@ public class PanelMostrar extends PanelPadre {
 		textPaginas.setEnabled(false); 
 		textAutor.setEnabled(false);
 		textNombre.setEnabled(false);
-		textDetalles.setEnabled(false);
+		textDescripcion.setEnabled(false);
 		textTematica.setEnabled(false);
 		textPrecio.setEditable(false);
 		textEdicion.setEnabled(false);
@@ -61,6 +65,61 @@ public class PanelMostrar extends PanelPadre {
 		checkDesmontable.setEnabled(false);	
 		showNext();
 		btnAnterior.setEnabled(false);
+
+		// boton siguiente
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showNext();
+			}
+
+		});
+		// boton anterior
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showPrevious();
+			}
+
+		});
+
+	}
+	/**
+	 * Retrocede en el stock
+	 */
+	protected void showPrevious() {
+		if (it.hasPrevious())
+			showArticle(it.previous());
+
+		if (it.hasNext()) {
+			btnSiguiente.setEnabled(true);
+		} else {
+			btnSiguiente.setEnabled(false);
+		}
+		if (it.hasPrevious()) {
+			btnAnterior.setEnabled(true);
+		} else {
+			btnAnterior.setEnabled(false);
+			it.next();
+
+		}
+	}
+
+	/**
+	 * Avanza en el stock
+	 */
+	protected void showNext() {
+		if (it.hasNext())
+			showArticle(it.next());
+		if (it.hasNext()) {
+			btnSiguiente.setEnabled(true);
+		} else {
+			btnSiguiente.setEnabled(false);
+			it.previous();
+		}
+		if (it.hasPrevious()) {
+			btnAnterior.setEnabled(true);
+		} else {
+			btnAnterior.setEnabled(false);
+		}
 
 	}
 

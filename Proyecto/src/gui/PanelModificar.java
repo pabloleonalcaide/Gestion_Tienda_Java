@@ -60,7 +60,7 @@ public class PanelModificar extends PanelMostrar {
 		textPaginas.setEnabled(true);
 		textAutor.setEnabled(true);
 		textNombre.setEnabled(true);
-		textDetalles.setEnabled(true);
+		textDescripcion.setEnabled(true);
 		textTematica.setEnabled(true);
 		textPrecio.setEditable(true);
 		textEdicion.setEnabled(true);
@@ -138,9 +138,9 @@ public class PanelModificar extends PanelMostrar {
 	protected void modificarJuegoTablero(Articulo articulo) throws EdadNoValidaException {
 		Tablero tablero = (Tablero) articulo;
 		try {
-			Principal.stock.ModificarTablero(Principal.stock.indexOf(tablero), textNombre.getText(),
+			Principal.stock.modifyTablero(Principal.stock.indexOf(tablero), textNombre.getText(),
 					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
-					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDescripcion.getText(),
 					readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
 					Integer.parseInt(textEdad.getText()), Integer.parseInt(textPiezas.getText()),
 					checkColeccion.isSelected(), Integer.parseInt(textJugadores.getText()),
@@ -159,9 +159,9 @@ public class PanelModificar extends PanelMostrar {
 	protected void modificarJuegoCartas(Articulo articulo) throws EdadNoValidaException {
 		Cartas cartas = (Cartas) articulo;
 		try {
-			Principal.stock.ModificarCartas(Principal.stock.indexOf(cartas), textNombre.getText(),
+			Principal.stock.modifyCartas(Principal.stock.indexOf(cartas), textNombre.getText(),
 					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
-					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDescripcion.getText(),
 					readDateSpinner(spinnerEntrada), Integer.parseInt(textEdad.getText()),
 					Double.parseDouble(textFieldDuracion.getText()), Integer.parseInt(textCartas.getText()),
 					(DificultadCartas) comboBoxDificultad.getSelectedItem(), chckbxColeccion.isSelected());
@@ -180,9 +180,9 @@ public class PanelModificar extends PanelMostrar {
 	protected void modificarJuegoRol(Articulo articulo) throws EdadNoValidaException {
 		Rol rol = (Rol) articulo;
 		try {
-			Principal.stock.ModificarRol(Principal.stock.indexOf(rol), textNombre.getText(),
+			Principal.stock.modifyRol(Principal.stock.indexOf(rol), textNombre.getText(),
 					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
-					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDescripcion.getText(),
 					readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
 					Integer.parseInt(textEdad.getText()), (GeneroRol) comboBox_Genero.getSelectedItem(),
 					(MaterialRol) comboBoxMaterialRol.getSelectedItem(), Double.parseDouble(textEdicion.getText()));
@@ -201,9 +201,9 @@ public class PanelModificar extends PanelMostrar {
 	protected void modificarFigura(Articulo articulo) throws PesoNoValidoException {
 		Figura figura = (Figura) articulo;
 		try {
-			Principal.stock.ModificarFigura(Principal.stock.indexOf(figura), textNombre.getText(),
+			Principal.stock.modifyFigura(Principal.stock.indexOf(figura), textNombre.getText(),
 					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
-					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDescripcion.getText(),
 					readDateSpinner(spinnerEntrada), (double) spinnerPeso.getValue(), textTematica.getText(),
 					checkColeccion.isSelected(), checkDesmontable.isSelected(), (int) textNumElementos.getValue());
 		} catch (NumberFormatException | PrecioNoValidoException e) {
@@ -220,15 +220,12 @@ public class PanelModificar extends PanelMostrar {
 	 * @throws NombreNoValidoException
 	 */
 	protected void modificarLibro(Articulo articulo) throws FechaNoValidaException, NombreNoValidoException {
-		Libro libro = (Libro) articulo;
 		try {
-			Principal.stock.ModificarLibro(Principal.stock.indexOf(libro), textNombre.getText(),
-					Double.parseDouble(textPrecio.getText()), Integer.parseInt(textStock.getText()),
-					(EstadoArticulo) comboBoxEstado.getSelectedItem(), textDetalles.getText(),
-					readDateSpinner(spinnerEntrada), Integer.valueOf(textPaginas.getText()),
-					readDateSpinner(spinnerPublicacion), textAutor.getText(), checkColeccion.isSelected(),
-					(IdiomaLibro) comboBox_Idioma.getSelectedItem(),
-					(CategoriaLibro) comboBox_Genero.getSelectedItem());
+			it.set(new Libro(textNombre.getText(), textDescripcion.getText(), Double.parseDouble(textPrecio.getText()), 
+					(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
+					Integer.valueOf(textPaginas.getText()), readDateSpinner(spinnerPublicacion), 
+					textAutor.getText(), checkColeccion.isSelected(), (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
+					(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()));
 		} catch (NumberFormatException | PrecioNoValidoException e) {
 			JOptionPane.showMessageDialog(rootPane, e.getMessage());
 		}

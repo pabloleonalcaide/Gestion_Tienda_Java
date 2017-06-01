@@ -18,10 +18,11 @@ public class PanelEliminar extends PanelPadre {
 	private static final long serialVersionUID = 1L;
 
 	public PanelEliminar(ListIterator<Articulo> it) {
-		super(it);
+		super();
+		setTitle("Eliminar");
 		textNombre.setEditable(false);
 		textPrecio.setEditable(false);
-		textDetalles.setEditable(false);
+		textDescripcion.setEditable(false);
 		textStock.setEditable(false);
 		textStock.setEnabled(false);
 		comboBoxEstado.setEnabled(false);
@@ -35,7 +36,7 @@ public class PanelEliminar extends PanelPadre {
 		lblDescripcion.setBounds(12, 121, 80, 27);
 		lblNombre.setBounds(12, 30, 80, 27);
 		textNombre.setEnabled(false);
-		textDetalles.setEnabled(false);
+		textDescripcion.setEnabled(false);
 		textPrecio.setEnabled(false);
 		spinnerEntrada.setEnabled(false);
 		comboBoxTipoArticulo.setVisible(false);

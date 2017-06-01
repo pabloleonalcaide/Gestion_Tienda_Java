@@ -20,9 +20,9 @@ public class ComparePrice implements Comparator<Articulo> {
 
 	@Override
 	public int compare(Articulo e1, Articulo e2) {
-		if (e1.calcularTotal() < e2.calcularTotal()) {
+		if (e1.calculateFinalPrice() < e2.calculateFinalPrice()) {
 			return 1;
-		} else if (e2.calcularTotal() < e1.calcularTotal()) {
+		} else if (e2.calculateFinalPrice() < e1.calculateFinalPrice()) {
 			return -1;
 		} else
 			return 0;

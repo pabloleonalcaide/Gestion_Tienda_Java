@@ -8,12 +8,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.regex.Pattern;
+
+import stock.Stock;
+
 /**
  * Clase que gestiona el manejo de ficheros
+ * 
  * @author pablo
  *
  */
-//DEBERIA CREAR OTRA CLASE FICHERO PARA GUARDAR FICHEROS TXT O EN ESTA MISMA?
 public class Fichero implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,8 +27,8 @@ public class Fichero implements Serializable {
 	 * @param fichero
 	 */
 	public static void setFichero(String fichero) {
-		if (fichero==null)
-			fichero="SinTitulo";
+		if (fichero == null)
+			fichero = "SinTitulo";
 		Fichero.fichero = new File(fichero);
 	}
 
@@ -35,10 +38,11 @@ public class Fichero implements Serializable {
 	public static File getFichero() {
 		return fichero;
 	}
+
 	/**
 	 * Crear un nuevo fichero
 	 */
-	public static void newFile(){
+	public static void newFile() {
 		setFichero("SinTitulo.obj");
 	}
 
@@ -49,10 +53,10 @@ public class Fichero implements Serializable {
 	 * @param nombre
 	 * @throws IOException
 	 */
-	public static void saveAs(Object objeto, File nombre) throws IOException {
+	public static void saveAs(Stock stock, File nombre) throws IOException {
 		fichero = checkFile(nombre);
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fichero))) {
-			out.writeObject(objeto);
+			out.writeObject(stock);
 		}
 	}
 
@@ -62,9 +66,9 @@ public class Fichero implements Serializable {
 	 * @param objeto
 	 * @throws IOException
 	 */
-	public static void save(Object objeto) throws IOException {
+	public static void save(Stock stock) throws IOException {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fichero))) {
-			out.writeObject(objeto);
+			out.writeObject(stock);
 		}
 	}
 
@@ -75,14 +79,15 @@ public class Fichero implements Serializable {
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static Object open(File archivo) throws IOException, ClassNotFoundException {
+	public static Stock open(File archivo) throws IOException, ClassNotFoundException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(archivo))) {
-			return in.readObject();
+			return (Stock) in.readObject();
 		}
 	}
 
 	/**
-	 * Comprueba que el nombre del fichero cumple el patr�n establecido y le a�ade la extension elegida (.obj)
+	 * Comprueba que el nombre del fichero cumple el patr\u00f3n establecido y
+	 * le a\u00f1ade la extension elegida (.obj)
 	 * 
 	 * @param fichero2
 	 * @return
@@ -96,6 +101,4 @@ public class Fichero implements Serializable {
 		}
 
 	}
-	}
-
-
+}

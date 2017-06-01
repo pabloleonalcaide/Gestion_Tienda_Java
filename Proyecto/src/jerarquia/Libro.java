@@ -141,7 +141,7 @@ public class Libro extends Articulo {
 	@Override
 	public double obtenerDescuento() {
 		calcularDescuento();
-		return this.descuento;
+		return getDescuento();
 	}
 
 	@Override

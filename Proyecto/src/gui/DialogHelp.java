@@ -1,14 +1,16 @@
 package gui;
 
 import java.awt.FlowLayout;
-import java.awt.Font;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.TextArea;
-
+/**
+ * Despliega la ventana de ayuda, que permite seguir navegando sin necesidad de cerrarla previamente
+ * @author pablo
+ *
+ */
 public class DialogHelp extends JDialog {
 
 

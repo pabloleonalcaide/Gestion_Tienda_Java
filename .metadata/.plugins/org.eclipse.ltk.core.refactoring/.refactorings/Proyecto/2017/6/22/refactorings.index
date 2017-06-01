@@ -1,2 +1,10 @@
 1496301783725	Delete element
 1496302011000	Delete element
+1496305963520	Rename method 'ModificarLibro'
+1496305977364	Rename method 'ModificarFigura'
+1496305989404	Rename method 'ModificarRol'
+1496306003159	Rename method 'ModificarCartas'
+1496306018239	Rename method 'ModificarTablero'
+1496306159133	Rename method 'calcularTotal'
+1496306462197	Rename field 'mnArticulos_1'
+1496320371747	Rename field 'textDetalles'

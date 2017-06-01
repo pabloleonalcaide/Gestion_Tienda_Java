@@ -1,14 +1,11 @@
 package stock;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
-
-import javax.swing.JOptionPane;
 
 import enumeraciones.*;
 import excepciones.ArticuloNoExisteException;
@@ -36,11 +33,17 @@ public class Stock implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Articulo> stock = new ArrayList<Articulo>();
 	private boolean modificado = false;
-
+	
+	/**
+	 * @return true false
+	 */
 	public boolean isModificado() {
 		return modificado;
 	}
-
+	/**
+	 * 
+	 * @param modificado
+	 */
 	public void setModificado(boolean modificado) {
 		this.modificado = modificado;
 	}
@@ -73,7 +76,7 @@ public class Stock implements Serializable {
 		if (stock.contains(articulo))
 			articulo.setSeleccionado(true);
 		else
-			throw new ArticuloNoExisteException("el articulo no existe");
+			throw new ArticuloNoExisteException("el art\u00edculo no existe");
 	}
 
 	/**
@@ -81,12 +84,13 @@ public class Stock implements Serializable {
 	 * nuevo a false de lo contrario, lanza un mensaje
 	 * 
 	 * @param articulo
+	 * @throws ArticuloNoExisteException 
 	 */
-	void takeOut(Articulo articulo) {
+	void takeOut(Articulo articulo) throws ArticuloNoExisteException {
 		if (stock.contains(articulo) && articulo.isSeleccionado())
 			articulo.setSeleccionado(false);
 		else
-			System.out.println("imposible eliminar");
+			throw new ArticuloNoExisteException("no se pudo localizar el articulo");
 	}
 
 	/**
@@ -146,18 +150,25 @@ public class Stock implements Serializable {
 		int indice = stock.indexOf(articulo);
 		stock.get(indice).setEstado(EstadoArticulo.DESCATALOGADO);
 	}
-
+	/**
+	 * 
+	 * @return size
+	 */
 	public int size() {
 		return stock.size();
 	}
-
+	/**
+	 * 
+	 * @return isEmpty
+	 */
 	public boolean isEmpty() {
 		return stock.isEmpty();
 	}
 
-	// Muestra articulos destacados, escogidos por el dueño ---> IMPLEMENTAR
+	/**
+	 * Muestra los artículos destacados, seleccionados por el administrador
+	 */
 	void showBestFive() {
-
 	}
 
 	/**
@@ -356,10 +367,10 @@ public class Stock implements Serializable {
 	 */
 	public String getCatalogo(){
 		StringBuilder catalogo = new StringBuilder();
-		catalogo.append("----CATÁLOGO DE "+LocalDate.now()+"----\n");
+		catalogo.append("----CAT\u00c1LOGO DE "+LocalDate.now()+"----\n");
 		for (Articulo art : stock) {
-			catalogo.append("\nArticulo: " + art.getNombre() + ", Categoria: " + art.getClass()
-					+", Precio: "+art.calcularTotal());
+			catalogo.append("\nArt\u00edculo: " + art.getNombre() + ", Categor\u00eda: " + art.getClass()
+					+", Precio: "+art.calculateFinalPrice());
 			
 		}
 		return catalogo.toString();		
@@ -385,7 +396,7 @@ public class Stock implements Serializable {
 	 * @throws NombreNoValidoException
 	 * @throws FechaNoValidaException
 	 */
-	public void ModificarLibro(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
+	public void modifyLibro(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
 			String descripcion, LocalDate fecha, int paginas, LocalDate publicacion, String autor, boolean coleccion,
 			IdiomaLibro idioma, CategoriaLibro categoria)
 			throws PrecioNoValidoException, NombreNoValidoException, FechaNoValidaException {
@@ -415,7 +426,7 @@ public class Stock implements Serializable {
 	 * @throws PrecioNoValidoException
 	 * @throws PesoNoValidoException
 	 */
-	public void ModificarFigura(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
+	public void modifyFigura(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
 			String descripcion, LocalDate fecha, Double peso, String tematica, boolean coleccion, boolean desmontable,
 			int numElementos) throws PrecioNoValidoException, PesoNoValidoException {
 		stock.get(index).setNombre(nombre);
@@ -444,7 +455,7 @@ public class Stock implements Serializable {
 	 * @throws PrecioNoValidoException 
 	 * @throws EdadNoValidaException 
 	 */
-	public void ModificarRol(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
+	public void modifyRol(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
 			String descripcion,LocalDate fecha, double duracion, int edad, GeneroRol genero, MaterialRol material, Double edicion) throws PrecioNoValidoException, EdadNoValidaException {
 		stock.get(index).setNombre(nombre);
 		stock.get(index).setPrecio(precio);
@@ -472,7 +483,7 @@ public class Stock implements Serializable {
 	 * @throws PrecioNoValidoException
 	 * @throws EdadNoValidaException
 	 */
-	public void ModificarCartas(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
+	public void modifyCartas(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
 			String descripcion, LocalDate fecha, int edad, double duracion, int numCartas, DificultadCartas dificultad, boolean coleccion)
 			throws PrecioNoValidoException, EdadNoValidaException {
 		stock.get(index).setNombre(nombre);
@@ -502,7 +513,7 @@ public class Stock implements Serializable {
 	 * @throws PrecioNoValidoException
 	 * @throws EdadNoValidaException
 	 */
-	public void ModificarTablero(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
+	public void modifyTablero(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
 			String descripcion, LocalDate fecha, double duracion, int edad, int piezas, boolean coleccion, int jugadores, double dimensiones)
 			throws PrecioNoValidoException, EdadNoValidaException {
 		stock.get(index).setNombre(nombre);

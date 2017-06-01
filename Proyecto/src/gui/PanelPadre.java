@@ -53,10 +53,8 @@ import java.awt.Dimension;
  */
 public class PanelPadre extends JFrame {
 	private static final long serialVersionUID = 1L;
-	ListIterator<Articulo> it;
 	Articulo articuloMostrado;
-	public PanelPadre(ListIterator<Articulo> iterador) {
-		it = iterador;
+	public PanelPadre(){
 
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
@@ -78,22 +76,7 @@ public class PanelPadre extends JFrame {
 		// BOTONES
 		crearBotones();
 		crearBotonesJuego();
-		
-		// boton siguiente
-		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showNext();
-			}
-
-		});
-		// boton anterior
-		btnAnterior.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showPrevious();
-			}
-
-		});
-		comboBoxTipoArticulo.setModel(new DefaultComboBoxModel(new String[] { "Libro", "Figura", "Juego" }));
+				comboBoxTipoArticulo.setModel(new DefaultComboBoxModel(new String[] { "Libro", "Figura", "Juego" }));
 		comboBoxTipoArticulo.setSelectedIndex(0);
 
 		// combobox tipo de articulo
@@ -118,7 +101,7 @@ public class PanelPadre extends JFrame {
 		getContentPane().add(btnSalir);
 
 		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(
-				new Component[] { lblNombre, textNombre, lblPrecio, textPrecio, lblDescripcion, textDetalles, lblEstado,
+				new Component[] { lblNombre, textNombre, lblPrecio, textPrecio, lblDescripcion, textDescripcion, lblEstado,
 						lblCantidadStock, textStock, lblFechaEntrada, lblNProducto }));
 	}
 
@@ -205,7 +188,7 @@ public class PanelPadre extends JFrame {
 			spinnerPeso = new JSpinner();
 			spinnerPeso.setModel(new SpinnerNumberModel(new Double(1), null, null, new Double(0.1)));
 			panelFigura.add(spinnerPeso);
-			JLabel lblTematica = new JLabel("Tematica");
+			JLabel lblTematica = new JLabel("Tem\u00e1tica");
 			panelFigura.add(lblTematica);
 			textTematica = new JTextField();
 			textTematica.setEnabled(false);
@@ -213,13 +196,13 @@ public class PanelPadre extends JFrame {
 			textTematica.setColumns(10);
 			JLabel label = new JLabel("");
 			panelFigura.add(label);
-			checkColeccion = new JCheckBox("Coleccion");
+			checkColeccion = new JCheckBox("Colecci\u00f3n");
 			checkColeccion.setEnabled(false);
 			checkColeccion.setSelected(false);
 			panelFigura.add(checkColeccion);
 			JLabel lblDesmontable = new JLabel("Desmontable");
 			panelFigura.add(lblDesmontable);
-			checkDesmontable = new JCheckBox("yes/no");
+			checkDesmontable = new JCheckBox("si/no");
 			checkDesmontable.setEnabled(false);
 			panelFigura.add(checkDesmontable);
 			JLabel lblNumElementos = new JLabel("Num Elementos");
@@ -242,7 +225,7 @@ public class PanelPadre extends JFrame {
 			getContentPane().add(panelJuego);
 			panelJuego.setLayout(new GridLayout(0, 2, 0, 0));
 
-			lblDuracionJuego = new JLabel("Duracion");
+			lblDuracionJuego = new JLabel("Duraci\u00f3n");
 			panelJuego.add(lblDuracionJuego);
 
 			textFieldDuracion = new JTextField();
@@ -285,10 +268,10 @@ public class PanelPadre extends JFrame {
 			panelJuego.add(textJugadores);
 			textJugadores.setColumns(10);
 
-			lblColeccionJuego = new JLabel("Coleccion");
+			lblColeccionJuego = new JLabel("Colecci\u00f3n");
 			panelJuego.add(lblColeccionJuego);
 
-			chbxColeccionJuego = new JCheckBox("Coleccion");
+			chbxColeccionJuego = new JCheckBox("Colecci\u00f3n");
 			chbxColeccionJuego.setEnabled(false);
 			panelJuego.add(chbxColeccionJuego);
 			lblGenero = new JLabel("Genero");
@@ -322,7 +305,7 @@ public class PanelPadre extends JFrame {
 			comboBoxMaterialRol.setModel(new DefaultComboBoxModel(MaterialRol.values()));
 			panelJuego.add(comboBoxMaterialRol);
 
-			lblEdicion = new JLabel("Edicion");
+			lblEdicion = new JLabel("Edici\u00f3n");
 			panelJuego.add(lblEdicion);
 
 			textEdicion = new JTextField();
@@ -341,7 +324,7 @@ public class PanelPadre extends JFrame {
 			panelLibro.setBounds(398, 21, 306, 387);
 			getContentPane().add(panelLibro);
 			panelLibro.setLayout(new GridLayout(0, 2, 0, 0));
-			lblPaginas = new JLabel("Paginas");
+			lblPaginas = new JLabel("P\u00e1ginas");
 			lblPaginas.setMaximumSize(new Dimension(57, 10));
 			lblPaginas.setMinimumSize(new Dimension(57, 10));
 			lblPaginas.setPreferredSize(new Dimension(57, 10));
@@ -350,7 +333,7 @@ public class PanelPadre extends JFrame {
 			textPaginas.setEnabled(false);
 			panelLibro.add(textPaginas);
 			textPaginas.setColumns(10);
-			lblPublicacion = new JLabel("Publicacion");
+			lblPublicacion = new JLabel("Publicaci\u00f3n");
 			panelLibro.add(lblPublicacion);
 
 			spinnerPublicacion = new JSpinner();
@@ -370,7 +353,7 @@ public class PanelPadre extends JFrame {
 			panelLibro.add(textColeccion);
 			textColeccion.setEditable(false);
 			textColeccion.setColumns(10);
-			chckbxColeccion = new JCheckBox("Coleccion");
+			chckbxColeccion = new JCheckBox("Colecci\u00f3n");
 			chckbxColeccion.setEnabled(false);
 			panelLibro.add(chckbxColeccion);
 			lblIdioma = new JLabel("Idioma");
@@ -420,9 +403,9 @@ public class PanelPadre extends JFrame {
 			lblDescripcion = new JLabel("Detalles");
 			panelPrincipal.add(lblDescripcion);
 
-			textDetalles = new JTextField();
-			panelPrincipal.add(textDetalles);
-			textDetalles.setColumns(10);
+			textDescripcion = new JTextField();
+			panelPrincipal.add(textDescripcion);
+			textDescripcion.setColumns(10);
 
 			lblEstado = new JLabel("Estado");
 			panelPrincipal.add(lblEstado);
@@ -479,47 +462,7 @@ public class PanelPadre extends JFrame {
 		return articuloMostrado;
 	}
 
-	/**
-	 * Retrocede en el stock
-	 */
-	protected void showPrevious() {
-		if (it.hasPrevious())
-			showArticle(it.previous());
-
-		if (it.hasNext()) {
-			btnSiguiente.setEnabled(true);
-		} else {
-			btnSiguiente.setEnabled(false);
-		}
-		if (it.hasPrevious()) {
-			btnAnterior.setEnabled(true);
-		} else {
-			btnAnterior.setEnabled(false);
-			it.next();
-
-		}
-	}
-
-	/**
-	 * Avanza en el stock
-	 */
-	protected void showNext() {
-		if (it.hasNext())
-			showArticle(it.next());
-		if (it.hasNext()) {
-			btnSiguiente.setEnabled(true);
-		} else {
-			btnSiguiente.setEnabled(false);
-			it.previous();
-		}
-		if (it.hasPrevious()) {
-			btnAnterior.setEnabled(true);
-		} else {
-			btnAnterior.setEnabled(false);
-		}
-
-	}
-
+	
 	/**
 	 * Muestra en la ventana el articulo
 	 * 
@@ -539,9 +482,9 @@ public class PanelPadre extends JFrame {
 	void showMainPanel(Articulo articulo) {
 		comboBoxEstado.setSelectedItem(articulo.getEstado());
 		textStock.setText(Integer.toString(articulo.getCantidad()));
-		textDetalles.setText(articulo.getDescripcion());
+		textDescripcion.setText(articulo.getDescripcion());
 		textNombre.setText(articulo.getNombre());
-		textPrecio.setText(Double.toString(articulo.calcularTotal()));
+		textPrecio.setText(Double.toString(articulo.calculateFinalPrice()));
 		textId.setText(Integer.toString(articulo.getId()));
 	}
 
@@ -670,7 +613,7 @@ public class PanelPadre extends JFrame {
 	 */
 	public void emptyPanels() {
 		textNombre.setText("");
-		textDetalles.setText("");
+		textDescripcion.setText("");
 		textPrecio.setText("");
 		textPaginas.setText("");
 		textStock.setText("");
@@ -811,7 +754,7 @@ public class PanelPadre extends JFrame {
 	JLabel lblNProducto;
 	JTextField textNombre;
 	JTextField textPrecio;
-	JTextField textDetalles;
+	JTextField textDescripcion;
 	JTextField textStock;
 	JTextField textId;
 

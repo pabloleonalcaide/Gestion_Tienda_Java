@@ -1,75 +1,85 @@
 package jerarquia;
 
-import interfaces.Rebajable;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.function.Function;
-import java.util.function.ToDoubleFunction;
-import java.util.function.ToIntFunction;
-import java.util.function.ToLongFunction;
-
 import enumeraciones.EstadoArticulo;
 import excepciones.PrecioNoValidoException;
 
-public abstract class Articulo implements Serializable{
+public abstract class Articulo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String descripcion;
 	private double precio;
-	protected double descuento=1;
+	private double descuento = 1;
 	private double precioTotal;
 	private EstadoArticulo estado;
 	private LocalDate fechaEntrada;
 	private boolean seleccionado;
 	private int id;
-	private static int codigo=1;
+	private static int codigo = 1;
 	private int cantidad;
-	
-	public Articulo(String nombre,String descripcion, double precio,EstadoArticulo estado, LocalDate fecha) throws PrecioNoValidoException{
+
+	public Articulo(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha)
+			throws PrecioNoValidoException {
 		setId(id);
-		this.seleccionado=false; //no puede incluirse directamente seleccionado para la cesta de compra
-		this.precioTotal=calcularTotal();
+		this.seleccionado = false; // no puede incluirse directamente
+									// seleccionado para la cesta de compra
+		this.precioTotal = calculateFinalPrice();
 		setNombre(nombre);
 		setDescripcion(descripcion);
 		setPrecio(precio);
 		setEstado(estado);
 		setFecha(fecha);
-		
+
 	}
-	public Articulo (int id){
-		this.id=id;
+
+	/**
+	 * Constructor por id
+	 * 
+	 * @param id
+	 */
+	public Articulo(int id) {
+		this.id = id;
 	}
-	
+
+	/**
+	 * Constructor por nombre
+	 * 
+	 * @param nombre
+	 */
 	public Articulo(String nombre) {
 		setNombre(nombre);
 	}
-//	protected void setId(int id) {
-//		this.id=id;
-//		
-//	}
+
+	// protected void setId(int id) {
+	// this.id=id;
+	//
+	// }
 	/**
 	 * Calcula el precio al que será vendido el producto.
+	 * 
 	 * @return precio total tras aplicar descuentos
 	 */
-	public double calcularTotal() {
-		return getPrecio()-obtenerDescuento();
+	public double calculateFinalPrice() {
+		return getPrecio() - obtenerDescuento();
 	}
+
 	/**
 	 * Establece el id unico del articulo
 	 */
 	private void setId(int id) {
-		this.id=codigo++;
+		this.id = codigo++;
 	}
+
 	/**
 	 * 
 	 * @return identificador univoco del articulo
 	 */
-	public int getId(){
+	public int getId() {
 		return id;
 	}
+
 	/**
 	 * 
 	 * @return nombre
@@ -77,13 +87,15 @@ public abstract class Articulo implements Serializable{
 	public String getNombre() {
 		return nombre;
 	}
+
 	/**
-	 *  
+	 * 
 	 * @param nombre
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	/**
 	 * 
 	 * @return descripcion
@@ -91,6 +103,7 @@ public abstract class Articulo implements Serializable{
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	/**
 	 * 
 	 * @param descripcion
@@ -98,6 +111,7 @@ public abstract class Articulo implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 	/**
 	 * 
 	 * @return precio base del producto (sin descuento)
@@ -105,20 +119,24 @@ public abstract class Articulo implements Serializable{
 	public double getPrecio() {
 		return precio;
 	}
+
 	/**
 	 * 
-	 * @param precio base del producto (sin descuento)
-	 * @throws PrecioNoValidoException 
+	 * @param precio
+	 *            base del producto (sin descuento)
+	 * @throws PrecioNoValidoException
 	 */
 	public void setPrecio(double precio) throws PrecioNoValidoException {
-		if (precio>1000 && getEstado()==EstadoArticulo.DESCATALOGADO)
+		if (precio > 1000 && getEstado() == EstadoArticulo.DESCATALOGADO)
 			throw new PrecioNoValidoException("los productos descatalogados no valen tanto");
-		else if (precio<10 && getEstado()==EstadoArticulo.ED_LIMITADA)
-			throw new PrecioNoValidoException("es una edicion limitada, vale mas!");
-		else if (precio<=0)
+		else if (precio < 10 && getEstado() == EstadoArticulo.ED_LIMITADA)
+			throw new PrecioNoValidoException("es una edici\u00f3n limitada, vale mas!");
+		else if (precio <= 0)
 			throw new PrecioNoValidoException("el precio ha de ser positivo");
-		else this.precio=precio;
+		else
+			this.precio = precio;
 	}
+
 	/**
 	 * 
 	 * @return base de descuento
@@ -126,9 +144,11 @@ public abstract class Articulo implements Serializable{
 	public double getDescuento() {
 		return descuento;
 	}
-	void setDescuento(double descuento){
-		this.descuento=descuento;
+
+	void setDescuento(double descuento) {
+		this.descuento = descuento;
 	}
+
 	/**
 	 * @return estado del producto
 	 * @see Enum Estado
@@ -136,6 +156,7 @@ public abstract class Articulo implements Serializable{
 	public EstadoArticulo getEstado() {
 		return estado;
 	}
+
 	/**
 	 * 
 	 * @param estado
@@ -144,6 +165,7 @@ public abstract class Articulo implements Serializable{
 	public void setEstado(EstadoArticulo estado) {
 		this.estado = estado;
 	}
+
 	/**
 	 * 
 	 * @return fecha de llegada al stock
@@ -151,12 +173,14 @@ public abstract class Articulo implements Serializable{
 	public LocalDate getFecha() {
 		return fechaEntrada;
 	}
+
 	/**
 	 * La fecha se establece en base al momento de instanciar el objeto
 	 */
 	public void setFecha(LocalDate fecha) {
 		this.fechaEntrada = fecha;
 	}
+
 	/**
 	 * 
 	 * @return true / false (dentro/fuera de la cesta de compra)
@@ -164,6 +188,7 @@ public abstract class Articulo implements Serializable{
 	public boolean isSeleccionado() {
 		return seleccionado;
 	}
+
 	/**
 	 * 
 	 * @param seleccionado
@@ -171,26 +196,44 @@ public abstract class Articulo implements Serializable{
 	public void setSeleccionado(boolean seleccionado) {
 		this.seleccionado = seleccionado;
 	}
+
 	/**
 	 * Devuelve la clase de Objeto
+	 * 
 	 * @param articulo
 	 * @return
 	 */
-	public Object getClass(Articulo articulo){
+	public Object getClass(Articulo articulo) {
 		return getClass(articulo);
 	}
-	// ¿Debería ser un método del ArrayList? --> recuento a través de instanceof <objeto>
+
+	/**
+	 * Devuelve el stock de ese artículo
+	 * 
+	 * @return
+	 */
 	public int getCantidad() {
 		return cantidad;
 	}
-	// idem del anterior
-	
-	public String getClassName(){
+
+	/**
+	 * Devuelve el nombre de la clase del articulo
+	 * 
+	 * @return
+	 */
+	public String getClassName() {
 		return this.getClass().getSimpleName();
 	}
+
+	/**
+	 * Modifica el stock de ese artículo
+	 * 
+	 * @param cantidad
+	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
 	/**
 	 * Metodo abstracto que calcula el descuento del articulo
 	 */
@@ -200,14 +243,13 @@ public abstract class Articulo implements Serializable{
 	 * Metodo abstracto que devuelve el descuento especifico del articulo
 	 */
 	public abstract double obtenerDescuento();
-	
-	
+
 	@Override
 	public String toString() {
-		return "\nArticulo [nombre=" + getNombre() + ", descripcion=" + getDescripcion()
-				+ ", precioTotal=" + calcularTotal() + ", estado=" + getEstado()
-				+ ", id=" + getId() + "]";
+		return "\nArticulo [nombre=" + getNombre() + ", descripci\u00f3n=" + getDescripcion() + ", precioTotal="
+				+ calculateFinalPrice() + ", estado=" + getEstado() + ", id=" + getId() + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -215,6 +257,7 @@ public abstract class Articulo implements Serializable{
 		result = prime * result + id;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -228,6 +271,5 @@ public abstract class Articulo implements Serializable{
 			return false;
 		return true;
 	}
-
 
 }

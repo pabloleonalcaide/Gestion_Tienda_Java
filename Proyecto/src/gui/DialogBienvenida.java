@@ -49,7 +49,7 @@ public class DialogBienvenida {
 		final JTextField texto = new JTextField();
 		texto.setForeground(Color.WHITE);
 		texto.setText("Bienvenido a nuestra tienda Online \n"
-				+ "recuerda que puedes descargar el catalogo de forma gratuita");
+				+ "recuerda que puedes descargar el c\u00e1talogo de forma gratuita");
 		try {
 			BufferedImage image = null;
 			image = ImageIO.read(new File(getClass().getResource("/img/fondoBienvenida.jpg").getFile()));
@@ -59,7 +59,7 @@ public class DialogBienvenida {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(frameWelcome, "problemas al cargar el fondo");
 		}
-		JButton btnAreaClientes = new JButton("Area Clientes");
+		JButton btnAreaClientes = new JButton("\u00c1rea Clientes");
 		btnAreaClientes.setMnemonic('C');
 		btnAreaClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +80,7 @@ public class DialogBienvenida {
 		btnAreaClientes.setBounds(35, 54, 150, 47);
 		frameWelcome.getContentPane().add(btnAreaClientes);
 		
-		JButton btnAreaEmpleados = new JButton("Area Empleados");
+		JButton btnAreaEmpleados = new JButton("\u00c1rea Empleados");
 		btnAreaEmpleados.setMnemonic('E');
 		btnAreaEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

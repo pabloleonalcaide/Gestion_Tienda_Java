@@ -2,8 +2,6 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ListIterator;
 
 import javax.swing.JOptionPane;
@@ -21,8 +19,6 @@ import jerarquia.Libro;
 import jerarquia.Rol;
 import jerarquia.Tablero;
 
-import javax.swing.JPanel;
-
 /**
  * 
  * acciones para incluir Libro, Figuras y Juegos (con su respectiva herencia)
@@ -32,12 +28,14 @@ import javax.swing.JPanel;
  */
 public class PanelAnadir extends PanelPadre {
 
+	private static final long serialVersionUID = 1L;
+
 	public PanelAnadir(ListIterator<Articulo> it) {
-		super(it);
-		setTitle("Stock: Introducir articulo");
+		super();
+		setTitle("Stock: Introducir art\u00edculo");
 		comboBoxTipoArticulo.setSelectedItem(null);
 		textNombre.setEnabled(true);
-		textDetalles.setEnabled(true);
+		textDescripcion.setEnabled(true);
 		textPrecio.setEnabled(true);
 		textPaginas.setEnabled(true);
 		btnAnterior.setVisible(false);
@@ -73,33 +71,41 @@ public class PanelAnadir extends PanelPadre {
 		btnALaCesta_anadir.setText("A\u00f1adir");
 		btnALaCesta_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (isCamposVacios())
+					try {
+						throw new CamposVaciosException("has dejado campos sin rellenar");
+					} catch (CamposVaciosException e2) {
+						JOptionPane.showMessageDialog(getContentPane(), e2.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+					}
 				if (panelLibro.isVisible()) { // Si se ha marcado Libro
 					panelButtons.setVisible(true);
 					try {
 						addBook();
+						emptyPanels();
 						Principal.stock.setModificado(true);
 					} catch (NumberFormatException | NombreNoValidoException | PrecioNoValidoException
 							| FechaNoValidaException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(getContentPane(), e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (panelJuego.isVisible()) { // Si se ha marcado Juego
 					panelButtons.setVisible(false);
 					try {
 						addGame();
+						emptyPanels();
 						Principal.stock.setModificado(true);
 					} catch (NumberFormatException | PrecioNoValidoException | EdadNoValidaException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(getContentPane(), e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (panelFigura.isVisible()) { // Si se ha marcado figura
 					panelButtons.setVisible(false);
 					try {
 						addToy();
+						emptyPanels();
 						Principal.stock.setModificado(true);
 					} catch (NumberFormatException | PesoNoValidoException | PrecioNoValidoException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(getContentPane(), e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				}
-				emptyPanels();
 			}
 
 			/**
@@ -110,36 +116,41 @@ public class PanelAnadir extends PanelPadre {
 			 * @throws NumberFormatException
 			 */
 			protected void addGame() throws NumberFormatException, PrecioNoValidoException, EdadNoValidaException {
+				try {
+					if (rdbtnCartas.isSelected()) { 
+						enableCartas();
+						Principal.stock.addToStock(new Cartas(textNombre.getText(), textDescripcion.getText(),
+								Double.parseDouble(textPrecio.getText()),
+								(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
+								Double.parseDouble(textFieldDuracion.getText()), Integer.parseInt(textEdad.getText()),
+								Integer.parseInt(textCartas.getText()),
+								(DificultadCartas) comboBoxDificultad.getSelectedItem(), checkColeccion.isSelected()),
+								Integer.parseInt(textStock.getText()));
 
-				if (rdbtnCartas.isSelected()) { // Si se ha marcado el boton de
-												// Cartas
-					enableCartas();
-					Principal.stock.addToStock(new Cartas(textNombre.getText(), textDetalles.getText(),
-							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-							readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
-							Integer.parseInt(textEdad.getText()), Integer.parseInt(textCartas.getText()),
-							(DificultadCartas) comboBoxDificultad.getSelectedItem(), checkColeccion.isSelected()),
-							Integer.parseInt(textStock.getText()));
+					} else if (rdbtnRol.isSelected()) { 
+						enableRol();
+						Principal.stock.addToStock(new Rol(textNombre.getText(), textDescripcion.getText(),
+								Double.parseDouble(textPrecio.getText()),
+								(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
+								Double.parseDouble(textFieldDuracion.getText()), Integer.parseInt(textEdad.getText()),
+								(GeneroRol) comboBox_Genero.getSelectedItem(),
+								(MaterialRol) comboBoxMaterialRol.getSelectedItem(),
+								Double.parseDouble(textEdicion.getText())), Integer.parseInt(textStock.getText()));
 
-				} else if (rdbtnRol.isSelected()) { // Si se ha marcado el boton
-													// de Rol
-					enableRol();
-					Principal.stock.addToStock(new Rol(textNombre.getText(), textDetalles.getText(),
-							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-							readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
-							Integer.parseInt(textEdad.getText()), (GeneroRol) comboBox_Genero.getSelectedItem(),
-							(MaterialRol) comboBoxMaterialRol.getSelectedItem(),
-							Double.parseDouble(textEdicion.getText())), Integer.parseInt(textStock.getText()));
+					} else if (rdbtnTablero.isSelected()) { 
+						enableTablero();
+						Principal.stock.addToStock(new Tablero(textNombre.getText(), textDescripcion.getText(),
+								Double.parseDouble(textPrecio.getText()),
+								(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
+								Double.parseDouble(textFieldDuracion.getText()), Integer.parseInt(textEdad.getText()),
+								Integer.parseInt(textPiezas.getText()), Double.parseDouble(textDimensiones.getText()),
+								Integer.parseInt(textJugadores.getText()), checkColeccion.isSelected()),
+								Integer.parseInt(textStock.getText()));
 
-				} else if (rdbtnTablero.isSelected()) { // Si se ha marcado el
-														// boton de Tablero
-					enableTablero();
-					Principal.stock.addToStock(new Tablero(textNombre.getText(), textDetalles.getText(),
-							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-							readDateSpinner(spinnerEntrada), Double.parseDouble(textFieldDuracion.getText()),
-							Integer.parseInt(textEdad.getText()), Integer.parseInt(textPiezas.getText()),
-							Double.parseDouble(textDimensiones.getText()), Integer.parseInt(textJugadores.getText()),
-							checkColeccion.isSelected()), Integer.parseInt(textStock.getText()));
+					}
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Introduciste un car\u00e1cter err\u00f3neo",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
@@ -150,13 +161,16 @@ public class PanelAnadir extends PanelPadre {
 			 * @tInthrows PrecioNoValidoException
 			 */
 			protected void addToy() throws PesoNoValidoException, PrecioNoValidoException {
-				Principal.stock.addToStock(
-						new Figura(textNombre.getText(), textDetalles.getText(),
-								Double.parseDouble(textPrecio.getText()),
-								(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
-								(double) (spinnerPeso.getValue()), textTematica.getText(), checkColeccion.isSelected(),
-								checkDesmontable.isSelected(), (int) (textNumElementos.getValue())),
-						Integer.parseInt(textStock.getText()));
+				try {
+					Principal.stock.addToStock(new Figura(textNombre.getText(), textDescripcion.getText(),
+							Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
+							readDateSpinner(spinnerEntrada), (double) (spinnerPeso.getValue()), textTematica.getText(),
+							checkColeccion.isSelected(), checkDesmontable.isSelected(),
+							(int) (textNumElementos.getValue())), Integer.parseInt(textStock.getText()));
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Introduciste un car\u00e1cter err\u00f3neo",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 
 			/**
@@ -167,16 +181,41 @@ public class PanelAnadir extends PanelPadre {
 			 * @throws FechaNoValidaException
 			 */
 			protected void addBook() throws NombreNoValidoException, PrecioNoValidoException, FechaNoValidaException {
-				Principal.stock.addToStock(new Libro(textNombre.getText(), textDetalles.getText(),
-						Double.parseDouble(textPrecio.getText()), (EstadoArticulo) comboBoxEstado.getSelectedItem(),
-						readDateSpinner(spinnerEntrada), Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
-						textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
-						(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()),
-						Integer.parseInt(textStock.getText()));
+				try {
+					Principal.stock.addToStock(
+							new Libro(textNombre.getText(), textDescripcion.getText(),
+									Double.parseDouble(textPrecio.getText()),
+									(EstadoArticulo) comboBoxEstado.getSelectedItem(), readDateSpinner(spinnerEntrada),
+									Integer.parseInt(textPaginas.getText()), readDateSpinner(spinnerPublicacion),
+									textAutor.getText(), true, (IdiomaLibro) comboBox_Idioma.getSelectedItem(),
+									(CategoriaLibro) comboBoxCategoriaLibro.getSelectedItem()),
+							Integer.parseInt(textStock.getText()));
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Introduciste un car\u00e1cter err\u00f3neo",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
+				}
 
 			}
 		});
 
+	}
+
+	protected boolean isCamposVacios() {
+		if (textNombre.getText().isEmpty())return true;
+		else if (textDescripcion.getText().isEmpty())return true;
+		else if (textPrecio.getText().isEmpty())return true;
+		else if (textAutor.getText().isEmpty())return true;
+		else if (textCartas.getText().isEmpty())return true;
+		else if (textColeccion.getText().isEmpty())return true;
+		else if (textDimensiones.getText().isEmpty())return true;
+		else if (textPaginas.getText().isEmpty())return true;
+		else if (textEdad.getText().isEmpty())return true;
+		else if (textFieldDuracion.getText().isEmpty())return true;
+		else if (textEdicion.getText().isEmpty())return true;
+		else if (textPiezas.getText().isEmpty())return true;
+		else if (textTematica.getText().isEmpty())return true;
+		else if (textJugadores.getText().isEmpty())return true;
+		return false;
 	}
 
 }

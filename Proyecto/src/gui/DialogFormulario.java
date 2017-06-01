@@ -52,7 +52,7 @@ public class DialogFormulario extends JDialog {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al abrir el formulario", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -137,7 +137,7 @@ public class DialogFormulario extends JDialog {
 			comboBoxFormulario = new JComboBox();
 			comboBoxFormulario.setBounds(217, 101, 197, 31);
 			comboBoxFormulario
-					.setModel(new DefaultComboBoxModel(new String[] { "Sugerencia", "Reclamacion", "Dejar un C.V" }));
+					.setModel(new DefaultComboBoxModel(new String[] { "Sugerencia", "Reclamaci\u00f3n", "Dejar un C.V" }));
 			comboBoxFormulario.setSelectedItem(null);
 			contentPanel.add(comboBoxFormulario);
 		}
@@ -172,7 +172,7 @@ public class DialogFormulario extends JDialog {
 						try {
 							openFileChooser();
 						} catch (IOException | ClassNotFoundException e) {
-							JOptionPane.showMessageDialog(null, "Hay problemas para abrir el fichero", "ERROR",
+							JOptionPane.showMessageDialog(contentPanel, "Hay problemas para abrir el fichero", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 							Fichero.newFile();
 						}
@@ -215,7 +215,7 @@ public class DialogFormulario extends JDialog {
 									throw new NombreNoValidoException(
 											"Por favor, el comentario debe tener entre 10 y 500 caracteres");
 								} catch (NombreNoValidoException e) {
-									JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Fallo al enviar",
+									JOptionPane.showMessageDialog(contentPanel, e.getMessage(), "Fallo al enviar",
 											JOptionPane.WARNING_MESSAGE);
 								}
 							} else {
@@ -224,18 +224,18 @@ public class DialogFormulario extends JDialog {
 								try (FileWriter fichero = new FileWriter(sFichero)) {
 									fichero.write(mensaje);
 								} catch (IOException e) {
-									JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Fallo al enviar",
+									JOptionPane.showMessageDialog(contentPanel, e.getMessage(), "Fallo al enviar",
 											JOptionPane.WARNING_MESSAGE);
 								}
 
-								JOptionPane.showMessageDialog(rootPane,
-										"Enviado con Exito \n Muy pronto atenderemos su mensaje");
+								JOptionPane.showMessageDialog(contentPanel,
+										"Enviado con \u00c9xito \n Muy pronto atenderemos su mensaje");
 								setVisible(false);
 							}
 						} else {
 							try {
 								throw new NombreNoValidoException(
-										"El nombre o email no es valido, por favor corrigelo");
+										"El nombre o email no es valido, por favor corr\u00edgelo");
 							} catch (NombreNoValidoException e) {
 								JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Fallo al enviar",
 										JOptionPane.WARNING_MESSAGE);

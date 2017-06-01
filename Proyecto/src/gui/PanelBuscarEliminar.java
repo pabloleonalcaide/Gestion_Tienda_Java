@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ListIterator;
 
+import javax.swing.JOptionPane;
+
 import jerarquia.Articulo;
 /**
  * Muestra el catálogo de artículos y permite eliminar en el propio recorrido
@@ -16,19 +18,24 @@ public class PanelBuscarEliminar extends PanelMostrar {
 
 	public PanelBuscarEliminar( ListIterator<Articulo> iterador) {
 		super(iterador);
-		this.it =iterador;
 		btnSacar_borrar.setVisible(true);
 		btnSacar_borrar.setText("Eliminar");
 		btnSacar_borrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				it.remove();
+				try{
+					it.remove();
+					Principal.stock.setModificado(true);
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				}
+				
 				if (!it.hasPrevious() && !it.hasNext())
 					setVisible(false);				
 				else if (!it.hasPrevious()){
 					showNext();
 					btnAnterior.setEnabled(false);
 				}
-				else if (!it.hasNext()){
+				else{// if (!it.hasNext()){
 					showPrevious();
 					btnSiguiente.setEnabled(false);
 				}				

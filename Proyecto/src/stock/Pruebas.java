@@ -31,13 +31,13 @@ public class Pruebas {
 			stock.addToStock(libro, 5);
 			System.out.println("precio: "+libro.getPrecio());
 			System.out.println(libro.obtenerDescuento());
-			System.out.println("total: "+libro.calcularTotal());
+			System.out.println("total: "+libro.calculateFinalPrice());
 			System.out.println("descuento:"+libro.getDescuento());
 			stock.addToStock(libro2, 5);
 			stock.addToStock(libro3, 5);
 			stock.addToStock(libro4, 5);
 			System.out.println(libro.getPrecio());
-			System.out.println(libro.calcularTotal());
+			System.out.println(libro.calculateFinalPrice());
 			System.out.println(stock.toString());
 			System.out.println("descuento" +libro.getDescuento());
 

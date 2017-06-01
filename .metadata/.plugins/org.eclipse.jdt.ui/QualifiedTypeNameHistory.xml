@@ -14,7 +14,6 @@
 <fullyQualifiedTypeName name="jerarquia.Juego"/>
 <fullyQualifiedTypeName name="jerarquia.Tablero"/>
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="excepciones.PesoNoValidoException"/>
 <fullyQualifiedTypeName name="jerarquia.Rol"/>
 <fullyQualifiedTypeName name="jerarquia.Cartas"/>
@@ -40,4 +39,9 @@
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="stock.FondoImagen"/>
+<fullyQualifiedTypeName name="jerarquia.Libro"/>
+<fullyQualifiedTypeName name="excepciones.ArticuloNoExisteException"/>
+<fullyQualifiedTypeName name="stock.Stock"/>
+<fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>
