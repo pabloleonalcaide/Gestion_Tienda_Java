@@ -1,17 +1,13 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
@@ -19,8 +15,6 @@ import java.net.URISyntaxException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.Font;
-import javax.swing.JSeparator;
 import java.awt.SystemColor;
 /**
  * Muestra la informacion acerca del autor y el proyecto
@@ -29,7 +23,8 @@ import java.awt.SystemColor;
  */
 public class DialogAbout extends JDialog {
 
-	
+
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	 URI uri;
 	public DialogAbout() {

@@ -18,13 +18,12 @@ import javax.swing.JTextPane;
  *
  */
 public class DialogOferta extends JDialog {
+
+	private static final long serialVersionUID = 1L;
 	JTextPane textOfertas;
 	private final JPanel contentPanel = new JPanel();
-	private Stock stockOfertas = new Stock();
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		try {
 			DialogOferta dialog = new DialogOferta();
@@ -35,9 +34,7 @@ public class DialogOferta extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+
 	public DialogOferta() {
 		buscarOfertas();
 		setTitle("Menu Ofertas");

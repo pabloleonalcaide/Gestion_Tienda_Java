@@ -45,16 +45,16 @@ import javax.swing.JRadioButton;
 import jerarquia.*;
 import stock.FondoImagen;
 import java.awt.Dimension;
-
+/**
+ * Frame General del que heredan el resto de ventanas, contiene la declaración de
+ * los diferentes paneles y los elementos que éstos contienen.
+ * @author pablo
+ *
+ */
 public class PanelPadre extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	ListIterator<Articulo> it;
 	Articulo articuloMostrado;
-
-	// REFACTORIZAR --> SEPARAR POR COMPORTAMIENTO
 	public PanelPadre(ListIterator<Articulo> iterador) {
 		it = iterador;
 
@@ -394,7 +394,7 @@ public class PanelPadre extends JFrame {
 	}
 
 	/**
-	 * crea el panel principal
+	 * crea el panel principal con los elementos comunes a todos los Artículos
 	 */
 	protected void crearPanelPrincipal() {
 		{
@@ -681,11 +681,17 @@ public class PanelPadre extends JFrame {
 		textJugadores.setText("");
 		textTematica.setText("");
 		textPiezas.setText("");
+		textAutor.setText("");
+		textEdad.setText("");
+		textJugadores.setText("");
 		comboBoxTipoArticulo.setSelectedItem(null);
 		cleanRightPanel();
 
 	}
-
+	/**
+	 * 
+	 * @return the current JPanel
+	 */
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
@@ -853,6 +859,7 @@ public class PanelPadre extends JFrame {
 	JSpinner spinnerEntrada;
 	JComboBox comboBoxTipoArticulo = new JComboBox();
 	JCheckBox checkEnLaCesta;
+	JCheckBox chbxColeccionJuego;
 
 	JComboBox comboBoxMaterialRol;
 	JLabel lblMaterial;
@@ -868,12 +875,14 @@ public class PanelPadre extends JFrame {
 	JCheckBox checkColeccion;
 	JSpinner spinnerPeso;
 	JCheckBox checkDesmontable;
+	JSpinner textNumElementos;
+	JCheckBox chckbxColeccion;
+	
 	ButtonGroup bgJuegos = new ButtonGroup();
 	JRadioButton rdbtnCartas;
 	JRadioButton rdbtnTablero;
 	JRadioButton rdbtnRol;
 
-	JSpinner textNumElementos;
-	JCheckBox chckbxColeccion;
-	JCheckBox chbxColeccionJuego;
+	
+
 }

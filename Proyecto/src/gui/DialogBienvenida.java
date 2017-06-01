@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import stock.FondoImagen;
 
@@ -14,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
 /**
  * La ventana de Bienvenida habilita/deshabilita el menu de opciones de los empleados
@@ -38,11 +41,15 @@ public class DialogBienvenida {
 		frameWelcome = new JDialog();
 		frameWelcome.setVisible(true);
 		frameWelcome.setModal(true);
-		frameWelcome.setTitle("Developer's Dungeon - May the force be with Unix");
+		frameWelcome.setTitle("    --Developer's Dungeon--");
 		frameWelcome.setResizable(false);
 		frameWelcome.setBounds(100, 100, 402, 156);
 		frameWelcome.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		frameWelcome.getContentPane().setLayout(null);
+		final JTextField texto = new JTextField();
+		texto.setForeground(Color.WHITE);
+		texto.setText("Bienvenido a nuestra tienda Online \n"
+				+ "recuerda que puedes descargar el catalogo de forma gratuita");
 		try {
 			BufferedImage image = null;
 			image = ImageIO.read(new File(getClass().getResource("/img/fondoBienvenida.jpg").getFile()));
@@ -59,9 +66,7 @@ public class DialogBienvenida {
 				habilitarVentanasCliente();
 				frameWelcome.setVisible(false);
 				Principal.framePrincipal.setVisible(true);
-				
-				JOptionPane.showMessageDialog(frameWelcome, "Bienvenido a nuestra tienda Online \n"
-						+ "recuerda que puedes descargar el catalogo de forma gratuita");
+				JOptionPane.showMessageDialog(frameWelcome,texto);
 
 			}
 			/**
@@ -95,14 +100,16 @@ public class DialogBienvenida {
 		btnAreaEmpleados.setBounds(212, 54, 150, 47);
 		frameWelcome.getContentPane().add(btnAreaEmpleados);
 		
-		JLabel lblBienvenidoALa = new JLabel("Bienvenido a la Mazmorra del Desarrollador");
-		lblBienvenidoALa.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblBienvenidoALa.setBounds(35, 0, 383, 15);
-		frameWelcome.getContentPane().add(lblBienvenidoALa);
+		JLabel lblBIenvenido1 = new JLabel("Bienvenido a la Mazmorra del Desarrollador");
+		lblBIenvenido1.setForeground(Color.WHITE);
+		lblBIenvenido1.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblBIenvenido1.setBounds(35, 0, 383, 15);
+		frameWelcome.getContentPane().add(lblBIenvenido1);
 		
-		JLabel lblIndicaSiEres = new JLabel("Indica si eres cliente o empleado");
-		lblIndicaSiEres.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lblIndicaSiEres.setBounds(69, 26, 314, 15);
-		frameWelcome.getContentPane().add(lblIndicaSiEres);
+		JLabel lblBienvenido2 = new JLabel("Indica si eres cliente o empleado");
+		lblBienvenido2.setForeground(Color.WHITE);
+		lblBienvenido2.setFont(new Font("Dialog", Font.ITALIC, 12));
+		lblBienvenido2.setBounds(69, 26, 314, 15);
+		frameWelcome.getContentPane().add(lblBienvenido2);
 	}
 }

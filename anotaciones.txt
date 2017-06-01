@@ -6,14 +6,11 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	
 	**Salir -->
 				no debería preguntarme si no he modificado nada.. ¿es xq carga el fichero en el static?
-	**NavBar Usuario --> 
-				Mantener? --> Preguntar a Jaime o Lourdes
+
 	**Documentación -->
 				Mirar lo que ha puesto Lourdes sobre el repositorio y tal
 	**Botones Juego -->
 				Ocultar si no hay nada en el combobox
-
-	**Ayuda --> hacer un getinstance
 
 MÁS COSAS QUE CONTROLAR: 
 	

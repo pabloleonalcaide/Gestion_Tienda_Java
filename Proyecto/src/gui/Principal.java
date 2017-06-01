@@ -44,6 +44,7 @@ import javax.swing.JPanel;
 import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 /**
  * Clase Principal que despliega el JFrame de base
@@ -52,13 +53,14 @@ import java.awt.Rectangle;
  *
  */
 public class Principal {
-	static JFrame framePrincipal;
-	static Stock stock = new Stock();
+	protected static JFrame framePrincipal;
+	protected static Stock stock = new Stock();
+	private DialogHelp ayuda=null;
 	private Filtro filtro = new Filtro(".obj", "obj");
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
-	protected JButton btnWeb;
-	protected static JFileChooser fileChooser = new JFileChooser();
+	private JButton btnWeb;
+	private static JFileChooser fileChooser = new JFileChooser();
 	private JMenu mnArticulos_1;
 	static {
 		//Fichero.fichero = new File("stockUltimo.obj");
@@ -94,6 +96,7 @@ public class Principal {
 
 	private void initialize() {
 		framePrincipal = new JFrame();
+		framePrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/icono.png")));
 		framePrincipal.setResizable(false);
 		framePrincipal.addWindowListener(new WindowAdapter() {
 			@Override
@@ -285,7 +288,7 @@ public class Principal {
 		JMenuItem mntmAyuda_1 = new JMenuItem("Ayuda");
 		mntmAyuda_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DialogHelp ayuda = new DialogHelp();
+				ayuda =ayuda.getInstance();
 				ayuda.setVisible(true);
 			}
 		});

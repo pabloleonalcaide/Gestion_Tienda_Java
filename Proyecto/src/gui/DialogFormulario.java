@@ -21,32 +21,20 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
 /**
- * Dialogo de Formulario --> Recoger el formulario en un fichero
+ * Dialogo de Formulario: Recoge el formulario en un fichero
  * 
  * @author pablo
  *
  */
 public class DialogFormulario extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField formNombre;
@@ -58,9 +46,6 @@ public class DialogFormulario extends JDialog {
 	private Filtro filtroInput = new Filtro("pdf", "pdf");
 	StringBuilder mensaje = new StringBuilder();
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			DialogFormulario dialog = new DialogFormulario();
@@ -71,9 +56,6 @@ public class DialogFormulario extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public DialogFormulario() {
 		setResizable(false);
 		setModal(true);
@@ -135,11 +117,7 @@ public class DialogFormulario extends JDialog {
 				@Override
 				public void focusLost(FocusEvent arg0) {
 					if (!emailValido()) {
-						formEmail.setForeground(java.awt.Color.red);// si no es
-																	// valida,
-																	// se lo
-																	// indicamos
-																	// en rojo
+						formEmail.setForeground(java.awt.Color.red);
 						formEmail.setText(formEmail.getText());
 					}
 				}
@@ -147,7 +125,6 @@ public class DialogFormulario extends JDialog {
 				@Override
 				public void focusGained(FocusEvent arg0) {
 					formEmail.setForeground(java.awt.Color.black);
-					// una vez regresa, vuelve a ponerse negro
 				}
 			});
 		}
@@ -188,6 +165,9 @@ public class DialogFormulario extends JDialog {
 						open();
 					}
 
+					/**
+					 * Llama al método openFileChooser
+					 */
 					private void open() {
 						try {
 							openFileChooser();
@@ -199,6 +179,13 @@ public class DialogFormulario extends JDialog {
 
 					}
 
+					/**
+					 * Permite cargar un fichero desde un fileChooser
+					 * 
+					 * @throws FileNotFoundException
+					 * @throws ClassNotFoundException
+					 * @throws IOException
+					 */
 					private void openFileChooser() throws FileNotFoundException, ClassNotFoundException, IOException {
 						JFileChooser open = new JFileChooser();
 						open.setAcceptAllFileFilterUsed(false);
@@ -232,15 +219,15 @@ public class DialogFormulario extends JDialog {
 											JOptionPane.WARNING_MESSAGE);
 								}
 							} else {
-								String sFichero = "formularioPrueba.txt";
+								String sFichero = "formulario.txt";
 								String mensaje = generarContenido();
-								try (FileWriter fichero = new FileWriter(sFichero)){
+								try (FileWriter fichero = new FileWriter(sFichero)) {
 									fichero.write(mensaje);
 								} catch (IOException e) {
 									JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Fallo al enviar",
 											JOptionPane.WARNING_MESSAGE);
 								}
-								
+
 								JOptionPane.showMessageDialog(rootPane,
 										"Enviado con Exito \n Muy pronto atenderemos su mensaje");
 								setVisible(false);
@@ -254,7 +241,6 @@ public class DialogFormulario extends JDialog {
 										JOptionPane.WARNING_MESSAGE);
 							}
 						}
-						// Guarda la información del formulario en un fichero.txt
 					}
 
 				});
@@ -279,19 +265,26 @@ public class DialogFormulario extends JDialog {
 			}
 		}
 	}
-	protected String generarContenido() {
+
+	/**
+	 * Recoge el contenido del formulario y lo devuelve como cadena
+	 * 
+	 * @return contenido
+	 */
+	private String generarContenido() {
 		mensaje.append("---Formulario---\n");
-		mensaje.append("Nombre: "+formNombre.getText()+"\n");
-		mensaje.append("apellidos: "+formApellidos.getText()+"\n");
-		mensaje.append("email: "+formEmail.getText()+"\n");
-		mensaje.append("Tipo de mensaje: "+ comboBoxFormulario.getSelectedItem()+"\n");
-		mensaje.append("Contenido\n"+textArea.getText());
-		
+		mensaje.append("Nombre: " + formNombre.getText() + "\n");
+		mensaje.append("apellidos: " + formApellidos.getText() + "\n");
+		mensaje.append("email: " + formEmail.getText() + "\n");
+		mensaje.append("Tipo de mensaje: " + comboBoxFormulario.getSelectedItem() + "\n");
+		mensaje.append("Contenido\n" + textArea.getText());
+
 		return mensaje.toString();
 	}
 
 	/**
 	 * Comprueba que el email se escriba en un formato valido
+	 * 
 	 * @return
 	 */
 	private boolean emailValido() {
@@ -300,8 +293,10 @@ public class DialogFormulario extends JDialog {
 		return mEmail.matches();
 
 	}
+
 	/**
 	 * Comprueba que el nombre se escriba en un formato valido
+	 * 
 	 * @return
 	 */
 	private boolean nombreValido() {
