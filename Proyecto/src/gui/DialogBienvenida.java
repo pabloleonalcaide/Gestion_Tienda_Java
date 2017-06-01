@@ -1,9 +1,17 @@
 package gui;
 
 import javax.swing.JDialog;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+
+import stock.FondoImagen;
+
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -35,7 +43,15 @@ public class DialogBienvenida {
 		frameWelcome.setBounds(100, 100, 402, 156);
 		frameWelcome.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		frameWelcome.getContentPane().setLayout(null);
-		
+		try {
+			BufferedImage image = null;
+			image = ImageIO.read(new File(getClass().getResource("/img/fondoBienvenida.jpg").getFile()));
+			FondoImagen fondo = new FondoImagen(image);
+			((JComponent) frameWelcome.getContentPane()).setBorder(fondo);
+			frameWelcome.getContentPane().setLayout(null);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(frameWelcome, "problemas al cargar el fondo");
+		}
 		JButton btnAreaClientes = new JButton("Area Clientes");
 		btnAreaClientes.setMnemonic('C');
 		btnAreaClientes.addActionListener(new ActionListener() {

@@ -328,7 +328,7 @@ public class Principal {
 		mnBbdd.setMnemonic('A');
 		menuEmpleado.add(mnBbdd);
 
-		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Cambios");
+		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Como");
 		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
 		mntmGuardarcambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -344,6 +344,15 @@ public class Principal {
 			}
 		});
 		mnBbdd.add(mntmNuevoStock);
+		
+		JMenuItem mntmGuardar = new JMenuItem("Guardar");
+		mntmGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				save();
+			}
+		});
+		mntmGuardar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+		mnBbdd.add(mntmGuardar);
 		mnBbdd.add(mntmGuardarcambios);
 
 		JMenuItem mntmAbrir = new JMenuItem("Abrir Copia");
@@ -560,7 +569,7 @@ public class Principal {
 		menuUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		menuUsuario.setBackground(Color.LIGHT_GRAY);
 		menuUsuario.setToolTipText("Bienvenido a la Mazmorra del Desarrollador");
-		menuUsuario.setBounds(0, 0, 461, 21);
+		menuUsuario.setBounds(0, 0, 500, 21);
 		framePrincipal.getContentPane().add(menuUsuario);
 	}
 

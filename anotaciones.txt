@@ -13,6 +13,8 @@ PARTAMOS DE LO BÁSICO --> INSERTA - BORRA - MUESTRA
 	**Botones Juego -->
 				Ocultar si no hay nada en el combobox
 
+	**Ayuda --> hacer un getinstance
+
 MÁS COSAS QUE CONTROLAR: 
 	
 	**implementar método showBestFive() ((clase stock))  --> ¿LO METO?		
