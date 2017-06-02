@@ -1,5 +1,9 @@
 package enumeraciones;
-
+/**
+ * Categoria Literaria
+ * @author pablo
+ *
+ */
 public enum CategoriaLibro {
 	NOVELA_GRAFICA,
 	COMIC,

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import javax.swing.KeyStroke;
 
+import excepciones.CestaVaciaException;
 import ficheros.Fichero;
 import ficheros.Filtro; //Nuestra clase que maneja el filtro para la extension de los ficheros
 import java.awt.event.KeyEvent;
@@ -23,16 +24,13 @@ import stock.FondoImagen;
 import stock.Stock;
 
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
@@ -40,10 +38,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
-import java.awt.Cursor;
-import javax.swing.JLabel;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 /**
@@ -55,25 +49,17 @@ import java.awt.Toolkit;
 public class Principal {
 	protected static JFrame framePrincipal;
 	protected static Stock stock = new Stock();
-	private DialogHelp ayuda=null;
+	private DialogHelp ayuda = null;
 	protected static JMenuBar menuEmpleado;
 	protected static JMenuBar menuUsuario;
 	private JButton btnWeb;
 	private static JFileChooser fileChooser = new JFileChooser();
 	private Filtro filtro = new Filtro(".obj", "obj");
 	private JMenu menuArticulos;
-	static {
-		//Fichero.fichero = new File("stockUltimo.obj");
-		// try {
-		// stock = (Stock) Fichero.open(Fichero.fichero);
-		// stock.setModificado(false);		// } catch (ClassNotFoundException | IOException e) {
-		// JOptionPane.showMessageDialog(framePrincipal, "no se ha cargado ningun stock", "Aviso",
-		// JOptionPane.WARNING_MESSAGE);
-		// }
-	}
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings({ "unused", "static-access" })
 			public void run() {
 				/*
 				 * DialogBienvenida lanza un JDialog para escoger si se accede a
@@ -92,7 +78,8 @@ public class Principal {
 
 	private void initialize() {
 		framePrincipal = new JFrame();
-		framePrincipal.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/icono.png")));
+		framePrincipal
+				.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/icono.png")));
 		framePrincipal.setResizable(false);
 		framePrincipal.addWindowListener(new WindowAdapter() {
 			@Override
@@ -131,6 +118,7 @@ public class Principal {
 		cargarBotonWeb();
 
 	}
+
 	/**
 	 * Carga la imagen de fondo
 	 */
@@ -142,7 +130,8 @@ public class Principal {
 			((JComponent) framePrincipal.getContentPane()).setBorder(fondo);
 			framePrincipal.getContentPane().setLayout(null);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(framePrincipal, "problemas al cargar el fondo","Error", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(framePrincipal, "problemas al cargar el fondo", "Error",
+					JOptionPane.WARNING_MESSAGE);
 		}
 	}
 
@@ -158,18 +147,23 @@ public class Principal {
 		menuUsuario.add(menuArticulos);
 
 		JMenuItem mntmMostrarPrecio = new JMenuItem("Ordenar por Precio");
+		mntmMostrarPrecio.setMnemonic(KeyEvent.VK_P);
 		mntmMostrarPrecio.setToolTipText("Ordenar por precio");
 		mntmMostrarPrecio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PanelMostrar ordenaPrecio = new PanelMostrar(stock.iteratorPrice());
-				ordenaPrecio.setVisible(true);
-
+				if (stock.isEmpty())
+					msjEmptyStock();
+				else {
+					PanelVenta ordenaPrecio = new PanelVenta(stock.iteratorPrice());
+					ordenaPrecio.setVisible(true);
+				}
 			}
 		});
 		mntmMostrarPrecio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 		menuArticulos.add(mntmMostrarPrecio);
 
 		JMenuItem mntmMostrarNombre = new JMenuItem("Ordenar por Nombre");
+		mntmMostrarNombre.setMnemonic(KeyEvent.VK_N);
 		mntmMostrarNombre.setToolTipText("Ordenar por Nombre");
 		mntmMostrarNombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -198,6 +192,7 @@ public class Principal {
 		menuUsuario.add(mnCesta);
 
 		JMenuItem mntmVaciarCesta = new JMenuItem("Vaciar");
+		mntmVaciarCesta.setMnemonic(KeyEvent.VK_V);
 		mntmVaciarCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
 		mntmVaciarCesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -205,24 +200,30 @@ public class Principal {
 					JOptionPane.showMessageDialog(framePrincipal,
 							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
 							JOptionPane.WARNING_MESSAGE);
+				} else {
+					Principal.stock.setBasketEmpty();
+					JOptionPane.showMessageDialog(framePrincipal, "Cesta Vacia", "Despejado",
+							JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 		});
 		mnCesta.add(mntmVaciarCesta);
 
 		JMenuItem mntmVerCesta = new JMenuItem("Mostrar");
+		mntmVerCesta.setMnemonic(KeyEvent.VK_M);
 		mntmVerCesta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
 		mntmVerCesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (stock.isBasketEmpty()) {
-					JOptionPane.showMessageDialog(framePrincipal,
-							"No has seleccionado nada para la cesta\n vuelve cuando hayas elegido", "Esta Vacia",
-							JOptionPane.WARNING_MESSAGE);
-				} else {
-					// Muestra todos los articulos seleccionados en una lista y
-					// despliega opcion de pagar
+
+				PanelMostrar mostrarCesta;
+				try {
+					mostrarCesta = new PanelMostrar(Principal.stock.iteradorCesta());
+					mostrarCesta.setVisible(true);
+				} catch (CestaVaciaException e1) {
+					JOptionPane.showMessageDialog(framePrincipal, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+
 		});
 		mnCesta.add(mntmVerCesta);
 	}
@@ -237,15 +238,18 @@ public class Principal {
 	 * Carga el boton de acceso a la vista de usuario
 	 */
 	protected void cargarBotonWeb() {
-		btnWeb = new JButton("Vista web");
-		btnWeb.setBounds(166, 219, 120, 19);
+		btnWeb = new JButton("Cambiar vista");
+		btnWeb.setBounds(165, 250, 158, 19);
 		framePrincipal.getContentPane().add(btnWeb);
-		framePrincipal.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				menuUsuario.setVisible(true);
-				menuEmpleado.setVisible(false);
-				btnWeb.setVisible(false);
+				if (menuUsuario.isVisible()) {
+					menuUsuario.setVisible(false);
+					menuEmpleado.setVisible(true);
+				} else {
+					menuUsuario.setVisible(true);
+					menuEmpleado.setVisible(false);
+				}
 			}
 		});
 	}
@@ -259,6 +263,11 @@ public class Principal {
 		menuEmpleado.add(mnPedidos);
 
 		JMenuItem mntmMostrar = new JMenuItem("Mostrar");
+		mntmMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				readOrder();
+			}
+		});
 		mnPedidos.add(mntmMostrar);
 	}
 
@@ -266,19 +275,20 @@ public class Principal {
 	 * Crea el menu de empleado Destacados (cambiar destacados)
 	 */
 	protected void cargarMenuDestacados() {
-		JMenu mnCambiarDestacados = new JMenu("Cambiar Destacados");
-		mnCambiarDestacados.setMnemonic('C');
+		JMenuItem mnCambiarDestacados = new JMenuItem("Destacados");
 		mnCambiarDestacados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				JOptionPane.showMessageDialog(framePrincipal, "Proximamente...", "At work", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
+		mnCambiarDestacados.setMnemonic('C');
 		menuEmpleado.add(mnCambiarDestacados);
 
 		JMenuItem mntmAyuda_1 = new JMenuItem("Ayuda");
 		mntmAyuda_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
-				ayuda =ayuda.getInstance();
+				ayuda = ayuda.getInstance();
 				ayuda.setVisible(true);
 			}
 		});
@@ -297,6 +307,7 @@ public class Principal {
 		menuUsuario.add(mnOfertas);
 
 		JMenuItem mntmTodasOfertas = new JMenuItem("Todas las ofertas");
+		mntmTodasOfertas.setMnemonic(KeyEvent.VK_T);
 		mntmTodasOfertas.setToolTipText("Nuevo");
 		mntmTodasOfertas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
 		mntmTodasOfertas.addActionListener(new ActionListener() {
@@ -322,7 +333,6 @@ public class Principal {
 		menuEmpleado.add(mnBbdd);
 
 		JMenuItem mntmGuardarcambios = new JMenuItem("Guardar Como");
-		mntmGuardarcambios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
 		mntmGuardarcambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				saveAs();
@@ -330,6 +340,7 @@ public class Principal {
 		});
 
 		JMenuItem mntmNuevoStock = new JMenuItem("Nuevo Stock");
+		mntmNuevoStock.setMnemonic(KeyEvent.VK_N);
 		mntmNuevoStock.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mntmNuevoStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -337,28 +348,31 @@ public class Principal {
 			}
 		});
 		mnBbdd.add(mntmNuevoStock);
-		
+
 		JMenuItem mntmGuardar = new JMenuItem("Guardar");
+		mntmGuardar.setMnemonic(KeyEvent.VK_G);
 		mntmGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				save();
 			}
 		});
-		mntmGuardar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+		mntmGuardar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.CTRL_MASK));
 		mnBbdd.add(mntmGuardar);
 		mnBbdd.add(mntmGuardarcambios);
 
 		JMenuItem mntmAbrir = new JMenuItem("Abrir Stock");
+		mntmAbrir.setMnemonic(KeyEvent.VK_A);
 		mntmAbrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 		mntmAbrir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				recuperarCopia();
+				open();
 			}
 		});
 		mnBbdd.add(mntmAbrir);
 
 		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mntmSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK | InputEvent.ALT_MASK));
+		mntmSalir.setMnemonic(KeyEvent.VK_S);
+		mntmSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK | InputEvent.ALT_MASK));
 		mntmSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				salir();
@@ -370,6 +384,7 @@ public class Principal {
 		menuEmpleado.add(mnGestinArticulos);
 
 		JMenuItem mntmAadirNuevo = new JMenuItem("Incluir nuevo");
+		mntmAadirNuevo.setMnemonic(KeyEvent.VK_I);
 		mntmAadirNuevo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
 		mntmAadirNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -381,41 +396,44 @@ public class Principal {
 		mnGestinArticulos.add(mntmAadirNuevo);
 
 		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mntmEliminar.setMnemonic(KeyEvent.VK_E);
 		mntmEliminar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
 		mntmEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!stock.isEmpty()){
-				PanelEliminar delete = new PanelEliminar(stock.listIterator());
-				delete.setVisible(true);
-				}else{
+				if (!stock.isEmpty()) {
+					PanelEliminar delete = new PanelEliminar(stock.listIterator());
+					delete.setVisible(true);
+				} else {
 					msjEmptyStock();
 				}
 			}
 		});
 
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mntmModificar.setMnemonic(KeyEvent.VK_O);
 		mntmModificar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!stock.isEmpty()){
+				if (!stock.isEmpty()) {
 					PanelModificar modificar = new PanelModificar(stock.listIterator());
 					modificar.setVisible(true);
-				} else 
+				} else
 					msjEmptyStock();
-				
+
 			}
 		});
 
 		JMenuItem mntmMostrar_1 = new JMenuItem("Mostrar");
+		mntmMostrar_1.setMnemonic(KeyEvent.VK_M);
 		mntmMostrar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
 		mntmMostrar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!stock.isEmpty()) {
+				if (!stock.isEmpty()) {
 					PanelMostrar mostrar = new PanelMostrar(stock.listIterator());
 					mostrar.setVisible(true);
 				} else
 					msjEmptyStock();
-				
+
 			}
 		});
 		mnGestinArticulos.add(mntmMostrar_1);
@@ -423,6 +441,7 @@ public class Principal {
 		mnGestinArticulos.add(mntmEliminar);
 
 		JMenuItem mntmBuscarYEliminar = new JMenuItem("Buscar y Eliminar");
+		mntmBuscarYEliminar.setMnemonic(KeyEvent.VK_B);
 		mntmBuscarYEliminar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK));
 		mntmBuscarYEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -438,12 +457,14 @@ public class Principal {
 		mnGestinArticulos.add(mntmBuscarYEliminar);
 
 		JMenuItem mntmActualizarExistencias = new JMenuItem("Actualizar existencias");
+		mntmActualizarExistencias.setMnemonic(KeyEvent.VK_S);
 		mntmActualizarExistencias.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		mntmActualizarExistencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!stock.isEmpty()) {
-					if (JOptionPane.showConfirmDialog(framePrincipal, "Aumentaremos todas las existencias\nEst\u00e1s seguro?",
-							"Reponer", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					if (JOptionPane.showConfirmDialog(framePrincipal,
+							"Aumentaremos todas las existencias\nEst\u00e1s seguro?", "Reponer",
+							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 						stock.replenishAll();
 					} else
 						msjEmptyStock();
@@ -485,10 +506,10 @@ public class Principal {
 		JMenuItem mntmFiguras = new JMenuItem("Figuras");
 		mntmFiguras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!stock.isEmpty()) {
+				if (!stock.isEmpty()) {
 					PanelMostrar mostrarFiguras = new PanelMostrar(stock.iteratorFigura());
 					mostrarFiguras.setVisible(true);
-				}else
+				} else
 					msjEmptyStock();
 			}
 		});
@@ -497,7 +518,7 @@ public class Principal {
 		JMenuItem mntmLibros = new JMenuItem("Libros");
 		mntmLibros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!stock.isEmpty()) {
+				if (!stock.isEmpty()) {
 					PanelMostrar mostrarLibros = new PanelMostrar(stock.iteratorLibro());
 					mostrarLibros.setVisible(true);
 				} else
@@ -545,6 +566,7 @@ public class Principal {
 		mnContacto.add(mntmAyuda);
 
 		JMenuItem menuFormulario = new JMenuItem("Formulario de Contacto");
+		menuFormulario.setMnemonic(KeyEvent.VK_F);
 		menuFormulario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DialogFormulario formulario = new DialogFormulario();
@@ -590,8 +612,9 @@ public class Principal {
 
 		if (stock.isModificado()) {
 
-			int respuesta = JOptionPane.showOptionDialog(framePrincipal, "Desea guardar los cambios?", "Hay Cambios Sin Guardar",
-					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+			int respuesta = JOptionPane.showOptionDialog(framePrincipal, "Desea guardar los cambios?",
+					"Hay Cambios Sin Guardar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null,
+					null, null);
 			String nombre = JOptionPane.showInputDialog("Introduce un nombre para este stock");
 			if (respuesta == JOptionPane.YES_OPTION) {
 				saveAs();
@@ -635,7 +658,8 @@ public class Principal {
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(framePrincipal, "No se ha podido guardar", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(framePrincipal, "No se ha podido guardar", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 				}
 
 			} else {
@@ -649,7 +673,7 @@ public class Principal {
 	 * Guarda el stock en un fichero
 	 */
 	protected void save() {
-		if (Fichero.fichero.getName().equalsIgnoreCase("")) {
+		if (Fichero.fichero.getName().equalsIgnoreCase("SinTitulo")) {
 			saveAs();
 		} else {
 			try {
@@ -665,7 +689,7 @@ public class Principal {
 	/**
 	 * Abre un inventario anterior
 	 */
-	protected void recuperarCopia() {
+	protected void open() {
 		try {
 			openFileChooser();
 			stock.setModificado(false);
@@ -688,7 +712,7 @@ public class Principal {
 		fileChooser.addChoosableFileFilter(filtro);
 		if (fileChooser.showDialog(fileChooser, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
 			Fichero.fichero = fileChooser.getSelectedFile();
-			stock = (Stock) Fichero.open(fileChooser.getSelectedFile());
+			stock = Fichero.open(fileChooser.getSelectedFile());
 			JOptionPane.showMessageDialog(framePrincipal, "Cargado con \u00e9xito");
 		}
 	}
@@ -697,7 +721,8 @@ public class Principal {
 	 * Mensaje de stock vacio --> ¿metodo o desde el evento?
 	 */
 	private void msjEmptyStock() {
-		JOptionPane.showMessageDialog(framePrincipal, "No hay art\u00edculos", null, JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(framePrincipal, "No hay art\u00edculos", "Stock Vacio",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
@@ -705,8 +730,8 @@ public class Principal {
 	 */
 	protected void salir() {
 		if (stock.isModificado()) {
-			int respuesta = JOptionPane.showOptionDialog(framePrincipal, "No has guardado, Desea Guardar?", "NO HAS GUARDADO",
-					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+			int respuesta = JOptionPane.showOptionDialog(framePrincipal, "No has guardado, Desea Guardar?",
+					"NO HAS GUARDADO", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
 			if (respuesta == JOptionPane.YES_OPTION) {
 				saveAs();
 				System.exit(0);
@@ -716,6 +741,24 @@ public class Principal {
 			}
 		} else {
 			System.exit(0);
+		}
+	}
+
+	/**
+	 * De haberlo, accede al fichero de pedidos y muestra el contenido
+	 */
+	protected void readOrder() {
+		try {
+			FileReader fr = new FileReader("pedido.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			while ((linea = br.readLine()) != null)
+				linea += "\n" + linea;
+			fr.close();
+			JOptionPane.showMessageDialog(framePrincipal, linea);
+		} catch (IOException e5) {
+			JOptionPane.showMessageDialog(framePrincipal, "No pudo abrirse el fichero\n" + "o no existe ningun pedido",
+					"Sin Pedidos", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }

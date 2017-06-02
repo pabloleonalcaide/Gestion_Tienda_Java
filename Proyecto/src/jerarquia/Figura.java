@@ -1,7 +1,6 @@
 package jerarquia;
 
 import java.time.LocalDate;
-
 import enumeraciones.EstadoArticulo;
 import excepciones.PesoNoValidoException;
 import excepciones.PrecioNoValidoException;
@@ -14,53 +13,76 @@ import excepciones.PrecioNoValidoException;
  *
  */
 public class Figura extends Articulo {
+	private static final long serialVersionUID = 1L;
 	private static final double DESCUENTO_B = 0.03;
 	private static final double DESCUENTO_A = 0.05;
 	private double peso;
 	private String tematica;
 	private boolean desmontable;
 	private boolean coleccion;
-	private int num_elementos; // cantidad de figuras de que se compone el
-								// articulo
+	private int num_elementos; 
 
 	public Figura(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha, double peso,
-			String tematica, boolean desmontable, boolean coleccion, int num_elementos)
+			String tematica, boolean desmontable, boolean coleccion, int num_elementos,int cantidad)
 			throws PesoNoValidoException, PrecioNoValidoException {
-		super(nombre, descripcion, precio, estado, fecha);
+		super(nombre, descripcion, precio, estado, fecha, cantidad);
 		setPeso(peso);
 		setTematica(tematica);
 		setDesmontable(desmontable);
 		setColeccion(coleccion);
 		setNum_elementos(num_elementos);
 	}
-
+	/**
+	 * Constructor por nombre
+	 * @param nombre
+	 */
 	public Figura(String nombre) {
 		super(nombre);
 	}
-
+	/**
+	 * Constructor por id
+	 * @param id
+	 */
 	public Figura(int id) {
 		super(id);
 	}
-
+	/**
+	 * 
+	 * @return peso
+	 */
 	double getPeso() {
 		return peso;
 	}
 
-	// Controlamos que el peso no sea negativo ni excesivo
+	
+	/**
+	 * Controlamos que el peso no sea negativo ni excesivo
+	 * @param peso
+	 * @throws PesoNoValidoException
+	 */
 	public void setPeso(double peso) throws PesoNoValidoException {
 		if (peso > 5000 || peso < 0)
 			throw new PesoNoValidoException("ese peso no esta permitido");
 		this.peso = peso;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public String getTematica() {
 		return tematica;
 	}
-
+	/**
+	 * 
+	 * @param tematica
+	 */
 	public void setTematica(String tematica) {
 		this.tematica = tematica;
 	}
-
+	/**
+	 * 
+	 * @return true o false
+	 */
 	public boolean isDesmontable() {
 		return desmontable;
 	}
@@ -76,15 +98,24 @@ public class Figura extends Articulo {
 		else
 			this.desmontable = true;
 	}
-
+	/**
+	 * 
+	 * @return true o false
+	 */
 	private boolean isPesoReducido() {
 		return getPeso() < 500;
 	}
-
+	/**
+	 * 
+	 * @return true o false
+	 */
 	public boolean isColeccion() {
 		return coleccion;
 	}
-
+	/**
+	 * 
+	 * @param coleccion
+	 */
 	public void setColeccion(boolean coleccion) {
 		this.coleccion = coleccion;
 	}

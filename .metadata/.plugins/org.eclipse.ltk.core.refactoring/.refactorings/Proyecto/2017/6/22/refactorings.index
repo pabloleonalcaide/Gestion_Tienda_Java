@@ -8,3 +8,9 @@
 1496306159133	Rename method 'calcularTotal'
 1496306462197	Rename field 'mnArticulos_1'
 1496320371747	Rename field 'textDetalles'
+1496335902076	Delete element
+1496340798161	Rename method 'recuperarCopia'
+1496344424928	Extract method 'readOrder'
+1496357663180	Move compilation unit
+1496363607525	Delete element
+1496369001380	Move compilation unit

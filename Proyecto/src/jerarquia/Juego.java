@@ -1,41 +1,54 @@
 package jerarquia;
 
 import java.time.LocalDate;
-
 import enumeraciones.EstadoArticulo;
 import excepciones.EdadNoValidaException;
 import excepciones.PrecioNoValidoException;
 
 /**
  * Debido a que el descuento de los juegos se calcula en sus clases hijas la
- * clase Juego se ha definido como abstract (para poder dejar los métodos del
- * interface sin cuerpo
+ * clase Juego se ha definido como abstract
  * 
- * @author pablo
+ * @author pablo leon alcaide
  *
  */
 public abstract class Juego extends Articulo {
+
+	private static final long serialVersionUID = 1L;
 	private double duracion_horas;
 	private int edad_minima;
 
 	public Juego(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha,
-			double duracion, int edad) throws PrecioNoValidoException, EdadNoValidaException {
-		super(nombre, descripcion, precio, estado, fecha);
+			double duracion, int edad,int cantidad) throws PrecioNoValidoException, EdadNoValidaException {
+		super(nombre, descripcion, precio, estado, fecha, cantidad);
 		setDuracion(duracion);
 		setEdad(edad);
 	}
-
+	/**
+	 * Constructor por id (no utilizado, clase abstracta)
+	 * @param id
+	 */
 	public Juego(int id){
 		super(id);
 	}
+	/**
+	 * 
+	 * @return duracion
+	 */
 	public double getDuracion() {
 		return duracion_horas;
 	}
-
+	/**
+	 * 
+	 * @param duracion_horas
+	 */
 	public void setDuracion(double duracion_horas) {
 		this.duracion_horas = duracion_horas;
 	}
-
+	/**
+	 * 
+	 * @return edad minima
+	 */
 	public int getEdad() {
 		return edad_minima;
 	}
@@ -52,13 +65,20 @@ public abstract class Juego extends Articulo {
 			throw new EdadNoValidaException("edad fuera de los limites");
 		this.edad_minima = edad_minima;
 	}
-
+	/**
+	 * 
+	 * @param edad_minima
+	 * @return
+	 */
 	private boolean isEdadValida(int edad_minima) {
 		return edad_minima > 65 || edad_minima < 3;
 	}
 
-	// El descuento se calcula en las clases que heredan de Juego, no en la
-	// propia clase Juego
+	/**
+	 * El descuento se calcula en las clases que heredan de Juego, no en la
+	*
+	* propia clase Juego
+	*/
 	@Override
 	public abstract void calcularDescuento();
 

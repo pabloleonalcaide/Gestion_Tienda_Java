@@ -35,7 +35,7 @@ public class PanelBuscarEliminar extends PanelMostrar {
 					showNext();
 					btnAnterior.setEnabled(false);
 				}
-				else{// if (!it.hasNext()){
+				else{
 					showPrevious();
 					btnSiguiente.setEnabled(false);
 				}				

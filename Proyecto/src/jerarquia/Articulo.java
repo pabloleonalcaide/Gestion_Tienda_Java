@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import enumeraciones.EstadoArticulo;
 import excepciones.PrecioNoValidoException;
-
+/**
+ * Clase Articulo, padre de la jerarquía
+ * @author pablo leon alcaide
+ *
+ */
 public abstract class Articulo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,9 +24,9 @@ public abstract class Articulo implements Serializable {
 	private static int codigo = 1;
 	private int cantidad;
 
-	public Articulo(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha)
+	public Articulo(String nombre, String descripcion, double precio, EstadoArticulo estado, LocalDate fecha,int cantidad)
 			throws PrecioNoValidoException {
-		setId(id);
+		setId() ;
 		this.seleccionado = false; // no puede incluirse directamente
 									// seleccionado para la cesta de compra
 		this.precioTotal = calculateFinalPrice();
@@ -31,7 +35,7 @@ public abstract class Articulo implements Serializable {
 		setPrecio(precio);
 		setEstado(estado);
 		setFecha(fecha);
-
+		setCantidad(cantidad);
 	}
 
 	/**
@@ -52,23 +56,20 @@ public abstract class Articulo implements Serializable {
 		setNombre(nombre);
 	}
 
-	// protected void setId(int id) {
-	// this.id=id;
-	//
-	// }
 	/**
 	 * Calcula el precio al que será vendido el producto.
 	 * 
 	 * @return precio total tras aplicar descuentos
 	 */
 	public double calculateFinalPrice() {
-		return getPrecio() - obtenerDescuento();
+		this.precioTotal = getPrecio() - obtenerDescuento();
+		return precioTotal;
 	}
 
 	/**
 	 * Establece el id unico del articulo
 	 */
-	private void setId(int id) {
+	private void setId() {
 		this.id = codigo++;
 	}
 

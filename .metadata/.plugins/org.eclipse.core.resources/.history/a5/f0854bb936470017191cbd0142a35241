@@ -1,0 +1,10 @@
+package stock;
+
+public class CestaVaciaException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

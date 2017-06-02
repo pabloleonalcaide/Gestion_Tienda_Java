@@ -1,16 +1,11 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import jerarquia.Articulo;
-import stock.Stock;
-
 import javax.swing.JTextPane;
 /**
  * Panel que muestra las ofertas actuales
@@ -22,19 +17,6 @@ public class DialogOferta extends JDialog {
 	private static final long serialVersionUID = 1L;
 	JTextPane textOfertas;
 	private final JPanel contentPanel = new JPanel();
-
-
-	public static void main(String[] args) {
-		try {
-			DialogOferta dialog = new DialogOferta();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
 	public DialogOferta() {
 		buscarOfertas();
 		setTitle("Menu Ofertas");
@@ -49,13 +31,15 @@ public class DialogOferta extends JDialog {
 		textOfertas.setEditable(false);
 		textOfertas.setBounds(10, 23, 422, 239);
 		contentPanel.add(textOfertas);
+		textOfertas.setText(buscarOfertas());
 	}
 
 	/**
 	 * Recorre el stock buscando aquellos articulos con mejores descuentos
 	 */
-	private void buscarOfertas() {
+	private String buscarOfertas() {
 		StringBuilder contenido = new StringBuilder();
+		contenido.append("--Ofertas--");
 		int contador=0;
 		for (Articulo art : Principal.stock.getStock()) {
 			if (art.getDescuento() > 0.5) {
@@ -65,11 +49,7 @@ public class DialogOferta extends JDialog {
 			}
 
 		}
-		if (contenido.length() == 0)
-			textOfertas.setText("no tenemos ofertas");
-		else
-			textOfertas.setText(contenido.toString());
-
+		return contenido.toString();
 	}
 
 }

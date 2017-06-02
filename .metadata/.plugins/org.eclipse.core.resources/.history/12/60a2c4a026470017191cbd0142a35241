@@ -1,0 +1,16 @@
+package gui;
+
+import java.util.ListIterator;
+
+import jerarquia.Articulo;
+
+public class PanelVenta extends PanelMostrar {
+
+	private static final long serialVersionUID = 1L;
+
+	public PanelVenta(ListIterator<Articulo> iterator) {
+		super(iterator);
+		checkEnLaCesta.setEnabled(true);
+	}
+
+}

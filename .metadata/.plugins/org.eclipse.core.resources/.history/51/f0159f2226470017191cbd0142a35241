@@ -1,0 +1,13 @@
+package gui;
+
+import java.util.ListIterator;
+
+import jerarquia.Articulo;
+
+public class PanelVenta extends PanelMostrar {
+
+	public PanelVenta(ListIterator<Articulo> iterator) {
+		super(iterator);
+	}
+
+}

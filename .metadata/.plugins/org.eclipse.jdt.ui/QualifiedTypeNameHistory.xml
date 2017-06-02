@@ -43,5 +43,7 @@
 <fullyQualifiedTypeName name="excepciones.ArticuloNoExisteException"/>
 <fullyQualifiedTypeName name="stock.Stock"/>
 <fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
+<fullyQualifiedTypeName name="gui.PanelMostrar"/>
+<fullyQualifiedTypeName name="jdk.nashorn.internal.scripts.JO"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

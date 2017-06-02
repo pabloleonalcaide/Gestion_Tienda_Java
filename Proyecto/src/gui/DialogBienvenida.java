@@ -5,8 +5,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import stock.FondoImagen;
 
 import java.awt.event.ActionListener;
@@ -27,16 +25,12 @@ import java.awt.Font;
 public class DialogBienvenida {
 
 	private JDialog frameWelcome;
-	/**
-	 * Create the application.
-	 */
+
 	public DialogBienvenida() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+
 	private void initialize() {
 		frameWelcome = new JDialog();
 		frameWelcome.setVisible(true);
@@ -46,10 +40,6 @@ public class DialogBienvenida {
 		frameWelcome.setBounds(100, 100, 402, 156);
 		frameWelcome.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		frameWelcome.getContentPane().setLayout(null);
-		final JTextField texto = new JTextField();
-		texto.setForeground(Color.WHITE);
-		texto.setText("Bienvenido a nuestra tienda Online \n"
-				+ "recuerda que puedes descargar el c\u00e1talogo de forma gratuita");
 		try {
 			BufferedImage image = null;
 			image = ImageIO.read(new File(getClass().getResource("/img/fondoBienvenida.jpg").getFile()));
@@ -66,7 +56,6 @@ public class DialogBienvenida {
 				habilitarVentanasCliente();
 				frameWelcome.setVisible(false);
 				Principal.framePrincipal.setVisible(true);
-				JOptionPane.showMessageDialog(frameWelcome,texto);
 
 			}
 			/**

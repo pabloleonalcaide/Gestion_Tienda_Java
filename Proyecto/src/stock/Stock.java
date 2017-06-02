@@ -9,12 +9,8 @@ import java.util.ListIterator;
 
 import enumeraciones.*;
 import excepciones.ArticuloNoExisteException;
-import excepciones.EdadNoValidaException;
-import excepciones.FechaNoValidaException;
+import excepciones.CestaVaciaException;
 import excepciones.ImposibleEliminarException;
-import excepciones.NombreNoValidoException;
-import excepciones.PesoNoValidoException;
-import excepciones.PrecioNoValidoException;
 import jerarquia.Articulo;
 import jerarquia.Cartas;
 import jerarquia.Figura;
@@ -26,7 +22,7 @@ import jerarquia.Tablero;
 /**
  * Stock de articulos, envoltorio de arraylist
  * 
- * @author pablo
+ * @author pablo leon alcaide
  * 
  */
 public class Stock implements Serializable {
@@ -110,9 +106,9 @@ public class Stock implements Serializable {
 	 * @param cantidad
 	 */
 	public void addToStock(Articulo articulo, int cantidad) {
-		if (!stock.contains(articulo)) {
+//		if (!stock.contains(articulo)) {
 			stock.add(articulo);
-		}
+//		}
 		int indice = stock.indexOf(articulo);
 		stock.get(indice).setCantidad(stock.get(indice).getCantidad() + cantidad);
 	}
@@ -165,11 +161,6 @@ public class Stock implements Serializable {
 		return stock.isEmpty();
 	}
 
-	/**
-	 * Muestra los artículos destacados, seleccionados por el administrador
-	 */
-	void showBestFive() {
-	}
 
 	/**
 	 * Extrae un Libro a traves de su id
@@ -239,7 +230,11 @@ public class Stock implements Serializable {
 		}
 		return null;
 	}
-	
+	/**
+	 * 
+	 * @param articulo
+	 * @return indexOf articulo
+	 */
 	public int indexOf(Articulo articulo) {
 		return stock.indexOf(articulo);
 	}
@@ -278,7 +273,7 @@ public class Stock implements Serializable {
 	/**
 	 * Aumenta el stock de todos los articulos en +10
 	 */
-	public void replenishAll() { 	//--> Pasar por parámetro la cantidad??
+	public void replenishAll() { 	
 		for (Articulo art : stock) {
 			art.setCantidad(art.getCantidad() + 10);
 		}
@@ -377,162 +372,31 @@ public class Stock implements Serializable {
 	
 	}
 
-	/**
-	 * Modifica los datos del Articulo Libro
-	 * 
-	 * @param nombre
-	 * @param precio
-	 * @param cantidad
-	 * @param estado
-	 * @param descripcion
-	 * @param fecha
-	 * @param paginas
-	 * @param publicacion
-	 * @param autor
-	 * @param coleccion
-	 * @param idioma
-	 * @param categoria
-	 * @throws PrecioNoValidoException
-	 * @throws NombreNoValidoException
-	 * @throws FechaNoValidaException
-	 */
-	public void modifyLibro(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
-			String descripcion, LocalDate fecha, int paginas, LocalDate publicacion, String autor, boolean coleccion,
-			IdiomaLibro idioma, CategoriaLibro categoria)
-			throws PrecioNoValidoException, NombreNoValidoException, FechaNoValidaException {
-		stock.get(index).setNombre(nombre);
-		stock.get(index).setPrecio(precio);
-		stock.get(index).setCantidad(cantidad);
-		stock.get(index).setEstado(estado);
-		stock.get(index).setDescripcion(descripcion);
-		stock.get(index).setFecha(fecha);
-		((Libro) stock.get(index)).setPaginas(paginas);
-		((Libro) stock.get(index)).setFechaPublicacion(publicacion);
-		((Libro) stock.get(index)).setAutor(autor);
-		((Libro) stock.get(index)).setColeccion(coleccion);
-		((Libro) stock.get(index)).setIdioma(idioma);
-		((Libro) stock.get(index)).setCategoria(categoria);
-	}
-
-	/**
-	 * Modifica los datos del Articulo Figura
-	 * 
-	 * @param index
-	 * @param peso
-	 * @param tematica
-	 * @param coleccion
-	 * @param desmontable
-	 * @param numElementos
-	 * @throws PrecioNoValidoException
-	 * @throws PesoNoValidoException
-	 */
-	public void modifyFigura(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
-			String descripcion, LocalDate fecha, Double peso, String tematica, boolean coleccion, boolean desmontable,
-			int numElementos) throws PrecioNoValidoException, PesoNoValidoException {
-		stock.get(index).setNombre(nombre);
-		stock.get(index).setPrecio(precio);
-		stock.get(index).setCantidad(cantidad);
-		stock.get(index).setEstado(estado);
-		stock.get(index).setDescripcion(descripcion);
-		stock.get(index).setFecha(fecha);
-		((Figura) stock.get(index)).setPeso(peso);
-		((Figura) stock.get(index)).setTematica(tematica);
-		((Figura) stock.get(index)).setColeccion(coleccion);
-		((Figura) stock.get(index)).setDesmontable(desmontable);
-		((Figura) stock.get(index)).setNum_elementos(numElementos);
-
-	}
-
-	/**
-	 * Modifica los datos del Articulo Juego-Rol
-	 * 
-	 * @param index
-	 * @param duracion 
-	 * @param edad 
-	 * @param genero 
-	 * @param material 
-	 * @param edicion 
-	 * @throws PrecioNoValidoException 
-	 * @throws EdadNoValidaException 
-	 */
-	public void modifyRol(int index,String nombre, double precio, int cantidad, EstadoArticulo estado,
-			String descripcion,LocalDate fecha, double duracion, int edad, GeneroRol genero, MaterialRol material, Double edicion) throws PrecioNoValidoException, EdadNoValidaException {
-		stock.get(index).setNombre(nombre);
-		stock.get(index).setPrecio(precio);
-		stock.get(index).setCantidad(cantidad);
-		stock.get(index).setEstado(estado);
-		stock.get(index).setDescripcion(descripcion);
-		stock.get(index).setFecha(fecha);
-		((Juego) stock.get(index)).setDuracion(duracion);
-		((Juego) stock.get(index)).setEdad(edad);
-		((Rol) stock.get(index)).setGenero(genero);
-		((Rol) stock.get(index)).setMaterial(material);
-		((Rol) stock.get(index)).setEdicion(edicion);
-
-	}
-
-	/**
-	 * Modifica los datos del Articulo Juego-Cartas
-	 * 
-	 * @param index
-	 * @param edad
-	 * @param duracion
-	 * @param numCartas 
-	 * @param dificultad 
-	 * @param coleccion 
-	 * @throws PrecioNoValidoException
-	 * @throws EdadNoValidaException
-	 */
-	public void modifyCartas(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
-			String descripcion, LocalDate fecha, int edad, double duracion, int numCartas, DificultadCartas dificultad, boolean coleccion)
-			throws PrecioNoValidoException, EdadNoValidaException {
-		stock.get(index).setNombre(nombre);
-		stock.get(index).setPrecio(precio);
-		stock.get(index).setCantidad(cantidad);
-		stock.get(index).setEstado(estado);
-		stock.get(index).setDescripcion(descripcion);
-		stock.get(index).setFecha(fecha);
-		((Juego) stock.get(index)).setDuracion(duracion);
-		((Juego) stock.get(index)).setEdad(edad);
-		((Cartas) stock.get(index)).setNum_cartas(numCartas);
-		((Cartas) stock.get(index)).setDificultad(dificultad);
-		((Cartas) stock.get(index)).setColeccion(coleccion);
-		
-	}
-
-	/**
-	 * Modifica los datos del Articulo Juego-Tablero
-	 * 
-	 * @param index
-	 * @param duracion
-	 * @param edad
-	 * @param piezas 
-	 * @param coleccion 
-	 * @param jugadores 
-	 * @param dimensiones 
-	 * @throws PrecioNoValidoException
-	 * @throws EdadNoValidaException
-	 */
-	public void modifyTablero(int index, String nombre, double precio, int cantidad, EstadoArticulo estado,
-			String descripcion, LocalDate fecha, double duracion, int edad, int piezas, boolean coleccion, int jugadores, double dimensiones)
-			throws PrecioNoValidoException, EdadNoValidaException {
-		stock.get(index).setNombre(nombre);
-		stock.get(index).setPrecio(precio);
-		stock.get(index).setCantidad(cantidad);
-		stock.get(index).setEstado(estado);
-		stock.get(index).setDescripcion(descripcion);
-		stock.get(index).setFecha(fecha);
-		((Juego) stock.get(index)).setDuracion(duracion);
-		((Juego) stock.get(index)).setEdad(edad);
-		((Tablero) stock.get(index)).setNum_piezas(piezas);
-		((Tablero) stock.get(index)).setDimensiones(dimensiones);
-		((Tablero) stock.get(index)).setNum_jugadores(jugadores);
-		((Tablero) stock.get(index)).setColeccion(coleccion);
-
-	}
 
 	@Override
 	public String toString() {
 		return "Stock [stock=" + stock + "]";
+	}
+	/**
+	 * Devuelve un iterador con los elementos que han sido introducidos en la cesta
+	 * @return listIterator
+	 * @throws CestaVaciaException 
+	 */
+	public ListIterator<Articulo> iteradorCesta() throws CestaVaciaException {
+		ArrayList<Articulo> listaCesta  = getStock();
+		for(Articulo art: getStock()){
+			if (art.isSeleccionado())
+				listaCesta.add(art);
+		}
+		if (listaCesta.isEmpty()) throw new CestaVaciaException("La cesta esta vacia");
+		return listaCesta.listIterator();
+	}
+	/**
+	 * Vacia la cesta de articulos
+	 */
+	public void setBasketEmpty() {
+		for (Articulo art: getStock()){
+			art.setSeleccionado(false);
+		}
 	}
 }

@@ -1,0 +1,28 @@
+package gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ListIterator;
+
+import jerarquia.Articulo;
+
+public class PanelVenta extends PanelMostrar {
+
+	private static final long serialVersionUID = 1L;
+
+	public PanelVenta(ListIterator<Articulo> iterator) {
+		super(iterator);
+		checkEnLaCesta.setVisible(true);
+		checkEnLaCesta.setEnabled(true);
+		checkEnLaCesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(checkEnLaCesta.isSelected()){
+					getArticuloMostrado().setSeleccionado(true);
+				}else
+					getArticuloMostrado().setSeleccionado(false);
+			}
+
+		});
+	}
+
+}

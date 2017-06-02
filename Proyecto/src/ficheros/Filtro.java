@@ -3,7 +3,11 @@ package ficheros;
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
-
+/**
+ * Clase que gestiona el filtro o extension de los ficheros
+ * @author pablo leon alcaide
+ *
+ */
 public class Filtro extends FileFilter{
 	
 	private String ext;
@@ -37,7 +41,6 @@ public class Filtro extends FileFilter{
 	public String getDescripcion() {
 		return descripcion;
 	}
-
 
 	/**
 	 * @param descripcion the descripcion to set

@@ -1,7 +1,5 @@
 package stock;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import jerarquia.Articulo;
 
@@ -9,7 +7,7 @@ import jerarquia.Articulo;
  * Clase que implementa el interface comparator, permitiendo que el stock sea
  * ordenado por precio.
  * 
- * @author pablo
+ * @author pablo leon alcaide
  *
  */
 public class ComparePrice implements Comparator<Articulo> {

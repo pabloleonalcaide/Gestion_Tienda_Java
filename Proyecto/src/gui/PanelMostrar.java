@@ -12,7 +12,9 @@ import jerarquia.Articulo;
  *
  */
 public class PanelMostrar extends PanelPadre {
-	 ListIterator<Articulo> it;
+
+	private static final long serialVersionUID = 1L;
+	ListIterator<Articulo> it;
 	
 
 	public PanelMostrar(ListIterator<Articulo> iterator) {
@@ -86,8 +88,12 @@ public class PanelMostrar extends PanelPadre {
 	 * Retrocede en el stock
 	 */
 	protected void showPrevious() {
-		if (it.hasPrevious())
-			showArticle(it.previous());
+		
+		Articulo anterior = it.previous();
+
+		if (anterior.equals(getArticuloMostrado())&&it.hasNext())
+			anterior = it.previous();
+			showArticle(anterior);
 
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
@@ -107,8 +113,12 @@ public class PanelMostrar extends PanelPadre {
 	 * Avanza en el stock
 	 */
 	protected void showNext() {
-		if (it.hasNext())
-			showArticle(it.next());
+		Articulo siguiente = it.next();
+
+		if (siguiente.equals(getArticuloMostrado())&&it.hasNext())
+			siguiente = it.next();
+		showArticle(siguiente);
+
 		if (it.hasNext()) {
 			btnSiguiente.setEnabled(true);
 		} else {

@@ -40,6 +40,7 @@ public class DialogFormulario extends JDialog {
 	private JTextField formNombre;
 	private JTextField formApellidos;
 	private JTextField formEmail;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxFormulario;
 	private JTextArea textArea;
 	private JLabel lblFichero;
@@ -56,6 +57,7 @@ public class DialogFormulario extends JDialog {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public DialogFormulario() {
 		setResizable(false);
 		setModal(true);

@@ -8,12 +8,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.border.Border;
 /**
  * Clase que gestiona la inserción de un fondo en los Frames
- * @author pablo
+ * @author pablo leon alcaide
  *
  */
 public class FondoImagen implements Border {
-	private static final long serialVersionUID = 1L;
-	
 	BufferedImage backImage = null;
 
 	public FondoImagen(BufferedImage bImage) {

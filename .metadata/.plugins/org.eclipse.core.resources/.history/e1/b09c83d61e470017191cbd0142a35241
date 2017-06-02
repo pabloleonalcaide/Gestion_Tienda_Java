@@ -1,0 +1,128 @@
+package gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ListIterator;
+
+import jerarquia.Articulo;
+
+/**
+ * Ventana que permite recorrer los articulos y mostrar sus caracteristicas
+ * @author pablo
+ *
+ */
+public class PanelMostrar extends PanelPadre {
+	 ListIterator<Articulo> it;
+	
+
+	public PanelMostrar(ListIterator<Articulo> iterator) {
+		super();
+		this.it = iterator;
+		setTitle("Mostrar");
+		rdbtnCartas.setEnabled(false);
+		rdbtnRol.setEnabled(false);
+		rdbtnTablero.setEnabled(false);
+		lblPrecio.setText("P.V.P");
+		textPaginas.setEnabled(false); 
+		textAutor.setEnabled(false);
+		textNombre.setEnabled(false);
+		textDescripcion.setEnabled(false);
+		textTematica.setEnabled(false);
+		textPrecio.setEditable(false);
+		textEdicion.setEnabled(false);
+		textStock.setEnabled(false);
+		textId.setEnabled(false);
+		textCartas.setEnabled(false);
+		chbxColeccionJuego.setEnabled(false);
+		textDimensiones.setEnabled(false);
+		textEdad.setEnabled(false);
+		textFieldDuracion.setEnabled(false);
+		
+		
+		textPiezas.setEnabled(false);
+		textJugadores.setEnabled(false);
+		textNumElementos.setEnabled(false);
+		
+		btnALaCesta_anadir.setVisible(false);
+		btnSacar_borrar.setText("");
+		btnSacar_borrar.setVisible(false);
+		
+		spinnerEntrada.setEnabled(false);
+		spinnerPeso.setEnabled(false);
+		spinnerPublicacion.setEnabled(false);
+		
+		comboBox_Genero.setEnabled(false);
+		comboBoxCategoriaLibro.setEnabled(false);
+		comboBoxEstado.setEnabled(false);
+		comboBox_Idioma.setEnabled(false);
+		comboBox_Genero.setEnabled(false);
+		comboBoxTipoArticulo.setVisible(false);
+		comboBoxDificultad.setEnabled(false);
+		comboBoxMaterialRol.setEnabled(false);
+		
+		checkEnLaCesta.setVisible(false);
+		checkColeccion.setEnabled(false);
+		checkDesmontable.setEnabled(false);	
+		showNext();
+		btnAnterior.setEnabled(false);
+
+		// boton siguiente
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showNext();
+			}
+
+		});
+		// boton anterior
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showPrevious();
+			}
+
+		});
+
+	}
+	/**
+	 * Retrocede en el stock
+	 */
+	protected void showPrevious() {
+		if (it.hasPrevious())
+			articuloMostrado = it.previous();
+			showArticle(it.previous());
+
+		if (it.hasNext()) {
+			btnSiguiente.setEnabled(true);
+		} else {
+			btnSiguiente.setEnabled(false);
+		}
+		if (it.hasPrevious()) {
+			btnAnterior.setEnabled(true);
+		} else {
+			btnAnterior.setEnabled(false);
+			it.next();
+
+		}
+	}
+
+	/**
+	 * Avanza en el stock
+	 */
+	protected void showNext() {
+		if (it.hasNext())
+			showArticle(it.next());
+		if (it.hasNext()) {
+			btnSiguiente.setEnabled(true);
+		} else {
+			btnSiguiente.setEnabled(false);
+			it.previous();
+		}
+		if (it.hasPrevious()) {
+			btnAnterior.setEnabled(true);
+		} else {
+			btnAnterior.setEnabled(false);
+		}
+
+	}
+
+	
+}

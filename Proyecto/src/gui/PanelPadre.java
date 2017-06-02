@@ -1,50 +1,47 @@
 package gui;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.GridLayout;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
-import enumeraciones.*;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
-import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JSpinner;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.ListIterator;
-import java.awt.event.ItemEvent;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JRadioButton;
-import jerarquia.*;
-import stock.FondoImagen;
-import java.awt.Dimension;
+import enumeraciones.CategoriaLibro;
+import enumeraciones.DificultadCartas;
+import enumeraciones.EstadoArticulo;
+import enumeraciones.GeneroRol;
+import enumeraciones.IdiomaLibro;
+import enumeraciones.MaterialRol;
+import jerarquia.Articulo;
+import jerarquia.Cartas;
+import jerarquia.Figura;
+import jerarquia.Juego;
+import jerarquia.Libro;
+import jerarquia.Rol;
+import jerarquia.Tablero;
 /**
  * Frame General del que heredan el resto de ventanas, contiene la declaración de
  * los diferentes paneles y los elementos que éstos contienen.
@@ -54,6 +51,7 @@ import java.awt.Dimension;
 public class PanelPadre extends JFrame {
 	private static final long serialVersionUID = 1L;
 	Articulo articuloMostrado;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public PanelPadre(){
 
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -218,6 +216,7 @@ public class PanelPadre extends JFrame {
 	/**
 	 * crea el panel secundario de juego
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void crearPanelJuego() {
 		{
 			panelJuego = new JPanel();
@@ -318,6 +317,7 @@ public class PanelPadre extends JFrame {
 	/**
 	 * Crea el panel secundario de libro
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void crearPanelLibro() {
 		{
 			panelLibro = new JPanel();
@@ -379,6 +379,7 @@ public class PanelPadre extends JFrame {
 	/**
 	 * crea el panel principal con los elementos comunes a todos los Artículos
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void crearPanelPrincipal() {
 		{
 			panelPrincipal = new JPanel();
@@ -471,7 +472,8 @@ public class PanelPadre extends JFrame {
 	void showArticle(Articulo articulo) {
 		showMainPanel(articulo);
 		showSecundaryPanel(articulo);
-
+		setArticuloMostrado(articulo);
+		
 	}
 
 	/**
@@ -539,7 +541,6 @@ public class PanelPadre extends JFrame {
 			checkColeccion.setSelected(((Figura) (articulo)).isColeccion());
 			textNumElementos.setValue((((Figura) (articulo)).getNum_elementos()));
 		}
-		setArticuloMostrado(articulo);
 	}
 
 	/**
@@ -568,8 +569,7 @@ public class PanelPadre extends JFrame {
 	/**
 	 * Muestra el panel de Figuras y oculta el resto
 	 */
-	protected void mostrarPanelFiguras() { // --> Mejorar Esto, por algun motivo
-											// me oculta sus textField al añadir
+	protected void mostrarPanelFiguras() { 
 		panelFigura.setVisible(true);
 		textDimensiones.setVisible(true);
 		spinnerPeso.setVisible(true);
@@ -786,8 +786,11 @@ public class PanelPadre extends JFrame {
 	JPanel panelButtons;
 
 	JComboBox<EstadoArticulo> comboBoxEstado;
+	@SuppressWarnings("rawtypes")
 	JComboBox comboBox_Genero;
+	@SuppressWarnings("rawtypes")
 	JComboBox comboBox_Idioma;
+	@SuppressWarnings("rawtypes")
 	JComboBox comboBoxCategoriaLibro;
 
 	JLabel lblPiezas;
@@ -796,14 +799,17 @@ public class PanelPadre extends JFrame {
 	JTextField textDimensiones;
 	JTextField textJugadores;
 	JTextField textCartas;
+	@SuppressWarnings("rawtypes")
 	JComboBox comboBoxDificultad;
 	JLabel lblEdicion;
 	JTextField textEdicion;
 	JSpinner spinnerEntrada;
+	@SuppressWarnings("rawtypes")
 	JComboBox comboBoxTipoArticulo = new JComboBox();
 	JCheckBox checkEnLaCesta;
 	JCheckBox chbxColeccionJuego;
 
+	@SuppressWarnings("rawtypes")
 	JComboBox comboBoxMaterialRol;
 	JLabel lblMaterial;
 	JLabel lblDificultad;

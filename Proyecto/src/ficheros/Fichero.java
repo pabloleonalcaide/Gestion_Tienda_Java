@@ -73,7 +73,7 @@ public class Fichero implements Serializable {
 	}
 
 	/**
-	 * abre un concesionario previamente guardado
+	 * abre un Stock previamente guardado
 	 * 
 	 * @param archivo
 	 * @throws IOException
@@ -86,8 +86,8 @@ public class Fichero implements Serializable {
 	}
 
 	/**
-	 * Comprueba que el nombre del fichero cumple el patr\u00f3n establecido y
-	 * le a\u00f1ade la extension elegida (.obj)
+	 * Comprueba que el nombre del fichero cumple el patron establecido y
+	 * le introduce la extension elegida (.obj)
 	 * 
 	 * @param fichero2
 	 * @return
