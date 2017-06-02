@@ -29,13 +29,15 @@ public class Stock implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Articulo> stock = new ArrayList<Articulo>();
 	private boolean modificado = false;
-	
+	private int ultimoId = 0;
+
 	/**
 	 * @return true false
 	 */
 	public boolean isModificado() {
 		return modificado;
 	}
+
 	/**
 	 * 
 	 * @param modificado
@@ -46,6 +48,7 @@ public class Stock implements Serializable {
 
 	/**
 	 * Ordena los articulos por orden alfabetico
+	 * 
 	 * @see stock.CompareName
 	 */
 	void sortByName() {
@@ -54,6 +57,7 @@ public class Stock implements Serializable {
 
 	/**
 	 * Ordena los articulos por precio
+	 * 
 	 * @see stock.ComparePrice
 	 */
 	void sortByPrice() {
@@ -80,7 +84,7 @@ public class Stock implements Serializable {
 	 * nuevo a false de lo contrario, lanza un mensaje
 	 * 
 	 * @param articulo
-	 * @throws ArticuloNoExisteException 
+	 * @throws ArticuloNoExisteException
 	 */
 	void takeOut(Articulo articulo) throws ArticuloNoExisteException {
 		if (stock.contains(articulo) && articulo.isSeleccionado())
@@ -106,11 +110,16 @@ public class Stock implements Serializable {
 	 * @param cantidad
 	 */
 	public void addToStock(Articulo articulo, int cantidad) {
-//		if (!stock.contains(articulo)) {
-			stock.add(articulo);
-//		}
+		// if (!stock.contains(articulo)) {
+		stock.add(articulo);
+		// }
 		int indice = stock.indexOf(articulo);
 		stock.get(indice).setCantidad(stock.get(indice).getCantidad() + cantidad);
+		if (stock.get(indice).getId() < getUltimoId()) {
+			stock.get(indice).setId(getUltimoId()+1);
+		}
+		setUltimoId(stock.get(indice).getId());
+
 	}
 
 	/**
@@ -146,6 +155,7 @@ public class Stock implements Serializable {
 		int indice = stock.indexOf(articulo);
 		stock.get(indice).setEstado(EstadoArticulo.DESCATALOGADO);
 	}
+
 	/**
 	 * 
 	 * @return size
@@ -153,6 +163,7 @@ public class Stock implements Serializable {
 	public int size() {
 		return stock.size();
 	}
+
 	/**
 	 * 
 	 * @return isEmpty
@@ -160,7 +171,6 @@ public class Stock implements Serializable {
 	public boolean isEmpty() {
 		return stock.isEmpty();
 	}
-
 
 	/**
 	 * Extrae un Libro a traves de su id
@@ -230,6 +240,7 @@ public class Stock implements Serializable {
 		}
 		return null;
 	}
+
 	/**
 	 * 
 	 * @param articulo
@@ -252,8 +263,10 @@ public class Stock implements Serializable {
 		return true;
 
 	}
+
 	/**
 	 * Devuelve el stock de productos (ArrayList)
+	 * 
 	 * @return
 	 */
 	public ArrayList<Articulo> getStock() {
@@ -273,7 +286,7 @@ public class Stock implements Serializable {
 	/**
 	 * Aumenta el stock de todos los articulos en +10
 	 */
-	public void replenishAll() { 	
+	public void replenishAll() {
 		for (Articulo art : stock) {
 			art.setCantidad(art.getCantidad() + 10);
 		}
@@ -358,45 +371,57 @@ public class Stock implements Serializable {
 	 * Devuelve el catálogo de artículos (nombre, tipo de articulo y precio)
 	 * 
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public String getCatalogo(){
+	public String getCatalogo() {
 		StringBuilder catalogo = new StringBuilder();
-		catalogo.append("----CAT\u00c1LOGO DE "+LocalDate.now()+"----\n");
+		catalogo.append("----CAT\u00c1LOGO DE " + LocalDate.now() + "----\n");
 		for (Articulo art : stock) {
-			catalogo.append("\nArt\u00edculo: " + art.getNombre() + ", Categor\u00eda: " + art.getClass()
-					+", Precio: "+art.calculateFinalPrice());
-			
-		}
-		return catalogo.toString();		
-	
-	}
+			catalogo.append("\nArt\u00edculo: " + art.getNombre() + ", Categor\u00eda: " + art.getClass() + ", Precio: "
+					+ art.calculateFinalPrice());
 
+		}
+		return catalogo.toString();
+
+	}
 
 	@Override
 	public String toString() {
 		return "Stock [stock=" + stock + "]";
 	}
+
 	/**
-	 * Devuelve un iterador con los elementos que han sido introducidos en la cesta
+	 * Devuelve un iterador con los elementos que han sido introducidos en la
+	 * cesta
+	 * 
 	 * @return listIterator
-	 * @throws CestaVaciaException 
+	 * @throws CestaVaciaException
 	 */
 	public ListIterator<Articulo> iteradorCesta() throws CestaVaciaException {
-		ArrayList<Articulo> listaCesta  = getStock();
-		for(Articulo art: getStock()){
+		ArrayList<Articulo> listaCesta = getStock();
+		for (Articulo art : getStock()) {
 			if (art.isSeleccionado())
 				listaCesta.add(art);
 		}
-		if (listaCesta.isEmpty()) throw new CestaVaciaException("La cesta esta vacia");
+		if (listaCesta.isEmpty())
+			throw new CestaVaciaException("La cesta esta vacia");
 		return listaCesta.listIterator();
 	}
+
 	/**
 	 * Vacia la cesta de articulos
 	 */
 	public void setBasketEmpty() {
-		for (Articulo art: getStock()){
+		for (Articulo art : getStock()) {
 			art.setSeleccionado(false);
 		}
+	}
+
+	public int getUltimoId() {
+		return ultimoId;
+	}
+
+	public void setUltimoId(int ultimoId) {
+		this.ultimoId = ultimoId;
 	}
 }

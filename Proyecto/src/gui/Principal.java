@@ -14,6 +14,8 @@ import javax.swing.KeyStroke;
 import excepciones.CestaVaciaException;
 import ficheros.Fichero;
 import ficheros.Filtro; //Nuestra clase que maneja el filtro para la extension de los ficheros
+import jerarquia.Articulo;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 
@@ -713,8 +715,16 @@ public class Principal {
 		if (fileChooser.showDialog(fileChooser, "Abrir Fichero") == JFileChooser.APPROVE_OPTION) {
 			Fichero.fichero = fileChooser.getSelectedFile();
 			stock = Fichero.open(fileChooser.getSelectedFile());
+			actualizarId();
 			JOptionPane.showMessageDialog(framePrincipal, "Cargado con \u00e9xito");
 		}
+	}
+
+	private void actualizarId() {
+		for(Articulo art:stock.getStock()){
+			if (art.getId()>stock.getUltimoId())
+				stock.setUltimoId(art.getId()+1);
+		}		
 	}
 
 	/**

@@ -72,7 +72,9 @@ public abstract class Articulo implements Serializable {
 	private void setId() {
 		this.id = codigo++;
 	}
-
+	public void setId(int id){
+		this.id = id;
+	}
 	/**
 	 * 
 	 * @return identificador univoco del articulo
