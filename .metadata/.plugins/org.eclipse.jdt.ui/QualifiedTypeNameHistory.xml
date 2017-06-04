@@ -10,7 +10,6 @@
 <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="java.util.ListIterator"/>
-<fullyQualifiedTypeName name="jerarquia.Articulo"/>
 <fullyQualifiedTypeName name="jerarquia.Juego"/>
 <fullyQualifiedTypeName name="jerarquia.Tablero"/>
 <fullyQualifiedTypeName name="jerarquia.Figura"/>
@@ -46,4 +45,5 @@
 <fullyQualifiedTypeName name="gui.PanelMostrar"/>
 <fullyQualifiedTypeName name="jdk.nashorn.internal.scripts.JO"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="jerarquia.Articulo"/>
 </qualifiedTypeNameHistroy>

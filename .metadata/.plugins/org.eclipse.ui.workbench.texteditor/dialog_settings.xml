@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Catalogo" key="selection"/>
+		<item value="addTo" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="addto"/>
+			<item value="add"/>
 			<item value="catalogo"/>
 			<item value="cesta"/>
 			<item value="destacados"/>
 			<item value="pedidos"/>
 			<item value="DO_NOTHING_ON_CLOSE"/>
 			<item value="&#x09;&#x09;framePrincipal.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);"/>
-			<item value="prec"/>
-			<item value="articulom"/>
 		</list>
 		<list key="replacehistory">
 		</list>
