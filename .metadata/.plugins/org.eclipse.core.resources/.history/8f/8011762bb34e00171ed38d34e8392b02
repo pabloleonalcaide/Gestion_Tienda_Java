@@ -93,7 +93,7 @@ public class Fichero implements Serializable {
 	 * @return
 	 */
 	public static File checkFile(File ficheroUsuario) {
-		if (patron.matcher(ficheroUsuario.getName()).find()) {
+		if (patron.matcher(ficheroUsuario.getName()).matches()) {
 			return ficheroUsuario;
 		} else {
 			setFichero(ficheroUsuario.getAbsolutePath() + ".obj");
