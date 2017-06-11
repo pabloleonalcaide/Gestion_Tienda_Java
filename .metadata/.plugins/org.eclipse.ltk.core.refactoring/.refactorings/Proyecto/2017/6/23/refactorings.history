@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;stock.Stock.devuelvePorCódigo(...)&apos; to &apos;devuelvePorCodigo&apos;&#x0A;- Original project: &apos;Proyecto&apos;&#x0A;- Original element: &apos;stock.Stock.devuelvePorCódigo(...)&apos;&#x0A;- Renamed element: &apos;stock.Stock.devuelvePorCodigo(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;devuelvePorCódigo&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;stock{Stock.java[Stock~devuelvePorCódigo~I" name="devuelvePorCodigo" references="true" stamp="1497191172535" version="1.0"/>
+</session>

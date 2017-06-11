@@ -74,7 +74,7 @@ public class PanelEliminar extends PanelPadre {
 			 */
 			protected void removeArticle(int id) {
 				try {
-					Articulo articulo = Principal.stock.devuelvePorCódigo(id);
+					Articulo articulo = Principal.stock.devuelvePorCodigo(id);
 					if (articulo instanceof Libro)
 						Principal.stock.removeFromStock((Articulo) Principal.stock.getLibro(id));
 					else if (articulo instanceof Figura)
@@ -97,15 +97,15 @@ public class PanelEliminar extends PanelPadre {
 	 */
 	protected void show(int id) {
 		
-		if (Principal.stock.devuelvePorCódigo(id) instanceof Libro)
+		if (Principal.stock.devuelvePorCodigo(id) instanceof Libro)
 			showArticle(Principal.stock.getLibro(id));
-		else if (Principal.stock.devuelvePorCódigo(id) instanceof Figura)
+		else if (Principal.stock.devuelvePorCodigo(id) instanceof Figura)
 			showArticle(Principal.stock.getFigura(id));
-		else if (Principal.stock.devuelvePorCódigo(id) instanceof Rol)
+		else if (Principal.stock.devuelvePorCodigo(id) instanceof Rol)
 			showArticle(Principal.stock.getRol(id));
-		else if (Principal.stock.devuelvePorCódigo(id) instanceof Tablero)
+		else if (Principal.stock.devuelvePorCodigo(id) instanceof Tablero)
 			showArticle(Principal.stock.getTablero(id));
-		else if (Principal.stock.devuelvePorCódigo(id) instanceof Cartas)
+		else if (Principal.stock.devuelvePorCodigo(id) instanceof Cartas)
 			showArticle(Principal.stock.getCartas(id));
 		
 	}

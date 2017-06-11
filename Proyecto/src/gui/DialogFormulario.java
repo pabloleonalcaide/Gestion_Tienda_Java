@@ -47,16 +47,7 @@ public class DialogFormulario extends JDialog {
 	private Filtro filtroInput = new Filtro("pdf", "pdf");
 	StringBuilder mensaje = new StringBuilder();
 
-	public static void main(String[] args) {
-		try {
-			DialogFormulario dialog = new DialogFormulario();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error al abrir el formulario", "ERROR", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public DialogFormulario() {
 		setResizable(false);
@@ -302,7 +293,7 @@ public class DialogFormulario extends JDialog {
 	 * @return
 	 */
 	private boolean nombreValido() {
-		final Pattern controlNombre = Pattern.compile("^\\w{5,20}");
+		final Pattern controlNombre = Pattern.compile("^\\w.{5,20}");
 		java.util.regex.Matcher mNombre = controlNombre.matcher(formNombre.getText());
 		return mNombre.matches();
 	}

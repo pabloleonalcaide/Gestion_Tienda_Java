@@ -230,7 +230,7 @@ public class Stock implements Serializable {
 	 * @param cod
 	 * @return
 	 */
-	public Articulo devuelvePorCódigo(int id) {
+	public Articulo devuelvePorCodigo(int id) {
 		Articulo articulo;
 		for (Articulo art : stock) {
 			articulo = art;
